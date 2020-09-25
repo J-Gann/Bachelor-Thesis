@@ -1,0 +1,95 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ynt/global//global/global}
+    \entry{integrationPatterns}{book}{}
+      \name{author}{2}{}{%
+        {{hash=2ed2f5feceafdf9a03a27134da39d3d0}{%
+           family={Hohpe},
+           familyi={H\bibinitperiod},
+           given={Gregor},
+           giveni={G\bibinitperiod}}}%
+        {{hash=8ea1767d5a1edce116c79b82a83c54da}{%
+           family={Woolf},
+           familyi={W\bibinitperiod},
+           given={Bobby},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{ddf3be6dfde807c1811cbd3352154f04}
+      \strng{fullhash}{ddf3be6dfde807c1811cbd3352154f04}
+      \strng{bibnamehash}{ddf3be6dfde807c1811cbd3352154f04}
+      \strng{authorbibnamehash}{ddf3be6dfde807c1811cbd3352154f04}
+      \strng{authornamehash}{ddf3be6dfde807c1811cbd3352154f04}
+      \strng{authorfullhash}{ddf3be6dfde807c1811cbd3352154f04}
+      \field{labelalpha}{HW04}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-321-20068-3}
+      \field{title}{Enterprise Integration Patterns}
+      \field{year}{2004}
+    \endentry
+    \entry{architecturePatterns}{book}{}
+      \name{author}{2}{}{%
+        {{hash=2782b51ff539e6ea2d2afcc8b70392c5}{%
+           family={Perroud},
+           familyi={P\bibinitperiod},
+           given={Thierry},
+           giveni={T\bibinitperiod}}}%
+        {{hash=7a18e50270f90ac79cbe210328e0123b}{%
+           family={Inversini},
+           familyi={I\bibinitperiod},
+           given={Reto},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{40c737a105340896df3131f6646d06ad}
+      \strng{fullhash}{40c737a105340896df3131f6646d06ad}
+      \strng{bibnamehash}{40c737a105340896df3131f6646d06ad}
+      \strng{authorbibnamehash}{40c737a105340896df3131f6646d06ad}
+      \strng{authornamehash}{40c737a105340896df3131f6646d06ad}
+      \strng{authorfullhash}{40c737a105340896df3131f6646d06ad}
+      \field{labelalpha}{PI13}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-3-642-37560-6}
+      \field{title}{Enterprise Architecture Patterns}
+      \field{year}{2013}
+    \endentry
+    \entry{covid}{manual}{}
+      \field{labelalpha}{20}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labeltitlesource}{title}
+      \field{title}{Self-Services – gefragter denn je durch die Corona-Pandemie}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://www.e-commerce-magazin.de/self-services-gefragter-denn-je-durch-die-corona-pandemie/
+      \endverb
+      \verb{url}
+      \verb https://www.e-commerce-magazin.de/self-services-gefragter-denn-je-durch-die-corona-pandemie/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
