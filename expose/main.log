@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.24)  25 SEP 2020 17:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.24)  27 SEP 2020 14:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/mnt/c/Users/Jonas Gann/Documents/expose/main.tex"
-(/mnt/c/Users/Jonas Gann/Documents/expose/main.tex
+**"/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.tex"
+(/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14> (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
@@ -267,7 +267,7 @@ File: biblatex.cfg
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count368
 \l__pdf_internal_box=\box45
-) (/mnt/c/Users/Jonas Gann/Documents/expose/main.aux)
+) (/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
@@ -296,7 +296,7 @@ Package biblatex Info: Automatic encoding selection.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
- (/mnt/c/Users/Jonas Gann/Documents/expose/main.bbl)
+ (/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.bbl)
 Package biblatex Info: Reference section=0 on input line 10.
 Package biblatex Info: Reference segment=0 on input line 10.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -309,24 +309,24 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 99.
+(Font)              <7> on input line 114.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 99.
- [3] (/mnt/c/Users/Jonas Gann/Documents/expose/main.aux)
+(Font)              <5> on input line 114.
+ [3] (/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.aux)
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
  7848 strings out of 483130
- 149081 string characters out of 5963883
+ 149257 string characters out of 5963883
  764281 words of memory out of 5000000
  22860 multiletter control sequences out of 15000+600000
  537128 words of font info for 40 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,6n,45p,869b,1280s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,6n,45p,885b,1280s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on "/mnt/c/Users/Jonas Gann/Documents/expose/main.pdf" (3 pages, 101173 bytes).
+Output written on "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.pdf" (3 pages, 101778 bytes).
 PDF statistics:
  47 PDF objects out of 1000 (max. 8388607)
  33 compressed objects within 1 object stream

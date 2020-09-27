@@ -26,10 +26,8 @@ Resources and especially time are scarce. Integration therefore has to be as sim
 Simple means e.g. that existing systems do not need to be modified for integration or, 
 that integration systems do not differ fundamentally between heterogenious landscapes.
 
-Of course, besides being simple and fast, it also has to satisfy requirements of the connector 
-and provide its CSS functionalities towards the EA. Typical integration challanges have to be adressed: 
-Networks are slow and unreliable, applications have different interfacing requirements or are not 
-built to be interfaced at all and possible changes of applications have to be considered. 
+Of course, besides being simple and fast, it also has to enable EA and business connector to access each others 
+functionalities according to their requirements.
 
 \section{Objectives and Planned Approaches}
 
@@ -51,16 +49,27 @@ provide business processes which are part of or related to a CSS scenario.
 This can e.g. be: \textit{Change Address: Login, Edit Profile, Change Address, Save Changes}
 
 EAPs, which contain the selected business processes, are evaluated in respect to relevant architecture 
-bricks and data objects.
+bricks and data objects, which will make up the enterprise architecture. The requirements of the EA 
+regarding the consumption of CSS services will be analyzed. One requirement could e.g. be, that access to 
+the \textit{New Address} CSS scenario is required via a web server architecture brick.
+
+CSS scenarios will be used to construct the business connector as a black box of requirements regarding 
+access to EA systems and data objects. The black box will also contain interfaces, which provide the CSS 
+scenarios. It will not be included, how the business 
+connector processes the recieved data, triggers instructions to the EA or implements a service.
+The business connector could e.g. consist of the requirements: \textit{access to identities, access to idendity validation, 
+access to profile data} and of the interface: \textit{changeIdendityProfileProperty}
 
 An integration architecture gets defined, which utilizes the selected business processes, architecture 
-bricks and data objects in order to integrate the business connector. Architecture bricks and data objects 
-used in the final form of the integration architecture can be seen as its requirements towards the existing EA.
+bricks and data objects in order to integrate the business connector. Purpose of the integration is to enable 
+the EA and business connector to access each others functionalities according to their requirements considering 
+the rigid and heterogenious nature of the EA. Rather technological requirements like scalability and fail safety 
+and possible solutions will be evaluated while creating the integration architecture.
+Architecture bricks and data objects used in the final form of the 
+integration architecture can be seen as its requirements towards the existing EA.
 
 The integration architecture takes a message based approach by using enterprise integration patterns described
-by \cite{integrationPatterns}. This approach aims to solve the previously described challenges in the 
-"Problem Statements" section.
-
+by \cite{integrationPatterns}.
 The integration architecture gets documented as a component diagram
 containing architecture bricks, integration patterns and business connector along with communication 
 channels and respective message layouts \cite[cf. 16 ff.]{integrationPatterns}.
