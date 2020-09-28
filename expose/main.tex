@@ -3,16 +3,15 @@
 \usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
 \addbibresource{bibliography.bib}
 
-\title{Messaging Architecture for Integration of Customer Self Service Systems \\ Version 0.1}
+\title{Messaging Architecture for Integration of Customer Self Service Systems \\ Version 0.2}
 \author{Jonas Gann}
-\date{25 September 2020}
+\date{28 September 2020}
 
 \begin{document}
 
 \maketitle
 
 \section{Context}
-
 As a result of the 2020 pandemic, customer self-service (CSS) technologies reached a new level of importance \cite{covid}.
 Many shops were closed due to government measurements. Customers therefore had to use respective web
 presences. CSS is a useful method to handle support for a high number of customers.
@@ -23,24 +22,24 @@ Most enterprise systems such as CSS need to be integrated into existing enterpri
 This can be done via a business connector dedicated to providing CSS. 
 
 Resources and especially time are scarce. Integration therefore needs to be as simple and fast as possible and 
-function with little support, failure and modification over time. The variety of heterogenious landscapes and their constant 
+function with little support, failure and modification over time. The variety of heterogeneous landscapes and their constant 
 development make this challenging. The integration has to interface with an EA without the need of changing it but also be able to 
-adabt to its modifications.
+adapt to its modifications.
 Of course, the integration also has to perform according to requirements of both the EA and the CSS business connector, which 
 the bachelor thesis evaluates.
 As an integration does not only interface with systems but also delivers information and instructions, additional requirements 
-relating to reliability e.g. sclability, failure safety have to be considered.
+relating to reliability e.g. scalability, failure safety have to be considered.
 
 \section{Objectives and Planned Approaches}
 
 In order to simplify integration, the bachelor thesis defines a messaging architecture for integration of a CSS connector 
 into enterprise
 architectures. The integration architecture simplifies integration by providing a integration solution reusable in many different 
-scenarios. It uses a messaging approach to be applicaple to heterogenious landscapes through loosely coupling. 
+scenarios. It uses a messaging approach to be applicable to heterogeneous landscapes through loosely coupling. 
 Loose coupling allows integrated systems to not make assumptions about each other and use a send-and-forget approach, 
 simplifying their integration.
 Messaging systems can also reliably handle communication through e.g load balancing and store-and-forward mechanisms.
-If the integration system satisifes requirements of the EA and business connector will be validated on a real life example.
+If the integration system satisfies requirements of the EA and business connector will be validated on a real life example.
 An operation manual presented by the thesis aims to further reduce deployment time and complexity and is used in the evaluation.
 
 The following describes the planned approaches:
@@ -49,7 +48,7 @@ In order to describe, what CSS is in practice, the bachelor thesis compiles CSS 
 resources. A scenario might e.g. be: \textit{New Address: User has a new home address and wants to change it in his profile}.
 
 Enterprise architecture patterns (EAP) described by \cite{architecturePatterns} are used as model for
-real life architectures. An EAP describes a common solution for reoccuring architectural problems in a 
+real life architectures. An EAP describes a common solution for reoccurring architectural problems in a 
 generic way. It contains business processes, data objects and architecture bricks relevant for each pattern.
 Architecture bricks are in the context of EAPs "the smallest element that everything is built of" 
 \cite[Page 21]{architecturePatterns}. They can e.g. be a web-server or a database. Implementations of 
@@ -65,11 +64,11 @@ regarding the consumption of CSS services will be analyzed. One requirement coul
 the \textit{New Address} CSS scenario is required via a web server architecture brick.
 
 CSS scenarios will be used to construct the business connector as a black box of requirements regarding 
-access to EA systems and data objects. The black box will also contain interfaces, which provide the CSS 
+access to EA systems and data objects. The black box will also contain interfaces, which provide functionalities for CSS 
 scenarios. It will not be included, how the business 
-connector processes the recieved data, triggers instructions to the EA or implements a service.
-The business connector could e.g. consist of the requirements: \textit{access to identities, access to idendity validation, 
-access to profile data} and of the interface: \textit{changeIdendityProfileProperty}
+connector processes the received data, triggers instructions to the EA or implements a service.
+The business connector could e.g. consist of the requirements: \textit{access to identities, access to identity validation, 
+access to profile data} and of the interface: \textit{changeIdentityProfileProperty}
 
 An integration architecture gets defined, which utilizes the selected business processes, architecture 
 bricks and data objects in order to integrate the business connector. Purpose of the integration is to enable 
@@ -83,23 +82,26 @@ by \cite{integrationPatterns}.
 The integration architecture gets documented as a component diagram
 containing architecture bricks, integration patterns and business connector along with communication 
 channels and respective message layouts \cite[cf. 16 ff.]{integrationPatterns}.
-For each CSS business process, relevant data and instruction flows inside the integration architecture 
+For each CSS scenario, relevant data and instruction flows inside the integration architecture 
 are visualized as a sequence diagram.
 
-An operation manual, 
-amongst other things, guides the requirement analysis in respect to existing architecture bricks and data 
+With the integration architecture finished, technologies which can be used for implementation get evaluated.
+These can e.g. be different message oriented middlewares used for implementing messaging systems in general.
+
+An operation manual guides the requirement analysis in respect to existing architecture bricks and data 
 objects of the EA and helps with theoretical and practical deployment of the integration architecture.
+It might e.g. help finding architecture bricks required by the integration architecture inside the EA 
+and instruct on how to implement the integration architecture in practice.
 
 The results of the bachelor thesis are validated through application on customer examples. For given 
-EA, business processes and customer specific requirments, the integration architecture will be 
+EA, business processes and customer specific requirements, the integration architecture will be 
 deployed (in theory) by usage of the operation manual.
 The quality of the integration architecture is measured by ease of deployment (e.g. used time) and 
-statisfaction of customer requirements.
+satisfaction of customer requirements.
 
-\section{Realted Work}
+\section{Related Work}
 
 \begin{itemize}
-    \item Business Connecor: The business connector of IDAS providing CSS functionalities
     \item Architecture Patterns described in the book by \cite{architecturePatterns}
     \item Integration Patterns described in the book by \cite{integrationPatterns}
 \end{itemize}
