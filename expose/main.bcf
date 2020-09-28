@@ -2185,11 +2185,12 @@
     <bcf:citekey order="1">covid</bcf:citekey>
     <bcf:citekey order="2">architecturePatterns</bcf:citekey>
     <bcf:citekey order="3">architecturePatterns</bcf:citekey>
-    <bcf:citekey order="4">integrationPatterns</bcf:citekey>
+    <bcf:citekey order="4">architecturePatterns</bcf:citekey>
     <bcf:citekey order="5">integrationPatterns</bcf:citekey>
     <bcf:citekey order="6">integrationPatterns</bcf:citekey>
-    <bcf:citekey order="7">architecturePatterns</bcf:citekey>
-    <bcf:citekey order="8">integrationPatterns</bcf:citekey>
+    <bcf:citekey order="7">integrationPatterns</bcf:citekey>
+    <bcf:citekey order="8">architecturePatterns</bcf:citekey>
+    <bcf:citekey order="9">integrationPatterns</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="ynt">
