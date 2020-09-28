@@ -20,19 +20,30 @@ presences. CSS is a useful method to handle support for a high number of custome
 \section{Problem Statements}
 
 Most enterprise systems such as CSS need to be integrated into existing enterprise architectures (EA).
-This can be done via a business connector dedicated to providing CSS.
+This can be done via a business connector dedicated to providing CSS. 
 
-Resources and especially time are scarce. Integration therefore has to be as simple and fast as possible.
-Simple means e.g. that existing systems do not need to be modified for integration or, 
-that integration systems do not differ fundamentally between heterogenious landscapes.
-
-Of course, besides being simple and fast, it also has to enable EA and business connector to access each others 
-functionalities according to their requirements.
+Resources and especially time are scarce. Integration therefore needs to be as simple and fast as possible and 
+function with little support, failure and modification over time. The variety of heterogenious landscapes and their constant 
+development make this challenging. The integration has to interface with an EA without the need of changing it but also be able to 
+adabt to its modifications.
+Of course, the integration also has to perform according to requirements of both the EA and the CSS business connector, which 
+the bachelor thesis evaluates.
+As an integration does not only interface with systems but also delivers information and instructions, additional requirements 
+relating to reliability e.g. sclability, failure safety have to be considered.
 
 \section{Objectives and Planned Approaches}
 
-The bachelor thesis defines a messaging architecture for integration of CSS systems into existing enterprise
-architectures.
+In order to simplify integration, the bachelor thesis defines a messaging architecture for integration of a CSS connector 
+into enterprise
+architectures. The integration architecture simplifies integration by providing a integration solution reusable in many different 
+scenarios. It uses a messaging approach to be applicaple to heterogenious landscapes through loosely coupling. 
+Loose coupling allows integrated systems to not make assumptions about each other and use a send-and-forget approach, 
+simplifying their integration.
+Messaging systems can also reliably handle communication through e.g load balancing and store-and-forward mechanisms.
+If the integration system satisifes requirements of the EA and business connector will be validated on a real life example.
+An operation manual presented by the thesis aims to further reduce deployment time and complexity and is used in the evaluation.
+
+The following describes the planned approaches:
 
 In order to describe, what CSS is in practice, the bachelor thesis compiles CSS scenarios from multiple
 resources. A scenario might e.g. be: \textit{New Address: User has a new home address and wants to change it in his profile}.
@@ -62,9 +73,8 @@ access to profile data} and of the interface: \textit{changeIdendityProfilePrope
 
 An integration architecture gets defined, which utilizes the selected business processes, architecture 
 bricks and data objects in order to integrate the business connector. Purpose of the integration is to enable 
-the EA and business connector to access each others functionalities according to their requirements considering 
-the rigid and heterogenious nature of the EA. Rather technological requirements like scalability and fail safety 
-and possible solutions will be evaluated while creating the integration architecture.
+the EA and business connector to access each others functionalities according to their requirements.
+Requirements relating to the internal data and instruction delivery like e.g. scalability and fail safety will be considered.
 Architecture bricks and data objects used in the final form of the 
 integration architecture can be seen as its requirements towards the existing EA.
 
