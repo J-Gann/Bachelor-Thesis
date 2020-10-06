@@ -3,20 +3,20 @@
 \usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
 \addbibresource{bibliography.bib}
 
-\title{Messaging Architecture for Integration of Customer Self Services \\ Version 0.2}
+\title{Messaging Architecture for Integration of Customer Self-Services}
 \author{Jonas Gann}
-\date{28 September 2020}
+\date{29 September 2020}
 
 \begin{document}
 
 \maketitle
 
 \section{Context}
-As a result of the 2020 pandemic, customer self-service (CSS) technologies reached a new level of importance \cite{covid}.
+As a result of the 2020 COVID-19 pandemic, customer self-service (CSS) technologies reached a new level of importance.
 Many shops were closed due to government measurements and customers had to use their web
-presences. CSS is a useful method to handle support for an increasing number of online customers. It enables them to search 
-for contract data, change profile information, track shipment and much more without the need of human to human interaction.
-This reduces cost and increases customer performance.
+presences. CSS is a useful method to handle support for an increasing number of online customers. It enables searching
+for contract data, changing profile information, tracking shipment and much more without the need of human to human interaction.
+This reduces cost and increases customer performance \cite{covid}.
 
 \section{Problem Statements}
 
@@ -28,20 +28,23 @@ function with little maintenance and failure. The variety of heterogeneous lands
 development make this challenging. The integration has to interface with an EA without the need of changing it but also be able to 
 adapt to future modifications.
 
-Of course, the integration also has to perform according to requirements of both the EA and the CSS business connector.
+The integration also has to perform according to requirements of both the EA and the CSS business connector.
 
 As an integration does not only interface with systems but also delivers information and instructions, additional requirements 
-relating to reliability e.g. scalability, failure safety have to be considered.
+relating to reliability like scalability and failure safety have to be considered.
 
 \section{Objectives}
 
-The bachelor thesis defines a messaging architecture for integration of a CSS connector 
+The bachelor thesis defines a messaging architecture for integration of a business connector, providing an interface for CSS,  
 into enterprise architectures. This simplifies and speeds up integration by providing a solution reusable in many 
-different scenarios. A messaging approach enables deployment on different heterogeneous landscapes through 
+different scenarios.
+
+A messaging approach enables deployment on different heterogeneous landscapes through 
 loose coupling. Loose coupling allows integrated systems to not make assumptions about each other and use a 
 send-and-forget approach, simplifying their integration.
 
-Messaging systems can also reliably handle communication through e.g load balancing and store-and-forward mechanisms.
+Mechanisms increasing reliability of message communication through for example load balancing and store-and-forward are part of the 
+messaging approach.
 
 Through a real life example, it is validated, if the integration architecture satisfies requirements of the EA and 
 business connector.
@@ -51,7 +54,7 @@ An operation manual presented by the thesis aims to further reduce deployment ti
 \section{Planned Approaches}
 
 \textbf{CSS scenarios} get compiled from multiple resources in order to describe, what CSS looks like in practice.
-A scenario might e.g. be "New Address": User wants to change the address in his profile.
+A scenario might be "New Address: User wants to change the address in his profile".
 
 \textbf{Enterprise architecture patterns (EAP)} described by \textcite{architecturePatterns} are used to abstract
 real life architectures. An EAP describes a common solution for reoccurring architectural problems in a 
@@ -60,32 +63,31 @@ Architecture bricks are in the context of EAPs "the smallest element that everyt
 \cite[Page 21]{architecturePatterns}. They can e.g. be a web-server or a database. Implementations of 
 architecture bricks are called solution bricks and can e.g. be the Apache web-server or PostgreSQL.
 
-\textbf{Business processes} relevant for the CSS scenarios get selected from EAPs. Relevance means, that the process 
-is part of or related to the scenario.
-This can e.g. be "Change Address": Login, Edit Profile, Change Address, Save Changes
+\textbf{Business processes} relevant for the CSS scenarios get selected from EAPs. A process is relevant if he
+is part of or related to a scenario and can be "Change Address: Login, Edit Profile, Change Address, Save Changes"
 
 \textbf{Architecture bricks and data objects} contained by EAPs of selected business processes are evaluated in respect to their necessity 
 for the process. They make up the enterprise architecture. Requirements of the EA 
-regarding the consumption of CSS get analyzed. One requirement could e.g. be, that access to 
+regarding the consumption of CSS get analyzed. One requirement could be, that access to 
 the "New Address" CSS scenario is required via a web server architecture brick. Another requirement might be, 
 that data has to arrive in the correct order.
 
-\textbf{The business connector} is constructed - based on CSS scenarios - as a black box of requirements regarding 
-the access to EA systems and data objects. The black box also contains interfaces, which provide functionalities for CSS 
-scenarios. It is not be included, how the business 
+The \textbf{business connector} is constructed - based on CSS scenarios - as a black box of requirements regarding 
+the access to EA systems and data objects. The black box also contains interfaces which provide functionalities for CSS 
+scenarios. It is not included, how the business 
 connector processes received data, triggers instructions to the EA or implements a service.
-The business connector could e.g. consist of the requirements: access to identities, access to identity validation, 
+The business connector could consist of the requirements: access to identities, access to identity validation, 
 access to profile data and of the interface "changeIdentityProfileProperty"
 
-\textbf{An integration architecture} gets defined, which utilizes the selected business processes, architecture 
+An \textbf{integration architecture} gets defined which utilizes the selected business processes, architecture 
 bricks and data objects in order to integrate the business connector. Purpose of the integration is to enable 
 the EA and business connector to access each others functionalities according to their requirements.
 Requirements relating to the internal data and instruction delivery of the integration architecture 
-like e.g. scalability and fail safety get considered in addition.
+like scalability and fail safety get considered in addition.
 Architecture bricks and data objects used in the final form of the 
 integration architecture can be seen as its requirements towards an existing EA.
 
-\textbf{A messaging approach} based on enterprise integration patterns described
+A \textbf{messaging approach} based on enterprise integration patterns described
 by \textcite{integrationPatterns} is used for the integration architecture.
 It gets documented as a component diagram
 containing architecture bricks, integration patterns and business connector along with communication 
@@ -94,31 +96,22 @@ For each CSS scenario, relevant data and instruction flows inside the integratio
 are visualized as a sequence diagram.
 
 \textbf{Technologies} which can be used for implementation get evaluated for the final form of the integration architecture.
-These can e.g. be different message oriented middlewares used for implementing messaging systems in general.
+These can be different message oriented middlewares used for implementing messaging systems in general.
 
-\textbf{An operation manual} with the purpose of guiding the requirement analysis in respect to existing architecture bricks and data 
+An \textbf{operation manual} with the purpose of guiding the requirement analysis in respect to existing architecture bricks and data 
 objects of the EA and helping with theoretical and practical deployment of the integration architecture gets constructed.
-It might e.g. help finding architecture bricks required by the integration architecture inside the EA 
+It might help finding architecture bricks required by the integration architecture inside the EA 
 and instruct on how to implement the integration architecture in practice.
 
-\textbf{A validation} of results is done through a customer example. For given 
+A \textbf{validation} of results is done through a real life example. For given 
 EA, business processes, business connector and customer specific requirements, the integration architecture gets 
 deployed (in theory) by usage of the operation manual.
 The quality of the integration architecture is measured by ease of deployment (e.g. used time) and 
 satisfaction of requirements.
 
-\section{Related Work}
-
-\begin{itemize}
-    \item "Enterprise Architecture Patterns" \cite{architecturePatterns}: This book presents how to construct and use so 
-    called enterprise architecture patterns and documents 13 common examples. 
-    \item "Enterprise Integration Patterns" \cite{integrationPatterns}: This book documents fundamental messaging patterns, 
-    which can be used for integration purposes.
-\end{itemize}
-
 \section{Milestones}
 
-The bachelor thesis is planned to be officially registered in November and finished in February.
+The bachelor thesis is planned to be officially registered at the beginning of November and finished at the end of February.
 Parallel to the execution of described approaches, relating chapters of the bachelor thesis will be written.
 
 \begin{enumerate}

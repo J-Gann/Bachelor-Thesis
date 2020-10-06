@@ -1,17 +1,15 @@
 # Fdb version 3
-["biber main"] 1601292737 "main.bcf" "main.bbl" "main" 1601292740
+["biber main"] 1601368002 "main.bcf" "main.bbl" "main" 1601368025
   "bibliography.bib" 1601285721 566 8829aab82468144e5e82482ac9761a75 ""
-  "main.bcf" 1601292740 102032 c00aa1028a2c4d2d0cda32709af118a7 "pdflatex"
+  "main.bcf" 1601368025 101909 999d69e525823e2f10bf30744a947eee "pdflatex"
   (generated)
-  "main.blg"
   "main.bbl"
-["pdflatex"] 1601292739 "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.tex" "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.pdf" "main" 1601292740
+  "main.blg"
+["pdflatex"] 1601368025 "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.tex" "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.pdf" "main" 1601368025
   "/etc/texmf/web2c/texmf.cnf" 1600951329 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk" 1601047149 11524 3d923ff0abea4f3b1391237af140ecf3 ""
-  "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.aux" 1601292740 2241 0cf652d1473b89729acbf267ed1e0c90 ""
-  "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.tex" 1601292734 8190 203353d929b2efaba79c9b6d64395515 ""
+  "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.aux" 1601368025 1937 644c9ef6839b696ab2e7567c8f405cc1 ""
+  "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.tex" 1601368024 7799 c0f33361bee6b52535e4891bdd2129e7 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
-  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm" 1136768653 1300 63a6111ee6274895728663cf4b4e7e81 ""
@@ -64,15 +62,15 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1600951362 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1600951373 5715080 77d44b58177403d12123689fb1f9f689 ""
-  "main.aux" 1601292740 2241 0cf652d1473b89729acbf267ed1e0c90 "pdflatex"
-  "main.bbl" 1601292738 3399 22e62f466f13222771c14b33de1e41df "biber main"
-  "main.run.xml" 1601292740 2313 bf3e4322c3614feb21562dbefc98a9cd "pdflatex"
-  "main.tex" 1601292734 8190 203353d929b2efaba79c9b6d64395515 ""
+  "main.aux" 1601368025 1937 644c9ef6839b696ab2e7567c8f405cc1 "pdflatex"
+  "main.bbl" 1601368003 3399 22e62f466f13222771c14b33de1e41df "biber main"
+  "main.run.xml" 1601368025 2313 bf3e4322c3614feb21562dbefc98a9cd "pdflatex"
+  "main.tex" 1601368024 7799 c0f33361bee6b52535e4891bdd2129e7 ""
   (generated)
-  "main.run.xml"
-  "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.log"
+  "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.pdf"
   "main.bcf"
   "main.pdf"
   "main.log"
-  "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.pdf"
+  "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/expose/main.log"
   "main.aux"
+  "main.run.xml"
