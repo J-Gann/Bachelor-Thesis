@@ -1,0 +1,15 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.4}%
+\contentsline {section}{\numberline {1.1}Motivation}{1}{section.5}%
+\contentsline {section}{\numberline {1.2}Goals of the work}{1}{section.6}%
+\contentsline {section}{\numberline {1.3}Structure of the work}{1}{section.7}%
+\contentsline {chapter}{\numberline {2}Foundation and related work}{2}{chapter.8}%
+\contentsline {section}{\numberline {2.1}(Beispiel) Netzwerke}{2}{section.9}%
+\contentsline {section}{\numberline {2.2}(Beispiel) Informationsextraktion}{2}{section.10}%
+\contentsline {section}{\numberline {2.3}Verwandte Arbeiten}{2}{section.11}%
+\contentsline {chapter}{\numberline {3}My contribution}{3}{chapter.12}%
+\contentsline {section}{\numberline {3.1}Overview and objective}{3}{section.13}%
+\contentsline {section}{\numberline {3.2}First part}{3}{section.14}%
+\contentsline {section}{\numberline {3.3}Second part}{3}{section.15}%
+\contentsline {chapter}{\numberline {4}Experimental evaluation}{4}{chapter.16}%
+\contentsline {chapter}{\numberline {5}Summary and outlook}{5}{chapter.17}%
