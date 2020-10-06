@@ -153,26 +153,17 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecss1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecsx1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecsx2488.tfm
-INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/zusammenfassung.tex
-INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/zusammenfassung.tex
-INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/abstract.tex
-INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/abstract.tex
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.toc
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.toc
 OUTPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.toc
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecsx1728.tfm
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.bbl
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.bbl
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.aux
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.out
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.out
-INPUT /home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk
 INPUT /home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1728.600pk
-INPUT /home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk
 INPUT /home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk
-INPUT /home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk
 INPUT /home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx2488.600pk
 INPUT /home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk
 INPUT /home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk

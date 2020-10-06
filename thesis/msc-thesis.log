@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.24)  6 OCT 2020 16:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.24)  6 OCT 2020 17:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -399,12 +399,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 111.
  [2]
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 119.
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 118.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) (/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/zusammenfassung.tex) [3
+) [3
 
-] (/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/abstract.tex) [4
+] [4
 
 ] (/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.toc)
 \tf@toc=\write4
@@ -424,11 +424,6 @@ chapter 2.
 
 ]
 chapter 3.
-
-Overfull \hbox (4.87144pt too wide) in paragraph at lines 218--223
-\T1/cmr/m/n/12 ï¾\TS1/cmr/m/n/12 ½\T1/cmr/m/n/12 berblicksartig beschrieben wer-den. Hier sollte die Beschrei-bung ``tech-nis-cher'' bzw. ``for-
- []
-
 [3
 
 ]
@@ -439,32 +434,37 @@ chapter 4.
 chapter 5.
 (/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.bbl [5
 
-])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 276.
+]
+
+LaTeX Warning: Empty `thebibliography' environment or \BreakBibliography
+               before end of `thebibliography' environment on input line 3.
+
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 198.
  [6
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 276.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 198.
  (/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 276.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 276.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 198.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 198.
 Package rerunfilecheck Info: File `msc-thesis.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 276.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 198.
  ) 
 Here is how much of TeX's memory you used:
- 9168 strings out of 483130
- 161044 string characters out of 5963883
+ 9147 strings out of 483130
+ 160529 string characters out of 5963883
  546596 words of memory out of 5000000
- 24014 multiletter control sequences out of 15000+600000
- 545489 words of font info for 49 fonts, out of 8000000 for 9000
+ 24001 multiletter control sequences out of 15000+600000
+ 544468 words of font info for 47 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  45i,7n,72p,10164b,346s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1728.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx2488.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk>
-Output written on "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.pdf" (11 pages, 113656 bytes).
+ </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1728.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx2488.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/jonas/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk>
+Output written on "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.pdf" (11 pages, 87219 bytes).
 PDF statistics:
- 490 PDF objects out of 1000 (max. 8388607)
- 173 compressed objects within 2 object streams
- 32 named destinations out of 1000 (max. 500000)
+ 403 PDF objects out of 1000 (max. 8388607)
+ 153 compressed objects within 2 object streams
+ 30 named destinations out of 1000 (max. 500000)
  113 words of extra memory for PDF output out of 10000 (max. 10000000)
 

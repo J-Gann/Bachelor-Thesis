@@ -115,13 +115,12 @@ University of Heidelberg.
 Date of Submission: \today
 \newpage
 
-% Add a brief summary of your topic and contributions (Zusammenfassung) in German *and* in English:
-\chapter*{Summary}
-\input{zusammenfassung}
+\chapter*{Zusammenfassung}
+
 \newpage
 
 \chapter*{Abstract}
-\input{abstract}
+
 \newpage
 
 % MAIN PART:
@@ -136,43 +135,20 @@ Date of Submission: \today
 %\listoftables
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Here, the actual content of your thesis begins
-% You can either put all the text here or use individual files to store the chapters of your thesis.
-% Below are templates for both alternatives.
 
 \chapter{Introduction}\label{intro}
 
-Dieses Kapitel gibt einen �berblick �ber die Arbeit. Gerade der
-Abschnitt zur Motivation soll allgemein verst�ndlich geschrieben
-werden. Die Einleitung sollte auch wichtige Referenzen enthalten. 
-
 \section{Motivation}
-
-Worum geht es? Beispiel(e)! Illustrationen sind hier meist sinnvoll
-zum Verst�ndnis. Warum ist das Thema wichtig? In welchem Kontext?
 
 \section{Goals of the work}
 
-In diesem Abschnitt sollen neben den Herausforderungen und der
-Problemstellung insbesondere die Ziele der Arbeit beschrieben werden. 
-
 \section{Structure of the work}
-
-Dieser Abschnitt wird meist recht kurz gehalten und beschreibt im
-Prinzip nur den Aufbau des Rests der Arbeit. Zum Beispiel: In Kapitel
-\ref{chap:grundlagen} geben wir einen �berblick �ber die  Grundlagen
-zu der Arbeit sowie �ber verwandte Arbeiten. In Kapitel
-\ref{chap:main} stellen wir dann \ldots vor. \ldots etc.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
 \chapter{Foundation and related work}
 \label{chap:grundlagen}
-
-Die ersten paar Abschnitte in diesem Kapitel f�hren in die Grundlagen
-zur Arbeit ein. Das k�nnen beispielsweise Grundlagen zu Netzwerken
-oder zur Informationsextraktion sein. 
 
 \section{(Beispiel) Netzwerke}
 \label{sec:networks}
@@ -183,53 +159,17 @@ oder zur Informationsextraktion sein.
 \section{Verwandte Arbeiten}
 \label{sec:related}
 
-Typischerweise im letzten Abschnitt dieses Kapitels wird dann auf
-verwandte Arbeiten eingegangen. Entsprechende Arbeiten sind geeignet
-zu zitieren. Beispiel: Die wurde erstmalig in den Arbeiten von Spitz
-und Gertz \cite{Spitz2016a} gezeigt \ldots Details dazu werden in
-dem Buch von Newman zu Netzwerken \cite{Newman2010} erl�utert \ldots.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-
-% Alternative: put content in separate files
-% Check the difference between including these files using \input{filename} and \include{filename} and see which one you like better
-%\chapter{Einleitung}\label{intro}
-%\input{introduction}
-%
-%\chapter{Voraussetzungen}\label{bg}
-%\input{background}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
 \chapter{My contribution}
 \label{chap:main}
 
-Dieses Kapitel stellt meist den Hauptteil der Arbeit dar. Vor dem
-ersten Abschnitt sollte ein kurzer �berblick (ein paar wenige S�tze
-mit Verweise auf nachfolgende Abschnitte) gegeben werden. Beispiel: Im
-nachfolgenden Abschnitt \ref{sec:overview} wir ein �berblick �ber die Anforderungen an
-das Modell gegeben. 
-
 \section{Overview and objective}
 \label{sec:overview} 
 
-Knapp zwei Seiten, in dem die Anforderungen, die Zielsetzung und die
-Methoden �berblicksartig beschrieben werden. Hier sollte die
-Beschreibung ``technischer'' bzw.~``formaler'' sein als in der
-Einleitung, da der Leser nun mit den Grundlagen und verwandten
-Arbeiten vertraut ist.
-
 \section{First part}
 \label{sec:teil1}
-
-In diesem und den nachfolgenden Abschnitten werden die Beitr�ge der
-Arbeit motiviert, formal sauber (oft mathematisch, sprich mit
-Definitionen etc.) beschrieben, und bei Bedarf mithilfe von Beispielen
-verdeutlicht. Die Beschreibungen in diesem Kapitel sind meist
-unabh�ngig von einer konkreten Realisierung und Daten; diese werden im
-nachfolgenden Kapitel detailliert.
 
 \section{Second part}
 \label{sec:teil2}
@@ -240,27 +180,9 @@ Usw.
 \chapter{Experimental evaluation}
 \label{chap:eval}
 
-Der Aufbau dieses Kapitels oder dessen Aufteilung in zwei Kapiteln ist
-stark von dem Thema und der Bearbeitung des Themas
-abh�ngig. Beschrieben werden hier Daten, die f�r eine Evaluation
-verwendet wird (Quellen, Beispiele, Statistiken), die Zielsetzung der Evaluation
-und die verwendeten Ma�e sowie die Ergebnisse (u.a.~mithilfe von
-Charts, Diagrammen, Abbildungen etc.)
-
-Dieses Kapitel kann auch mit einer Beschreibung der Realisierung eines
-Systems beginnen (kein Quellcode, maximal Klassendiagramme!).
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Summary and outlook}
 \label{chap:concl}
-
-Hier werden noch einmal die wichtigsten Ergebnisse und Erkenntnisse
-der Arbeit zusammengefasst (nicht einfach eine Wiederholung des
-Aufbaus der vorherigen Kapitel!), welche neuen Konzepte, Methoden und
-Werkzeuge Neues entwickelt wurden, welche Probleme nun (effizienter)
-gel�st werden k�nnen, und es wird ein Ausblick auf weiterf�hrende
-Arbeiten gegeben (z.B.~was Sie machen w�rden, wenn Sie noch 6 Monate
-mehr Zeit h�tten).
 
 
 % References (Literaturverzeichnis):
