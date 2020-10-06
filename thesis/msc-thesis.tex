@@ -74,11 +74,11 @@
 
 \vspace{3cm}
 
-\textbf{\large Master-Arbeit} % Bachelor-Arbeit 
+\textbf{\large Bachelor-Arbeit}
 
 \vspace{0.5\baselineskip}
 {\huge
-\textbf{Titel}
+\textbf{Messaging Architecture for Integration of Customer Self-Services}
 }
 \end{center}
 
@@ -140,7 +140,126 @@ Date of Submission: \today
 
 \section{Motivation}
 
+\begin{enumerate}
+     \item Example(s) of CSS Problems Today
+     \begin{enumerate}
+          \item CSS incomplete in governmental administration
+          \begin{enumerate}
+               \item identity card renewal
+               \item change of home address
+               \item change of residency status 
+          \end{enumerate}
+
+          \item CSS incomplete in universities
+          \begin{enumerate}
+               \item transfer of profile: grades, certificates, etc. between universities
+               \item applications in general (study place, semester abroad, ...)
+          \end{enumerate}
+
+          \item CSS different for each enterprise / organization
+          \begin{enumerate}
+               \item multiple identities
+               \item multiple profiles => addresses, phone numbers, mail address
+               \item time consuming to manage same information in all systems
+          \end{enumerate}
+     \end{enumerate}
+
+     \item Solution for CSS Problems
+     \begin{enumerate}
+          \item One CSS providing company, which integrates multiple / all EA
+          \item One identity, profile, address, phone number location
+          \item Easy management of identity used by multiple enterprises / organizations
+     \end{enumerate}
+
+     \item Why is integration necessary?
+     \begin{enumerate}
+          \item Each enterprise / organization has its own identities, profiles, etc. in multiple systems
+          \item The CSS providing company needs to manage those systems / data of each enterprise / organization
+          \item Enterprise Integration solves this Problem
+     \end{enumerate}
+
+\end{enumerate}
+
 \section{Goals of the work}
+
+\begin{enumerate}
+     \item What are challenges of integration?
+     \begin{enumerate}
+          \item Heterogeneous Enterprise Architecture Systems
+          \begin{enumerate}
+               \item Different Applications
+               \item Different Application Vendors
+               \item Different Application Interfaces
+               \item No Application Interfaces
+               \item Legacy Systems
+          \end{enumerate}
+
+          \item Different (proprietary) data models within and between Enterprises and Organizations
+
+          \item Stability of Integration
+          \begin{enumerate}
+               \item Future Changes of EA
+               \item Scalability
+               \item Failure of EA or Integration Components
+               \item ...
+          \end{enumerate}
+
+          \item Scarce Resources
+          \begin{enumerate}
+               \item Integration Development Speed
+               \begin{enumerate}
+                    \item Necessary Development <=> Reuse of existing Technology
+                    \item Complexity / Size of Integration
+               \end{enumerate}
+
+               \item Maintenance of finished Integration
+
+               \item Hardware / Software Costs of Integration
+               \begin{enumerate}
+                    \item Licenses for Software
+                    \item Scalability of Integration => Necessary Computing Power
+               \end{enumerate}
+
+          \end{enumerate}
+
+     \end{enumerate}
+
+     \item How does the thesis solve the problems?
+     \begin{enumerate}
+          \item Messaging Integration
+          \begin{enumerate}
+               \item Loose Coupling
+               \begin{enumerate}
+                    \item Loose Coupling simplifies adaption to changing EA => simpler Maintenance
+                    \item Loose Coupling simplifies integration of new EA systems => integration of heterogeneous EA
+                    \item Loose Coupling allows Reuse of "Modules" => faster development
+               \end{enumerate}
+
+               \item Messaging enables communication with many systems through Adapters
+
+               \item Messaging provides mechanisms for Stability
+               \begin{enumerate}
+                    \item Store-and-Forward
+                    \item Load Balancing
+               \end{enumerate}
+
+          \end{enumerate}
+
+          \item Integration Patterns
+          \begin{enumerate}
+               \item Patterns speed up construction of Integration Architecture
+               \item Patterns are proven solutions
+               \item Patterns abstract from possible technologies
+               \begin{enumerate}
+                    \item Simplifies understanding of integration concept
+                    \item Allows implementation with different technologies
+               \end{enumerate} 
+
+          \end{enumerate}
+
+     \end{enumerate}
+
+\end{enumerate}
 
 \section{Structure of the work}
 
@@ -150,14 +269,29 @@ Date of Submission: \today
 \chapter{Foundation and related work}
 \label{chap:grundlagen}
 
-\section{(Beispiel) Netzwerke}
-\label{sec:networks}
+\section{Customer Self-Service}
 
-\section{(Beispiel) Informationsextraktion}
-\label{sec:ie}
+\begin{enumerate}
+     \item Definition of CSS
+     \item What is CSS and why is it important?
+     \item How to document CSS-Scenarios
+     \item List of important CSS-Scenarios
+     \begin{enumerate}
+          \item Criteria for importance
+     \end{enumerate}
+\end{enumerate}
 
-\section{Verwandte Arbeiten}
-\label{sec:related}
+\section{Architecture Patterns}
+
+\begin{enumerate}
+     \item Definition
+     \item Patterns relevant for CSS
+     \item Relevant Architecture bricks and data bricks
+\end{enumerate}
+
+\section{Business Connector}
+
+\section{Integration Patterns}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
