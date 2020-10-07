@@ -5,12 +5,10 @@
 \contentsline {section}{\numberline {1.3}Structure of the work}{3}{section.64}%
 \contentsline {chapter}{\numberline {2}Foundation and related work}{4}{chapter.65}%
 \contentsline {section}{\numberline {2.1}Customer Self-Service}{4}{section.66}%
-\contentsline {section}{\numberline {2.2}Architecture Patterns}{4}{section.72}%
-\contentsline {section}{\numberline {2.3}Business Connector}{4}{section.76}%
-\contentsline {section}{\numberline {2.4}Integration Patterns}{4}{section.77}%
-\contentsline {chapter}{\numberline {3}My contribution}{5}{chapter.78}%
-\contentsline {section}{\numberline {3.1}Overview and objective}{5}{section.79}%
-\contentsline {section}{\numberline {3.2}First part}{5}{section.80}%
-\contentsline {section}{\numberline {3.3}Second part}{5}{section.81}%
-\contentsline {chapter}{\numberline {4}Experimental evaluation}{6}{chapter.82}%
-\contentsline {chapter}{\numberline {5}Summary and outlook}{7}{chapter.83}%
+\contentsline {section}{\numberline {2.2}Architecture Patterns}{4}{section.75}%
+\contentsline {section}{\numberline {2.3}Business Connector}{5}{section.96}%
+\contentsline {section}{\numberline {2.4}Integration Patterns}{6}{section.115}%
+\contentsline {chapter}{\numberline {3}My contribution}{7}{chapter.122}%
+\contentsline {section}{\numberline {3.1}Overview}{7}{section.123}%
+\contentsline {chapter}{\numberline {4}Experimental evaluation}{8}{chapter.124}%
+\contentsline {chapter}{\numberline {5}Summary and outlook}{9}{chapter.125}%

@@ -167,7 +167,7 @@ Date of Submission: \today
      \item Solution for CSS Problems
      \begin{enumerate}
           \item One CSS providing company, which integrates multiple / all EA
-          \item One identity, profile, address, phone number location
+          \item One identity, profile, address, phone number, location, ...
           \item Easy management of identity used by multiple enterprises / organizations
      \end{enumerate}
 
@@ -189,19 +189,21 @@ Date of Submission: \today
           \begin{enumerate}
                \item Different Applications
                \item Different Application Vendors
-               \item Different Application Interfaces
-               \item No Application Interfaces
+               \item Different / No Application Interfaces
                \item Legacy Systems
           \end{enumerate}
 
           \item Different (proprietary) data models within and between Enterprises and Organizations
+          \begin{enumerate}
+               \item Different (property)name for same data objects (syntactic integration)
+               \item Different meanings for same (property)name (semantic integration)
+          \end{enumerate}
 
           \item Stability of Integration
           \begin{enumerate}
                \item Future Changes of EA
                \item Scalability
                \item Failure of EA or Integration Components
-               \item ...
           \end{enumerate}
 
           \item Scarce Resources
@@ -249,7 +251,7 @@ Date of Submission: \today
           \begin{enumerate}
                \item Patterns speed up construction of Integration Architecture
                \item Patterns are proven solutions
-               \item Patterns abstract from possible technologies
+               \item Patterns abstract from concrete technologies
                \begin{enumerate}
                     \item Simplifies understanding of integration concept
                     \item Allows implementation with different technologies
@@ -270,28 +272,113 @@ Date of Submission: \today
 \label{chap:grundlagen}
 
 \section{Customer Self-Service}
-
 \begin{enumerate}
-     \item Definition of CSS
-     \item What is CSS and why is it important?
-     \item How to document CSS-Scenarios
-     \item List of important CSS-Scenarios
+     \item What is CSS
      \begin{enumerate}
-          \item Criteria for importance
+          \item Definition in the context of the thesis
      \end{enumerate}
+
+     \item How to document CSS-Scenarios
+     \item List of CSS-Scenarios
+     \item Purpose of CSS-Scenarios in the thesis
+     \begin{enumerate}
+          \item Finding relevant EAPs
+          \item Requirement analysis of business Connector
+          \item Interface definition of business connector
+     \end{enumerate}
+
 \end{enumerate}
 
 \section{Architecture Patterns}
-
 \begin{enumerate}
-     \item Definition
+     \item What is an EAP
+     \begin{enumerate}
+          \item Definition
+          \item Metadata
+          \item Views
+          \item Architecture bricks
+          \item Data bricks
+          \item Business processes
+     \end{enumerate}
+
+     \item Purpose of an EAP in this context
+     \begin{enumerate}
+          \item Basis for real-life enterprise architectures
+          \item Provides architecture and data bricks the integration can build up on
+     \end{enumerate}
+
+     \item Short description of EAPs in the book
      \item Patterns relevant for CSS
-     \item Relevant Architecture bricks and data bricks
+     \begin{enumerate}
+          \item Derived by comparing CSS-Scenarios with business processes
+     \end{enumerate}
+
+     \item Relevant Architecture bricks and data bricks for CSS-Scenarios
+     \item How to document relevant bricks for usage of the integration Architecture
+     \item Documentation of relevant bricks
+     \item List of requirements regarding the integration Architecture
+     \item \begin{enumerate}
+          \item Adapters for systems
+          \item Required Format of incoming data
+     \end{enumerate}
+
 \end{enumerate}
 
 \section{Business Connector}
+\begin{enumerate}
+     \item What is a business connector?
+     \begin{enumerate}
+          \item Provides functionality of "external" service provider
+          \item Purpose is to simplify integration
+          \item Can be assumed to provide sufficient interfaces
+     \end{enumerate}
+
+     \item Purpose of business connector in context of the thesis
+     \begin{enumerate}
+          \item Provides interface for CSS functionalities
+          \item Should be integrated in architecture and data bricks
+     \end{enumerate}
+
+     \item How to document the business Connector in this context
+     \begin{enumerate}
+          \item List of provided functionalities along with their interfaces
+          \begin{enumerate}
+               \item Derived from CSS-Scenarios
+               \item Derived from IDAS Connector
+          \end{enumerate}
+
+          \item List of requirements regarding the EA
+          \begin{enumerate}
+               \item Access to architecture and data bricks
+          \end{enumerate}
+
+          \item List of requirements regarding the integration Architecture
+          \begin{enumerate}
+               \item Format of data
+               \item Order of delivery
+               \item Time relevance of data
+               \item Guaranteed delivery of data
+          \end{enumerate}
+
+     \end{enumerate}
+
+\end{enumerate}
 
 \section{Integration Patterns}
+\begin{enumerate}
+     \item What are Integration Patterns?
+     \begin{enumerate}
+          \item Messaging Methodology
+          \item Patterns describe often solved messaging problems
+     \end{enumerate}
+
+     \item What is their purpose in this context
+     \begin{enumerate}
+          \item Already explained in Motivation?
+     \end{enumerate}
+
+     \item Description of Patterns later used in the integration architecture
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -299,16 +386,9 @@ Date of Submission: \today
 \chapter{My contribution}
 \label{chap:main}
 
-\section{Overview and objective}
+\section{Overview}
 \label{sec:overview} 
 
-\section{First part}
-\label{sec:teil1}
-
-\section{Second part}
-\label{sec:teil2}
-
-Usw.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Experimental evaluation}
