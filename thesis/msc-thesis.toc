@@ -10,5 +10,38 @@
 \contentsline {section}{\numberline {2.4}Integration Patterns}{6}{section.115}%
 \contentsline {chapter}{\numberline {3}My contribution}{7}{chapter.122}%
 \contentsline {section}{\numberline {3.1}Overview}{7}{section.123}%
-\contentsline {chapter}{\numberline {4}Experimental evaluation}{8}{chapter.124}%
-\contentsline {chapter}{\numberline {5}Summary and outlook}{9}{chapter.125}%
+\contentsline {section}{\numberline {3.2}Requirements}{7}{section.124}%
+\contentsline {subsection}{\numberline {3.2.1}Requirements of Enterprise Architecture}{7}{subsection.125}%
+\contentsline {subsection}{\numberline {3.2.2}Requirements of Business Connector}{7}{subsection.126}%
+\contentsline {subsection}{\numberline {3.2.3}Requirements of Integration System}{7}{subsection.127}%
+\contentsline {section}{\numberline {3.3}Scenario Integrations}{8}{section.130}%
+\contentsline {subsection}{\numberline {3.3.1}Integration Architecture Documentation Method}{8}{subsection.131}%
+\contentsline {subsection}{\numberline {3.3.2}Scenario1}{8}{subsection.132}%
+\contentsline {subsubsection}{\nonumberline Scenario1 Integration Architecture}{8}{section*.133}%
+\contentsline {subsubsection}{\nonumberline System Integration}{8}{section*.134}%
+\contentsline {subsubsection}{\nonumberline Data Integration}{8}{section*.135}%
+\contentsline {subsection}{\numberline {3.3.3}Scenario2}{8}{subsection.136}%
+\contentsline {subsubsection}{\nonumberline Scenario2 Integration Architecture}{8}{section*.137}%
+\contentsline {subsubsection}{\nonumberline System Integration}{8}{section*.138}%
+\contentsline {subsubsection}{\nonumberline Data Integration}{8}{section*.139}%
+\contentsline {section}{\numberline {3.4}Operating Manual}{8}{section.140}%
+\contentsline {chapter}{\numberline {4}Experimental evaluation}{9}{chapter.141}%
+\contentsline {section}{\numberline {4.1}Customer Landscape}{9}{section.142}%
+\contentsline {section}{\numberline {4.2}Customer Requirements}{9}{section.143}%
+\contentsline {section}{\numberline {4.3}Integration}{9}{section.144}%
+\contentsline {subsection}{\numberline {4.3.1}Using the Operating Manual}{9}{subsection.145}%
+\contentsline {subsection}{\numberline {4.3.2}Relevant Bricks}{9}{subsection.146}%
+\contentsline {subsubsection}{\nonumberline Data Bricks}{9}{section*.147}%
+\contentsline {subsubsection}{\nonumberline Architecture Bricks}{9}{section*.148}%
+\contentsline {subsection}{\numberline {4.3.3}Resulting Integration}{9}{subsection.149}%
+\contentsline {subsubsection}{\nonumberline System Integration}{9}{section*.150}%
+\contentsline {subsubsection}{\nonumberline Data Integration}{9}{section*.151}%
+\contentsline {subsubsection}{\nonumberline Integration Documentation}{9}{section*.152}%
+\contentsline {section}{\numberline {4.4}Evaluation}{9}{section.153}%
+\contentsline {subsection}{\numberline {4.4.1}Satisfaction of Requirements}{9}{subsection.154}%
+\contentsline {subsubsection}{\nonumberline Enterprise Architecture Requirements}{9}{section*.155}%
+\contentsline {subsubsection}{\nonumberline Customer Requirements}{9}{section*.156}%
+\contentsline {subsubsection}{\nonumberline Business Connector Requirements}{9}{section*.157}%
+\contentsline {subsubsection}{\nonumberline Integration Architecture Requirements}{9}{section*.158}%
+\contentsline {subsection}{\numberline {4.4.2}Resource-Heaviness}{9}{subsection.159}%
+\contentsline {chapter}{\numberline {5}Summary and outlook}{10}{chapter.160}%
