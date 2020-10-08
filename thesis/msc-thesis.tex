@@ -63,24 +63,24 @@
           \vspace*{3cm}
           \textbf
           {
-               \Large Universität Heidelberg\\
+               \Large University of Heidelberg\\
                \smallskip
-               \Large Institut für Informatik\\
+               \Large Institute for Computer Science\\
                \smallskip
-               \Large Arbeitsgruppe Datenbanksysteme\\
+               \Large Working group database systems\\
                \smallskip
           }
 
           \vspace{3cm}
 
-          \textbf{\large Bachelor-Arbeit}
+          \textbf{\large Bachelor thesis}
 
           \vspace{0.5\baselineskip}
           {
                \huge
                \textbf{Messaging Architecture for Integration of Customer Self-Services}
           }
-          
+
      \end{center}
 
      \vfill
@@ -141,128 +141,123 @@ Date of Submission: \today
 
 \section{Motivation}
 
+\subsection{Example(s) of CSS Problems Today}
 \begin{enumerate}
-     \item Example(s) of CSS Problems Today
+     \item CSS incomplete in governmental administration
            \begin{enumerate}
-                \item CSS incomplete in governmental administration
-                      \begin{enumerate}
-                           \item identity card renewal
-                           \item change of home address
-                           \item change of residency status
-                      \end{enumerate}
-
-                \item CSS incomplete in universities
-                      \begin{enumerate}
-                           \item transfer of profile: grades, certificates, etc. between universities
-                           \item applications in general (study place, semester abroad, ...)
-                      \end{enumerate}
-
-                \item CSS different for each enterprise / organization
-                      \begin{enumerate}
-                           \item multiple identities
-                           \item multiple profiles => addresses, phone numbers, mail address
-                           \item time consuming to manage same information in all systems
-                      \end{enumerate}
+                \item identity card renewal
+                \item change of home address
+                \item change of residency status
            \end{enumerate}
 
-     \item Solution for CSS Problems
+     \item CSS incomplete in universities
            \begin{enumerate}
-                \item One CSS providing company, which integrates multiple / all EA
-                \item One identity, profile, address, phone number, location, ...
-                \item Easy management of identity used by multiple enterprises / organizations
+                \item transfer of profile: grades, certificates, etc. between universities
+                \item applications in general (study place, semester abroad, ...)
            \end{enumerate}
 
-     \item Why is integration necessary?
+     \item CSS different for each enterprise / organization
            \begin{enumerate}
-                \item Each enterprise / organization has its own identities, profiles, etc. in multiple systems
-                \item The CSS providing company needs to manage those systems / data of each enterprise / organization
-                \item Enterprise Integration solves this Problem
+                \item multiple identities
+                \item multiple profiles => addresses, phone numbers, mail address
+                \item time consuming to manage same information in all systems
            \end{enumerate}
+\end{enumerate}
 
+\subsection{Solution for CSS Problems}
+\begin{enumerate}
+     \item One CSS providing company, which integrates multiple / all EA
+     \item One identity, profile, address, phone number, location, ...
+     \item Easy management of identity used by multiple enterprises / organizations
+\end{enumerate}
+
+\subsection{Integration necessity}
+\begin{enumerate}
+     \item Each enterprise / organization has its own identities, profiles, etc. in multiple systems
+     \item The CSS providing company needs to manage those systems / data of each enterprise / organization
+     \item Enterprise Integration solves this Problem
 \end{enumerate}
 
 \section{Goals of the work}
 
+\subsection{Integration Challenges}
 \begin{enumerate}
-     \item What are challenges of integration?
+     \item Heterogeneous Enterprise Architecture Systems
            \begin{enumerate}
-                \item Heterogeneous Enterprise Architecture Systems
-                      \begin{enumerate}
-                           \item Different Applications
-                           \item Different Application Vendors
-                           \item Different / No Application Interfaces
-                           \item Legacy Systems
-                      \end{enumerate}
-
-                \item Different (proprietary) data models within and between Enterprises and Organizations
-                      \begin{enumerate}
-                           \item Different (property)name for same data objects (syntactic integration)
-                           \item Different meanings for same (property)name (semantic integration)
-                      \end{enumerate}
-
-                \item Stability of Integration
-                      \begin{enumerate}
-                           \item Future Changes of EA
-                           \item Scalability
-                           \item Failure of EA or Integration Components
-                      \end{enumerate}
-
-                \item Scarce Resources
-                      \begin{enumerate}
-                           \item Integration Development Speed
-                                 \begin{enumerate}
-                                      \item Necessary Development <=> Reuse of existing Technology
-                                      \item Complexity / Size of Integration
-                                 \end{enumerate}
-
-                           \item Maintenance of finished Integration
-
-                           \item Hardware / Software Costs of Integration
-                                 \begin{enumerate}
-                                      \item Licenses for Software
-                                      \item Scalability of Integration => Necessary Computing Power
-                                 \end{enumerate}
-
-                      \end{enumerate}
-
+                \item Different Applications
+                \item Different Application Vendors
+                \item Different / No Application Interfaces
+                \item Legacy Systems
            \end{enumerate}
 
-     \item How does the thesis solve the problems?
+     \item Different (proprietary) data models within and between Enterprises and Organizations
            \begin{enumerate}
-                \item Messaging Integration
+                \item Different (property)name for same data objects (syntactic integration)
+                \item Different meanings for same (property)name (semantic integration)
+           \end{enumerate}
+
+     \item Stability of Integration
+           \begin{enumerate}
+                \item Future Changes of EA
+                \item Scalability
+                \item Failure of EA or Integration Components
+           \end{enumerate}
+
+     \item Scarce Resources
+           \begin{enumerate}
+                \item Integration Development Speed
                       \begin{enumerate}
-                           \item Loose Coupling
-                                 \begin{enumerate}
-                                      \item Loose Coupling simplifies adaption to changing EA => simpler Maintenance
-                                      \item Loose Coupling simplifies integration of new EA systems => integration of heterogeneous EA
-                                      \item Loose Coupling allows Reuse of "Modules" => faster development
-                                 \end{enumerate}
-
-                           \item Messaging enables communication with many systems through Adapters
-
-                           \item Messaging provides mechanisms for Stability
-                                 \begin{enumerate}
-                                      \item Store-and-Forward
-                                      \item Load Balancing
-                                 \end{enumerate}
-
+                           \item Necessary Development <=> Reuse of existing Technology
+                           \item Complexity / Size of Integration
                       \end{enumerate}
 
-                \item Integration Patterns
-                      \begin{enumerate}
-                           \item Patterns speed up construction of Integration Architecture
-                           \item Patterns are proven solutions
-                           \item Patterns abstract from concrete technologies
-                                 \begin{enumerate}
-                                      \item Simplifies understanding of integration concept
-                                      \item Allows implementation with different technologies
-                                 \end{enumerate}
+                \item Maintenance of finished Integration
 
+                \item Hardware / Software Costs of Integration
+                      \begin{enumerate}
+                           \item Licenses for Software
+                           \item Scalability of Integration => Necessary Computing Power
                       \end{enumerate}
 
            \end{enumerate}
 
 \end{enumerate}
+
+\subsection{Presented Solutions}
+\begin{enumerate}
+     \item Messaging Integration
+           \begin{enumerate}
+                \item Loose Coupling
+                      \begin{enumerate}
+                           \item Loose Coupling simplifies adaption to changing EA => simpler Maintenance
+                           \item Loose Coupling simplifies integration of new EA systems => integration of heterogeneous EA
+                           \item Loose Coupling allows Reuse of "Modules" => faster development
+                      \end{enumerate}
+
+                \item Messaging enables communication with many systems through Adapters
+
+                \item Messaging provides mechanisms for Stability
+                      \begin{enumerate}
+                           \item Store-and-Forward
+                           \item Load Balancing
+                      \end{enumerate}
+
+           \end{enumerate}
+
+     \item Integration Patterns
+           \begin{enumerate}
+                \item Patterns speed up construction of Integration Architecture
+                \item Patterns are proven solutions
+                \item Patterns abstract from concrete technologies
+                      \begin{enumerate}
+                           \item Simplifies understanding of integration concept
+                           \item Allows implementation with different technologies
+                      \end{enumerate}
+
+           \end{enumerate}
+
+\end{enumerate}
+
 
 \section{Structure of the work}
 
@@ -270,114 +265,121 @@ Date of Submission: \today
 \newpage
 
 \chapter{Foundation and related work}
-\label{chap:grundlagen}
 
 \section{Customer Self-Service}
+
+\subsection{Definition}
 \begin{enumerate}
-     \item What is CSS
-           \begin{enumerate}
-                \item Definition in the context of the thesis
-           \end{enumerate}
-
-     \item How to document CSS-Scenarios
-     \item List of CSS-Scenarios
-     \item Purpose of CSS-Scenarios in the thesis
-           \begin{enumerate}
-                \item Finding relevant EAPs
-                \item Requirement analysis of business Connector
-                \item Interface definition of business connector
-           \end{enumerate}
-
+     \item Definition in the context of the thesis
 \end{enumerate}
 
-\section{Architecture Patterns}
+\subsection{Documentation}
 \begin{enumerate}
-     \item What is an EAP
-           \begin{enumerate}
-                \item Definition
-                \item Metadata
-                \item Views
-                \item Architecture bricks
-                \item Data bricks
-                \item Business processes
-           \end{enumerate}
+     \item How can CSS-Scenarios be documented?
+\end{enumerate}
 
-     \item Purpose of an EAP in this context
-           \begin{enumerate}
-                \item Basis for real-life enterprise architectures
-                \item Provides architecture and data bricks the integration can build up on
-           \end{enumerate}
+\subsection{List of Scenarios}
 
-     \item Short description of EAPs in the book
-     \item Patterns relevant for CSS
+\subsection{Purpose in Thesis}
+\begin{enumerate}
+     \item Finding relevant EAPs
+     \item Requirement analysis of business Connector
+     \item Interface definition of business connector
+\end{enumerate}
+
+
+\section{Architecture Patterns}
+\subsection{Definition}
+\begin{enumerate}
+     \item Definition
+     \item Metadata
+     \item Views
+     \item Architecture bricks
+     \item Data bricks
+     \item Business processes
+\end{enumerate}
+
+\subsection{Purpose in Thesis}
+\begin{enumerate}
+     \item Basis for real-life enterprise architectures
+     \item Provides architecture and data bricks the integration can build up on
+\end{enumerate}
+
+\subsection{Architecture- and Data bricks}
+\begin{enumerate}
+     \item Description of EAPs used in the thesis
+     \item Reasons why each EAP is relevant for CSS
            \begin{enumerate}
                 \item Derived by comparing CSS-Scenarios with business processes
            \end{enumerate}
+     \item Architecture bricks and data bricks of EAPs relevant for CSS-Scenarios
+     \item Documentation of resulting Architecture and data bricks
+\end{enumerate}
 
-     \item Relevant Architecture bricks and data bricks for CSS-Scenarios
-     \item How to document relevant bricks for usage of the integration Architecture
-     \item Documentation of relevant bricks
-     \item List of requirements regarding the integration Architecture
-     \item \begin{enumerate}
+\subsection{Requirements of Enterprise Architecture}
+\begin{enumerate}
+     \item List of requirements towards the integration Architecture
+           \begin{enumerate}
                 \item Adapters for systems
                 \item Required Format of incoming data
            \end{enumerate}
-
 \end{enumerate}
 
 \section{Business Connector}
+
+\subsection{Definition}
 \begin{enumerate}
-     \item What is a business connector?
-           \begin{enumerate}
-                \item Provides functionality of "external" service provider
-                \item Purpose is to simplify integration
-                \item Can be assumed to provide sufficient interfaces
-           \end{enumerate}
+     \item Provides functionality of "external" service provider
+     \item Purpose is to simplify integration
+     \item Can be assumed to provide sufficient interfaces
+\end{enumerate}
 
-     \item Purpose of business connector in context of the thesis
-           \begin{enumerate}
-                \item Provides interface for CSS functionalities
-                \item Should be integrated in architecture and data bricks
-           \end{enumerate}
+\subsection{Purpose in Thesis}
+\begin{enumerate}
+     \item Provides interface for CSS functionalities
+     \item Should be integrated in architecture and data bricks
+\end{enumerate}
 
+\subsection{Documentation}
+\begin{enumerate}
      \item How to document the business Connector in this context
+
+     \item List of provided functionalities along with their interfaces
            \begin{enumerate}
-                \item List of provided functionalities along with their interfaces
-                      \begin{enumerate}
-                           \item Derived from CSS-Scenarios
-                           \item Derived from IDAS Connector
-                      \end{enumerate}
+                \item Derived from CSS-Scenarios
+                \item Derived from IDAS Connector
+           \end{enumerate}
 
-                \item List of requirements regarding the EA
-                      \begin{enumerate}
-                           \item Access to architecture and data bricks
-                      \end{enumerate}
+     \item List of requirements regarding the EA
+           \begin{enumerate}
+                \item Access to architecture and data bricks
+           \end{enumerate}
 
-                \item List of requirements regarding the integration Architecture
-                      \begin{enumerate}
-                           \item Format of data
-                           \item Order of delivery
-                           \item Time relevance of data
-                           \item Guaranteed delivery of data
-                      \end{enumerate}
-
+     \item List of requirements regarding the integration Architecture
+           \begin{enumerate}
+                \item Format of data
+                \item Order of delivery
+                \item Time relevance of data
+                \item Guaranteed delivery of data
            \end{enumerate}
 
 \end{enumerate}
 
 \section{Integration Patterns}
+
+\subsection{Definition}
 \begin{enumerate}
-     \item What are Integration Patterns?
-           \begin{enumerate}
-                \item Messaging Methodology
-                \item Patterns describe often solved messaging problems
-           \end{enumerate}
+     \item Messaging Methodology
+     \item Patterns describe often solved messaging problems
+\end{enumerate}
 
-     \item What is their purpose in this context
-           \begin{enumerate}
-                \item Already explained in Motivation?
-           \end{enumerate}
+\subsection{Purpose in Thesis}
+\begin{enumerate}
+     \item Already explained in Motivation?
+\end{enumerate}
 
+\subsection{Patterns used in Thesis}
+\begin{enumerate}
      \item Description of Patterns later used in the integration architecture
 \end{enumerate}
 
@@ -396,22 +398,43 @@ Date of Submission: \today
 
 \subsection{Requirements of Integration System}
 
+\section{Scenario Integrations}
 \begin{enumerate}
-     \item Stability
-     \item Scalability
+     \item Look at integration architecture for each CSS-Scenario
 \end{enumerate}
 
-\section{Scenario Integrations}
-
 \subsection{Integration Architecture Documentation Method}
+\begin{enumerate}
+     \item Entity Diagram(s)
+     \item Flow Diagram(s)
+     \item etc.
+\end{enumerate}
 
 \subsection{Scenario1}
+\begin{enumerate}
+     \item Description of Scenario
+\end{enumerate}
 
 \subsubsection{Scenario1 Integration Architecture}
+\begin{enumerate}
+     \item Entity Diagram(s)
+     \item Flow Diagram(s)
+     \item etc.
+\end{enumerate}
 
 \subsubsection{System Integration}
+\begin{enumerate}
+     \item Explanation how the systems are integrated
+     \item Why was each pattern used?
+     \item How are requirements met?
+\end{enumerate}
 
 \subsubsection{Data Integration}
+\begin{enumerate}
+     \item Explanation how the data objects are integrated
+     \item Why was data transformed / mapped?
+     \item How are requirements met
+\end{enumerate}
 
 \subsection{Scenario2}
 
@@ -442,11 +465,11 @@ Date of Submission: \today
 
 \subsection{Resulting Integration}
 
+\subsubsection{Integration Documentation}
+
 \subsubsection{System Integration}
 
 \subsubsection{Data Integration}
-
-\subsubsection{Integration Documentation}
 
 \section{Evaluation}
 
@@ -461,6 +484,12 @@ Date of Submission: \today
 \subsubsection{Integration Architecture Requirements}
 
 \subsection{Resource-Heaviness}
+
+\subsubsection{Required time for application}
+
+\subsubsection{Size of Resulting System}
+
+\subsubsection{Increasing cost due to scaling}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Summary and outlook}
