@@ -1,5 +1,6 @@
 Internet Self-Service in Kundenbeziehungen: Gestaltungselemente, Prozessarchitektur und Fallstudien aus der Finanzdienstleistungsbranche
 Self-Service in the Internet Age: Expectations and Experiences
+Adoption technologiebasierter Self-Service-Innovationen
 Enterprise Integration Patterns
 Enterprise Architecture Patterns
 Data and Reality

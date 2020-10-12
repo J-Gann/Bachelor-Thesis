@@ -1,69 +1,44 @@
 \babel@toc {english}{}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.4}%
 \contentsline {section}{\numberline {1.1}Motivation}{1}{section.5}%
-\contentsline {subsection}{\numberline {1.1.1}Example(s) of CSS Problems Today}{1}{subsection.6}%
-\contentsline {subsection}{\numberline {1.1.2}Solution for CSS Problems}{1}{subsection.18}%
-\contentsline {subsection}{\numberline {1.1.3}Integration necessity}{1}{subsection.22}%
-\contentsline {section}{\numberline {1.2}Goals of the work}{2}{section.26}%
-\contentsline {subsection}{\numberline {1.2.1}Integration Challenges}{2}{subsection.27}%
-\contentsline {subsection}{\numberline {1.2.2}Presented Solutions}{3}{subsection.48}%
-\contentsline {section}{\numberline {1.3}Structure of the work}{3}{section.64}%
-\contentsline {chapter}{\numberline {2}Foundation and related work}{4}{chapter.65}%
-\contentsline {section}{\numberline {2.1}Customer Self-Service}{4}{section.66}%
-\contentsline {subsection}{\numberline {2.1.1}Definition}{4}{subsection.67}%
-\contentsline {subsection}{\numberline {2.1.2}Documentation}{4}{subsection.69}%
-\contentsline {subsection}{\numberline {2.1.3}List of Scenarios}{4}{subsection.71}%
-\contentsline {subsection}{\numberline {2.1.4}Purpose in Thesis}{4}{subsection.72}%
-\contentsline {section}{\numberline {2.2}Architecture Patterns}{4}{section.76}%
-\contentsline {subsection}{\numberline {2.2.1}Definition}{4}{subsection.77}%
-\contentsline {subsection}{\numberline {2.2.2}Purpose in Thesis}{5}{subsection.84}%
-\contentsline {subsection}{\numberline {2.2.3}Architecture- and Data bricks}{5}{subsection.87}%
-\contentsline {subsection}{\numberline {2.2.4}Requirements of Enterprise Architecture}{5}{subsection.93}%
-\contentsline {section}{\numberline {2.3}Business Connector}{5}{section.97}%
-\contentsline {subsection}{\numberline {2.3.1}Definition}{5}{subsection.98}%
-\contentsline {subsection}{\numberline {2.3.2}Purpose in Thesis}{5}{subsection.102}%
-\contentsline {subsection}{\numberline {2.3.3}Documentation}{6}{subsection.105}%
-\contentsline {section}{\numberline {2.4}Integration Patterns}{6}{section.117}%
-\contentsline {subsection}{\numberline {2.4.1}Definition}{6}{subsection.118}%
-\contentsline {subsection}{\numberline {2.4.2}Purpose in Thesis}{6}{subsection.121}%
-\contentsline {subsection}{\numberline {2.4.3}Patterns used in Thesis}{6}{subsection.123}%
-\contentsline {chapter}{\numberline {3}My contribution}{7}{chapter.125}%
-\contentsline {section}{\numberline {3.1}Overview}{7}{section.126}%
-\contentsline {section}{\numberline {3.2}Requirements}{7}{section.127}%
-\contentsline {subsection}{\numberline {3.2.1}Requirements of Enterprise Architecture}{7}{subsection.128}%
-\contentsline {subsection}{\numberline {3.2.2}Requirements of Business Connector}{7}{subsection.129}%
-\contentsline {subsection}{\numberline {3.2.3}Requirements of Integration System}{7}{subsection.130}%
-\contentsline {section}{\numberline {3.3}Scenario Integrations}{7}{section.131}%
-\contentsline {subsection}{\numberline {3.3.1}Integration Architecture Documentation Method}{7}{subsection.133}%
-\contentsline {subsection}{\numberline {3.3.2}Scenario1}{7}{subsection.137}%
-\contentsline {subsubsection}{\nonumberline Scenario1 Integration Architecture}{7}{section*.139}%
-\contentsline {subsubsection}{\nonumberline System Integration}{8}{section*.143}%
-\contentsline {subsubsection}{\nonumberline Data Integration}{8}{section*.147}%
-\contentsline {subsection}{\numberline {3.3.3}Scenario2}{8}{subsection.151}%
-\contentsline {subsubsection}{\nonumberline Scenario2 Integration Architecture}{8}{section*.152}%
-\contentsline {subsubsection}{\nonumberline System Integration}{8}{section*.153}%
-\contentsline {subsubsection}{\nonumberline Data Integration}{8}{section*.154}%
-\contentsline {section}{\numberline {3.4}Operating Manual}{8}{section.155}%
-\contentsline {chapter}{\numberline {4}Experimental evaluation}{9}{chapter.156}%
-\contentsline {section}{\numberline {4.1}Customer Landscape}{10}{section.157}%
-\contentsline {section}{\numberline {4.2}Customer Requirements}{10}{section.158}%
-\contentsline {section}{\numberline {4.3}Integration}{10}{section.159}%
-\contentsline {subsection}{\numberline {4.3.1}Using the Operating Manual}{10}{subsection.160}%
-\contentsline {subsection}{\numberline {4.3.2}Relevant Bricks}{10}{subsection.161}%
-\contentsline {subsubsection}{\nonumberline Data Bricks}{10}{section*.162}%
-\contentsline {subsubsection}{\nonumberline Architecture Bricks}{10}{section*.163}%
-\contentsline {subsection}{\numberline {4.3.3}Resulting Integration}{10}{subsection.164}%
-\contentsline {subsubsection}{\nonumberline Integration Documentation}{10}{section*.165}%
-\contentsline {subsubsection}{\nonumberline System Integration}{10}{section*.166}%
-\contentsline {subsubsection}{\nonumberline Data Integration}{10}{section*.167}%
-\contentsline {section}{\numberline {4.4}Evaluation}{10}{section.168}%
-\contentsline {subsection}{\numberline {4.4.1}Satisfaction of Requirements}{10}{subsection.169}%
-\contentsline {subsubsection}{\nonumberline Enterprise Architecture Requirements}{10}{section*.170}%
-\contentsline {subsubsection}{\nonumberline Customer Requirements}{10}{section*.171}%
-\contentsline {subsubsection}{\nonumberline Business Connector Requirements}{10}{section*.172}%
-\contentsline {subsubsection}{\nonumberline Integration Architecture Requirements}{10}{section*.173}%
-\contentsline {subsection}{\numberline {4.4.2}Resource-Heaviness}{10}{subsection.174}%
-\contentsline {subsubsection}{\nonumberline Required time for application}{10}{section*.175}%
-\contentsline {subsubsection}{\nonumberline Size of Resulting System}{10}{section*.176}%
-\contentsline {subsubsection}{\nonumberline Increasing cost due to scaling}{10}{section*.177}%
-\contentsline {chapter}{\numberline {5}Summary and outlook}{11}{chapter.178}%
+\contentsline {subsection}{\numberline {1.1.1}Evolution of digital Customer Self-Service}{1}{subsection.6}%
+\contentsline {subsection}{\numberline {1.1.2}CSS as a Service}{1}{subsection.15}%
+\contentsline {subsection}{\numberline {1.1.3}Service Integration}{1}{subsection.17}%
+\contentsline {section}{\numberline {1.2}Goals of the work}{1}{section.19}%
+\contentsline {section}{\numberline {1.3}Structure of the work}{2}{section.40}%
+\contentsline {chapter}{\numberline {2}Foundation and related work}{3}{chapter.41}%
+\contentsline {section}{\numberline {2.1}Customer Self-Service}{3}{section.42}%
+\contentsline {section}{\numberline {2.2}Architecture Patterns}{3}{section.46}%
+\contentsline {subsection}{\numberline {2.2.1}Business Connector}{3}{subsection.50}%
+\contentsline {section}{\numberline {2.3}Messaging Patterns}{3}{section.53}%
+\contentsline {chapter}{\numberline {3}Groundwork}{4}{chapter.60}%
+\contentsline {subsection}{\numberline {3.0.1}CSS-Scenarios}{4}{subsection.61}%
+\contentsline {subsection}{\numberline {3.0.2}Enterprise Architecture}{4}{subsection.67}%
+\contentsline {section}{\numberline {3.1}Business Connector}{4}{section.77}%
+\contentsline {chapter}{\numberline {4}Integration Architecture}{6}{chapter.89}%
+\contentsline {section}{\numberline {4.1}Overview}{6}{section.90}%
+\contentsline {section}{\numberline {4.2}Requirements}{6}{section.91}%
+\contentsline {subsection}{\numberline {4.2.1}Requirements of Enterprise Architecture}{6}{subsection.95}%
+\contentsline {subsection}{\numberline {4.2.2}Requirements of Business Connector}{6}{subsection.96}%
+\contentsline {subsection}{\numberline {4.2.3}Requirements of Integration System}{6}{subsection.97}%
+\contentsline {section}{\numberline {4.3}Scenario Integrations}{6}{section.98}%
+\contentsline {subsection}{\numberline {4.3.1}Integration Architecture Documentation Method}{6}{subsection.100}%
+\contentsline {subsection}{\numberline {4.3.2}Scenario1}{6}{subsection.104}%
+\contentsline {subsubsection}{\nonumberline Scenario1 Integration Architecture}{7}{section*.106}%
+\contentsline {subsubsection}{\nonumberline System Integration}{7}{section*.110}%
+\contentsline {subsubsection}{\nonumberline Data Integration}{7}{section*.114}%
+\contentsline {subsection}{\numberline {4.3.3}Scenario2}{7}{subsection.118}%
+\contentsline {subsubsection}{\nonumberline Scenario2 Integration Architecture}{7}{section*.119}%
+\contentsline {subsubsection}{\nonumberline System Integration}{7}{section*.120}%
+\contentsline {subsubsection}{\nonumberline Data Integration}{7}{section*.121}%
+\contentsline {chapter}{\numberline {5}Evaluation}{8}{chapter.122}%
+\contentsline {section}{\numberline {5.1}Technological Evaluation}{8}{section.123}%
+\contentsline {subsection}{\numberline {5.1.1}Available Messaging Technologies}{8}{subsection.124}%
+\contentsline {subsection}{\numberline {5.1.2}Implementation of Integration Architecture}{8}{subsection.125}%
+\contentsline {subsection}{\numberline {5.1.3}Evaluation of result}{8}{subsection.126}%
+\contentsline {section}{\numberline {5.2}Experimental Evaluation}{8}{section.127}%
+\contentsline {subsection}{\numberline {5.2.1}Customer Example}{8}{subsection.128}%
+\contentsline {subsection}{\numberline {5.2.2}Application of Integration Architecture}{8}{subsection.129}%
+\contentsline {subsection}{\numberline {5.2.3}Evaluation of result}{8}{subsection.130}%
+\contentsline {section}{\numberline {5.3}Operation Manual}{8}{section.131}%
+\contentsline {chapter}{\numberline {6}Summary and outlook}{9}{chapter.134}%
