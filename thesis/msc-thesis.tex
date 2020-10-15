@@ -124,300 +124,169 @@ Date of Submission: \today
 
 \newpage
 
-% MAIN PART:
-% Table of contents (Inhaltsverzeichnis)
 \tableofcontents
 \cleardoublepage
 \pagenumbering{arabic}
 
-% List of figures (Abbildungsverzeichnis):
-%\listoffigures
-% List of tables (Tabellenverzeichnis):
-%\listoftables
+\chapter{Context}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The german ministry of economy and energy recognizes that "we have long since arrived in a digitized world". This realization 
+of the german government comes along with important federal and european legislation. Most prominent are DSGVO, OZG and DVG, 
+modernizing data protection, governmental administration and health care.
 
-\chapter{Introduction}\label{intro}
+Enterprises, organizations and authorities are required to provide additional digital services for its customers and users.
+Those include for example the deletion of non-mandatory data and the digital application for unemployment benefit.
 
-\section{Motivation}
+Working with existing system- and data architectures, integration of new solutions is necessary.
 
-\subsection{Evolution of digital Customer Self-Service}
+\chapter{Objectives}
+
+This bachelor thesis describes digital self-service as a solution for the additional requirements. It explains the basis of what 
+customer self-service (CSS) is, what relevant legislation is about and how CSS providers can help in the digital transformation.
+
+The technological challenge of integrating CSS providers into existing system architectures is focus of this bachelor thesis.
+An integration architecture is presented, which provides solutions for the following questions (ToDo: In Textform schreiben):
+
 \begin{enumerate}
-     \item Increasing consumer standards
-           \begin{enumerate}
-                \item Passwordless sign in
-                \item instant updates
-           \end{enumerate}
-
-     \item New regulations
-           \begin{enumerate}
-                \item DSGVO
-                \item Onlinezugangsgesetz
-                \item DVG (eAU, eRezept)
-                \item psd2
-           \end{enumerate}
-
+     \item How can services of a CSS provider be accessed by the enterprise architecture?
+     \item Which systems of a typical enterprise architecture are required?
+     \item Which data objects of a typical enterprise architecture are required?
+     \item Which additional systems and data objects are required?
+     \item How can heterogeneous enterprise architectures be integrated the same way?
+     \item How can the integration be non-invasive?
+     \item How can the speed of integration development be increased?
+     \item How can the speed of integration deployment be increased?
+     \item How can the integration system be reliable and maintainable?
 \end{enumerate}
 
-\subsection{CSS as a Service}
-\begin{enumerate}
-     \item Enterprises can offer CSS service, satisfying modern requirements and regulations
-\end{enumerate}
+The architecture is evaluated in respect to technological feasibility and real-life applicability. The results are incorporated into 
+an operating manual, providing guidance in developing and deploying the presented integration architecture.
 
-\subsection{Service Integration}
-\begin{enumerate}
-     \item The provided CSS service has to be integrated into existing enterprise architecture
-\end{enumerate}
+\chapter{Structure of Work}
 
-\section{Goals of the work}
+\chapter{Customer Self-Service (CSS)}
 
-Solution for integration challenges
-\begin{enumerate}
-     \item Heterogeneous Enterprise Architecture Systems
-           \begin{enumerate}
-                \item Different Applications
-                \item Different Application Vendors
-                \item Different / No Application Interfaces
-                \item Legacy Systems
-           \end{enumerate}
+\section{Definition}
 
-     \item Different (proprietary) data models within and between Enterprises and Organizations
-           \begin{enumerate}
-                \item Different (property)name for same data objects (syntactic integration)
-                \item Different meanings for same (property)name (semantic integration)
-           \end{enumerate}
+\section{Description}
 
-     \item Stability of Integration
-           \begin{enumerate}
-                \item Future Changes of EA
-                \item Scalability
-                \item Failure of EA or Integration Components
-           \end{enumerate}
+\section{Benefits}
 
-     \item Scarce Resources
-           \begin{enumerate}
-                \item Integration Development Speed
-                      \begin{enumerate}
-                           \item Necessary Development <=> Reuse of existing Technology
-                           \item Complexity / Size of Integration
-                      \end{enumerate}
+\subsection{Customer}
 
-                \item Maintenance of finished Integration
+\subsection{Organization}
 
-                \item Hardware / Software Costs of Integration
-                      \begin{enumerate}
-                           \item Licenses for Software
-                           \item Scalability of Integration => Necessary Computing Power
-                      \end{enumerate}
+\section{Examples}
 
-           \end{enumerate}
+\chapter{Governmental Regulations}
 
-\end{enumerate}
+\section{Purpose}
 
-\section{Structure of the work}
+\section{Importance for Organizations}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
+\section{DSGVO}
 
-\chapter{Foundation and related work}
+\section{OZG}
 
-\section{Customer Self-Service}
-\begin{enumerate}
-     \item Definition in the context of the thesis
-     \item Purpose in Thesis
-     \item Overview of CSS-Scenarios found in literature
-\end{enumerate}
+\section{DVG}
 
-\section{Architecture Patterns}
-\begin{enumerate}
-     \item Definition
-     \item Purpose in Thesis
-     \item Explanation of used Patterns
-\end{enumerate}
+\section{Challenges for Organizations}
 
-\subsection{Business Connector}
-\begin{enumerate}
-     \item Definition in context of the thesis
-     \item Purpose in Thesis
-\end{enumerate}
+\chapter{Compliance through CSS}
 
-\section{Messaging Patterns}
-\begin{enumerate}
-     \item Definition
-     \item Messaging
-           \begin{enumerate}
-                \item Answer: Why is messaging used?
-           \end{enumerate}
-     \item Patterns
-           \begin{enumerate}
-                \item Answer: Why are patterns used?
-           \end{enumerate}
-     \item Explanation of used patterns
-\end{enumerate}
+\section{Description}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-
-\chapter{Groundwork}
-
-\subsection{CSS-Scenarios}
-\begin{enumerate}
-     \item Categorization of Scenarios
-     \item Combining similar scenarios (into a more general one)
-     \item Prioritization
-     \item ToDo: How to document?
-     \item Documentation of final list
-\end{enumerate}
-
-\subsection{Enterprise Architecture}
-\begin{enumerate}
-     \item Architecture- and Data bricks
-           \begin{enumerate}
-                \item Selection of EAPs relevant for CSS
-                      \begin{enumerate}
-                           \item Derived by comparing CSS-Scenarios with business processes
-                      \end{enumerate}
-                \item Evaluation of Architecture bricks and data bricks of EAPs relevant for CSS-Scenarios
-                \item Documentation of resulting Architecture and data bricks
-           \end{enumerate}
-
-     \item Requirements of Enterprise Architecture
-           \begin{enumerate}
-                \item List of requirements towards the integration Architecture
-                      \begin{enumerate}
-                           \item Adapters for systems
-                           \item Required Format of incoming data
-                      \end{enumerate}
-           \end{enumerate}
-\end{enumerate}
-
-
-\section{Business Connector}
-\begin{enumerate}
-     \item How to document the business Connector
-     \item List of provided functionalities along with their interfaces
-           \begin{enumerate}
-                \item Derived from CSS-Scenarios
-                \item Derived from IDAS Connector
-           \end{enumerate}
-
-     \item List of requirements regarding the EA
-           \begin{enumerate}
-                \item Access to architecture and data bricks
-           \end{enumerate}
-
-     \item List of requirements regarding the integration Architecture
-           \begin{enumerate}
-                \item Format of data
-                \item Order of delivery
-                \item Time relevance of data
-                \item Guaranteed delivery of data
-           \end{enumerate}
-
-\end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-
-\chapter{Integration Architecture}
-
-\section{Overview}
+\section{CSS-Scenarios}
 
 \section{Requirements}
 
-\begin{enumerate}
-     \item Requirements of Enterprise Architecture
-     \item Requirements of Business Connector
-     \item Requirements of Integration System
-\end{enumerate}
+\chapter{CSS Providers}
 
-\subsection{Requirements of Enterprise Architecture}
+\section{Description}
 
-\subsection{Requirements of Business Connector}
+\section{CSS Solutions}
 
-\subsection{Requirements of Integration System}
+\section{Business Connector}
 
-\section{Scenario Integrations}
-\begin{enumerate}
-     \item Look at integration architecture for each CSS-Scenario
-\end{enumerate}
+\chapter{Enterprise Architectures}
 
-\subsection{Integration Architecture Documentation Method}
-\begin{enumerate}
-     \item Entity Diagram(s)
-     \item Flow Diagram(s)
-     \item etc.
-\end{enumerate}
+\section{Modeling of the real world}
 
-\subsection{Scenario1}
-\begin{enumerate}
-     \item Description of Scenario
-\end{enumerate}
+\section{Modeling Challenges}
 
-\subsubsection{Scenario1 Integration Architecture}
-\begin{enumerate}
-     \item Entity Diagram(s)
-     \item Flow Diagram(s)
-     \item etc.
-\end{enumerate}
+\section{Enterprise Architecture Patterns (EAP)}
 
-\subsubsection{System Integration}
-\begin{enumerate}
-     \item Explanation how the systems are integrated
-     \item Why was each pattern used?
-     \item How are requirements met?
-\end{enumerate}
+\chapter{Relevant Systems and Data}
 
-\subsubsection{Data Integration}
-\begin{enumerate}
-     \item Explanation how the data objects are integrated
-     \item Why was data transformed / mapped?
-     \item How are requirements met
-\end{enumerate}
+\section{EAPs}
 
-\subsection{Scenario2}
+\section{Architecture Bricks}
 
-\subsubsection{Scenario2 Integration Architecture}
+\section{Data Bricks}
 
-\subsubsection{System Integration}
+\section{Integration Requirements}
 
-\subsubsection{Data Integration}
+\subsection{Regarding Integration Architecture}
 
-\chapter{Evaluation}
+\subsection{Regarding Business Connector}
 
-\section{Technological Evaluation}
+\chapter{Integration}
 
-\subsection{Available Messaging Technologies}
+\section{Definition}
 
-\subsection{Implementation of Integration Architecture}
+\section{Requirements}
 
-\subsection{Evaluation of result}
+\subsection{Loose Coupling}
 
-\section{Experimental Evaluation}
+\subsection{Homogeneous Landscapes}
 
-\subsection{Customer Example}
+\section{Enterprise Integration Patterns (EIP)}
 
-\subsection{Application of Integration Architecture}
+\subsection{Pattern 1}
 
-\subsection{Evaluation of result}
+\subsection{Pattern 2}
 
-\section{Operation Manual}
-\begin{enumerate}
-     \item Guide on how to implement and deploy the integration architecture
-     \item incorporates results of previous evaluations
-\end{enumerate}
+\chapter{Business Connector}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Summary and outlook}
+\section{Functionalities and Interfaces}
 
-% References (Literaturverzeichnis):
-% a) Style (with abbreviations: use alpha):
-% see
-% https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_bibliographystyle
-% for the different formats and styles
+\section{Integration Requirements}
+
+\subsection{Regarding Enterprise Architecture}
+
+\subsection{Regarding Integration Architecture}
+
+\section{Documentation}
+
+\subsection{Connector as Architecture Brick}
+
+\chapter{Integration Architecture}
+
+\section{Scenario 1}
+
+\subsection{Integration Documentation}
+
+\subsection{System Integration}
+
+\subsection{Data Integration}
+
+\section{Scenario 2}
+
+\subsection{Integration Documentation}
+
+\subsection{System Integration}
+
+\subsection{Data Integration}
+
+\chapter{Integration Architecture Evaluation}
+
+\section{Technology}
+
+\section{Customer Example}
+
+\section{Operating Manual}
 
 \bibliographystyle{apalike}
-% b) The File:
 \bibliography{references}
 
 \end{document}
