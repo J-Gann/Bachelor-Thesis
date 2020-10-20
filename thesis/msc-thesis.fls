@@ -155,16 +155,18 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecsx1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecsx2488.tfm
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.toc
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.toc
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecsl1200.tfm
 OUTPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.toc
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecsl1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecsx1728.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecsx1440.tfm
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.bbl
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.bbl
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.aux
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.out
 INPUT /mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.out
 INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc
+INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb
@@ -175,3 +177,4 @@ INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfsx1200.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfsx1440.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfsx1728.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfsx2488.pfb
+INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb

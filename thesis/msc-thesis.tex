@@ -134,19 +134,21 @@ The german ministry of economy and energy recognizes that "we have long since ar
 of the german government comes along with important federal and european legislation. Most prominent are DSGVO, OZG and DVG, 
 modernizing data protection, governmental administration and health care.
 
-Enterprises, organizations and authorities are required to provide additional digital services for its customers and users.
-Those include for example the deletion of non-mandatory data and the digital application for unemployment benefit.
+Enterprises, organizations and authorities are required to provide digital self-service for its customers and users.
+This includes for example the deletion of non-mandatory data and the digital application for unemployment benefit.
 
-Working with existing system- and data architectures, integration of new solutions is necessary.
+Working with existing system- and data architectures, integration of digital customer self-service solutions is necessary.
 
 \chapter{Objectives}
 
-This bachelor thesis describes digital self-service as a solution for the additional requirements. It explains the basis of what 
-customer self-service (CSS) is, what relevant legislation is about and how CSS providers can help in the digital transformation.
+This bachelor thesis explains the basis of what digital customer self-service (DCSS) is, what relevant legislation is about and how 
+CSS providers can help in the digital transformation.
 
 The technological challenge of integrating CSS providers into existing system architectures is focus of this bachelor thesis.
-An integration architecture is presented, which provides solutions for the following questions (ToDo: In Textform schreiben):
+An integration architecture is provided which models integration of the top 10 OZG DCSS processes while satisfying DSGVO 
+requirements.
 
+The integration architecture solves the following questions:
 \begin{enumerate}
      \item How can services of a CSS provider be accessed by the enterprise architecture?
      \item Which systems of a typical enterprise architecture are required?
@@ -164,25 +166,40 @@ an operating manual, providing guidance in developing and deploying the presente
 
 \chapter{Structure of Work}
 
-\chapter{Customer Self-Service (CSS)}
+ToDo: Briefly explain every Chapter and their relationships
 
-\section{Definition}
+\chapter{Digital Customer Self-Service (DCSS)}
+This chapter introduces the concept of digital customer self-service. It defines DCSS, describes what it is by using examples and mentions benefits and challenges.
 
-\section{Description}
+\textbf{Definition}: Digital self-service is the consumption of services provided by an enterprise over the internet without human to human interaction.
 
-\section{Benefits}
+It is important to distinguish between "service" and "self-Service". The difference is shown through two examples:
 
-\subsection{Customer}
+\textbf{Example 1}: A service is the availability to purchase items whereas digital self-service is the order placement over a website.
 
-\subsection{Organization}
+\textbf{Example 2}: A service is the availability of video on demand whereas digital self-service is the access of video files over a website.
 
-\section{Examples}
+Digital self-service is characteristic one of many possible ways to access a service: An order placement could also be done through email 
+or phone call and access to videos could be granted through same-day-delivery of DVDs.
+
+Reasons for the widespread usage of digital self-service are significant benefits in ease of service usability for customers and cost reduction for enterprises.
+Customers can self-service from almost every place, easily manage customer data like phone number and address, configure services like subscription plans and 
+access lots of information on available products or trouble shooting steps in an immediate way.
+Digital customer self-service improves usability, saves time, increases availability, saves money and therefore increases customer experience 
+\cite[cf. 243]{CSSInternetAge}.
+Enterprises, especially in progressive countries, aim to keep employment at a minimum, as it is a big cost factor. Digital self-service turns customers into 
+unpaid employees \cite{served}.
+
+Decreasing employment cost while increasing customer experience sounds like a win-win situation. Sadly, digital self-service does have its downsides.
+One downside is most immediate to the elderly. In order to use DCSS, computers have to be available and one has to be experienced in their usage. 
+Technological complexity, however, is not only a problem for customers but also for enterprises providing DCSS. Based on existing system architectures, 
+adding DCSS functionalities can turn out to be a difficult task. Some form of integration is often necessary. With increased system complexity and business 
+dependability come additional maintenance cost.
+
+As most large enterprises provide DCSS, it can be assumed, that at a given size of an enterprise (measured in number of costumers), the benefits of DCSS 
+surpass the disadvantages.
 
 \chapter{Governmental Regulations}
-
-\section{Purpose}
-
-\section{Importance for Organizations}
 
 \section{DSGVO}
 
@@ -192,15 +209,30 @@ an operating manual, providing guidance in developing and deploying the presente
 
 \section{Challenges for Organizations}
 
-\chapter{Compliance through CSS}
 
-\section{Description}
+\chapter{DCSS Scenarios}
 
-\section{CSS-Scenarios}
+ToDo: Explain DCSS scenarios resulting from top 10 OZG processes and DSGVO
+
+\subsection{Arbeitslosengeld 2}
+
+\subsection{BAföG}
+
+\subsection{Führerschein}
+
+\subsection{Deletion of Personal Data}
+
+\subsection{Correction of Personal Data}
+
+\subsection{Information about collected Personal Data}
 
 \section{Requirements}
 
+
 \chapter{CSS Providers}
+
+ToDo: Explain what CSS Providers are (what services they can provide -> what IDAS does) and how they can help creating DCSS. 
+Also explain the concept of a business connector as technological communication point of the CSS provider
 
 \section{Description}
 
@@ -208,7 +240,10 @@ an operating manual, providing guidance in developing and deploying the presente
 
 \section{Business Connector}
 
+
 \chapter{Enterprise Architectures}
+
+ToDo: Introduce Enterprise Architectures and challanges such as heterogeneous systems when trying to model them
 
 \section{Modeling of the real world}
 
@@ -216,7 +251,10 @@ an operating manual, providing guidance in developing and deploying the presente
 
 \section{Enterprise Architecture Patterns (EAP)}
 
+
 \chapter{Relevant Systems and Data}
+
+ToDo: Explain the approach of modeling enterprise architectures by EAPs and explain the used EAPs
 
 \section{EAPs}
 
@@ -230,7 +268,11 @@ an operating manual, providing guidance in developing and deploying the presente
 
 \subsection{Regarding Business Connector}
 
+
 \chapter{Integration}
+
+ToDo: Introduce the concept of integration. What are challenges in general and what would be an ideal integration.
+Also explain the approach towards integration used (messaging, patterns)
 
 \section{Definition}
 
@@ -246,7 +288,10 @@ an operating manual, providing guidance in developing and deploying the presente
 
 \subsection{Pattern 2}
 
+
 \chapter{Business Connector}
+
+ToDo: Construct the model of the business connector
 
 \section{Functionalities and Interfaces}
 
@@ -260,7 +305,10 @@ an operating manual, providing guidance in developing and deploying the presente
 
 \subsection{Connector as Architecture Brick}
 
+
 \chapter{Integration Architecture}
+
+ToDo: Create the integration architecture
 
 \section{Scenario 1}
 
@@ -277,6 +325,7 @@ an operating manual, providing guidance in developing and deploying the presente
 \subsection{System Integration}
 
 \subsection{Data Integration}
+
 
 \chapter{Integration Architecture Evaluation}
 
