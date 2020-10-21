@@ -42,6 +42,11 @@
 \usepackage[bookmarks=true,colorlinks,pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,citecolor = black,urlcolor=black]{hyperref} 
 %\usepackage{hyperref}
 
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+
+\usepackage{color,soul}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % OTHER SETTINGS:
@@ -54,6 +59,8 @@
 
 
 \begin{document}
+
+\listoftodos
 
 % TITLE:
 \pagenumbering{roman}
@@ -129,77 +136,84 @@ Date of Submission: \today
 \pagenumbering{arabic}
 
 \chapter{Context}
+\todo[inline, caption={Expand Context Chapter}]{Add more content to this chapter}
 
-The german ministry of economy and energy recognizes that "we have long since arrived in a digitized world". This realization 
-of the german government comes along with important federal and european legislation. Most prominent are DSGVO, OZG and DVG, 
-modernizing data protection, governmental administration and health care.
 
-Enterprises, organizations and authorities are required to provide digital self-service for its customers and users.
-This includes for example the deletion of non-mandatory data and the digital application for unemployment benefit.
+Digital customer self-service (DCSS) is a great tool for improving customer experience and reducing cost. Many enterprises therefore heavily
+rely on it for main business services. Especially recent governmental regulations like "Onlinezugangsgesetz" (OZG), "Datenschutzgrundverordnung"
+(DSGVO) and "Digitale Versorgung Gesetz" (DVG) have increased requirements for DCSS capabilities.
 
-Working with existing system- and data architectures, integration of digital customer self-service solutions is necessary.
+Adding DCSS to a system architecture is a common task. It usually involves integration of new DCSS components
+into an existing system architecture. Due to the complicated nature of system architectures, integration proves to be a difficult
+task.
+
+One possibility for adding DCSS capabilities is the usage of solutions from DCSS providers. They keep companies and organizations up to date
+with DCSS requirements and help with integration.
 
 \chapter{Objectives}
 
-This bachelor thesis explains the basis of what digital customer self-service (DCSS) is, what relevant legislation is about and how 
-CSS providers can help in the digital transformation.
+\todo[inline, caption={Expand Objectives Chapter}]{Add more content to this chapter}
 
-The technological challenge of integrating CSS providers into existing system architectures is focus of this bachelor thesis.
-An integration architecture is provided which models integration of the top 10 OZG DCSS processes while satisfying DSGVO 
-requirements.
+The objective of this bachelor thesis is to improve the capability of enterprises and organizations to integrate DCSS providers \hl{(or solutions?)}.
+The thesis explains the basis of what DCSS and its providers are, which relevant scenarios exist and how DCSS providers can help
+in the digital transformation.
 
-The integration architecture solves the following questions:
-\begin{enumerate}
-     \item How can services of a CSS provider be accessed by the enterprise architecture?
-     \item Which systems of a typical enterprise architecture are required?
-     \item Which data objects of a typical enterprise architecture are required?
-     \item Which additional systems and data objects are required?
-     \item How can heterogeneous enterprise architectures be integrated the same way?
-     \item How can the integration be non-invasive?
-     \item How can the speed of integration development be increased?
-     \item How can the speed of integration deployment be increased?
-     \item How can the integration system be reliable and maintainable?
-\end{enumerate}
+The technological challenge of integrating DCSS providers into existing system architectures is focus of this bachelor thesis.
 
-The architecture is evaluated in respect to technological feasibility and real-life applicability. The results are incorporated into 
-an operating manual, providing guidance in developing and deploying the presented integration architecture.
+Based on governmental DCSS scenarios (due to their current relevance), an integration architecture is presented, which describes
+how integration for this domain can be done. It provides information on which type of systems and data objects an existing
+architecture requires in order to integrate DCSS providers. It models how CSS provider and system architecture can communicate -
+deliver data and instructions. And it shows how, with fast development and deployment speed, integration can be applied to
+heterogeneous system architectures, be non-invasive and reliable.
+
+The integration architecture is evaluated in respect to technological feasibility and real-life applicability. The results are
+incorporated into an operating manual, providing guidance in developing and deploying the presented integration architecture.
 
 \chapter{Structure of Work}
 
-ToDo: Briefly explain every Chapter and their relationships
+\todo[inline, caption={Write Structure of Work Chapter}]{Briefly explain each chapter and their relationships}
 
 \chapter{Digital Customer Self-Service (DCSS)}
-This chapter introduces the concept of digital customer self-service. It defines DCSS, describes what it is by using examples and mentions benefits and challenges.
+
+\todo[inline, caption={Expand DCSS Chapter}]{Add more content to this chapter}
+
+This chapter introduces the concept of digital customer self-service. It defines DCSS, describes what it is by usage of examples and mentions benefits such as challenges.
 
 \textbf{Definition}: Digital self-service is the consumption of services provided by an enterprise over the internet without human to human interaction.
 
-It is important to distinguish between "service" and "self-Service". The difference is shown through two examples:
+It is important to distinguish between "service" and "self-service". The difference is shown through two examples:
 
 \textbf{Example 1}: A service is the availability to purchase items whereas digital self-service is the order placement over a website.
 
 \textbf{Example 2}: A service is the availability of video on demand whereas digital self-service is the access of video files over a website.
 
-Digital self-service is characteristic one of many possible ways to access a service: An order placement could also be done through email 
+Digital self-service is characteristic one of many possible ways to access a service: An order placement could also be done through email
 or phone call and access to videos could be granted through same-day-delivery of DVDs.
 
+Customers are able to do self-service because companies provide them with self-service tools. Creating them is not trivial
+and is the main business model of many companies. Video on demand websites for example do not only flourish as a result of providing access to
+videos (this business model existed long before them) but as a result of the digital self-service tools they provide.
+
 Reasons for the widespread usage of digital self-service are significant benefits in ease of service usability for customers and cost reduction for enterprises.
-Customers can self-service from almost every place, easily manage customer data like phone number and address, configure services like subscription plans and 
+Customers can self-service from almost every place, easily manage customer data like phone number and address, configure services like subscription plans and
 access lots of information on available products or trouble shooting steps in an immediate way.
-Digital customer self-service improves usability, saves time, increases availability, saves money and therefore increases customer experience 
+Digital customer self-service improves usability, saves time, increases availability, saves money and therefore increases customer experience
 \cite[cf. 243]{CSSInternetAge}.
-Enterprises, especially in progressive countries, aim to keep employment at a minimum, as it is a big cost factor. Digital self-service turns customers into 
+Enterprises, especially in progressive countries, aim to keep employment at a minimum, as it is a big cost factor. Digital self-service turns customers into
 unpaid employees \cite{served}.
 
 Decreasing employment cost while increasing customer experience sounds like a win-win situation. Sadly, digital self-service does have its downsides.
-One downside is most immediate to the elderly. In order to use DCSS, computers have to be available and one has to be experienced in their usage. 
-Technological complexity, however, is not only a problem for customers but also for enterprises providing DCSS. Based on existing system architectures, 
-adding DCSS functionalities can turn out to be a difficult task. Some form of integration is often necessary. With increased system complexity and business 
+One downside is most immediate to the elderly. In order to use DCSS, computers have to be available and one has to be experienced in their usage.
+Technological complexity, however, is not only a problem for customers but also for enterprises providing DCSS. Based on existing system architectures,
+adding DCSS functionalities can turn out to be a difficult task. Some form of integration is often necessary. With increased system complexity and business
 dependability come additional maintenance cost.
 
-As most large enterprises provide DCSS, it can be assumed, that at a given size of an enterprise (measured in number of costumers), the benefits of DCSS 
+As most large enterprises provide DCSS, it can be assumed, that at a given size of an enterprise (measured in number of costumers), the benefits of DCSS
 surpass the disadvantages.
 
 \chapter{Governmental Regulations}
+
+\todo[inline, caption={Research Governmental Regulations Chapter}]{Explain the three regulations in general, what their purpose is what their challenges are}
 
 \section{DSGVO}
 
@@ -207,32 +221,104 @@ surpass the disadvantages.
 
 \section{DVG}
 
-\section{Challenges for Organizations}
-
 
 \chapter{DCSS Scenarios}
 
-ToDo: Explain DCSS scenarios resulting from top 10 OZG processes and DSGVO
+\todo[inline, caption={Research DCSS Scenarios Chapter}]{
+     \begin{enumerate}
+          \item Should governmental regulations be the focus of scenarios? => good resources for OZG
+     \end{enumerate}
+}
 
-\subsection{Arbeitslosengeld 2}
 
-\subsection{BAföG}
+Usage of DCSS OZG scenarios (\textbf{process diagrams and data schemas available}
+\cite{ozgScenarios}) and DSGVO scenarios (textual description available \cite{dsgvo})
 
-\subsection{Führerschein}
+\begin{enumerate}
+     \item What part of a scenario is digital?
+     \item What part of a scenario can be done through a CSS provider?
+     \item What part of a scenario is done through existing business systems? => new required business logic part of integration (non invasive)?
+     \item What part of a scenario should be done by the integration architecture?
+     \item What are commonalities of scenarios?
+           \begin{enumerate}
+                \item OZG scenarios often describe digital handling of applications
+                \item In OZG scenarios, often multiple governmental institutions are involved. This could be modeled as one system with the problem of distributed
+                      data and functionality which the integration architecture would solve.
+           \end{enumerate}
+\end{enumerate}
+
+\section{OZG}
+
+\subsection{Unemployment Benefit (AG2)}
+\textbf{Available Information}
+\begin{itemize}
+     \item Data Schema
+     \item Process Diagram
+     \item Process Diagram of Application
+     \item Click-Dummy
+\end{itemize}
+
+\subsection{Training Promotion (BAföG)}
+\textbf{Available Information}
+\begin{itemize}
+     \item Data Schema
+     \item Process Diagram
+     \item Click-Dummy
+\end{itemize}
+
+\subsection{Drivers License}
+\textbf{Available Information}
+\begin{itemize}
+     \item Data Schema
+     \item Process Diagram
+     \item Process Diagram of Application
+     \item Click-Dummy
+\end{itemize}
+
+\subsection{Company Registration and Approval}
+\textbf{Available Information}
+\begin{itemize}
+     \item Data Schema
+     \item Process Diagram
+     \item Click-Dummy
+\end{itemize}
+
+\subsection{Visa Issuance}
+\textbf{Available Information}
+\begin{itemize}
+     \item Data Schema
+     \item Process Diagram
+\end{itemize}
+
+\section{DSGVO}
+
+\subsection{Transparent Accessability}
+The enterprise or organization can have the duty to make information about personal data accessible in transparent and understandable ways
 
 \subsection{Deletion of Personal Data}
+The user can have the right of removal of personal data
 
 \subsection{Correction of Personal Data}
+The user can have the right of modification of personal data.
 
 \subsection{Information about collected Personal Data}
+The user can have the right to be informed about various information of collected and stored personal data such as usage, duration of storage, ...
+
+\subsection{Restriction of Processing}
+The user can have the right to restrict the was in which personal data is processed
+
+\subsection{Availability of Transferral of Personal Data}
+The user can have the right to transfer personal data to himself or separate entity (company, organization).
+
+\section{DVG}
 
 \section{Requirements}
 
 
 \chapter{CSS Providers}
 
-ToDo: Explain what CSS Providers are (what services they can provide -> what IDAS does) and how they can help creating DCSS. 
-Also explain the concept of a business connector as technological communication point of the CSS provider
+\todo[inline, caption={Write CSS Providers Chapter}]{Explain what CSS Providers are (what services they can provide -> what IDAS does) and how they can help creating DCSS.
+Also explain the concept of a business connector as technological communication point of the CSS provider}
 
 \section{Description}
 
@@ -243,7 +329,22 @@ Also explain the concept of a business connector as technological communication 
 
 \chapter{Enterprise Architectures}
 
-ToDo: Introduce Enterprise Architectures and challanges such as heterogeneous systems when trying to model them
+\todo[inline, caption={Write Enterprise Architectures Chapter}]{Introduce Enterprise Architectures and challenges such as heterogeneous systems when trying to model them}
+
+\begin{enumerate}
+     \item Heterogeneous Enterprise Architecture Systems
+           \begin{enumerate}
+                \item Different Applications
+                \item Different Application Vendors
+                \item Different / No Application Interfaces
+                \item Legacy Systems
+           \end{enumerate}
+     \item Different (proprietary) data models within and between Enterprises and Organizations
+           \begin{enumerate}
+                \item Different (property)name for same data objects (syntactic integration)
+                \item Different meanings for same (property)name (semantic integration)
+           \end{enumerate}
+\end{enumerate}
 
 \section{Modeling of the real world}
 
@@ -254,7 +355,7 @@ ToDo: Introduce Enterprise Architectures and challanges such as heterogeneous sy
 
 \chapter{Relevant Systems and Data}
 
-ToDo: Explain the approach of modeling enterprise architectures by EAPs and explain the used EAPs
+\todo[inline, caption={Research Relevant Systems and Data Chapter}]{Explain the approach of modeling enterprise architectures by EAPs and explain the used EAPs}
 
 \section{EAPs}
 
@@ -271,8 +372,56 @@ ToDo: Explain the approach of modeling enterprise architectures by EAPs and expl
 
 \chapter{Integration}
 
-ToDo: Introduce the concept of integration. What are challenges in general and what would be an ideal integration.
-Also explain the approach towards integration used (messaging, patterns)
+\todo[inline, caption={Write Integration Chapter}]{Introduce the concept of integration. What are challenges in general and what would be an ideal integration.
+Also explain the approach towards integration used (messaging, patterns)}
+
+\begin{enumerate}
+     \item Scarce Resources
+           \begin{enumerate}
+                \item Integration Development Speed
+                      \begin{enumerate}
+                           \item Necessary Development <=> Reuse of existing Technology
+                           \item Complexity / Size of Integration
+                      \end{enumerate}
+                \item Maintenance of finished Integration
+                \item Hardware / Software Costs of Integration
+                      \begin{enumerate}
+                           \item Licenses for Software
+                           \item Scalability of Integration => Necessary Computing Power
+                      \end{enumerate}
+                \item Messaging Integration
+                      \begin{enumerate}
+                           \item Loose Coupling
+                                 \begin{enumerate}
+                                      \item Loose Coupling simplifies adaption to changing EA => simpler Maintenance
+                                      \item Loose Coupling simplifies integration of new EA systems => integration of heterogeneous EA
+                                      \item Loose Coupling allows Reuse of "Modules" => faster development
+                                 \end{enumerate}
+                           \item Messaging enables communication with many systems through Adapters
+                           \item Stability of Integration
+                                 \begin{enumerate}
+                                      \item Future Changes of EA
+                                      \item Scalability
+                                      \item Failure of EA or Integration Components
+                                 \end{enumerate}
+                           \item Messaging provides mechanisms for Stability
+                                 \begin{enumerate}
+                                      \item Store-and-Forward
+                                      \item Load Balancing
+                                 \end{enumerate}
+                      \end{enumerate}
+                \item Integration Patterns
+                      \begin{enumerate}
+                           \item Patterns speed up construction of Integration Architecture
+                           \item Patterns are proven solutions
+                           \item Patterns abstract from concrete technologies
+                                 \begin{enumerate}
+                                      \item Simplifies understanding of integration concept
+                                      \item Allows implementation with different technologies
+                                 \end{enumerate}
+                      \end{enumerate}
+           \end{enumerate}
+\end{enumerate}
 
 \section{Definition}
 
@@ -291,7 +440,7 @@ Also explain the approach towards integration used (messaging, patterns)
 
 \chapter{Business Connector}
 
-ToDo: Construct the model of the business connector
+\todo[inline, caption={Research Business Connector Chapter}]{Construct the model of the business connector}
 
 \section{Functionalities and Interfaces}
 
@@ -308,7 +457,7 @@ ToDo: Construct the model of the business connector
 
 \chapter{Integration Architecture}
 
-ToDo: Create the integration architecture
+\todo[inline, caption={Integration Architecture Chapter}]{Create the integration architecture}
 
 \section{Scenario 1}
 
