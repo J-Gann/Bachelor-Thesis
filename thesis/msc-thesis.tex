@@ -148,7 +148,7 @@ into an existing system architecture. Due to the complicated nature of system ar
 task.
 
 One possibility for adding DCSS capabilities is the usage of solutions from DCSS providers. They keep companies and organizations up to date
-with DCSS requirements and help with integration.
+with DCSS requirements and help with integration. Another possibility is the usage of websites and applications developed in self-work.
 
 \chapter{Objectives}
 
@@ -160,9 +160,9 @@ in the digital transformation.
 
 The technological challenge of integrating DCSS providers into existing system architectures is focus of this bachelor thesis.
 
-Based on governmental DCSS scenarios (due to their current relevance), an integration architecture is presented, which describes
-how integration for this domain can be done. It provides information on which type of systems and data objects an existing
-architecture requires in order to integrate DCSS providers. It models how CSS provider and system architecture can communicate -
+Based on DCSS scenarios resulting from governmental regulations (due to their current relevance), an integration architecture is presented, which describes
+integration of these scenarios. It provides information on which type of systems and data objects an existing
+architecture requires. It models how CSS providers and system architectures can communicate -
 deliver data and instructions. And it shows how, with fast development and deployment speed, integration can be applied to
 heterogeneous system architectures, be non-invasive and reliable.
 
@@ -187,7 +187,7 @@ It is important to distinguish between "service" and "self-service". The differe
 
 \textbf{Example 2}: A service is the availability of video on demand whereas digital self-service is the access of video files over a website.
 
-Digital self-service is characteristic one of many possible ways to access a service: An order placement could also be done through email
+Digital self-service is one of many possible ways to access a service: An order placement could also be done through email
 or phone call and access to videos could be granted through same-day-delivery of DVDs.
 
 Customers are able to do self-service because companies provide them with self-service tools. Creating them is not trivial
@@ -208,8 +208,8 @@ Technological complexity, however, is not only a problem for customers but also 
 adding DCSS functionalities can turn out to be a difficult task. Some form of integration is often necessary. With increased system complexity and business
 dependability come additional maintenance cost.
 
-As most large enterprises provide DCSS, it can be assumed, that at a given size of an enterprise (measured in number of costumers), the benefits of DCSS
-surpass the disadvantages.
+As tody most large enterprises provide DCSS, it can be assumed, that at a given size of an enterprise (measured in number of customers), the benefits of DCSS
+surpass its disadvantages.
 
 \chapter{Governmental Regulations}
 
@@ -231,17 +231,24 @@ surpass the disadvantages.
 }
 
 Usage of DCSS OZG scenarios (\textbf{process diagrams and data schemas available}
-\cite{ozgScenarios}) and DSGVO scenarios (textual description available \cite{dsgvo})
+\cite{ozgScenarios}), DSGVO scenarios (textual description available \cite{dsgvo}) and DVG scenarios
+(textual desciption available \cite{gematik-e-rezept})
+\\\\
+The scenarios include more than just CSS and are partly non-digital. Therefore processes relevant for DCSS have to be selected
+and it has to be defined which processes are part of a CSS provider, the business systems or the integration architecture:
 
 \begin{enumerate}
      \item What part of a scenario is digital?
-     \item What part of a scenario can be done through a CSS provider / is relevant for CSS?
-     \item What part of a scenario is done through existing business systems? => new required business logic part of integration (non invasive)?
+     \item What part of a scenario can be done through a DCSS provider / is relevant for DCSS?
+     \item What part of a scenario is done through \textbf{existing} business systems?
+           \begin{enumerate}
+                \item new necessary business logic part of (configurable) integration? => non invasive
+           \end{enumerate}
      \item What part of a scenario should be done by the integration architecture?
      \item What are commonalities of scenarios?
            \begin{enumerate}
                 \item OZG scenarios often describe digital handling of applications
-                \item In OZG scenarios, often multiple governmental institutions are involved. This could be modeled as one system with the problem of distributed
+                \item In OZG scenarios, often multiple governmental institutions are involved. This could be modeled as one system architecture with the problem of distributed
                       data and functionality which the integration architecture would solve.
            \end{enumerate}
 \end{enumerate}
@@ -249,7 +256,7 @@ Usage of DCSS OZG scenarios (\textbf{process diagrams and data schemas available
 \section{OZG}
 
 \subsection{Unemployment Benefit (AG2)}
-\textbf{Available Information}
+\textbf{Available Resources}
 \begin{itemize}
      \item Data Schema
      \item Process Diagram
@@ -258,7 +265,7 @@ Usage of DCSS OZG scenarios (\textbf{process diagrams and data schemas available
 \end{itemize}
 
 \subsection{Training Promotion (BAföG)}
-\textbf{Available Information}
+\textbf{Available Resources}
 \begin{itemize}
      \item Data Schema
      \item Process Diagram
@@ -266,7 +273,7 @@ Usage of DCSS OZG scenarios (\textbf{process diagrams and data schemas available
 \end{itemize}
 
 \subsection{Drivers License}
-\textbf{Available Information}
+\textbf{Available Resources}
 \begin{itemize}
      \item Data Schema
      \item Process Diagram
@@ -275,7 +282,7 @@ Usage of DCSS OZG scenarios (\textbf{process diagrams and data schemas available
 \end{itemize}
 
 \subsection{Company Registration and Approval}
-\textbf{Available Information}
+\textbf{Available Resources}
 \begin{itemize}
      \item Data Schema
      \item Process Diagram
@@ -283,7 +290,7 @@ Usage of DCSS OZG scenarios (\textbf{process diagrams and data schemas available
 \end{itemize}
 
 \subsection{Visa Issuance}
-\textbf{Available Information}
+\textbf{Available Resources}
 \begin{itemize}
      \item Data Schema
      \item Process Diagram
@@ -304,20 +311,21 @@ The user can have the right of modification of personal data.
 The user can have the right to be informed about various information of collected and stored personal data such as usage, duration of storage, ...
 
 \subsection{Restriction of Processing}
-The user can have the right to restrict the was in which personal data is processed
+The user can have the right to restrict the way in which personal data is processed
 
 \subsection{Availability of Transferral of Personal Data}
-The user can have the right to transfer personal data to himself or separate entity (company, organization).
+The user can have the right to transfer personal data to himself or separate entities (company, organization).
 
 \section{DVG}
 
 \subsection{e-Prescription}
-Reference can be found in the "Ärzteblatt" \cite{Ärzteblatt}
-The user can have the right to manage his prescriptions via an App. Doctors give digital prescriptions to users app, 
+Reference can be found in the "Ärzteblatt" \cite{Ärzteblatt}.
+\\\\
+The user can have the right to manage his prescriptions via an App. Doctors give digital prescriptions to users app,
 which can digitally be used in pharmacies also without physically being there.
-
-Regulation: ?Gesetz für mehr Sicherheit in der Arzneimittelversorgung (GSAV)?
-
+\\\\
+Regulation: "Gesetz für mehr Sicherheit in der Arzneimittelversorgung (GSAV)"
+\\\\
 e-Prescription processes \cite{gematik-e-rezept}
 \begin{enumerate}
      \item Doctor creates digital prescription if he has access to "Telematikinfrastruktur" and "Heilberufausweis"
@@ -326,22 +334,24 @@ e-Prescription processes \cite{gematik-e-rezept}
      \item Patient can receive QR-Code in App (or get a printout)
      \item Patient can check availability of drug in pharmacies via the app
      \item Patient can "apply" the prescription to a pharmacy via the app
-     \item prescription is now irrevocably bound to the pharmacy and gets reserved in the pharmacy
-     \item pharmacy can use prescription-token (QR-Code) to access prescription in "Telematikinfrastruktur"
+     \item prescription is now irrevocably bound to the pharmacy and gets reserved
+     \item pharmacy can use prescription-token (in QR-Code) to access prescription in "Telematikinfrastruktur"
      \item pharmacy notifies patient if or when the drug is available
      \item drug can be picked up by patient or be delivered
      \item If user picks drug up, he can show QR-Code in app or on printout (he got from doctor)
      \item pharmacy can access "Telematikinfrastruktur" to validate prescription
      \item pharmacy gives drug if validated
 \end{enumerate}
-
+~\\
 What are services and what are self-services in this scenario:
+\begin{itemize}
+     \item Service: Access to prescription. Self-service: Digital management of prescriptions (prescription-tokens) inside app
+     \item Service: Receiving drug for valid prescription. Self-service: Digital delivery of prescription (prescription-token)
+           to pharmacy and digital instruction of delivery of drug
+\end{itemize}
 
-Service 1: Access to prescription
-Self-service 1: Digital management of prescriptions (prescription-tokens) inside app
 
-Service 2: Receiving drug for valid prescription
-Self-service 2: Digital delivery of prescription (prescription-token) to pharmacy and digital instruction of delivery of drug
+
 
 \section{Requirements}
 
@@ -349,7 +359,7 @@ Self-service 2: Digital delivery of prescription (prescription-token) to pharmac
 \chapter{CSS Providers}
 
 \todo[inline, caption={Write CSS Providers Chapter}]{Explain what CSS Providers are (what services they can provide -> what IDAS does) and how they can help creating DCSS.
-Also explain the concept of a business connector as technological communication point of the CSS provider}
+     Also explain the concept of a business connector as technological communication point of the CSS provider}
 
 \section{Description}
 
@@ -386,7 +396,8 @@ Also explain the concept of a business connector as technological communication 
 
 \chapter{Relevant Systems and Data}
 
-\todo[inline, caption={Research Relevant Systems and Data Chapter}]{Explain the approach of modeling enterprise architectures by EAPs and explain the used EAPs}
+\todo[inline, caption={Research Relevant Systems and Data Chapter}]{Explain the approach of modeling enterprise architectures by EAPs and explain the used EAPs.
+     Analyze which system and data bricks of the system architecture could be necessarry for DCSS}
 
 \section{EAPs}
 
@@ -404,7 +415,7 @@ Also explain the concept of a business connector as technological communication 
 \chapter{Integration}
 
 \todo[inline, caption={Write Integration Chapter}]{Introduce the concept of integration. What are challenges in general and what would be an ideal integration.
-Also explain the approach towards integration used (messaging, patterns)}
+     Also explain the approach towards integration used (messaging, patterns)}
 
 \begin{enumerate}
      \item Scarce Resources
@@ -494,6 +505,8 @@ Also explain the approach towards integration used (messaging, patterns)}
 
 \subsection{Integration Documentation}
 
+\subsection{Required System and Data Bricks}
+
 \subsection{System Integration}
 
 \subsection{Data Integration}
@@ -501,6 +514,8 @@ Also explain the approach towards integration used (messaging, patterns)}
 \section{Scenario 2}
 
 \subsection{Integration Documentation}
+
+\subsection{Required System and Data Bricks}
 
 \subsection{System Integration}
 
