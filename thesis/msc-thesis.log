@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.10.6)  21 OCT 2020 16:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.10.6)  22 OCT 2020 12:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -677,65 +677,72 @@ chapter 5.
 ]
 chapter 6.
 
-Overfull \hbox (25.11691pt too wide) in paragraph at lines 234--236
+Overfull \hbox (25.11691pt too wide) in paragraph at lines 233--235
 \T1/cmr/m/n/12 [[]]) and DS-GVO sce-nar-ios (tex-tual de-scrip-tion avail-able [[]]) 
  []
 
 [7
 
 ] [8] [9]
-chapter 7.
-[10
+Overfull \hbox (12.82268pt too wide) in paragraph at lines 330--331
+[]\T1/cmr/m/n/12 pharmacy can use prescription-token (QR-Code) to ac-cess pre-scrip-tion in "Telematik-
+ []
 
-]
-chapter 8.
+[10]
+chapter 7.
 [11
 
 ]
-chapter 9.
+chapter 8.
 [12
 
 ]
-chapter 10.
+chapter 9.
 [13
 
-] [14]
-chapter 11.
-[15
-
 ]
-chapter 12.
+chapter 10.
+[14
+
+] [15]
+chapter 11.
 [16
 
 ]
-chapter 13.
-(/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.bbl [17
-
-]) [18
+chapter 12.
+[17
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 490.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 490.
+chapter 13.
+(/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.bbl [18
+
+]) [19
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 521.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 521.
  (/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 490.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 490.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 521.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 521.
 Package rerunfilecheck Info: File `msc-thesis.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 490.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 521.
  ) 
 Here is how much of TeX's memory you used:
- 20538 strings out of 481239
- 400659 string characters out of 5920377
+ 20559 strings out of 481239
+ 400877 string characters out of 5920377
  766731 words of memory out of 5000000
- 35239 multiletter control sequences out of 15000+600000
+ 35242 multiletter control sequences out of 15000+600000
  548161 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  73i,8n,90p,10164b,877s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{cite.\304rzteblatt} has been referenced but does not exist, replaced by a fixed one
+
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsl1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.pdf" (26 pages, 286179 bytes).
+Output written on "/mnt/c/Users/Jonas Gann/Documents/Bachelor Thesis/thesis/msc-thesis.pdf" (27 pages, 289975 bytes).
 PDF statistics:
- 654 PDF objects out of 1000 (max. 8388607)
- 591 compressed objects within 6 object streams
- 158 named destinations out of 1000 (max. 500000)
- 645 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 685 PDF objects out of 1000 (max. 8388607)
+ 620 compressed objects within 7 object streams
+ 176 named destinations out of 1000 (max. 500000)
+ 653 words of extra memory for PDF output out of 10000 (max. 10000000)
 

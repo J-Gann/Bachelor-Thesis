@@ -9,6 +9,10 @@ Dave~Oliver, Celia Romm~Livermore, F.~S. (2009).
 \newblock {\em Self-Service in the Internet Age}.
 \newblock Springer.
 
+\bibitem[gematik, 2020]{gematik-e-rezept}
+gematik (2020).
+\newblock Wie funktioniert das e-rezept?
+
 \bibitem[intersoft consulting, 2020]{dsgvo}
 intersoft consulting (2020).
 \newblock Datenschutz-grundverordnung.
@@ -18,5 +22,9 @@ Oliver~D, Romm Livermore~C, F.~N. (2005).
 \newblock Are you being served? - exploring the role of customer as employees
   in the digital world.
 \newblock {\em CollECT Europe}.
+
+\bibitem[Ärzteblatt, 2020]{Ärzteblatt}
+Ärzteblatt (2020).
+\newblock Elektronischer heilberufsausweis: Die krankschreibung wird digital.
 
 \end{thebibliography}

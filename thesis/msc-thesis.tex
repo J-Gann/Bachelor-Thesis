@@ -230,13 +230,12 @@ surpass the disadvantages.
      \end{enumerate}
 }
 
-
 Usage of DCSS OZG scenarios (\textbf{process diagrams and data schemas available}
 \cite{ozgScenarios}) and DSGVO scenarios (textual description available \cite{dsgvo})
 
 \begin{enumerate}
      \item What part of a scenario is digital?
-     \item What part of a scenario can be done through a CSS provider?
+     \item What part of a scenario can be done through a CSS provider / is relevant for CSS?
      \item What part of a scenario is done through existing business systems? => new required business logic part of integration (non invasive)?
      \item What part of a scenario should be done by the integration architecture?
      \item What are commonalities of scenarios?
@@ -311,6 +310,38 @@ The user can have the right to restrict the was in which personal data is proces
 The user can have the right to transfer personal data to himself or separate entity (company, organization).
 
 \section{DVG}
+
+\subsection{e-Prescription}
+Reference can be found in the "Ärzteblatt" \cite{Ärzteblatt}
+The user can have the right to manage his prescriptions via an App. Doctors give digital prescriptions to users app, 
+which can digitally be used in pharmacies also without physically being there.
+
+Regulation: ?Gesetz für mehr Sicherheit in der Arzneimittelversorgung (GSAV)?
+
+e-Prescription processes \cite{gematik-e-rezept}
+\begin{enumerate}
+     \item Doctor creates digital prescription if he has access to "Telematikinfrastruktur" and "Heilberufausweis"
+     \item Prescription is saved on "Telematikinfrastruktur"
+     \item Doctor displays a QR-Code (prescription-token)
+     \item Patient can receive QR-Code in App (or get a printout)
+     \item Patient can check availability of drug in pharmacies via the app
+     \item Patient can "apply" the prescription to a pharmacy via the app
+     \item prescription is now irrevocably bound to the pharmacy and gets reserved in the pharmacy
+     \item pharmacy can use prescription-token (QR-Code) to access prescription in "Telematikinfrastruktur"
+     \item pharmacy notifies patient if or when the drug is available
+     \item drug can be picked up by patient or be delivered
+     \item If user picks drug up, he can show QR-Code in app or on printout (he got from doctor)
+     \item pharmacy can access "Telematikinfrastruktur" to validate prescription
+     \item pharmacy gives drug if validated
+\end{enumerate}
+
+What are services and what are self-services in this scenario:
+
+Service 1: Access to prescription
+Self-service 1: Digital management of prescriptions (prescription-tokens) inside app
+
+Service 2: Receiving drug for valid prescription
+Self-service 2: Digital delivery of prescription (prescription-token) to pharmacy and digital instruction of delivery of drug
 
 \section{Requirements}
 
