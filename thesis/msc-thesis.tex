@@ -1,6 +1,6 @@
 % This template was initially provided by Dulip Withanage.
 % Modifications for the database systems research group
-% were made by Conny Junghans,  Jannik StrÃ¶tgen and Michael Gertz
+% were made by Conny Junghans,  Jannik Strï¿½tgen and Michael Gertz
 
 \documentclass[
      12pt,         % font size
@@ -143,25 +143,25 @@ Digital customer self-service (DCSS) is a great tool for improving customer expe
 rely on it for main business services. Especially recent governmental regulations like "Onlinezugangsgesetz" (OZG), "Datenschutzgrundverordnung"
 (DSGVO) and "Digitale Versorgung Gesetz" (DVG) have increased requirements for DCSS capabilities.
 
+DCSS is made available through DCSS providers. They can consist of websites and applications developed in self-work or be 
+services provided by separate companies.
+
 Adding DCSS to a system architecture is a common task. It usually involves integration of new DCSS components
 into an existing system architecture. Due to the complicated nature of system architectures, integration proves to be a difficult
 task.
 
-One possibility for adding DCSS capabilities is the usage of solutions from DCSS providers. They keep companies and organizations up to date
-with DCSS requirements and help with integration. Another possibility is the usage of websites and applications developed in self-work.
-
-\chapter{Objectives}
+\chapter{Objective}
 
 \todo[inline, caption={Expand Objectives Chapter}]{Add more content to this chapter}
 
-The objective of this bachelor thesis is to improve the capability of enterprises and organizations to integrate DCSS providers \hl{(or solutions?)}.
+The objective of this bachelor thesis is to improve the capability of enterprises and organizations to integrate DCSS providers.
 The thesis explains the basis of what DCSS and its providers are, which relevant scenarios exist and how DCSS providers can help
 in the digital transformation.
 
 The technological challenge of integrating DCSS providers into existing system architectures is focus of this bachelor thesis.
 
-Based on DCSS scenarios resulting from governmental regulations (due to their current relevance), an integration architecture is presented, which describes
-integration of these scenarios. It provides information on which type of systems and data objects an existing
+Based on scenarios resulting from governmental regulations (due to their current relevance), an integration architecture is presented, which describes
+their integration. It provides information on which type of systems and data objects an existing
 architecture requires. It models how CSS providers and system architectures can communicate -
 deliver data and instructions. And it shows how, with fast development and deployment speed, integration can be applied to
 heterogeneous system architectures, be non-invasive and reliable.
@@ -211,6 +211,11 @@ dependability come additional maintenance cost.
 As tody most large enterprises provide DCSS, it can be assumed, that at a given size of an enterprise (measured in number of customers), the benefits of DCSS
 surpass its disadvantages.
 
+Governments see digitalization as a chance for improvements in many important social and economical areas\todo{references}. The process of digitalization can in
+some cases be described as reinventing existing solutions for usability with computers. One of the goals is to make solutions more easily accessible for users and as a 
+method, provide digital self-service. Governmental regulations relating to digitalization therefore often encourage or demand enterprises and organizations to 
+provide DCSS.
+
 \chapter{Governmental Regulations}
 
 \todo[inline, caption={Research Governmental Regulations Chapter}]{Explain the three regulations in general, what their purpose is what their challenges are}
@@ -220,6 +225,18 @@ surpass its disadvantages.
 \section{OZG}
 
 \section{DVG}
+
+
+\chapter{DCSS Providers}
+
+\todo[inline, caption={Write CSS Providers Chapter}]{Explain what CSS Providers are (what services they can provide -> what IDAS does) and how they can help creating DCSS.
+     Also explain the concept of a business connector as technological communication point of the CSS provider}
+
+\section{Description}
+
+\section{CSS Solutions}
+
+\section{Business Connector}
 
 
 \chapter{DCSS Scenarios}
@@ -264,7 +281,7 @@ and it has to be defined which processes are part of a CSS provider, the busines
      \item Click-Dummy
 \end{itemize}
 
-\subsection{Training Promotion (BAföG)}
+\subsection{Training Promotion (BAfï¿½G)}
 \textbf{Available Resources}
 \begin{itemize}
      \item Data Schema
@@ -297,6 +314,16 @@ and it has to be defined which processes are part of a CSS provider, the busines
 \end{itemize}
 
 \section{DSGVO}
+
+The DSGVO influences DCSS by regulating how digitally collected personal information (which is common in DCSS) has to be managed. This means, DCSS providers have to 
+keep this regulation in mind when designing their solutions. It has implications on integration in that DSGVO compliance requires special management of data, 
+which an integration system has to make possible (DCSS providers use it).
+
+It has to be analyzed in regard to:
+\begin{enumerate}
+     \item Which parts of the regulation describe requirements for features of DCSS providers
+     \item Which parts of the regulation describe requirements for integrations
+\end{enumerate}
 
 \subsection{Transparent Accessability}
 The enterprise or organization can have the duty to make information about personal data accessible in transparent and understandable ways
@@ -343,6 +370,8 @@ e-Prescription processes \cite{gematik-e-rezept}
      \item pharmacy gives drug if validated
 \end{enumerate}
 ~\\
+Enterprises are "allowed" to provide the IT-Structure behind the App, meaning the communication with a pharmacy and the receiving of prescription-tokens.
+\\\\
 What are services and what are self-services in this scenario:
 \begin{itemize}
      \item Service: Access to prescription. Self-service: Digital management of prescriptions (prescription-tokens) inside app
@@ -350,22 +379,26 @@ What are services and what are self-services in this scenario:
            to pharmacy and digital instruction of delivery of drug
 \end{itemize}
 
+\section{PSD2}
 
-
+The regulation is about how digital payment self-service providers have to function. This includes their communication / integration\cite{psd2Summary}.
+\\\\
+Full law at \cite{psd2}
+\\\\
+Regulation: "Payment Services Directive 2" (PSD2) (European law)
+\\\\
+What are services and what are self-services in this scenario:
+\begin{itemize}
+     \item Service: Payments and transfers. Self-service: Payment services are DCSS providers and offer digital execution of payments and transfers
+\end{itemize}
+~\\
+The regulation has to be analyzed regarding:
+\begin{enumerate}
+     \item Which parts of the regulation describe required features of the self-service provider
+     \item Which parts of the regulation describe requirements for integration
+\end{enumerate}
 
 \section{Requirements}
-
-
-\chapter{CSS Providers}
-
-\todo[inline, caption={Write CSS Providers Chapter}]{Explain what CSS Providers are (what services they can provide -> what IDAS does) and how they can help creating DCSS.
-     Also explain the concept of a business connector as technological communication point of the CSS provider}
-
-\section{Description}
-
-\section{CSS Solutions}
-
-\section{Business Connector}
 
 
 \chapter{Enterprise Architectures}
