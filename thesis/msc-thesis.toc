@@ -14,7 +14,7 @@
 \contentsline {chapter}{\numberline {7}DCSS Scenarios}{8}{chapter.24}%
 \contentsline {section}{\numberline {7.1}OZG}{8}{section.35}%
 \contentsline {subsection}{\numberline {7.1.1}Unemployment Benefit (AG2)}{8}{subsection.36}%
-\contentsline {subsection}{\numberline {7.1.2}Training Promotion (BAf\IeC {\"\i }\IeC {\textquestiondown }\IeC {\textonehalf }G)}{9}{subsection.37}%
+\contentsline {subsection}{\numberline {7.1.2}Training Promotion (BAf\"oG)}{9}{subsection.37}%
 \contentsline {subsection}{\numberline {7.1.3}Drivers License}{9}{subsection.38}%
 \contentsline {subsection}{\numberline {7.1.4}Company Registration and Approval}{9}{subsection.39}%
 \contentsline {subsection}{\numberline {7.1.5}Visa Issuance}{9}{subsection.40}%
