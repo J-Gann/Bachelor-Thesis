@@ -1,17 +1,16 @@
 % This template was initially provided by Dulip Withanage.
 % Modifications for the database systems research group
-% were made by Conny Junghans,  Jannik Str�tgen and Michael Gertz
+% were made by Conny Junghans,  Jannik Strtgen and Michael Gertz
 
 \documentclass[
      12pt,         % font size
      a4paper,      % paper format
-     BCOR10mm,     % binding correction
-     DIV14,        % stripe size for margin calculation
+     BCOR=10mm,version=first,     % binding correction
+     DIV=14,version=first,        % stripe size for margin calculation
 %     liststotoc,   % table listing in toc
 %     bibtotoc,     % bibliography in toc
 %     idxtotoc,     % index in toc
-%     parskip       % p
-aragraph skip instad of paragraph indent
+%     parskip       % paragraph skip instad of paragraph indent
      ]{scrreprt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,6 +34,7 @@ aragraph skip instad of paragraph indent
 %\usepackage{docxx}
 % Include PDF links
 %\usepackage[pdftex, bookmarks=true]{hyperref}
+\usepackage{csquotes}
 
 % Fuer anderthalbzeiligen Textsatz
 \usepackage{setspace}
@@ -42,10 +42,6 @@ aragraph skip instad of paragraph indent
 % hyperrefs in the documents
 \usepackage[bookmarks=true,colorlinks,pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,citecolor = black,urlcolor=black]{hyperref} 
 %\usepackage{hyperref}
-
-\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
-
-\usepackage{color,soul}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -58,6 +54,8 @@ aragraph skip instad of paragraph indent
 % Choose language
 \newcommand{\setlang}[1]{\selectlanguage{#1}\nonfrenchspacing}
 
+\usepackage{biblatex}
+\addbibresource{references.bib}
 
 \begin{document}
 
@@ -134,29 +132,24 @@ Date of Submission: \today
 
 \chapter{Context}
 
-Many enterprises provide digital tools which improve service usability for their customers. For example: If somebody wants to watch a movie, he does not drive to the nearest store to buy a DVD but instead uses websites providing video on demand (VoD). The reason is: VoD enterprises provide tools for digital customer self-service (DCSS). A customer can easily access the video over a website on his own. DCSS becomes increasingly relevant, as the German government introduced requirements for DCSS in many recent regulations. Most prominent are  "Onlinezugangsgesetz" (OZG), "Datenschutzgrundverordnung" (DSGVO) and "Digitale Versorgung Gesetz" (DVG). 
+Many enterprises provide digital tools which improve service usability for their customers. For example: If somebody wants to watch a movie, he does not drive to the nearest store to buy a DVD but instead uses websites providing video on demand (VoD). The reason is: VoD enterprises provide tools for digital customer self-service (DCSS). A customer can easily access the video over a website on his own. Technologies for DCSS becomes increasingly relevant, as the German government introduced requirements for DCSS in recent regulations. Most prominent are  "Onlinezugangsgesetz" (OZG), "Datenschutzgrundverordnung" (DSGVO) and "Digitale Versorgung Gesetz" (DVG). 
 
 DCSS is made available through DCSS providers. They can consist of websites and applications developed in self-work or be services provided by separate companies. Adding DCSS providers to a system architecture is a common task. It usually involves integration of new DCSS components into an existing system architecture. Due to the complicated nature of system architectures, integration proves to be a difficult task.
 
 \chapter{Objective}
 
-The objective of this bachelor thesis is to improve the capability of enterprises and organizations to integrate DCSS providers. The thesis explains the basis of what DCSS and its providers are, which relevant scenarios exist and how DCSS providers can help in the digital transformation.
-
-The technological challenge of integrating DCSS providers into existing system architectures is focus of this bachelor thesis.
-
-Based on scenarios resulting from OZG, an integration architecture is presented, which describes their integration. It provides information on which type of systems and data objects an existing architecture requires. It models how CSS providers and system architectures can communicate - deliver data and instructions. And it shows how, with fast development and deployment speed, integration can be applied to heterogeneous system architectures, be non-invasive and reliable. The integration architecture enables expansion with self-service capabilities of different areas (e.g. online payment / shopping / information self-service) through future work.
-
+The objective of this bachelor thesis is to improve the capability of enterprises and institutions to integrate DCSS providers.
+The execution of the German "Online Access Law (OZG)" is a good example for modernization efforts through usage of DCSS. Due to an incoming deadline of the OZG, integration of DCSS technology in this context gets increasingly relevant.
+The bachelor thesis therefore focuses on the integration of DCSS providers into the technological OZG ecosystem. A message based integration architecture is presented which enables system architectures relevant for the OZG to utilize services of DCSS providers. However, the integration architecture is constructed to also be applicable in cases not related to the OZG and to be expandable according to requirements of future use cases.
 The integration architecture is evaluated in respect to technological feasibility and real-life applicability. The results are incorporated into an operating manual, providing guidance in developing and deploying the presented integration architecture.
 
 \chapter{Structure of Work}
 
+The first chapter explains what DCSS and its providers are, what system architectures are and how they can be modeled, what the content of the OZG is, how its implementation is planned and how DCSS providers can be utilized and what integration is, why it is necessary and why a message based approach is used. The second chapter ...
 
 \chapter{Fundamentals}
 
 \section{Digital Customer Self-Service}
-
-\todo[inline, caption={Expand DCSS Chapter}]{Add more content to this chapter}
-
 This chapter introduces the concept of digital customer self-service. It defines DCSS, describes what it is by usage of examples and mentions benefits such as challenges.
 
 \textbf{Definition}: Digital self-service is the consumption of services provided by an enterprise over the internet without human to human interaction.
@@ -171,44 +164,16 @@ Digital self-service is one of many possible ways to access a service: An order 
 
 Customers are able to do self-service because companies provide them with self-service tools. Creating them is not trivial and is the main business model of many companies. Video on demand websites for example do not only flourish as a result of providing access to videos (this business model existed long before them) but as a result of the digital self-service tools they provide.
 
-Reasons for the widespread usage of digital self-service are significant benefits in ease of service usability for customers and cost reduction for enterprises. Customers can self-service from almost every place, easily manage customer data like phone number and address, configure services like subscription plans and access lots of information on available products or trouble shooting steps in an immediate way. Digital customer self-service improves usability, saves time, increases availability, saves money and therefore increases customer experience
-\cite[cf. 243]{CSSInternetAge}.
-Enterprises, especially in progressive countries, aim to keep employment at a minimum, as it is a big cost factor. Digital self-service turns customers into unpaid employees \cite{served}.
+Reasons for the widespread usage of digital self-service are significant benefits in ease of service usability for customers and cost reduction for enterprises. Customers can self-service from almost every place, easily manage customer data like phone number and address, configure services like subscription plans and access lots of information on available products or trouble shooting steps in an immediate way. Digital customer self-service improves usability, saves time, increases availability, saves money and therefore increases customer experience.
+Enterprises, especially in progressive countries, aim to keep employment at a minimum, as it is a big cost factor. Digital self-service turns customers into unpaid employees.
 
 Decreasing employment cost while increasing customer experience sounds like a win-win situation. Sadly, digital self-service does have its downsides. One downside is most immediate to the elderly. In order to use DCSS, computers have to be available and one has to be experienced in their usage. Technological complexity, however, is not only a problem for customers but also for enterprises providing DCSS. Based on existing system architectures, adding DCSS functionalities can turn out to be a difficult task. Some form of integration is often necessary. With increased system complexity and business dependability come additional maintenance cost.
 
 As today most large enterprises provide DCSS, it can be assumed, that at a given size of an enterprise (measured in number of customers), the benefits of DCSS surpass its disadvantages.
 
-Governments see digitalization as a chance for improvements in many important social and economical areas\todo{references}. The process of digitalization can in some cases be described as reinventing existing solutions for usability with computers. One of the goals is to make solutions more easily accessible for users and as a method, provide digital self-service. Governmental regulations relating to digitalization therefore often encourage or demand enterprises and organizations to provide DCSS.
-
-\section{OZG}
-
-
-
-\section{DCSS Provider}
-
-\subsection{Description}
-
-\subsection{CSS Solutions}
-
-\subsection{Business Connector}
+Governments see digitalization as a chance for improvements in many important social and economical areas. The process of digitalization can in some cases be described as reinventing existing solutions for usability with computers. One of the goals is to make solutions more easily accessible for users and as a method, provide digital self-service. Governmental regulations relating to digitalization therefore often encourage or demand enterprises and organizations to provide DCSS.
 
 \section{Enterprise Architecture}
-
-\begin{enumerate}
-     \item Heterogeneous Enterprise Architecture Systems
-           \begin{enumerate}
-                \item Different Applications
-                \item Different Application Vendors
-                \item Different / No Application Interfaces
-                \item Legacy Systems
-           \end{enumerate}
-     \item Different (proprietary) data models within and between Enterprises and Organizations
-           \begin{enumerate}
-                \item Different (property)name for same data objects (syntactic integration)
-                \item Different meanings for same (property)name (semantic integration)
-           \end{enumerate}
-\end{enumerate}
 
 \subsection{Modeling of the real world}
 
@@ -216,56 +181,7 @@ Governments see digitalization as a chance for improvements in many important so
 
 \subsection{Enterprise Architecture Patterns (EAP)}
 
-
 \section{Integration}
-
-\begin{enumerate}
-     \item Scarce Resources
-           \begin{enumerate}
-                \item Integration Development Speed
-                      \begin{enumerate}
-                           \item Necessary Development <=> Reuse of existing Technology
-                           \item Complexity / Size of Integration
-                      \end{enumerate}
-                \item Maintenance of finished Integration
-                \item Hardware / Software Costs of Integration
-                      \begin{enumerate}
-                           \item Licenses for Software
-                           \item Scalability of Integration => Necessary Computing Power
-                      \end{enumerate}
-                \item Messaging Integration
-                      \begin{enumerate}
-                           \item Loose Coupling
-                                 \begin{enumerate}
-                                      \item Loose Coupling simplifies adaption to changing EA => simpler Maintenance
-                                      \item Loose Coupling simplifies integration of new EA systems => integration of heterogeneous EA
-                                      \item Loose Coupling allows Reuse of "Modules" => faster development
-                                 \end{enumerate}
-                           \item Messaging enables communication with many systems through Adapters
-                           \item Stability of Integration
-                                 \begin{enumerate}
-                                      \item Future Changes of EA
-                                      \item Scalability
-                                      \item Failure of EA or Integration Components
-                                 \end{enumerate}
-                           \item Messaging provides mechanisms for Stability
-                                 \begin{enumerate}
-                                      \item Store-and-Forward
-                                      \item Load Balancing
-                                 \end{enumerate}
-                      \end{enumerate}
-                \item Integration Patterns
-                      \begin{enumerate}
-                           \item Patterns speed up construction of Integration Architecture
-                           \item Patterns are proven solutions
-                           \item Patterns abstract from concrete technologies
-                                 \begin{enumerate}
-                                      \item Simplifies understanding of integration concept
-                                      \item Allows implementation with different technologies
-                                 \end{enumerate}
-                      \end{enumerate}
-           \end{enumerate}
-\end{enumerate}
 
 \subsection{Definition}
 
@@ -275,13 +191,122 @@ Governments see digitalization as a chance for improvements in many important so
 
 \subsubsection{Homogeneous Landscapes}
 
+\section{DCSS Provider}
+
+This chapter introduces digital customer self-service providers. It explains what they are, why they are useful, what services they can provide and what integration challenges can be.
+
+\subsection{Motivation}
+
+As described in the previous chapter, digital customer self-service is a widely used method on the free market to increase customer experience. In order for customers to use self-service, respective companies or institutions have to provide necessary tools. Depending on the business case, different self-service tools might be used: The local grocery store might simply provide tools for customers to inform themselves about opening hours and available products while e-commerce companies would want to enable users to buy products online. Depending on the use case, complexity of technology providing DCSS can be very high. Besides enabling DCSS functionality, used technology also needs to adhere to security and data protection standards which can change regularly and between countries. As a result, individual companies or institutions would have to invest many resources for development and maintenance of DCSS solutions. They could therefore decide to hire DCSS solutions from companies which have specialised in this area.
+
+\subsectio{Description}
+
+- Areas of DCSS: identity, profile, relations, forms, messages, inbox, applications, 
+
+
+\subsectio{Integration}
+
+\section{OZG}
+
+This section introduces the law for improvement of online access of administrative services (Online Access Law - OZG), its origin, purpose and planned realization. It explains the relevance of DCSS providers for the implementation of the OZG and where integration is necessary.
+
+\subsection{Context}
+
+The Federal Ministry of the Interior, Building and Community is, amongst other things, responsible for modernizing public administration \cite{BMI:Moderne_Verwaltung}. Current modernization efforts lie in the construction of an E-Government \cite{BMI:Behoerdengaenge}.
+The E-Government-Law in 2013 was an early step increasing internal usage of digital systems in governmental administration. This includes for example the usage of digital personal files and scanning of documents for replacement \cite{BMI:E-Government_Gesetz}. 
+In 2017 the German government passed the law for improvement of online access to administrative services (OZG) which focuses on usage of administration services by the people \cite{BMI:Onlinezugangsgesetz}. 
+Modernization of the administration, however, is not exclusive to Germany as in 2018 the European Parliament and Council decided on a Single Digital Gateway (SDG) providing uniform access to digital administrative governmental services of every European country \cite{BMI:Single_Digital_Gateway}.
+
+\subsection{Motivation}
+
+Customers on the free market are used to One-Stop-Shops providing access to services of companies in one digital place. Many self-service methods improve the user experience: Customers of e-commerce companies can put products in a digital shopping card, pay with digital money and select a location for delivery. In most cases, no direct human to human interaction is required. Customers complete the process of ordering in self-service. The progress of online self-service usage on the free market is a result of the ongoing digitalization of the world and the competitiveness of the market. Today, many customers own personal computers or smartphones and companies providing easy access to their services via online self-service have an advantage in the market.
+Governmental institutions provide administrative services for customers. This can for example be an application for child benefit or a new ID card. In contrast to the free market, access to administrative services is, in most cases, not available through online self-service. Reasons are, that digitalization is expensive and governmental institutions do not have competitors.
+Digitalization of governmental administration could for example enable users to inform themselves about available administrative services and access them over the internet. The need to personally appear in offices of an administration would be reduced. Communication about questions or required documents could also happen faster, more immediate, and more reliable over the internet than over mail. Governmental institutions could reduce bureaucracy through modernization of registries and the once-only principle.
+The German government recognizes the possible improvements and presents, amongst other things, the OZG as a solution. \cite{IT-Planungsrat:Herausforderung}
+
+\subsection{The OZG}
+
+The law for improvement of online access of administrative services (Online Access Law - OZG) passed in 2017 and requires federal republic and member states to execute the following regulations until 2022 \cite{BMI:OZG_Wortlaut}:
+\begin{enumerate}
+    \item \textbf{Digital availability of administrative services} \\
+    An administrative service is the electronic processing of administrative procedures which are available from outside the governmental institution.  As it is not clear which administrative services exactly are meant by the definition of the OZG, the BMI created a catalogue \cite{BMI:Verwaltungsleistungen}. The OZG requires these services to be digitally available. As a guideline to what is considered sufficient availability, the BMI defined a maturity model \cite{BMI:Digitale_Services}.
+    \item \textbf{Digital access to administrative services through administration portals of a portal network} \\
+    Federal republic, each member state and each commune must provide an administration portal. Portals of communes must be linked to the portal of the corresponding member state. Portals of federal republic and member states must be connected through a portal network. \cite{BMI:Portalverbund} Each portal must provide a "seek and find" feature, which enables users to find all administrative services provided by any administration portal \cite{Cotar:Drucksache_19/19089}. 
+    \item \textbf{Interoperable user profiles for accessing administrative services} \\
+    Federal republic and member states must provide user profiles which can be used to identify the corresponding person while requesting access to administrative services, to save personal information according to the once-only principle, to receive and send messages via a digital mailbox and to pay for services \cite{Cotar:Drucksache_19/19089}. The user profiles must be interoperable for every administration portal of the portal network.
+\end{enumerate}
+
+\subsection{OZG Execution}
+
+Execution of the OZG can be separate into two main projects: Digitalization and Networking. The digitalization focuses on transformation of existing processes and services to be using modern technologies. This includes most importantly the digitalization of governmental administrative services. The networking focuses on connecting existing and future governmental systems to make digitalization universally usable. This includes most importantly the construction of administration portals which are connected in a portal network.
+
+\subsubsection{Administrative Service Digitalization}
+
+The OZG requires administrative services to be available through a portal network. As a result of that, many services, which are still bound to paper must be digitalized.
+In total, the BMI lists 575 relevant services. Some of them are provided by the federal republic, some by the member states and yet other by the communes. Respective to these responsibilities, the task of digitalization is distributed between federal republic and member states, where each member state is assigned to take the lead for specific areas. \cite{BMI:Onlinezugangsgesetz}
+Weiter Digitalisierung erklären
+Results of the digitalization are documented on the "OZG-Informationsplattform" \cite{BMI:Informatiosplattform} as process diagrams and data schemata.
+
+\subsubsection{Portal Network}
+
+Following information describes the currently planned creation of a portal network:
+Administration portals are be provided by federal republic, each member state and each commune.
+Each commune integrates its portal with its corresponding member state. This is be done by ... 
+Federal republic and member states connect their administration portals to a portal network. This is done through an "Online-Gateway" which enables any administration portal to retrieve information about administration services provided on every other administration portal. The portal network is also characterized by interoperable user profiles. Federal republic and member states each provide their own user profile, which can be used on every administration portal of the portal network \cite{Cotar:Drucksache_19/12775}.
+Administration portals and user profiles of member states and federal republic are partly available. They are, however, not yet connected to a portal network. As the implementations of the federal republic can be seen as a guideline for member states on how administration portals and user profiles should work, the rest of the chapter will focus on systems developed by the BMI for usage by federal institutions. Those systems are:
+\begin{enumerate}
+    \item federal administration portal: "Verwaltungsportal Bund" \cite{BMI:Verwaltungsportal_Bund}
+    \item federal user profile: "Nutzerkonto Bund" \cite{BMI:Nutzerkonto_Bund}
+\end{enumerate}
+Administration portals of the portal network are supposed to provide the following functionalities.
+
+\textbf{Service Execution Functionality}: 
+Each administration portal provides information and access to a fixed (but expandable) list of administration services. Usually the administration services on this list consists of services the operator of the site is responsible for. However, it is also possible (and encouraged by the IT-Planungsrat) that a method called "one for all" is used:
+\begin{enumerate}
+    \item Federal republic or one member state develop the digitalization for a group of services
+    \item After development, federal republic or the member state provide the service on its portal
+    \item Every user requiring access to these services visits this portal
+    \item Federal republic or one member state is selected to be responsible for processing these services
+\end{enumerate}
+This method is recommended in order to minimize the amount of duplicate administration services. It, however, cannot be used in cases where the requirements for the "same" administration service differentiate a lot.
+A given administrative service of a portal can be accessed in three different ways \cite{BMI:Integrationsleitfaden_Bund}:
+\begin{itemize}
+    \item Fully integrated:	Full availability of the service through the portal
+    \item Web-Component:	Display of separate website providing the service inside the portal
+    \item Linking:			Link to separate website providing the service
+\end{itemize}
+In the long run, fully integrated administrative services are the goal, the following will therefore focus on this case. 
+Access to an administrative service is typically done through a form a user can fill- and hand in via self-service tools provided by the website. The acquired data can be made available to institutions through a special website and through methods like REST and SOAP for further automated processing by IT-systems. 
+Governmental institutions responsible for an administrative service provide the corresponding operator of the portal with necessary data \cite[88]{BMI:Integrationsleitfaden_Bund}):
+\begin{itemize}
+    \item General information about the service, like name, description, and laws
+    \item Layout of the form, like required fields, optional fields, click-dummy
+    \item Communication method for acquired data through form, like JSON over REST or XML over SOAP
+\end{itemize}
+
+\textbf{Service Search Functionality}: 
+As explained above, each administration portal provides its own list of administrative services. As required by the OZG, any administration portal should also be able to search and find administration services provided by other portals. This requires administration portals to share information about who provides which services which is done through an "Online-Gateway". \cite{BMI:Gateway}
+If a user searches for an administration service on a portal which does not provide it, he will see a list of search entries related to the search term. Selecting the service will forward the user to the corresponding portal.
+
+\textbf{Profile Functionality}:
+Profiles enable users to save reusable personal data according to the once-only principle and authenticate for usage of administrative services. A user profile can be created and accessed by using multiple identification methods. Three different levels of identification methods exist:
+\begin{enumerate}
+    \item Low trust level
+    \item Substantial trust level
+    \item High trust level
+\end{enumerate}
+A low trust level is for example the usage of a username and password combination. A high trust level is for example the usage of the eID feature of the German ID card.
+Depending on the administrative service a profile tries to access, a different level of identification is required. This is necessary to validate that the correct person is using the profile. As a result, for example, profiles created only by specifying a random username and password do not suffice for accessing important administrative services. An additional identification through the eID would be necessary.
+The user profile saves personal data like name, address, birth date, nationality and more. This information can be used to prefill forms for the user. \cite{BMI:Nutzerkonto_Bund}
+
+\textbf{Inbox Functionality}:
+This functionality is strongly connected to user profiles. The Inbox enables users and authorities to communicate directly if for example additional documents are necessary for a request or if the user has some general questions and more. The user can provide an E-Mail address to be notified of received messages. Depending on the security relevance of the message, different identification methods are necessary to view it. \cite{BMI:Nutzerkonto_Bund}
 
 \chapter{Preparatory Work}
 
 \section{OZG Scenarios}
 
 Usage of DCSS OZG scenarios (\textbf{process diagrams and data schemas available}
-\cite{ozgScenarios})
 \\\\
 The scenarios include more than just CSS and are partly non-digital. Therefore processes relevant for DCSS have to be selected
 and it has to be defined which processes are part of a CSS provider, the business systems or the integration architecture:
@@ -311,7 +336,7 @@ and it has to be defined which processes are part of a CSS provider, the busines
      \item Click-Dummy
 \end{itemize}
 
-\item Training Promotion (BAf�G)
+\item Training Promotion (BAföG)
 \begin{itemize}
      \item Data Schema
      \item Process Diagram
@@ -418,7 +443,7 @@ and it has to be defined which processes are part of a CSS provider, the busines
      \end{itemize}
 \end{itemize}
 
-\bibliographystyle{apalike}
-\bibliography{references}
+\printbibliography
+
 
 \end{document}
