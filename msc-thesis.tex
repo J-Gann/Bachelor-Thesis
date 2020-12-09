@@ -132,20 +132,33 @@ Date of Submission: \today
 
 \chapter{Context}
 
-Many enterprises provide digital tools which improve service usability for their customers. For example: If somebody wants to watch a movie, he does not drive to the nearest store to buy a DVD but instead uses websites providing video on demand (VoD). The reason is: VoD enterprises provide tools for digital customer self-service (DCSS). A customer can easily access the video over a website on his own. Technologies for DCSS becomes increasingly relevant, as the German government introduced requirements for DCSS in recent regulations. Most prominent are  "Onlinezugangsgesetz" (OZG), "Datenschutzgrundverordnung" (DSGVO) and "Digitale Versorgung Gesetz" (DVG). 
+Since invention of the World Wide Web, the number of its users increased rapidly. Today, more than 90 percent of the German population use the Internet \cite{Onlinestudie}. Enterprises recognised this potential to inform and interact with a large number of people. Today, an often used method can be called "digital customer self-service" (DCSS). Specialized software tools enable customers to use services of an enterprise through the internet without direct human interaction.
 
-DCSS is made available through DCSS providers. They can consist of websites and applications developed in self-work or be services provided by separate companies. Adding DCSS providers to a system architecture is a common task. It usually involves integration of new DCSS components into an existing system architecture. Due to the complicated nature of system architectures, integration proves to be a difficult task.
+Developing and maintaining these tools and the underlying architecture can be a difficult and expensive task. Required software solutions can therefore be accessed from commercial DCSS providers. In order to use their tools, enterprises will have to integrate them into existing system architectures. Depending on for example the complexity of the tools, different integration approaches can be applied.
+
+Many tools require user profiles if authentication, communication or access to personal information is necessary. Systems providing profiles therefore are part of numerous enterprise architectures. This leads online customers to create multiple user profiles - one for each enterprise. It is then his responsibility to keep his profiles synchronised and up to date. Increasing numbers of user profiles lead to a variety issues: Frequent changes of credentials become unrealistic and modification of an E-Mail address becomes a major inconvenience.
+
+An evolutionary step in customer profile management is the usage of self-sovereign identities (SSI): instead of each enterprise, the customer provides a user profile. This profile can be managed by a trusted DCSS provider for SSI. In order for this concept to work, each enterprise will have to integrate the provider into their existing user profile systems. The result would be one user profile for one person which identifies him as a customer for multiple integrated enterprises.
+
+A currently relevant example for usage of DCSS with particular interesting requirements for user profiles is the "Online Access Law" (OZG). It requires all administrative services of the German federal republic, each member state and commune to be digitally available through interoperable user profiles. The current plan is to make the profile only available for usage in context of the OZG. From a user perspective, this would be yet another profile to manage.
 
 \chapter{Objective}
 
-The objective of this bachelor thesis is to improve the capability of enterprises and institutions to integrate DCSS providers.
-The execution of the German "Online Access Law (OZG)" is a good example for modernization efforts through usage of DCSS. Due to an incoming deadline of the OZG, integration of DCSS technology in this context gets increasingly relevant.
-The bachelor thesis therefore focuses on the integration of DCSS providers into the technological OZG ecosystem. A message based integration architecture is presented which enables system architectures relevant for the OZG to utilize services of DCSS providers. However, the integration architecture is constructed to also be applicable in cases not related to the OZG and to be expandable according to requirements of future use cases.
-The integration architecture is evaluated in respect to technological feasibility and real-life applicability. The results are incorporated into an operating manual, providing guidance in developing and deploying the presented integration architecture.
+Based on the prominent example of the OZG, the bachelor thesis will construct a message based integration architecture which enables system architectures with existing user profiles to accept SSI through its providers. 
 
-\chapter{Structure of Work}
+In the beginning, the terms DCSS, DCSS provider, SSI, SSI provider, SSI connector and OZG are defined and the underlying concept is explained.
 
-The first chapter explains what DCSS and its providers are, what system architectures are and how they can be modeled, what the content of the OZG is, how its implementation is planned and how DCSS providers can be utilized and what integration is, why it is necessary and why a message based approach is used. The second chapter ...
+Then, preparatory work relevant for the integration architecture is presented. Based on process diagrams of digitalized administration services, several use cases of DCSS are listed and evaluated for their relevance. They provide important information on which functionalities the SSI provider is expected to have and the integration architecture is required to integrate.
+
+As an integration approach through a connector is used, concrete functionalities and interfaces of a possible connector are specified for usage by the integration architecture.
+
+Based on documentation of system architectures of several member states, relevant components of the architecture relevant for the OZG are selected. Each component is explained in detail along with the functionalities it provides for usage by the integration architecture.
+
+The integration architecture integrates previously documented connector and components of the system architecture in order to make the selected use cases available through the SSI provider. Integration patterns are used to formulate the integration architecture. In order to save investments the integration reuses as many systems as possible and modifies as few systems as necessary.
+
+The integration architecture is presented iteratively. Each iteration contains increasingly demanding requirements along with the documentation of the increasingly complex integration architecture. Each documentation is done through textual explanations, multiple flow diagrams and one messaging architecture.
+
+In order to validate the integration architecture, the execution of one administration service through the SSI provider is evaluated in theory.
 
 \chapter{Fundamentals}
 
@@ -153,8 +166,8 @@ The first chapter explains what DCSS and its providers are, what system architec
 This chapter introduces the concept of digital customer self-service. It defines DCSS, describes what it is by usage of examples and mentions benefits such as challenges.
 
 \textbf{Definition}: Digital self-service is the consumption of services provided by an enterprise over the internet without human to human interaction.
-
-It is important to distinguish between "service" and "self-service". The difference is shown through two examples:
+It is important to distinguish between "service" and "self-service".
+The difference is shown through two examples:
 
 \textbf{Example 1}: A service is the availability to purchase items whereas digital self-service is the placement of orders over a website.
 
@@ -162,7 +175,14 @@ It is important to distinguish between "service" and "self-service". The differe
 
 Digital self-service is one of many possible ways to access a service: An order placement could also be done through email or phone call and access to videos could be granted through same-day-delivery of DVDs.
 
-Customers are able to do self-service because companies provide them with self-service tools. Creating them is not trivial and is the main business model of many companies. Video on demand websites for example do not only flourish as a result of providing access to videos (this business model existed long before them) but as a result of the digital self-service tools they provide.
+Customers are able to do digital self-service because they are provided with digital self-service tools. Creating those is not trivial and is the main business model of many companies. Video on demand websites for example do not only flourish as a result of providing access to videos (this business model existed long before them) but as a result of the digital self-service tools they provide.
+
+There exist a lot of different use cases of DCSS. Many can be differentiated into two categories: DCSS for information and DCSS for transaction.
+The category DCSS for information contains use cases where DCSS enables users to \textbf{retrieve} information relevant for them. The category DCSS for transaction contains use cases where DCSS enables users to permanently \textbf{add} information to a system, usually in order to trigger some process.
+
+A use case for retrieving information through DCSS are so called "WiKi" pages. Similar to the famous website "Wikipedia", information about for example the usage of a product can be made accessible to customers. In this case, it is not necessary any more to call a support hot-line or visit a shop. Another example are online learning platforms which provide customers with necessary information to for example learn a language. In this case, it is not necessary any more to meet teachers. Online job hunting websites enable its users to find information about job offers which fit their requirements. In this case it is not necessary any more to go to employment bureaus.
+
+A common use case for transaction through DCSS are online retailers which enable users to start payment and delivery processes by providing the necessary information. They are often accompanied by DCSS for information in order to find and select products. In this case it is not necessary any more to go to the local shopping mall. Another use case is the management of user identities where DCSS enables users to authenticate themselves and manage personal information. In this case it is not necessary any more to show up in person at for example a store in order to identify ones identity and give personal information about e.g. the living address.
 
 Reasons for the widespread usage of digital self-service are significant benefits in ease of service usability for customers and cost reduction for enterprises. Customers can self-service from almost every place, easily manage customer data like phone number and address, configure services like subscription plans and access lots of information on available products or trouble shooting steps in an immediate way. Digital customer self-service improves usability, saves time, increases availability, saves money and therefore increases customer experience.
 Enterprises, especially in progressive countries, aim to keep employment at a minimum, as it is a big cost factor. Digital self-service turns customers into unpaid employees.
@@ -173,42 +193,35 @@ As today most large enterprises provide DCSS, it can be assumed, that at a given
 
 Governments see digitalization as a chance for improvements in many important social and economical areas. The process of digitalization can in some cases be described as reinventing existing solutions for usability with computers. One of the goals is to make solutions more easily accessible for users and as a method, provide digital self-service. Governmental regulations relating to digitalization therefore often encourage or demand enterprises and organizations to provide DCSS.
 
-\section{Enterprise Architecture}
+\subsection{DCSS Provider}
+As described in the previous section, digital customer self-service is a widely used method on the free market to increase customer experience. In order for customers to use self-service, companies and institutions have to provide necessary tools. Depending on the business case, different categories of DCSS are relevant. Depending on the use case, DCSS is enabled through a variety of software tools.
 
-\subsection{Modeling of the real world}
+A chain of stores, for example, might provide DCSS tools for information which enable users to inform themselves about available products and opening hours. One tool could for example provide a search functionality for stores in the local area. Another tool could provide a catalogue of available products when a store is selected. The catalogue could also enable users to filter for relevant products.
 
-\subsection{Modeling Challenges}
+Online retailers however will additionally require DCSS tools for transaction. This can be for example be tools for management of user profiles in order for users to authenticate and manage personal information like payment and delivery details.
 
-\subsection{Enterprise Architecture Patterns (EAP)}
+As just shown, depending on the use case, complexity of technology providing DCSS can be very high. Besides enabling DCSS functionality, technology in use also needs to be maintained in order to adhere to most recent security and data protection standards. Those can also differ between countries. Therefore, in an effort to save costs or to improve functionality companies and organizations could decide to use DCSS software solutions from companies which have specialised in this area: DCSS providers.
 
-\section{Integration}
+As there exist many use cases for DCSS, different software solutions from DCSS providers are possible. The bachelor thesis focuses on DCSS providers for management of identities.
 
-\subsection{Definition}
+Identity management is important for many businesses and organizations. In order to provide services to individual persons it is necessary to verify their identity, access and update related information and be able to interact. Interaction and verification of identities is straight forward if somebody shows up in person. Personal information of a customer can be managed trough paper files.
 
-\subsection{Requirements}
+DCSS providers for identity management can improve this process for customers and businesses. The following is a possible solution for identity management through DCSS providers, the bachelor thesis will assume.
 
-\subsubsection{Loose Coupling}
-
-\subsubsection{Homogeneous Landscapes}
-
-\section{DCSS Provider}
-
-This chapter introduces digital customer self-service providers. It explains what they are, why they are useful, what services they can provide and what integration challenges can be.
-
-\subsection{Motivation}
-
-As described in the previous chapter, digital customer self-service is a widely used method on the free market to increase customer experience. In order for customers to use self-service, respective companies or institutions have to provide necessary tools. Depending on the business case, different self-service tools might be used: The local grocery store might simply provide tools for customers to inform themselves about opening hours and available products while e-commerce companies would want to enable users to buy products online. Depending on the use case, complexity of technology providing DCSS can be very high. Besides enabling DCSS functionality, used technology also needs to adhere to security and data protection standards which can change regularly and between countries. As a result, individual companies or institutions would have to invest many resources for development and maintenance of DCSS solutions. They could therefore decide to hire DCSS solutions from companies which have specialised in this area.
-
-\subsectio{Description}
+Description of IDAS ...
 
 - Areas of DCSS: identity, profile, relations, forms, messages, inbox, applications, 
 
+- relations, relationship template, app, server, ....
 
-\subsectio{Integration}
+\section{SSI}
+
+\section{SSI Connector}
+seperat wegen bedeutung für Arbeit
 
 \section{OZG}
 
-This section introduces the law for improvement of online access of administrative services (Online Access Law - OZG), its origin, purpose and planned realization. It explains the relevance of DCSS providers for the implementation of the OZG and where integration is necessary.
+This section introduces the law for improvement of online access of administrative services (Online Access Law - OZG), its origin, purpose and planned realization.
 
 \subsection{Context}
 
@@ -238,188 +251,158 @@ The law for improvement of online access of administrative services (Online Acce
 
 \subsection{OZG Execution}
 
-Execution of the OZG can be separate into two main projects: Digitalization and Networking. The digitalization focuses on transformation of existing processes and services to be using modern technologies. This includes most importantly the digitalization of governmental administrative services. The networking focuses on connecting existing and future governmental systems to make digitalization universally usable. This includes most importantly the construction of administration portals which are connected in a portal network.
+Execution of the OZG can be separated into two projects: Digitalization and Networking. Digitalization focuses on transformation of existing processes and services to be using modern technologies. This includes most importantly the digitalization of governmental administrative services. The networking focuses on connecting existing and future governmental systems to make digitalization universally usable. This includes most importantly the construction of administration portals which are connected in a portal network.
 
-\subsubsection{Administrative Service Digitalization}
+Many services, which are still bound to paper must be digitalized. In total, the BMI lists 575 relevant services. Some of them are provided by the federal republic, some by the member states and yet other by the communes. Respective to these responsibilities, the task of digitalization is distributed between federal republic and member states, where each member state is assigned to take the lead for specific areas. \cite{BMI:Onlinezugangsgesetz} Results of the digitalization are documented on the "OZG-Informationsplattform" \cite{BMI:Informatiosplattform} as process diagrams and data schemata.
 
-The OZG requires administrative services to be available through a portal network. As a result of that, many services, which are still bound to paper must be digitalized.
-In total, the BMI lists 575 relevant services. Some of them are provided by the federal republic, some by the member states and yet other by the communes. Respective to these responsibilities, the task of digitalization is distributed between federal republic and member states, where each member state is assigned to take the lead for specific areas. \cite{BMI:Onlinezugangsgesetz}
-Weiter Digitalisierung erklären
-Results of the digitalization are documented on the "OZG-Informationsplattform" \cite{BMI:Informatiosplattform} as process diagrams and data schemata.
+Administrative services are made available through administrative portals which are be provided by federal republic, each member state and each commune. Communes integrate their portals with corresponding member states. The portals are connected through an "Online-Gateway" and form a portal network.
 
-\subsubsection{Portal Network}
+Federal republic and each member state provide digital access to administrative services. An important method is called "one for all": One member state manages the digitalization of a category of administrative services and makes them digitally accessible for every other member state. Every administrative service can be found through a search function provided by every portal of the network.
 
-Following information describes the currently planned creation of a portal network:
-Administration portals are be provided by federal republic, each member state and each commune.
-Each commune integrates its portal with its corresponding member state. This is be done by ... 
-Federal republic and member states connect their administration portals to a portal network. This is done through an "Online-Gateway" which enables any administration portal to retrieve information about administration services provided on every other administration portal. The portal network is also characterized by interoperable user profiles. Federal republic and member states each provide their own user profile, which can be used on every administration portal of the portal network \cite{Cotar:Drucksache_19/12775}.
-Administration portals and user profiles of member states and federal republic are partly available. They are, however, not yet connected to a portal network. As the implementations of the federal republic can be seen as a guideline for member states on how administration portals and user profiles should work, the rest of the chapter will focus on systems developed by the BMI for usage by federal institutions. Those systems are:
-\begin{enumerate}
-    \item federal administration portal: "Verwaltungsportal Bund" \cite{BMI:Verwaltungsportal_Bund}
-    \item federal user profile: "Nutzerkonto Bund" \cite{BMI:Nutzerkonto_Bund}
-\end{enumerate}
-Administration portals of the portal network are supposed to provide the following functionalities.
+Depending on the administrative service, a user profile is required to verify ones identity. As federal republic and most member states already provide their own user profiles, the "IT-Planungsrat" decided to save investments by connecting them to an interoperable user profile.
 
-\textbf{Service Execution Functionality}: 
-Each administration portal provides information and access to a fixed (but expandable) list of administration services. Usually the administration services on this list consists of services the operator of the site is responsible for. However, it is also possible (and encouraged by the IT-Planungsrat) that a method called "one for all" is used:
-\begin{enumerate}
-    \item Federal republic or one member state develop the digitalization for a group of services
-    \item After development, federal republic or the member state provide the service on its portal
-    \item Every user requiring access to these services visits this portal
-    \item Federal republic or one member state is selected to be responsible for processing these services
-\end{enumerate}
-This method is recommended in order to minimize the amount of duplicate administration services. It, however, cannot be used in cases where the requirements for the "same" administration service differentiate a lot.
-A given administrative service of a portal can be accessed in three different ways \cite{BMI:Integrationsleitfaden_Bund}:
-\begin{itemize}
-    \item Fully integrated:	Full availability of the service through the portal
-    \item Web-Component:	Display of separate website providing the service inside the portal
-    \item Linking:			Link to separate website providing the service
-\end{itemize}
-In the long run, fully integrated administrative services are the goal, the following will therefore focus on this case. 
-Access to an administrative service is typically done through a form a user can fill- and hand in via self-service tools provided by the website. The acquired data can be made available to institutions through a special website and through methods like REST and SOAP for further automated processing by IT-systems. 
-Governmental institutions responsible for an administrative service provide the corresponding operator of the portal with necessary data \cite[88]{BMI:Integrationsleitfaden_Bund}):
-\begin{itemize}
-    \item General information about the service, like name, description, and laws
-    \item Layout of the form, like required fields, optional fields, click-dummy
-    \item Communication method for acquired data through form, like JSON over REST or XML over SOAP
-\end{itemize}
+There exists a low, substantial and high level of authentication security when logging in to a user profile or when creating one.
+A low trust level is for example the usage of a username and password combination, a high trust level is for example the usage of the eID feature of the German ID card. Depending on the administrative service a profile tries to access, a different trust level is required.
 
-\textbf{Service Search Functionality}: 
-As explained above, each administration portal provides its own list of administrative services. As required by the OZG, any administration portal should also be able to search and find administration services provided by other portals. This requires administration portals to share information about who provides which services which is done through an "Online-Gateway". \cite{BMI:Gateway}
-If a user searches for an administration service on a portal which does not provide it, he will see a list of search entries related to the search term. Selecting the service will forward the user to the corresponding portal.
-
-\textbf{Profile Functionality}:
-Profiles enable users to save reusable personal data according to the once-only principle and authenticate for usage of administrative services. A user profile can be created and accessed by using multiple identification methods. Three different levels of identification methods exist:
-\begin{enumerate}
-    \item Low trust level
-    \item Substantial trust level
-    \item High trust level
-\end{enumerate}
-A low trust level is for example the usage of a username and password combination. A high trust level is for example the usage of the eID feature of the German ID card.
-Depending on the administrative service a profile tries to access, a different level of identification is required. This is necessary to validate that the correct person is using the profile. As a result, for example, profiles created only by specifying a random username and password do not suffice for accessing important administrative services. An additional identification through the eID would be necessary.
-The user profile saves personal data like name, address, birth date, nationality and more. This information can be used to prefill forms for the user. \cite{BMI:Nutzerkonto_Bund}
-
-\textbf{Inbox Functionality}:
-This functionality is strongly connected to user profiles. The Inbox enables users and authorities to communicate directly if for example additional documents are necessary for a request or if the user has some general questions and more. The user can provide an E-Mail address to be notified of received messages. Depending on the security relevance of the message, different identification methods are necessary to view it. \cite{BMI:Nutzerkonto_Bund}
+Profiles also enable users to save personal data in a data wallet and to communicate with institutions through an inbox.
 
 \chapter{Preparatory Work}
 
-\section{OZG Scenarios}
+\section{OZG DCSS Scenarios}
 
-Usage of DCSS OZG scenarios (\textbf{process diagrams and data schemas available}
-\\\\
-The scenarios include more than just CSS and are partly non-digital. Therefore processes relevant for DCSS have to be selected
-and it has to be defined which processes are part of a CSS provider, the business systems or the integration architecture:
+The information platform of the OZG contains information about many administration services in form of process diagrams \cite{BMI:Ergebnisse}. They serve as a resource to identify important DCSS scenarios of administration processes. The following scenarios were identified:
 
-\begin{enumerate}
-     \item What part of a scenario is digital?
-     \item What part of a scenario can be done through a DCSS provider / is relevant for DCSS?
-     \item What part of a scenario is done through \textbf{existing} business systems?
-           \begin{enumerate}
-                \item new necessary business logic part of (configurable) integration? => non invasive
-           \end{enumerate}
-     \item What part of a scenario should be done by the integration architecture?
-     \item What are commonalities of scenarios?
-           \begin{enumerate}
-                \item OZG scenarios often describe digital handling of applications
-                \item In OZG scenarios, often multiple governmental institutions are involved. This could be modeled as one system architecture with the problem of distributed
-                      data and functionality which the integration architecture would solve.
-           \end{enumerate}
-\end{enumerate}
+\subsection{Identity Management}
 
+\subsubsection{Scenario Profile Management}
 \begin{itemize}
-     \item Unemployment Benefit (AG2)
-\begin{itemize}
-     \item Data Schema
-     \item Process Diagram
-     \item Process Diagram of Application
-     \item Click-Dummy
+    \item Create a user profile
+    \item Delete a user profile
+    \item Check existence of a user profile
 \end{itemize}
 
-\item Training Promotion (BAföG)
+\subsubsection{Scenario Identity verification}
 \begin{itemize}
-     \item Data Schema
-     \item Process Diagram
-     \item Click-Dummy
+    \item Login to a user profile
+    \item Provide multiple levels of security for identity verification
+    \item Usage of a guest profile
 \end{itemize}
 
-\item Drivers License
+\subsection{Request Management}
+
+\subsubsection{Scenario Request Preparation}
 \begin{itemize}
-     \item Data Schema
-     \item Process Diagram
-     \item Process Diagram of Application
-     \item Click-Dummy
+    \item Search for administration services
+    \item Check necessity of a profile
+    \item Check required level of identity verification
+    \item Selection of institution responsible for processing the request (Specification of current location)
 \end{itemize}
 
-\item Company Registration and Approval
+\subsubsection{Scenario Request Creation}
 \begin{itemize}
-     \item Data Schema
-     \item Process Diagram
-     \item Click-Dummy
+    \item Filling in a form for an application
+    \item Automated filling in of form with saved personal data
+    \item Collaboration on application by multiple identities
 \end{itemize}
 
-\item Visa Issuance
+\subsubsection{Scenario Request Delivery}
 \begin{itemize}
-     \item Data Schema
-     \item Process Diagram
+    \item Transmission of an application to responsible institution
 \end{itemize}
 
-
+\subsubsection{Scenario Request Processing}
+\begin{itemize}
+    \item Period of validity of applications
+    \item Notification of user about missing information or documents
+    \item Transmission of missing information
+    \item Notification of user about required preliminary administration services
+    \item Communication through E-Mail
+    \item Cancel an application
+    \item Approvals of user to e.g. data protection or information transfer
+    \item Modification request of application after transmission
+    \item Notification of received application by institution
+    \item Request status update by user
+    \item Sending notification to confirm the reading of a message
+    \item Notification of certain events to separate person e.g. parents
+    \item Request of institution about explicit document
 \end{itemize}
 
+\subsubsection{Scenario Request Finalization}
+\begin{itemize}
+    \item Notification of outcome of process / application
+    \item Objection of user to result of the process
+    \item Access to signed digital formula of result of process
+    \item Definition of dates for evens
+\end{itemize}
 
-\section{Relevant Systems and Data}
+\subsection{Data Management}
 
-\subsection{EAPs}
+\subsubsection{Scenario Access Management}
+\begin{itemize}
+    \item Access to an application by multiple separate identities
+    \item Sharing of documents saved in a wallet
+\end{itemize}
 
-\subsection{Architecture Bricks}
+\subsubsection{Scenario Data Consistency}
+\begin{itemize}
+    \item Period of validity of documents
+    \item Profile data discrepancies between involved user profiles
+\end{itemize}
 
-\subsection{Data Bricks}
+\subsubsection{Scenario Data Accessibility}
+\begin{itemize}
+    \item Upload of e.g. documents and certificates
+    \item Saving personal data entered in a form to the user profile
+    \item Protocol of all processes accessible with information about interactions
+\end{itemize}
 
-\subsection{Integration Requirements}
+\section{DCSS Connector}
 
-\subsubsection{Regarding Integration Architecture}
+\section{OZG System Architecture}
+This section describes the system architecture of a member state relevant for the execution of the OZG an integration of a DCSS provider. Due to a lack of detailed information, the system architecture is described by components responsible for a category of tasks. Each component is associated to data objects it processes. The definition of components and data objects are based on research about planned system architectures of member states.
 
-\subsubsection{Regarding Business Connector}
+\subsection{User Profile}
+Each member state provides its own user profile which manages the identity of a user. It enables him to create, delete and login to a profile, authenticate for administration services, communicate with institutions through an inbox and manage personal information and documents in a data wallet.
 
+\subsection{Administration Portal}
+The administration portal provides the user with a web-interface he can use to access his user profile and search for available administration services.
 
+\subsection{Application Platform}
+The application platform gives access to administration services by providing the user with a website he can use to fill in application forms and sent them to the responsible institutions. It is possible to prefill the form with personal data stored inside the user profile.
 
-\section{Business Connector}
-
-\subsection{Functionalities and Interfaces}
-
-\subsection{Integration Requirements}
-
-\subsubsection{Regarding Enterprise Architecture}
-
-\subsubsection{Regarding Integration Architecture}
-
-\subsection{Documentation}
-
-\subsubsection{Connector as Architecture Brick}
-
+\subsection{Institution}
+Institutions are the entities distributed all over the member state which eventually process the incoming applications and provide the users with solutions.
 
 \chapter{Integration Architecture}
 
-\section{Scenario 1}
+This chapter presents a message based integration architecture which enables access to DCSS features of member states through a DCSS provider. Multiple versions of an integration architecture are presented which fulfill increasingly complex requirements. Requirements are formulated as user scenarios which should be accomplishable through the DCSS provider.
+Each version is presented in the form of multiple flow charts, each describing sequential steps while carrying out a required scenario and a corresponding messaging infrastructure.
 
-\subsection{Integration Documentation}
+\section{Basic}
 
-\subsection{Required System and Data Bricks}
+\subsection{Requirements}
+In the first version of the integration architecture, users of the DCSS provider should be able to
+\begin{itemize}
+    \item fill in an application
+    \item authenticate
+    \item receive and send messages
+\end{itemize}
 
-\subsection{System Integration}
+\subsection{Flow Charts}
 
-\subsection{Data Integration}
+\includegraphics[width=\textwidth]{Basic Integration Application.png}
 
-\section{Scenario 2}
+\includegraphics[width=\textwidth]{Basic Integration Onboarding.png}
 
-\subsection{Integration Documentation}
+\subsection{Messaging Integration}
 
-\subsection{Required System and Data Bricks}
+\section{Advanced}
 
-\subsection{System Integration}
+\subsection{Requirements}
 
-\subsection{Data Integration}
+\subsection{Flow Charts}
+
+\subsection{Messaging Integration}
 
 
 \chapter{Integration Architecture Evaluation}
