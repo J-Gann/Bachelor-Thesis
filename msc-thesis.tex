@@ -131,48 +131,87 @@ Date of Submission: \today
 \pagenumbering{arabic}
 
 \chapter{Context}
-Since invention of the World Wide Web, the number of its users increased rapidly. Today, more than 90 percent of the German population use the Internet \cite{Onlinestudie}. Enterprises and organizations recognised this potential to inform and interact with a large number of people. A frequently used method is "online self-service" (OSS). Specialized software tools enable customers to use services through the internet without direct human interaction.
+Since invention of the World Wide Web, the number of its users increased rapidly. Today, more than 90 percent of the German population use the internet \cite{Onlinestudie}. Enterprises and organizations, recognised this potential to provide their services to a large number of people as Service Providers (SP). A frequently used method of SPs is "online self-service" (OSS). Specialized software tools enable customers to use services through the internet without direct human interaction.
 
-Developing and maintaining these tools and the underlying architecture can be a difficult and expensive task. Required software solutions can therefore be accessed from commercial OSS providers. In order to use their tools, enterprises will have to integrate them into existing system architectures. Depending on for example the complexity of the tools, different integration approaches can be applied.
+Many tools require identification of a user in case interactions or initiated business processes have to be associated with him. An identity provider (IdP) who stores partial identities of users therefore is part of numerous system architectures. This leads to customers of SPs to be associated with multiple partial identities - one for each SP. Service Providers usually enable users to manage their partial identities using online self-service through so called User Profiles.
 
-Many tools require user profiles if authentication, communication or access to personal information is necessary. Systems providing profiles therefore are part of numerous enterprise architectures. This leads online customers to create multiple user profiles - one for each enterprise. It is then his responsibility to keep his profiles synchronised and up to date. Increasing numbers of user profiles lead to a variety issues: Frequent changes of credentials become unrealistic and modification of an E-Mail address becomes a major inconvenience.
+The issues of this approach becomes clear for a large amount of partial identities. The more Service Providers a person is customer of, the more partial identities he will have to manage through user profiles. Changing the home address in each profile becomes a major inconvenience. More serious problems occur for example through the increased risk of data breaches.
 
-An evolutionary step in customer profile management is the usage of self-sovereign identities (SSI): instead of each enterprise, the customer provides a user profile. This profile can be managed by a trusted OSS provider for SSI.
+An improved model for identity management is necessary. In recent years, multiple new models have been invented. One model called Social Login became popular. It enables customers to leverage existing User Profiles of social networks like Facebook to create new User Profiles for Service Providers. This improves identity management by enabling SPs to rely on the identity information they are provided by the external profile. Users can manage identity related information through their Social Profile and each change would then be propagated to User Profiles of connected SPs.
 
-In order for this concept to work, each enterprise will have to integrate the provider into their existing user profile systems. The result would be one user profile for one person which identifies him as a customer for multiple integrated enterprises.
+This approach, however, still leaves the requirement of User Profiles for each SP because depending on the provided service, additional attributes which are not part of the Social Profile, have to be manageable by the user. This includes for example subscriptions or contracts.
 
-A currently relevant example for usage of OSS with particular interesting requirements for user profiles is the "Online Access Law" (OZG). It requires all administrative services of the German federal republic, each member state and commune to be digitally available through interoperable user profiles. The current plan is to make the profile only available for usage in context of the OZG. From a user perspective, this would be yet another profile to manage.
+The solution to this problem is an Identity Management System (IMS) which manages the whole online identity of a person and can replace the individual partial identities and User Profiles of SPs. To replace User Profiles of SPs, the IMS can not only rely on systems for registration, authentication, authorisation and provisioning. Additional requirements of SPs like communication, data wallet and management of additional attributes have to be satisfied.
+
+In order for an SP to use identities and services of an IMS, an integration into the system architecture of the SP has to take place. Due to the complex nature of system architectures and identity management, this is a difficult task.
+
+A currently relevant example for usage of online self-service with particular interesting requirements for identities is the "Online Access Law" (OZG). It requires all administrative services of the German federal republic, each member state and commune to be digitally available through interoperable user profiles. The current plan is to make the profiles only available for usage in context of the OZG. From a user perspective, this would be yet another partial identity and user profile to manage.
 
 \chapter{Objective}
-Based on the prominent example of the OZG, the bachelor thesis will construct a message based integration architecture which enables system architectures with existing user profiles to accept SSI through its providers.
-The goal of the integration architecture in the example is to make important OZG scenarios accessible with usage of self-sovereign identities instead of the existing user profiles.
-The two points of integration are on one hand-side the system architecture relevant for the OZG in form of a list of system components and on the other hand-side the SSI provider in form of a connector.
-Integration patterns are used to formulate the integration architecture which enables to use a combination of established and tested messaging solutions. In order to save investments the integration reuses as many system components as possible and modifies as few system components as necessary.
+Based on the prominent example of the OZG, the bachelor thesis will construct a message based integration architecture which enables system architectures of SPs with existing user profiles to make their services accessible through an Identity Management System. In the example of the OZG, the integration architecture should enable users to access administrative services of a member state through usage of an IMS instead of a User Profile. The two points of integration are on one hand-side the system architecture relevant for the OZG in form of a list of system components and on the other hand-side a connector provided by the IMS. Integration patterns are used to formulate the integration architecture in order to utilize a combination of established and tested messaging solutions. In order to save investments the integration reuses as many system components as possible and modifies as few system components as necessary.
 
 \chapter{Structure of Work}
 
-In the beginning, the terms OSS, OSS provider, SSI, SSI provider, SSI connector and OZG are defined and the underlying concept is explained.
+In the beginning of the thesis, basic concepts and terminology is explained on which the following chapters will rely.
 
-Then, preparatory work relevant for the integration architecture is presented. Based on process diagrams of digitalized administration services, several use cases of OSS are listed and evaluated for their relevance. They provide important information on which functionalities the SSI provider is expected to have and the integration architecture is required to integrate.
+Then, preparatory work relevant for the integration architecture is presented. Based on process diagrams of digitalized administration services, several use cases of OSS are listed and evaluated for their relevance. They provide important information on which functionalities the IMS is required to have and the integration architecture is required to integrate.
 
 An integration approach through a connector is used. Concrete functionalities and interfaces of a possible connector are specified for usage by the integration architecture.
 
 Based on documentation of system architectures of several member states, relevant components of the architecture relevant for the OZG are selected. Each component is explained in detail along with the functionalities it provides for usage by the integration architecture.
 
-The integration architecture integrates previously documented connector and components of the system architecture in order to make the selected use cases available through the SSI provider. The architecture is presented iteratively. Each iteration contains increasingly demanding requirements along with the documentation of the increasingly complex integration architecture. Each documentation is done through textual explanations, multiple flow diagrams and one messaging architecture.
+The integration architecture integrates previously documented connector and components of the system architecture in order to make the selected OSS cases usable with the IMS. The architecture is presented iteratively. Each iteration contains increasingly demanding requirements along with the documentation of the increasingly complex integration architecture. Each documentation is done through textual explanations, multiple flow diagrams and one messaging architecture.
 
-In order to validate the integration architecture, the execution of one administration service through the SSI provider is evaluated in theory.
+In order to validate the integration architecture, the execution of one administration service with usage of the IMS is evaluated in theory.
 
 \chapter{Fundamentals}
-The goal of this chapter is to define terminology and to explain basic concepts for better understanding of context and objective of the bachelor thesis.
 
+
+\section{Service Provider}
+Service providers (SP) are entities like enterprises or organisations which make services accessible over the internet.
+
+\section{Online Self-Service}
+Online self-service (OSS) describes a method used by service providers to make their services available to the user. The method is characterized by being available over the internet, requiring no direct human interaction but instead enabling the user to access services in a self-reliant way. The user can be supported by a variety of software solutions.
+
+\section{Self-Service Tools}
+Self-service tools are software solutions for customers to enable a online self-service experience. Depending on the use case, the tools can be transactional or informing. Informing tools help users to receive relevant information, often replacing human customer support. Transactional tools help users to interact with services in a persistent way to for example save data or trigger business processes.
+
+Information tools can be for example so called "WiKi" pages or search fields which assist the user in his process of finding information. Transactional tools can be for example online forms which assist the user in his process of initiating an ordering business process.
+
+In contrast to information tools, transactional tools often require identification of users in order to associate them with changes they made to the system: If a user triggers the business process of ordering a product, the SP requires identification of the user.
+
+\section{Identity}
+
+
+Identities are managed by the system architecture of SPs through identity providers (Idp).
+
+- Problem multiple identities
+
+- Modern Identity models
+
+- 
+
+\section{User Profile}
+
+- self service for identities
+
+- problem multiple user profiles
+
+
+\section{}
+
+\section{OSS Profile Provider}
+
+\section{Connector}
 
 \section{Online Self-Service}
 Self-service has existed for a long time. It generally means the consumption of some service without human interaction but rather in a self-reliant way. One example which is still relevant today are restaurants offering buffets. Instead of a waiter, customers take food for themselves - in self-service. In spring, some farmers allow people to pick flowers from the acre in exchange for a small fee.
 
 In recent decades technology made advanced methods of digital self-service possible. Money can be withdrawn from local ATMs and train tickets can be bought from ticket machines. Technological advancements, at least directed to the average consumer, can be seen as advancements in self-service capabilities. Consumers buy technology which makes them independent from the help of other people. 
 
-Since the internet enabled the connection of a very large amount of people, especially the world wide web made it accessible to the general public. The world wide web enables any user to access and interact with technological systems all over the world through a user friendly visual interface. Today, many of those systems are provided by enterprises and other organizations for customers and users to access their services - they enable customers online self-service (OSS).
+Since the internet enabled the connection of a very large amount of people, especially the world wide web made it accessible to the general public. It enables any user to access and interact with technological systems all over the world through a user friendly visual interface. Today, many of those systems are provided by enterprises and other organizations for customers and users to access their services. 
+
+- they enable customers online self-service (OSS).
 
 Online self-service is defined as: self-reliant consumption of services over the internet without human to human interaction.
 
@@ -200,9 +239,6 @@ OSS providers are defined as: enterprises which develop and maintain solutions f
 
 Depending on the complexity of the solution, different methods of access are possible. One possibility would be to provide a self-contained software, the customer can deploy in his system architecture. This can be done for example in the case of solutions for WiKi-pages where the customer installs respective software in his web server. Another possibility would be, for the OSS provider to host the solution himself and provide system architectures of customers access. This can be done for example in the case of retailers which contain systems only for managing a catalogue of available products and processing incoming orders. They could integrate an online shop solution hosted by a OSS provider through using a business connector.
 
-\section{SSI}
-
-\section{SSI Connector}
 
 \section{OZG}
 
