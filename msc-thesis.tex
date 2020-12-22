@@ -259,18 +259,40 @@ The networking focuses on connecting governmental systems to make all digitized 
 
 In order to save investments a method called "one for all" is used when hosting administrative services. One member state or the federal republic provide access to a service on their administration portal and distribute the requests to the responsible institutions "under the hood". As administration portals are connected through an "online gateway", each portal contains a search feature, which enables users to find all administrative services through any portal. Interoperable user profiles enable usage of each profile for management of administrative services on all portals.
 
-\subsection{Administrative Service}
-Unemployment benefit (Arbeitslosengeld II: AGII) is selected as an example for a digitized administrative service, because it has a high priority according to the "OZG-Informationsplattform" and is well documented.
+\subsection{Basic Use Case}
+The BMI lists a total of almost 600 administrative services, each being described by a different process \cite{BMI:Informatiosplattform}. Each process consists of multiple sub-processes. When comparing the processes, one can see, that some sub-processes occur very often and in similar arrangements. Those arrangements can be called the basic use case of OZG services.
 
-The AGII is accessible through the "one for all" method through the administration portal of the federal republic. The digitalization of the service was done by the member state Nordrhein-Westfalen. The purpose of this service is to enable application for unemployment benefit and the result is an approval or denial by the responsible institution of the commune. The digitized process of this service enhances it to be manageable on an administration portal trough a user profile in the following way:
+The basic use case describes the submission of an application for an administrative service and consists of the following arrangement of sub-processes \cite{NRW:Umsetzung}:
 
-In order to access the service, a user must authenticate for an existing user profile or create one.
+\paragraph{1. Selection of Application Form}
+The user visits any administration portal of the portal network and types a search term in the corresponding search field. The user is then presented with a list of search results consisting of administrative services. If the user selects a search result, he is forwarded to the correct page inside the domain of the administration portal which hosts the selected service. This page provides information about the administration service along with instructions on how to access the form for application. The interactive form, usually provided by a form-server, can be for example included in the page through a web-component.
+
+\paragraph{2. Login to User Profile}
+Independent of the member state the user created the interoperable user profile for, he can use it in the current administration portal. The user has to finish authentication steps, which can consist for example of a username and password. Depending on the authentication method, a trust level of the current session is determined. With approval from the user, personal information from his profile is provided towards the form-server.
+
+\paragraph{3. Filling in of Application}
+Personal information from the user profile is used to by the form-server to fill as many fields of the form as possible. The form with prefilled information is then presented to the user. The interactive form can then be modified by the user. Depending on the form-server, additional functionalities like conditions between fields or sanity checking can be provided.
+
+\paragraph{4. Uploading Attachments}
+The user can upload documents to his user profile and reference them from the form.
+
+\paragraph{5. Submission of Application}
+The user again authenticates for his user profile and authorises the form-server to submit the application. The form-server saves the application until he is notified to delete it. The form-server submits the application to the administration portal which hosts the administrative service.
+
+\paragraph{6. Reception of Application by Administration Portal}
+The administration portal receives the application from a form-server and usually just forwards it to the data-exchange platform and notifies the form-server that the he can delete the application.
+
+\paragraph{7. Submission of Application to Data-Exchange Platform}
+The data-exchange platform distributes the application to the correct administrative institution responsible for processing it.
+
+\paragraph{8. Sending of Acknowledgment}
+The data-exchange platform notifies the user through the inbox functionality of the user profile if the application was submitted successfully.
 
 \subsection{System Architecture}
 This subsection describes the system architecture of a member state relevant for the execution of the OZG.
 
 \subsubsection{System Components}
-The system architecture consists of the following system components where each component is responsible for processing a certain group of tasks:
+The system architecture consists of the following system components where each component is responsible for providing a certain set of services:
 
 \paragraph{User Profile}
 Each member state provides its own user profile which manages the identity of a user. It enables him to create, delete and login to a profile, authenticate for administration services, communicate with institutions through an inbox and manage personal information and documents in a data wallet.
@@ -287,103 +309,23 @@ Institutions are the entities distributed all over the member state which eventu
 \subsubsection{Data Objects}
 The system architecture processes the following data objects which are associated to certain system components:
 
-\chapter{Problem Analysis}
+
+\chapter{Identity Management}
 
 \section{Requirement Analysis}
 
-\subsection{User Requirements}
+\subsection{User Perspective}
 
-\subsection{OZG Requirements}
+\subsection{OZG Perspective}
 
-The information platform of the OZG contains information about many administration services in form of process diagrams \cite{BMI:Ergebnisse}. They serve as a resource to identify important OZG scenarios of administration processes. The following scenarios were identified:
+\section{IMP Solution Proposal}
 
-\subsubsection{Identity Management}
+\chapter{IMP Integration Architecture}
 
-\textbf{Scenario Profile Management}
-\begin{itemize}
-    \item Create a user profile
-    \item Delete a user profile
-    \item Check existence of a user profile
-\end{itemize}
+\section{Requirement Analysis}
 
-\textbf{Scenario Identity verification}
-\begin{itemize}
-    \item Login to a user profile
-    \item Provide multiple levels of security for identity verification
-    \item Usage of a guest profile
-\end{itemize}
+\subsection{Integration Challenges}
 
-\subsubsection{Request Management}
-
-\textbf{Scenario Request Preparation}
-\begin{itemize}
-    \item Search for administration services
-    \item Check necessity of a profile
-    \item Check required level of identity verification
-    \item Selection of institution responsible for processing the request (Specification of current location)
-\end{itemize}
-
-\textbf{Scenario Request Creation}
-\begin{itemize}
-    \item Filling in a form for an application
-    \item Automated filling in of form with saved personal data
-    \item Collaboration on application by multiple identities
-\end{itemize}
-
-\textbf{Scenario Request Delivery}
-\begin{itemize}
-    \item Transmission of an application to responsible institution
-\end{itemize}
-
-\textbf{Scenario Request Processing}
-\begin{itemize}
-    \item Period of validity of applications
-    \item Notification of user about missing information or documents
-    \item Transmission of missing information
-    \item Notification of user about required preliminary administration services
-    \item Communication through E-Mail
-    \item Cancel an application
-    \item Approvals of user to e.g. data protection or information transfer
-    \item Modification request of application after transmission
-    \item Notification of received application by institution
-    \item Request status update by user
-    \item Sending notification to confirm the reading of a message
-    \item Notification of certain events to separate person e.g. parents
-    \item Request of institution about explicit document
-\end{itemize}
-
-\textbf{Scenario Request Finalization}
-\begin{itemize}
-    \item Notification of outcome of process / application
-    \item Objection of user to result of the process
-    \item Access to signed digital formula of result of process
-    \item Definition of dates for evens
-\end{itemize}
-
-\subsubsection{Data Management}
-
-\textbf{Scenario Access Management}
-\begin{itemize}
-    \item Access to an application by multiple separate identities
-    \item Sharing of documents saved in a wallet
-\end{itemize}
-
-\textbf{Scenario Data Consistency}
-\begin{itemize}
-    \item Period of validity of documents
-    \item Profile data discrepancies between involved user profiles
-\end{itemize}
-
-\textbf{Scenario Data Accessibility}
-\begin{itemize}
-    \item Upload of e.g. documents and certificates
-    \item Saving personal data entered in a form to the user profile
-    \item Protocol of all processes accessible with information about interactions
-\end{itemize}
-
-\section{Solution with IMP}
-
-\section{Integration Challenges}
 The following challenges are a result of the functionalities an IMP system provides in addition to conventional identity management systems. The origin of the challenges is the interoperability of the IMP identity with multiple SPs. It is the purpose of the integration architecture to solve as many of these challenges as possible.
 
 \paragraph{Data Mapping}
@@ -401,44 +343,31 @@ In this case, the self-service tools should be accessible through the IMP system
 \paragraph{Attribute Access}
 Attributes which were added by a SP might require restrictions towards the user. If for example a subscription status is saved as an attribute, the user should not be able to modify it without permission of the SP.
 
-\chapter{Integration Proposal}
-The bachelor thesis proposes an integration using a connector because:
+\subsection{Basic Use Case}
 
-\section{IMP System}
-List of functionalities of the IMP System based on research and analysis of the OZG scenarios:
+\subsection{Extensions}
 
-\section{IMP Connector}
-Interfaces of the connector for usage by the integration architecture:
+\section{Integration Proposal}
 
-\section{Basic Integration Architecture}
+\subsection{IMP Connector}
 
-\subsection{Version 1}
+\subsection{Messaging}
 
-\subsubsection{Requirements}
+\section{Basic Use Case}
 
-\subsubsection{Flow Diagrams}
+\subsection{Process Integration}
 
-\includegraphics[width=15cm]{Basic Integration Onboarding.png}
+\subsection{Messaging Integration}
 
-\includegraphics[width=15cm]{Basic Integration Application.png}
+\section{Extension: Inbox}
 
-\subsubsection{Messaging Architecture}
-
-\subsection{Version 2}
-
-\subsubsection{Requirements}
-
-\subsubsection{Flow Diagrams}
-
-\subsubsection{Messaging Architecture}
+\section{Extension: Collaboration}
 
 \chapter{Solution Evaluation}
 
 \section{Conclusion}
 
-\chapter{Outlook}
-
-\section{Advanced Integration Architecture}
+\chapter{Outlook: Advanced IMP Integration}
 
 \printbibliography
 
