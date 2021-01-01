@@ -130,7 +130,9 @@ Date of Submission: \today
 \cleardoublepage
 \pagenumbering{arabic}
 
-\chapter{Context}
+\chapter{Introduction}
+
+\section{Context}
 Since invention of the World Wide Web, the number of its users increased rapidly. Today, more than 90 percent of the German population use the internet \cite{Onlinestudie}. Enterprises and organizations, recognised this potential to provide their services to a large number of people as Service Providers (SP). A frequently used method of SPs is "online self-service" (OSS). Specialized software tools enable customers to use services through the internet without direct human interaction.
 
 Many tools require identification of a user in case interactions or initiated business processes have to be associated with him. A system for management of identities of users therefore is part of numerous system architectures. Service Providers usually enable users to manage their partial identities using online self-service through so called User Profiles. Today, customers of SPs are associated with multiple partial identities and user profiles - one for each SP
@@ -154,7 +156,7 @@ In order for an SP to use identities and services of an IMP, an integration into
 
 A currently relevant example for usage of online self-service with particular interesting requirements for identities is the German "Online Access Law" (Online Zugangs Gesetz: OZG). It requires all administrative services of the German federal republic, each member state and commune to be digitally available through interoperable user profiles. The current plan is to make the profiles only available for usage in context of the OZG. From a user perspective, this would be yet another partial identity and user profile to manage.
 
-\chapter{Objective}
+\section{Objective}
 Based on the prominent example of the OZG, the bachelor thesis will construct a message based integration architecture which enables system architectures of service providers with existing user profiles to make their services usable with an Identity Management Provider. In order to make the integration architecture suitable to real life requirements, the OZG is selected as an example due to its current relevance and high requirements regarding identity management. The integration architecture is however not only applicable in cases relevant for OZG but also for other Service Providers with similar requirements. As requirements of SPs are not guaranteed to be similar to those of the OZG, the integration architecture is built to be expendable.
 
 The \textbf{integration architecture} for the OZG enables \textbf{IMP functionalities} to be usable for selected \textbf{OZG scenarios} by integrating a \textbf{connector} in the \textbf{system architecture} of a member state.
@@ -169,7 +171,7 @@ The \textbf{integration architecture} for the OZG enables \textbf{IMP functional
 
 The integration architecture ...
 
-\chapter{Structure of Work}
+\section{Structure of Work}
 The "Fundamentals" chapter explains terminology and basic concepts.
 
 In the following chapter called "Identity Management System" the thesis analyzes requirements for identity management through the perspective of the user and through the perspective of service providers for the OZG. It is presented, how an identity management provider could solve current identity management problems and which challenges for an integration exist.
@@ -180,7 +182,7 @@ A "Solution Evaluation" analyzes benefits and problems of the proposed solution.
 
 The "Outlook" will conclude the thesis by presenting possibilities for advanced integration architectures.
 
-\chapter{Fundamentals}
+\chapter{Background and Related Work}
 
 \section{Terminology}
 
@@ -264,17 +266,17 @@ The BMI lists a total of almost 600 administrative services, each being describe
 
 The basic use case describes the submission of an application for an administrative service and consists of the following arrangement of sub-processes \cite{NRW:Umsetzung}:
 
-\paragraph{1. Selection of Application Form}
+\paragraph{1. Selection of Administrative Service}
 The user visits any administration portal of the portal network and types a search term in the corresponding search field. The user is then presented with a list of search results consisting of administrative services. If the user selects a search result, he is forwarded to the correct page inside the domain of the administration portal which hosts the selected service. This page provides information about the administration service along with instructions on how to access the form for application. The interactive form, usually provided by a form-server, can be for example included in the page through a web-component.
 
 \paragraph{2. Login to User Profile}
 Independent of the member state the user created the interoperable user profile for, he can use it in the current administration portal. The user has to finish authentication steps, which can consist for example of a username and password. Depending on the authentication method, a trust level of the current session is determined. With approval from the user, personal information from his profile is provided towards the form-server.
 
-\paragraph{3. Filling in of Application}
-Personal information from the user profile is used to by the form-server to fill as many fields of the form as possible. The form with prefilled information is then presented to the user. The interactive form can then be modified by the user. Depending on the form-server, additional functionalities like conditions between fields or sanity checking can be provided.
+\paragraph{3. Filling in Application}
+Personal information from the user profile is used by the form-server to fill as many fields of the form as possible. The form with prefilled information is then presented to the user. The interactive form can then be modified by the user. Depending on the form-server, additional functionalities like conditions between fields or sanity checking can be provided.
 
 \paragraph{4. Uploading Attachments}
-The user can upload documents to his user profile and reference them from the form.
+The user can upload documents to his user profile and reference them in the form.
 
 \paragraph{5. Submission of Application}
 The user again authenticates for his user profile and authorises the form-server to submit the application. The form-server saves the application until he is notified to delete it. The form-server submits the application to the administration portal which hosts the administrative service.
@@ -289,26 +291,233 @@ The data-exchange platform distributes the application to the correct administra
 The data-exchange platform notifies the user through the inbox functionality of the user profile if the application was submitted successfully.
 
 \subsection{System Architecture}
-This subsection describes the system architecture of a member state relevant for the execution of the OZG.
+This subsection describes the system architecture of a member state relevant for the execution the basic use case of the OZG based on the system architecture of Nordrhein-Westfalen. Systems, which are responsible for coordination of OZG execution between member states and the federal republic are not the focus.
 
 \subsubsection{System Components}
-The system architecture consists of the following system components where each component is responsible for providing a certain set of services:
-
-\paragraph{User Profile}
-Each member state provides its own user profile which manages the identity of a user. It enables him to create, delete and login to a profile, authenticate for administration services, communicate with institutions through an inbox and manage personal information and documents in a data wallet.
+The system architecture consists of the following system components. Each component consists of a list of services it provides either to the user or to other components. Components are defined based on strongly connected categories of services \cite{NRW:Umsetzung}:
 
 \paragraph{Administration Portal}
-The administration portal provides the user with a web-interface he can use to access his user profile and search for available administration services.
+The administration portal provides the user with a web-interface and implements user flows of digitized administrative processes by interacting with other system components. The main services are \cite{NRW:Umsetzung}:
 
-\paragraph{Application Platform}
-The application platform gives access to administration services by providing the user with a website he can use to fill in application forms and sent them to the responsible institutions. It is possible to prefill the form with personal data stored inside the user profile.
+\begin{itemize}
+    \item \textbf{Search and find a form}
+    
+    Due to the distributed responsibility for provisioning administrative services through for example the "one for all" method, it is not clear to the user, which member state provides which administrative service on his portal. Therefore, each administration portal provides a "Search and Find" functionality, which enables the user to find the correct administration portal and page, where the service is provided. In order for the administration portals to provide the "Search and Find" feature, an "Online Gateway" makes information about the location of administrative services accessible through a central data storage \cite{Capgemini:OnlineGateway}.
+    
+    \item \textbf{Selection of administrative service}
+    
+    In combination with the "Search and Find" feature, the user can select an entry of the search result and is forwarded to the corresponding web-page. Depending on the administrative service, the web-page can be hosted on the current or a different portal. It shows information about the selected service like a service description, requirements and possible outcomes and enables the user to open the corresponding form hosted by a form-server.
+    
+    \item \textbf{Opening a form through a form-server}
+    
+    The web-page of an administration portal describing the administrative service can integrate a form-server in multiple ways. The maybe easiest way is to add an URL which forwards the user to a web-page provided by the form-server. More advanced integration methods are possible where the form is rendered inside the web-page of the portal.
+    
+    \item \textbf{Request of personal information from user profile}
+    
+    Each member state and the federal republic provide interoperable user profiles. The administration portal is able to access the services of every user profile, which includes retrieval of personal information stored in the user profile. This requires a user to be logged into his user profile with a sufficiently high trust level.
+    
+    \item \textbf{Transfer of personal data to the form-server}
+    
+    If the administration portal was able to retrieve personal information from a currently active user profile, it can, with approval of the user, transmit it to the form-server which provides the form corresponding to the selected administrative service.
+    
+    \item \textbf{Reception of applications from form-server}
+    
+    The administration portal can request the application data from the form-server after it was notified of its "submission".
+    
+    \item \textbf{Feedback to form-server}
+    
+    The administration portal notifies the form-server, that it no longer has to store a certain application.
+
+    \item \textbf{Determination of receiving institution}
+    
+    Administrative services can be processed by a variety of administrative institutions, depending on the content of the application or the sender. It is the responsibility of the administration portal to determine which institution receives which application.
+    
+    \item \textbf{Transfer to data-exchange platform}
+    
+    The administration portal transfers the application to the data-exchange platform which is responsible for delivering it to the institution.
+\end{itemize}
+
+\paragraph{Form-Server}
+The from-server provides digital forms associated to administrative services. They can be accessed by a user profile through online self-service and submitted as applications to administrative institutions. The main services are \cite{dNRW:Standardisierungskonzeptzur}
+
+\begin{itemize}
+    \item \textbf{Retrieval of a digital form}
+    
+    There exist many administrative services and depending on the member state or commune, the required layout of the application can be different. Therefore, a system called federal information management (Föderales Informationsmanagement: FIM) is used to standardize administrative services. FIM consists of three categories of building blocks.
+    
+    \textit{Service blocks} contain human readable descriptions about a administrative service.
+    
+    \textit{Data field blocks} contain the standardized description of data fields required for the application of administrative services.
+    
+    \textit{Process blocks} contain standardized descriptions about the process of an administrative service.
+
+    Relevant for the form-server are data field blocks. A data field block can contain one element of five categories.
+    
+    \textit{Data fields} are the "smallest entity" of a data field block and describes one standardized piece of information. Depending on the type of information - if it is for example a checkbox or input field - additional metadata is included.
+    
+    \textit{Data field groups} consist of multiple data fields and other data field groups, relating to a category of information. A data field group can for example be "person" or "company".
+    
+    \textit{Rules} describe all kinds of logical conditions of and between data fields. This includes for example the automatic validation of the correctness of an entered value or the activation and deactivation of data fields depending on an entered value.
+    
+    \textit{Code lists} are lists of predefined values the user can select. This can for example be a list of all countries.
+    
+    \textit{Data field schemata} is the combination of entities from all previously described categories and describes the structure of a form.
+    
+    The building blocks are centrally managed by federal republic, member states and communes. This simplifies the creation of for example a new form by reusing existing data schema blocks and adding additional required data fields to a new data field schema.
+    
+    Each data field block can be uniquely identified through an ID. Therefore, if the form-server is provided with a FIM-ID, he can retrieve the corresponding data filed block from the central storage.
+    
+    \item \textbf{Initiation of application}
+    
+    The from-server can be requested to initiate an application using a certain form based on a FIM ID of a data field schemata. Along with the request, an identification and authorisation of a user profile has to be passed. Additional personal information of the user profile can be passed for automated filling in of the form.
+    
+    \item \textbf{Status update to portal}
+    
+    The form-server sends updates to the administration portal regarding the current status of the application. The possible status updates are listed in the interface section.
+
+    \item \textbf{Automatic filling in of form}
+    
+    If the administration portal submitted personal data to the form-server, the form can automatically be filled in. This can be done because both the user profile and the form-server use the same data fields defined through FIM.
+    
+    \item \textbf{Presentation of form}
+    
+    The form can be integrated into the administration portal through for example an URL or Web-Component.
+    
+    \item \textbf{Application interruption}
+    
+    The application can be interrupted or aborted. Interruption may occur if the user stays inactive for a certain period of time while filling in the form. The user can also manually interrupt the editing process. If the application is interrupted, the form-server stores the unfinished application for a certain amount of time. The user can then access the application at a later time.
+    
+    If the user decides to cancel editing the form, the application is deleted from the from-server.
+    
+    Depending on the actions of the user, the status of the application changes accordingly and the administration portal is notified through a status update.
+    
+    \item \textbf{Storage of application}
+    
+    The form-server stores applications for a specified period of time if they were interrupted or submitted. In case of submission, the administration portal notifies the form server, if the application can be deleted.
+    
+    \item \textbf{Provisioning stored applications}
+    
+    The administration portal submits JWT to the form-server which corresponds to a user profile. Based on this information, the form-server searches all stored applications which belong to the user profile and sends back to the portal a list of URLs, through which the user can access them.
+    
+    \item \textbf{Deletion of stored application}
+
+    If requested by the administration portal, the form-server can delete stored applications. This is usually the case after an application was submitted to the administration portal.
+
+    \item \textbf{Manually filling in data fields}
+    
+    When the form is presented to the user, it can happen, that not all information could be automatically filled in. In this case, the form can be interactively filled in by the user.
+    
+    \item \textbf{Uploading documents}
+    
+    The user can add documents as attachments to an application. Uploaded documents are scanned for viruses.
+    
+    \item \textbf{Authentication of user profile}
+    
+    JSON web token from administration portal.
+
+    \item \textbf{Submission of application}
+    
+    When the user submits the application by for example pressing a "submit" button, the form-server notifies the administration portal through a status update. The administration portal can then continue processing the application by requesting the application data from the form server. The portal does this by sending the form-server a FMS-ID it was sent by the form-server with the first status update. 
+    
+\end{itemize}
+
+\paragraph{User Profile}
+Each member state provides its own user profile for identity management. The main services are \cite{NRW:Umsetzung}:
+
+\begin{itemize}
+    \item \textbf{Identification and Authentification} \cite{dNRW:Anbindungsleitfaden}
+    
+    The user profile can be used for identification by transmitting personal information like name and address after successfully authentification. Authentification is the verification of an authentication. Users can authenticate for the user profile for example through a username / password combination.
+    
+    \item \textbf{Determination Trust Level} \cite{dNRW:Anbindungsleitfaden}
+    
+    The trust level of a logged in user profile is determined while registration and usage. The user can register and login to the user profile using a username / password combination or the German ID card. The trust level "High" is only granted, if the user registered using the German ID card \textbf{AND} logs in using the German ID card. All other combinations of registration and login result in a "normal" trust level.
+    
+    \item \textbf{Management Personal Information} \cite{dNRW:Anbindungsleitfaden} 
+    
+    Personal information of the user profile can be managed through the administration portal after successful authentication.
+    
+    \item \textbf{Provisioning Personal Information to Form-Server} \cite{dNRW:Anbindungsleitfaden} \cite{dNRW:Schnittstellen}
+    
+    If a user selects to open the form of an administrative service which is integrated in the administration portal, the portal asks the user for permission to transmit personal information to the form-server. If the user is logged in and accepts, the administration portal retrieves the necessary personal information from the user profile and forwards it to the form-server.
+    
+\end{itemize}
 
 \paragraph{Institution}
-Institutions are the entities distributed all over the member state which eventually process the incoming applications and provide the users with solutions.
+Institutions are the entities which eventually process the incoming applications and provide the users with solutions. They receive a digital application through the data-exchange platform. Institution are provided a special website on the administration portal, where they can interact with the user of an application through for example messages, status updates or requests for additional documents. Those interactions are done manually by an employee through the user interface of the website but can, to some degree, be automated.
 
+\paragraph{Data-Exchange Platform}
+The data-exchange platform delivers applications from the administration portal to the correct administrative institution.
+
+\subsubsection{Interfaces}
+The following interfaces of system components are relevant:
+
+\paragraph{Administration Portal and Form-Server}
+    \begin{itemize}
+        \item \textbf{Initiation of an application}
+        
+            When the user selects to fill in a certain form on an administration portal, the portal submits the following data to the form-server through an interface:
+            
+            \textbf{JSON Web Token}: 
+            If the user authenticated for a user profile on the administration portal, a JWT is created. This token authorizes its owner to automatically access services or resources as the corresponding user profile without the need of additional authentication. In order for the form-server to verify, that the current user is authenticated for the user profile, the portal submits a JWT token to it.
+                
+            \textbf{User Profile ID}: 
+            Each user profile contains a unique identifier. This identifier is submitted to the form server in order to associate the application with a user.
+                
+            \textbf{Personal Information}: 
+            The portal submits personal information to the form-server, so that the form can be automatically filled in. The user is asked if the data should be transmitted beforehand. This is therefore optional.
+                
+            \textbf{Personal Information Schema ID}: 
+            The portal is aware of the currently selected administration service by the user and knows which the corresponding form is. It therefore sends the correct ID of a FIM data field schemata to the form-server. Based on this ID, the form-server knows which form to present to the user.
+        
+        \item \textbf{Status Update}
+        
+            When an application was initiated, it is associated with a status. If the status changes, the administration portal gets notified of the new status along with a FMS-ID. The FMS-ID is created by the form server and uniquely identifies the application. The application can have the following states:
+            
+            \textbf{null}: The application and the corresponding form was successfully created
+            
+            \textbf{submitted}: The form was filled in and the application is ready to be requested by the administration portal.
+            
+            \textbf{filed}: The form was transmitted to the administration portal but the portal did not yet verify.
+            
+            \textbf{confirmed}: The administration portal confirmed the successful reception of the application
+            
+            \textbf{deleted}: The application was deleted by the form-server.
+    
+        \item \textbf{Submission of application}
+        
+            If the user presses a "submit" button on the interactive form, the status of the application changes to submitted and the administration portal is notified. The portal can then request the application data from the from-server through an interface by sending the FMS-ID and receives the following results:
+            
+            \textbf{FMS-ID}:
+                
+            \textbf{JSON Web Token}:
+                
+            \textbf{User Profile ID}:
+                
+            \textbf{XML File}:
+                
+            This file consists of the personal information the form was filled in with
+                
+            \textbf{Print version}:
+                
+            The form-server can optionally sent a printable version of the filled in form
+                
+            \textbf{Protocol Virus Scan}:
+                
+            \textbf{Protocol Signature Check}:
+        
+    \paragraph{Administration Portal and User Profile}
+    
+    \begin{itemize}
+        \item \textbf{}
+    \end{itemize}
+
+    \end{itemize}
+    
 \subsubsection{Data Objects}
 The system architecture processes the following data objects which are associated to certain system components:
 
+\subsection{Basic Use Case Flow Diagram}
 
 \chapter{Identity Management}
 
@@ -316,9 +525,24 @@ The system architecture processes the following data objects which are associate
 
 \subsection{User Perspective}
 
+\begin{itemize}
+    \item user wants to manage his data only on one platform
+    \item user wants to know who he provisions his personal information
+    \item user wants to communicate
+    \item user wants to know the reason each time his personal information is requested
+\end{itemize}
+
 \subsection{OZG Perspective}
 
 \section{IMP Solution Proposal}
+
+\begin{itemize}
+    \item The administration portal / form-server sends the user/app the content of a form. The app will display the form and ask the user to fill it in. The interaction is displayed under a relation between the user and the requesting portal. When submitting, the app sends the data back to the portal and logs that the user transmitted the list of personal data. No authentication is necessary? The content is encrypted and the connector knows the pub. key?
+    
+    Or relation is made with the responsible administrative institution. The administration portal determines the corresponding institution beforehand. In this case, the communication can also be done through the same relation and the personal data is provisioned to only the institution which needs it, not the whole member state or commune.
+    
+    The IMP solution has to allow the inititation of relations and after that the request of information for new usage (Verwendungszweck) where the new usage is the application for a administrative service.
+\end{itemize}
 
 \chapter{IMP Integration Architecture}
 
@@ -356,6 +580,8 @@ Attributes which were added by a SP might require restrictions towards the user.
 \section{Basic Use Case}
 
 \subsection{Process Integration}
+
+\includegraphics[width=15cm]{Basic Integration Application.png}
 
 \subsection{Messaging Integration}
 
