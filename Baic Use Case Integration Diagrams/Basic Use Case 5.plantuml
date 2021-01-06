@@ -1,0 +1,7 @@
+@startuml Submit Result
+
+Institution -> IMPServer: Send Message to IMP-ID
+Institution -> IMPServer: Result Document
+IMPServer -> IMPClient: Send Message with Result
+
+@enduml
