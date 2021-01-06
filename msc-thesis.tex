@@ -35,7 +35,9 @@
 % Include PDF links
 %\usepackage[pdftex, bookmarks=true]{hyperref}
 \usepackage{csquotes}
-
+\usepackage{color, colortbl, tabularx, ragged2e}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\newcolumntype{C}{>{\raggedright\arraybackslash}X} % centered "X" column
 % Fuer anderthalbzeiligen Textsatz
 \usepackage{setspace}
 
@@ -449,100 +451,238 @@ Institutions are the entities which eventually process the incoming applications
 \paragraph{Data-Exchange Platform}
 The data-exchange platform delivers applications from the administration portal to the correct administrative institution.
 
+\paragraph{Data Wallet}
+
+\paragraph{Inbox}
+
 \subsubsection{Interfaces}
-The following interfaces of system components are relevant:
+In order to implement the basic use case, the components have to interact with each. The following diagram visualizes, which components interact. Each interaction is described afterwards.
 
-\paragraph{Administration Portal and Form-Server}
-    \begin{itemize}
-        \item \textbf{Initiation of an application}
-        
-            When the user selects to fill in a certain form on an administration portal, the portal submits the following data to the form-server through an interface:
-            
-            \textbf{JSON Web Token}: 
-            If the user authenticated for a user profile on the administration portal, a JWT is created. This token authorizes its owner to automatically access services or resources as the corresponding user profile without the need of additional authentication. In order for the form-server to verify, that the current user is authenticated for the user profile, the portal submits a JWT token to it.
-                
-            \textbf{User Profile ID}: 
-            Each user profile contains a unique identifier. This identifier is submitted to the form server in order to associate the application with a user.
-                
-            \textbf{Personal Information}: 
-            The portal submits personal information to the form-server, so that the form can be automatically filled in. The user is asked if the data should be transmitted beforehand. This is therefore optional.
-                
-            \textbf{Personal Information Schema ID}: 
-            The portal is aware of the currently selected administration service by the user and knows which the corresponding form is. It therefore sends the correct ID of a FIM data field schemata to the form-server. Based on this ID, the form-server knows which form to present to the user.
-        
-        \item \textbf{Status Update}
-        
-            When an application was initiated, it is associated with a status. If the status changes, the administration portal gets notified of the new status along with a FMS-ID. The FMS-ID is created by the form server and uniquely identifies the application. The application can have the following states:
-            
-            \textbf{null}: The application and the corresponding form was successfully created
-            
-            \textbf{submitted}: The form was filled in and the application is ready to be requested by the administration portal.
-            
-            \textbf{filed}: The form was transmitted to the administration portal but the portal did not yet verify.
-            
-            \textbf{confirmed}: The administration portal confirmed the successful reception of the application
-            
-            \textbf{deleted}: The application was deleted by the form-server.
-    
-        \item \textbf{Submission of application}
-        
-            If the user presses a "submit" button on the interactive form, the status of the application changes to submitted and the administration portal is notified. The portal can then request the application data from the from-server through an interface by sending the FMS-ID and receives the following results:
-            
-            \textbf{FMS-ID}:
-                
-            \textbf{JSON Web Token}:
-                
-            \textbf{User Profile ID}:
-                
-            \textbf{XML File}:
-                
-            This file consists of the personal information the form was filled in with
-                
-            \textbf{Print version}:
-                
-            The form-server can optionally sent a printable version of the filled in form
-                
-            \textbf{Protocol Virus Scan}:
-                
-            \textbf{Protocol Signature Check}:
-        
-    \paragraph{Administration Portal and User Profile}
-    
-    \begin{itemize}
-        \item \textbf{}
-    \end{itemize}
+\begin{center}
+    \includegraphics[width=8cm]{Interaction Diagram.png}
+\end{center}
 
+\begin{enumerate}
+    \item The user interacts with the system architecture relevant for OZG only through the administration portal. The user is provided with a website as an interface with multiple online self-service functionalities.
+    \item Administration portal and form-server interact through a REST API. The API provides the following interfaces:
+    \begin{itemize}
+        \item \textbf{Application initiation interface provided by form-server and used by administration portal}
+        
+        On the page of an administrative service on the administration portal, the user can press a button "to online application". Upon pressing the button, the portal interacts with the form server by transmitting data through an interface and receiving a response, see table \ref{table:interface_form_initialization}.
+        
+        \begin{table}[!h]
+            \begin{tabularx}{\textwidth}{|l|C|l|}
+            \hline
+            Property & Description & Data Source \\
+            \hline
+            \rowcolor{LightCyan}
+            \multicolumn{3}{|l|}{Input} \\
+            \hline
+            
+            JSON Web Token & The portal received this JWT as a result of the login process with the user profile component. This token enables the form-server to verify the authentication of the user. & User Profile \\
+            
+            \hline
+            
+            User Profile ID & This ID is a unique identifier of a user profile and is used by the form server to associate the initiated application with a user profile. & User Profile \\
+            
+            \hline
+            
+            Personal Data & If the user approves, the administration portal submits personal data, the form-server can use to automatically fill in the form. & User Profile \\
+            
+            \hline
+            
+            FIM Schema ID & The administration portal stores a hard coded FIM-ID for every administration service. This FIM-ID corresponds to the correct data field schemata, the form-server can display & Hard Coded in Portal \\
+            
+            \hline
+            \rowcolor{LightCyan}
+            \multicolumn{3}{|l|}{Output} \\
+            \hline
+            
+            Status & The form-server answers with the status of the initiated application. & From Server \\
+            
+            \hline
+            
+            FMS-ID & While initializing the application, the form-server creates an ID, which uniquely identifies the application. This FMS-ID is sent back to the portal so that it can request information about the application at a later time. & Form Server \\
+            
+            \hline
+            \end{tabularx}
+            \caption{Interface of the form-server for initialization of an application}
+            \label{table:interface_form_initialization}
+        \end{table}
+        \item \textbf{Status updates from from-server to administration portal}
+        
+        The form-server notifies the administration portal of changes in the status of the application through an interface, see table \ref{table:interface_status}.
+        
+        \begin{table}[!h]
+            \begin{tabularx}{\textwidth}{|l|C|l|}
+            \hline
+            Property & Description & Data Source \\
+            \hline
+            \rowcolor{LightCyan}
+            \multicolumn{3}{|l|}{Input} \\
+            \hline
+            
+            FMS-ID & The FMS-ID was created by the form-server during the initialisation of the application and sent to the administration portal. Each status update includes this ID in order for the portal to associate the update with an application. & Form Server \\
+            
+            \hline
+            
+            Status & The status provides information about interactions of the user or the form-server with the application. The possible states are:
+            
+            \begin{itemize}
+                \item \textbf{null}: This application has this status right after initialisation.
+                \item \textbf{submitted}: The application has this status after the user triggered the submit functionality of the form-server. Usually the form is now locked for further modification by the user.
+                \item \textbf{filed}: The form-server submitted the application to the portal but did not yet receive a confirmation.
+                \item \textbf{confirmed}: The form-server received a confirmation from the portal.
+                \item \textbf{deleted}: The form-server deleted the application.
+            \end{itemize}
+            
+            & Form Server \\
+            \hline
+            \end{tabularx}
+            \caption{Interface of the administration portal for receiving status updates by the form-server}
+            \label{table:interface_status}
+        \end{table}
+        
+        \item \textbf{Submission of the application from the form-server to the administration portal}
+        
+        After the administration portal received the status update "submitted", it requests the form-server to transfer the application data through an interface, see table \ref{table:interface_application_data}.
+        
+        \begin{table}[!h]
+            \begin{tabularx}{\textwidth}{|l|C|l|}
+            \hline
+            Property & Description & Data Source \\
+            \hline
+            \rowcolor{LightCyan}
+            \multicolumn{3}{|l|}{Input} \\
+            \hline
+            
+            FMS-ID & The FMS-ID was created by the form-server during the initialisation of the application and sent to the administration portal along with the status update of the submission. The administration portal sends this ID in order for the form-server to know which application data to transfer. & Form Server \\
+            
+            \hline
+            \rowcolor{LightCyan}
+            \multicolumn{3}{|l|}{Output} \\
+            \hline
+            
+            FMS-ID & The FMS-ID is transmitted in order for the portal to associate the response with an application. & Form Server \\
+            
+            \hline
+            
+            JSON Web Token & The JWT which was initially sent from the portal to the form-server is now transmitted back again, in order for the portal to verify, that the form-server is authorized to submit an application for the user. & User Profile \\
+            
+            \hline
+            
+            User Profile ID & The user profile ID was initially transmitted to the form-server by the portal and is now transmitted back in order for the portal to associate the application with a user profile. & User Profile \\
+            
+            \hline
+            
+            XML File & The XML file contains the personal data retrieved through the form. & Form Server \\
+            
+            \hline
+            \end{tabularx}
+            \caption{Interface of the form-server for requesting application data by the administration portal.}
+            \label{table:interface_application_data}
+        \end{table}
     \end{itemize}
+    
+    \item The administration portal interacts with the user profile to provide online self-service for profile management and to identify the user and to request authentication and authorisation.
+    
+    \item The administration portal interacts with the data exchange platform to transfer an application which the data exchange platform submits to the correct institution.
+    
+    \item 
+    
+    \item
+    
+    \item
+    
+\end{enumerate}
     
 \subsubsection{Data Objects}
 The system architecture processes the following data objects which are associated to certain system components:
 
-\subsection{Basic Use Case Flow Diagram}
+\subsection{Basic Use Case Sequence Diagram}
+
+\includegraphics[width=15cm]{Basic Use Case.png}
+
 
 \chapter{Identity Management}
 
-\section{Requirement Analysis}
+\section{Functional Requirement Analysis}
 
 \subsection{User Perspective}
 
 \begin{itemize}
-    \item user wants to manage his data only on one platform
-    \item user wants to know who he provisions his personal information
-    \item user wants to communicate
-    \item user wants to know the reason each time his personal information is requested
+    \item The user wants to manage his personal information in one place
+    \begin{itemize}
+        \item The user wants to CRUD attributes
+        \item The user wants SPs to CRUD his attributes
+        \item The user wants a user friendly interface where he can CRUD his attributes
+        \item In case the user cannot understand an attribute or its possible values, he needs OSS tools which enables him to enter the correct value
+        \item The user wants to enter personal information only once (=> SPs should reuse existing attributes)
+        \item The user wants a new or modified attributes to be instantly used everywhere
+        \item The user wants a deleted attribute to be instantly deleted everywhere
+        \item The user wants to have a list of often used attributes, in order to prefill them
+    \end{itemize}
+    \item The user wants to manage authentication in one place
+    \begin{itemize}
+        \item The user does not want to authenticate
+        \item The user wants that only he has access to the identity
+    \end{itemize}
+    \item The user wants to manage authorisation in one place
+    \begin{itemize}
+        \item The user wants to manage who can perform which actions in his name (f.e CRUD attributes, place order, cancel subscription)
+        \item The user wants an authorisation to only be granted if he manually approves
+        \item The user wants an authorisation to be associated with a single entity, a reason, which actions can be performed and duration of the authorisation
+        \item The user wants to communicate with the authorised entity
+        \item The user wants to have much information about the authorised entity
+        \item The user wants to be able to revoke an authorisation
+        \item The user wants to save the history of authorisations
+    \end{itemize}
+    \item The user wants to use all OSS tools in one place
+    \begin{itemize}
+        \item Communication through inbox
+        \item Subscribe for a service of an SP
+        \item Place order in a shop of an SP
+        \item ...
+    \end{itemize}
+    \item The user wants
+
+\end{itemize}
+
+\subsection{Service Provider Perspective}
+
+\begin{itemize}
+    \item SPs want to manage personal information of users
+    \begin{itemize}
+        \item SPs want to CRUD attributes of the user
+        \item In case modification of an attribute has strong implications on the operation of a system, the modification of an attribute needs to be limited
+        \item SPs want to access personal information already collected by other SPs
+        \item SPs want 
+    \end{itemize}
+    \item identification
+    \item authentication
+    \item authorisation
+    \item 
 \end{itemize}
 
 \subsection{OZG Perspective}
 
 \section{IMP Solution Proposal}
 
-\begin{itemize}
-    \item The administration portal / form-server sends the user/app the content of a form. The app will display the form and ask the user to fill it in. The interaction is displayed under a relation between the user and the requesting portal. When submitting, the app sends the data back to the portal and logs that the user transmitted the list of personal data. No authentication is necessary? The content is encrypted and the connector knows the pub. key?
-    
-    Or relation is made with the responsible administrative institution. The administration portal determines the corresponding institution beforehand. In this case, the communication can also be done through the same relation and the personal data is provisioned to only the institution which needs it, not the whole member state or commune.
-    
-    The IMP solution has to allow the inititation of relations and after that the request of information for new usage (Verwendungszweck) where the new usage is the application for a administrative service.
-\end{itemize}
+\subsection{IMP Functionalities}
+
+The IMP solution aims to replace existing user profiles by enabling users to manage their identity through IMP clients and by integration with service providers.
+
+\subsection{Basic Use Case}
+
+The following diagram describes the concept of how IMP fits within the basic use case of the OZG. It contains some of the previously explained OZG components and an additional component: the IMP client. The IMP client is part of the system architecture and is responsible for identity management. Components related to integration and implementation of IMP are left out in this diagram and are focus of the Integration chapter. 
+
+\includegraphics[width=15cm]{Basic Use Case IMP.png}
+
+The selection of an administrative service is online self-service which is not part of identity management an is therefore left to be done through the websites of the administration portal. 
+
+One focus of IMP is to enable the user to be in full control of his identity. It therefore is the goal to execute the basic use case while sharing as little personal information as necessary and sharing personal information only with the components which require it. The main issue of the official execution of the basic use case in this regard is, that the administration portal collects personal information with the purpose of forwarding it to responsible institutions. It is not in the best interest of the user to share all information of an application with the administration portal of a member state when the application is eventually processed by an institution. It would be in the interest of the user to share personal information regarding the application with the institution directly. This way, the user has more differentiated control of which institutions access which personal information. The IMP client in the proposed solution therefore shares personal information directly with the institutions instead of the administration portal.
+
+The result of the application is sent to the IMP client as it contributes to personal information of his identity.
 
 \chapter{IMP Integration Architecture}
 
@@ -579,11 +719,30 @@ Attributes which were added by a SP might require restrictions towards the user.
 
 \section{Basic Use Case}
 
-\subsection{Process Integration}
+\subsection{Sequence Diagrams}
 
-\includegraphics[width=15cm]{Basic Integration Application.png}
+Hier eine grobe Beschreibung des Basis Anwendungsfalls aufgeteilt in mehrere Bilder.
 
-\subsection{Messaging Integration}
+\includegraphics[width=15cm]{Selection Administrative Service.png}
+
+\includegraphics[width=15cm]{Institution Determination.png}
+
+\includegraphics[width=15cm]{Notify Institution.png}
+
+\includegraphics[width=15cm]{Institution Request.png}
+
+\includegraphics[width=15cm]{Submit Result.png}
+
+Hier der Anfang einer detaillierteren Beschreibung des Basis Anwendungsfalls basierend auf dem Klassen Diagramm weiter unten.
+
+\includegraphics[width=15cm]{Sequence Diagram.png}
+
+
+\subsection{Class Diagram}
+
+\includegraphics[width=15cm]{Data Model.png}
+
+\subsection{Messaging Diagram}
 
 \section{Extension: Inbox}
 
