@@ -1,0 +1,150 @@
+@startuml Class Diagram
+
+class Portal {
+    {method} - getWebsite(URL): Website
+    {method} - searchServiceWebsiteURL(SearchTerm): [URL]
+    {method} - determineResponsibleInstitution(FIM-ID, Attributes): InstitutionID
+    {method} - sendResponsibleInstitution(InstitutionID)
+}
+
+class PortalConnector {
+    {field} - IMP-ID
+    {method} - createNewRequestTemplate(RequestTemplateParameter)
+    {method} - getExistingRequestTemplate(FIM-ID): RequestTemplateID
+    {method} - getRequestTemplateParameter(FIM-ID): RequestTemplateParameter
+    {method} - respondRequest(IMP-ID, RequestID, Response)
+    {method} - getRequest(RequestID)
+    {method} - getResponsibleInstitution(FIM-ID, Attributes)
+    {method} - submitApplication(ApplicationID, InstitutionID, FIM-ID, Application, IMP-ID)
+    {method} - createQRCode(RequestTemplateID)
+}
+
+PortalConnector "1" -- "many" RequestTemplateParameter
+PortalConnector "1" --> "1" IMPServer: <<uses>>
+
+class RequestTemplateParameter {
+    {field} - FIM-ID
+    {field} - Portal IMP-ID
+    {field} - Reason
+    {field} - Type
+    {field} - Requested Attributes
+}
+
+PortalConnector "1" -- "many" RequestTemplateQRCode
+
+class RequestTemplateQRCode {
+    {field} - FIM-ID: QR-Code
+}
+
+Portal "1" -- "many" Website: hosts
+Portal "1" -- "1" PortalConnector
+
+class Website {
+    {field} - URL
+}
+
+Website <|-- ServiceWebsite: instance
+Website <|-- Homepage: instance
+
+class Homepage {
+    {method} - getServiceWebsiteURL(SearchTerm): [URL]
+}
+
+Homepage --> Portal: <<uses>>
+
+class ServiceWebsite {
+    {field} - FIM-ID
+    {method} - getRequestTemplateQRCode(FIM-ID)
+}
+
+ServiceWebsite --> PortalConnector: <<uses>>
+
+
+class IMPClient {
+    {field} - IMP-ID
+    {field} - Personal Information
+    {method} - scanQRCode(ServiceWebsite): RequestTemplateID
+    {method} - getRequest(RequestID): Request
+    {method} - displayRequest(Request)
+    {method} - fillInRequest(RequestID)
+    {method} - getRequest(RequestID)
+    {method} - createNewRequest(RequestTemplateID, IMP-ID)
+    {method} - respondRequest(IMP-ID, RequestID, Response, Attributes)
+    {method} - displayAcceptedRequest(RequestID)
+}
+
+IMPClient --> ServiceWebsite: <<uses>>
+
+IMPClient --> IMPServer: <<uses>>
+
+
+class IMPServer {
+    {field} - IMPServerAddress
+    {method} - initializeRequestTemplate(RequestTemplateParameters): RequestTemplate
+    {method} - transmitRequestTemplate(IMP-ID, RequestTemplate)
+    {method} - initializeRequest(RequestTemplateID, IMP-ID): Request
+    {method} - updateRequest(RequestID, status, attributes)
+    {method} - transmitRequest(IMP-ID, Request)
+    {method} - notifyRequestUpdate(RequestID)
+}
+
+IMPServer "1" -- "many" Request
+
+class Request {
+    {field} RequestID
+    {field} RequestTemplateID
+    {field} IMP-ID
+    {field} Status
+    {field} Attributes
+}
+
+IMPServer "1" -- "many" RequestTemplate
+
+class RequestTemplate {
+    {field} - RequestTemplateID
+    {field} - RequestTemplateType
+    {field} - RequestTemplateIssuer
+    {field} - RequestTemplateReason
+}
+
+RequestTemplate <|-- AttributeRequestTemplate: instance
+
+class AttributeRequestTemplate {
+    {field} - RequestedAttributes
+}
+
+class DataExchangePlatform {
+    {method} - storeApplication(ApplicationID, InstitutionID, FIM-ID, Application, IMP-ID)
+    {method} - notifyNewApplication(ApplicationID, InstitutionID)
+    {method} - sendApplication(ApplicationID, InstitutionID, FIM-ID, Application, IMP-ID)
+}
+
+DataExchangePlatform "1" -- "many" PortalConnector: <<uses>>
+
+DataExchangePlatform "1" -- "many" Institution: <<uses>>
+
+DataExchangePlatform "1" -- "many" InstitutionConnector: <<uses>>
+
+
+class Institution {
+    {filed} - InstitutionID
+    {method} - sendApplication(FIM-ID, IMP-ID)
+    {method} - notifyNewApplication(ApplicationID, InstitutionID)
+    {method} - getApplication(ApplicationID, InstitutionID)
+}
+
+Institution "1" -- "1" InstitutionConnector
+
+class InstitutionConnector {
+    {field} - IMP-ID
+    {method} - getApplication(ApplicationID, InstitutionID)
+    {method} - checkApplicationType(Application)
+    {method} - getRequestTemplateParameter(FIM-ID)
+    {method} - createNewRequestTemplate(RequestTemplateParameter)
+    {method} - createNewRequest(RequestTemplateID, IMP-ID)
+    {method} - getRequest(RequestID)
+}
+
+IMPServer "1" -- "many" InstitutionConnector
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml Selection Administrative Service
+
+WebClient -> Portal: Request HomePage
+Portal --> WebClient: HomePage
+WebClient -> Portal: Search for Service
+Portal --> WebClient: List of Services
+WebClient -> WebClient: Select Service
+WebClient -> Portal: Request Webpage of Service
+Portal -> PortalConnector: Request QR-Code
+Portal -> PortalConnector: Send FIM-ID
+Portal -> PortalConnector: Send Requested Data Fields
+PortalConnector -> PortalConnector: Mapping of Data Fields to IMP Attributes
+PortalConnector -> IMPServer: Request QR-Code for Request Template
+PortalConnector -> IMPServer: Send Content of Template
+
+IMPServer -> IMPServer: Initialize Request Template
+
+note left
+Template Content:
+Type: Attribute Access Request
+Issuer: Portal IMP ID
+Reason: Institution Determination for FIM-ID
+Requested Attributes: Home Address, ...
+Response Address: IMPServer
+Template ID: ...
+end note
+
+IMPServer -> IMPServer: Generate QR-Code
+
+note left
+QR-Code Content:
+Template ID: ...
+end note
+
+IMPServer --> PortalConnector: QR-Code
+PortalConnector --> Portal: QR-Code
+Portal --> WebClient: Webpage of Service + QR-Code
+
+@enduml
