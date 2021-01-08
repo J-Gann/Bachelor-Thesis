@@ -1,4 +1,4 @@
-@startuml
+@startuml Basic Use Case Integration Sequence Diagram
 
 group User Selects Service Website
 

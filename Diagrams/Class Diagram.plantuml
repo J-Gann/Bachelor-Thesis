@@ -1,4 +1,4 @@
-@startuml Class Diagram
+@startuml Basic Use Case Integration Class Diagram
 
 class Portal {
     {method} - getWebsite(URL): Website
