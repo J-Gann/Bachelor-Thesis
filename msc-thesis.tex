@@ -373,17 +373,17 @@ The from-server provides digital forms associated to administrative services. Th
     
     The from-server can be requested to initiate an application using a certain form based on a FIM ID of a data field schemata. Along with the request, an identification and authorisation of a user profile has to be passed. Additional personal information of the user profile can be passed for automated filling in of the form.
     
-    \item \textbf{Status update to portal}
+    \item \textbf{Status update}
     
-    The form-server sends updates to the administration portal regarding the current status of the application. The possible status updates are listed in the interface section.
+    The form-server sends updates regarding the current status of the application.
 
     \item \textbf{Automatic filling in of form}
     
-    If the administration portal submitted personal data to the form-server, the form can automatically be filled in. This can be done because both the user profile and the form-server use the same data fields defined through FIM.
+    If the form server was provided with personal information during the initiation request for an application, it can automatically fill in the form.
     
     \item \textbf{Presentation of form}
     
-    The form can be integrated into the administration portal through for example an URL or Web-Component.
+    The form server can host a website where it displays an interactive form. The user can access this website either through an URL or through a web component.
     
     \item \textbf{Application interruption}
     
@@ -391,19 +391,18 @@ The from-server provides digital forms associated to administrative services. Th
     
     If the user decides to cancel editing the form, the application is deleted from the from-server.
     
-    Depending on the actions of the user, the status of the application changes accordingly and the administration portal is notified through a status update.
+    Depending on the actions of the user, the status of the application changes accordingly and the form server sends an status update.
     
     \item \textbf{Storage of application}
-    
-    The form-server stores applications for a specified period of time if they were interrupted or submitted. In case of submission, the administration portal notifies the form server, if the application can be deleted.
+    The form-server stores applications for a specified period of time if they were interrupted or submitted.
     
     \item \textbf{Provisioning stored applications}
     
-    The administration portal submits JWT to the form-server which corresponds to a user profile. Based on this information, the form-server searches all stored applications which belong to the user profile and sends back to the portal a list of URLs, through which the user can access them.
+    If the form server is provided an identification and authorisation of a user, it searches all stored applications which belong to the user and sends back a list of URLs, through which the user can access them.
     
     \item \textbf{Deletion of stored application}
 
-    If requested by the administration portal, the form-server can delete stored applications. This is usually the case after an application was submitted to the administration portal.
+    If the form server is provided an identification and authorisation of a user and an identification of an application, it can delete the stored application.
 
     \item \textbf{Manually filling in data fields}
     
@@ -411,16 +410,12 @@ The from-server provides digital forms associated to administrative services. Th
     
     \item \textbf{Uploading documents}
     
-    The user can add documents as attachments to an application. Uploaded documents are scanned for viruses.
-    
-    \item \textbf{Authentication of user profile}
-    
-    JSON web token from administration portal.
+    The user can add documents as attachments to an application. The documents can either be uploaded from the local machine or the data wallet of the user profile.
 
     \item \textbf{Submission of application}
     
-    When the user submits the application by for example pressing a "submit" button, the form-server notifies the administration portal through a status update. The administration portal can then continue processing the application by requesting the application data from the form server. The portal does this by sending the form-server a FMS-ID it was sent by the form-server with the first status update. 
-    
+    When the user submits the application by for example pressing a "submit" button, the form-server sends a status update. The finished application can now be transmitted to a requesting system.
+
 \end{itemize}
 
 \paragraph{User Profile}
@@ -437,11 +432,11 @@ Each member state provides its own user profile for identity management. The mai
     
     \item \textbf{Management Personal Information} \cite{dNRW:Anbindungsleitfaden} 
     
-    Personal information of the user profile can be managed through the administration portal after successful authentication.
+    Personal information of the user profile can be managed through the administration portal after successful authentification.
     
-    \item \textbf{Provisioning Personal Information to Form-Server} \cite{dNRW:Anbindungsleitfaden} \cite{dNRW:Schnittstellen}
-    
-    If a user selects to open the form of an administrative service which is integrated in the administration portal, the portal asks the user for permission to transmit personal information to the form-server. If the user is logged in and accepts, the administration portal retrieves the necessary personal information from the user profile and forwards it to the form-server.
+    \item \textbf{Provisioning Personal Information} \cite{dNRW:Anbindungsleitfaden} \cite{dNRW:Schnittstellen}
+
+    The user profile can be requested to send personal information to a specified URL. This requires the user to authenticate.
     
 \end{itemize}
 
@@ -452,17 +447,64 @@ Institutions are the entities which eventually process the incoming applications
 The data-exchange platform delivers applications from the administration portal to the correct administrative institution.
 
 \paragraph{Data Wallet}
+The data wallet is a sub-component of the user profile and enables the user to manage documents for his user profile. The main services are:
+
+\begin{itemize}
+
+    \item \textbf{Upload of document}
+    
+    The user can upload a document from his local machine to the data wallet.
+    
+    \item \textbf{Show documents}
+    
+    The user can list all documents which are stored in the data wallet.
+    
+    \item \textbf{Delete documents}
+    
+    The user can delete documents from the data wallet.
+    
+    \item \textbf{Attach documents to application}
+    
+    The user can attach a copy of a document stored in his data wallet to an application on a from server.
+
+\end{itemize}
+
 
 \paragraph{Inbox}
+The inbox is a sub-component of the user profile and enables the user to send messages through his user profile. The main services are:
+    
+\begin{itemize}
+    
+    \item \textbf{Send a message}
+    
+    The user can send a message to authorities. This can be for example an institution which processes an application.
+    
+    \item \textbf{Receive a message}
+    
+    The user can receive messages from authorities for example to update the status of an application.
+    
+    \item \textbf{List messages}
+    
+    The user can see the messages he received by logging in to his user profile on the administration portal.
+    
+    \item \textbf{Notification through E-Mail}
+    
+    The user can be notified of a new message through E-Mail.
+
+\end{itemize}
 
 \subsubsection{Interfaces}
-In order to implement the basic use case, the components have to interact with each. The following diagram visualizes, which components interact. Each interaction is described afterwards.
+In order to implement the basic use case, the components have to interact with each. The following diagram visualizes, which components interact. Each interaction is described afterwards. The arrows describe the main direction of information flow in an interaction.
 
 \begin{center}
     \includegraphics[width=8cm]{Interaction Diagram.png}
 \end{center}
 
 \begin{enumerate}
+
+    \item The form-server provides the service "Initiation of application" which can be requested by the administration portal. The portal submits information for identification, authentication and authorisation of a user through an JSON Web Token and a user profile ID. In order for the form server to determine the correct form to display, the portal submits a FIM-ID which corresponds to a data field schemata. In case the user approved, the portal can also collect personal information from the user profile and submit it to the form server for automated filling in of the form.
+    
+
     \item The user interacts with the system architecture relevant for OZG only through the administration portal. The user is provided with a website as an interface with multiple online self-service functionalities.
     \item Administration portal and form-server interact through a REST API. The API provides the following interfaces:
     \begin{itemize}
@@ -470,118 +512,18 @@ In order to implement the basic use case, the components have to interact with e
         
         On the page of an administrative service on the administration portal, the user can press a button "to online application". Upon pressing the button, the portal interacts with the form server by transmitting data through an interface and receiving a response, see table \ref{table:interface_form_initialization}.
         
-        \begin{table}[!h]
-            \begin{tabularx}{\textwidth}{|l|C|l|}
-            \hline
-            Property & Description & Data Source \\
-            \hline
-            \rowcolor{LightCyan}
-            \multicolumn{3}{|l|}{Input} \\
-            \hline
-            
-            JSON Web Token & The portal received this JWT as a result of the login process with the user profile component. This token enables the form-server to verify the authentication of the user. & User Profile \\
-            
-            \hline
-            
-            User Profile ID & This ID is a unique identifier of a user profile and is used by the form server to associate the initiated application with a user profile. & User Profile \\
-            
-            \hline
-            
-            Personal Data & If the user approves, the administration portal submits personal data, the form-server can use to automatically fill in the form. & User Profile \\
-            
-            \hline
-            
-            FIM Schema ID & The administration portal stores a hard coded FIM-ID for every administration service. This FIM-ID corresponds to the correct data field schemata, the form-server can display & Hard Coded in Portal \\
-            
-            \hline
-            \rowcolor{LightCyan}
-            \multicolumn{3}{|l|}{Output} \\
-            \hline
-            
-            Status & The form-server answers with the status of the initiated application. & From Server \\
-            
-            \hline
-            
-            FMS-ID & While initializing the application, the form-server creates an ID, which uniquely identifies the application. This FMS-ID is sent back to the portal so that it can request information about the application at a later time. & Form Server \\
-            
-            \hline
-            \end{tabularx}
-            \caption{Interface of the form-server for initialization of an application}
-            \label{table:interface_form_initialization}
-        \end{table}
+
         \item \textbf{Status updates from from-server to administration portal}
         
         The form-server notifies the administration portal of changes in the status of the application through an interface, see table \ref{table:interface_status}.
         
-        \begin{table}[!h]
-            \begin{tabularx}{\textwidth}{|l|C|l|}
-            \hline
-            Property & Description & Data Source \\
-            \hline
-            \rowcolor{LightCyan}
-            \multicolumn{3}{|l|}{Input} \\
-            \hline
-            
-            FMS-ID & The FMS-ID was created by the form-server during the initialisation of the application and sent to the administration portal. Each status update includes this ID in order for the portal to associate the update with an application. & Form Server \\
-            
-            \hline
-            
-            Status & The status provides information about interactions of the user or the form-server with the application. The possible states are:
-            
-            \begin{itemize}
-                \item \textbf{null}: This application has this status right after initialisation.
-                \item \textbf{submitted}: The application has this status after the user triggered the submit functionality of the form-server. Usually the form is now locked for further modification by the user.
-                \item \textbf{filed}: The form-server submitted the application to the portal but did not yet receive a confirmation.
-                \item \textbf{confirmed}: The form-server received a confirmation from the portal.
-                \item \textbf{deleted}: The form-server deleted the application.
-            \end{itemize}
-            
-            & Form Server \\
-            \hline
-            \end{tabularx}
-            \caption{Interface of the administration portal for receiving status updates by the form-server}
-            \label{table:interface_status}
-        \end{table}
+
         
         \item \textbf{Submission of the application from the form-server to the administration portal}
         
         After the administration portal received the status update "submitted", it requests the form-server to transfer the application data through an interface, see table \ref{table:interface_application_data}.
         
-        \begin{table}[!h]
-            \begin{tabularx}{\textwidth}{|l|C|l|}
-            \hline
-            Property & Description & Data Source \\
-            \hline
-            \rowcolor{LightCyan}
-            \multicolumn{3}{|l|}{Input} \\
-            \hline
-            
-            FMS-ID & The FMS-ID was created by the form-server during the initialisation of the application and sent to the administration portal along with the status update of the submission. The administration portal sends this ID in order for the form-server to know which application data to transfer. & Form Server \\
-            
-            \hline
-            \rowcolor{LightCyan}
-            \multicolumn{3}{|l|}{Output} \\
-            \hline
-            
-            FMS-ID & The FMS-ID is transmitted in order for the portal to associate the response with an application. & Form Server \\
-            
-            \hline
-            
-            JSON Web Token & The JWT which was initially sent from the portal to the form-server is now transmitted back again, in order for the portal to verify, that the form-server is authorized to submit an application for the user. & User Profile \\
-            
-            \hline
-            
-            User Profile ID & The user profile ID was initially transmitted to the form-server by the portal and is now transmitted back in order for the portal to associate the application with a user profile. & User Profile \\
-            
-            \hline
-            
-            XML File & The XML file contains the personal data retrieved through the form. & Form Server \\
-            
-            \hline
-            \end{tabularx}
-            \caption{Interface of the form-server for requesting application data by the administration portal.}
-            \label{table:interface_application_data}
-        \end{table}
+
     \end{itemize}
     
     \item The administration portal interacts with the user profile to provide online self-service for profile management and to identify the user and to request authentication and authorisation.
@@ -740,6 +682,114 @@ Hier der Anfang einer detaillierteren Beschreibung des Basis Anwendungsfalls bas
 \section{Conclusion}
 
 \chapter{Outlook: Advanced IMP Integration}
+
+\chapter{Tables}
+
+        \begin{table}[!h]
+            \begin{tabularx}{\textwidth}{|l|C|l|}
+            \hline
+            Property & Description & Data Source \\
+            \hline
+            \rowcolor{LightCyan}
+            \multicolumn{3}{|l|}{Input} \\
+            \hline
+            
+            JSON Web Token & The portal received this JWT as a result of the login process with the user profile component. This token enables the form-server to verify the authentication of the user. & User Profile \\
+            
+            \hline
+            
+            User Profile ID & This ID is a unique identifier of a user profile and is used by the form server to associate the initiated application with a user profile. & User Profile \\
+            
+            \hline
+            
+            Personal Data & If the user approves, the administration portal submits personal data, the form-server can use to automatically fill in the form. & User Profile \\
+            
+            \hline
+            
+            FIM Schema ID & The administration portal stores a hard coded FIM-ID for every administration service. This FIM-ID corresponds to the correct data field schemata, the form-server can display & Hard Coded in Portal \\
+            
+            \hline
+            \rowcolor{LightCyan}
+            \multicolumn{3}{|l|}{Output} \\
+            \hline
+            
+            Status & The form-server answers with the status of the initiated application. & From Server \\
+            
+            \hline
+            
+            FMS-ID & While initializing the application, the form-server creates an ID, which uniquely identifies the application. This FMS-ID is sent back to the portal so that it can request information about the application at a later time. & Form Server \\
+            
+            \hline
+            \end{tabularx}
+            \caption{Interface of the form-server for initialization of an application}
+            \label{table:interface_form_initialization}
+        \end{table}
+
+        \begin{table}[!h]
+            \begin{tabularx}{\textwidth}{|l|C|l|}
+            \hline
+            Property & Description & Data Source \\
+            \hline
+            \rowcolor{LightCyan}
+            \multicolumn{3}{|l|}{Input} \\
+            \hline
+            
+            FMS-ID & The FMS-ID was created by the form-server during the initialisation of the application and sent to the administration portal. Each status update includes this ID in order for the portal to associate the update with an application. & Form Server \\
+            
+            \hline
+            
+            Status & The status provides information about interactions of the user or the form-server with the application. The possible states are:
+            
+            \begin{itemize}
+                \item \textbf{null}: This application has this status right after initialisation.
+                \item \textbf{submitted}: The application has this status after the user triggered the submit functionality of the form-server. Usually the form is now locked for further modification by the user.
+                \item \textbf{filed}: The form-server submitted the application to the portal but did not yet receive a confirmation.
+                \item \textbf{confirmed}: The form-server received a confirmation from the portal.
+                \item \textbf{deleted}: The form-server deleted the application.
+            \end{itemize}
+            
+            & Form Server \\
+            \hline
+            \end{tabularx}
+            \caption{Interface of the administration portal for receiving status updates by the form-server}
+            \label{table:interface_status}
+        \end{table}
+
+        \begin{table}[!h]
+            \begin{tabularx}{\textwidth}{|l|C|l|}
+            \hline
+            Property & Description & Data Source \\
+            \hline
+            \rowcolor{LightCyan}
+            \multicolumn{3}{|l|}{Input} \\
+            \hline
+            
+            FMS-ID & The FMS-ID was created by the form-server during the initialisation of the application and sent to the administration portal along with the status update of the submission. The administration portal sends this ID in order for the form-server to know which application data to transfer. & Form Server \\
+            
+            \hline
+            \rowcolor{LightCyan}
+            \multicolumn{3}{|l|}{Output} \\
+            \hline
+            
+            FMS-ID & The FMS-ID is transmitted in order for the portal to associate the response with an application. & Form Server \\
+            
+            \hline
+            
+            JSON Web Token & The JWT which was initially sent from the portal to the form-server is now transmitted back again, in order for the portal to verify, that the form-server is authorized to submit an application for the user. & User Profile \\
+            
+            \hline
+            
+            User Profile ID & The user profile ID was initially transmitted to the form-server by the portal and is now transmitted back in order for the portal to associate the application with a user profile. & User Profile \\
+            
+            \hline
+            
+            XML File & The XML file contains the personal data retrieved through the form. & Form Server \\
+            
+            \hline
+            \end{tabularx}
+            \caption{Interface of the form-server for requesting application data by the administration portal.}
+            \label{table:interface_application_data}
+        \end{table}
 
 \printbibliography
 
