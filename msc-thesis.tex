@@ -40,6 +40,9 @@
 \newcolumntype{C}{>{\raggedright\arraybackslash}X} % centered "X" column
 % Fuer anderthalbzeiligen Textsatz
 \usepackage{setspace}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{float}
 
 % hyperrefs in the documents
 \usepackage[bookmarks=true,colorlinks,pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,citecolor = black,urlcolor=black]{hyperref} 
@@ -298,47 +301,6 @@ This subsection describes the system architecture of a member state relevant for
 \subsubsection{System Components}
 The system architecture consists of the following system components. Each component consists of a list of services it provides either to the user or to other components. Components are defined based on strongly connected categories of services \cite{NRW:Umsetzung}:
 
-\paragraph{Administration Portal}
-The administration portal provides the user with a web-interface and implements user flows of digitized administrative processes by interacting with other system components. The main services are \cite{NRW:Umsetzung}:
-
-\begin{itemize}
-    \item \textbf{Search and find a form}
-    
-    Due to the distributed responsibility for provisioning administrative services through for example the "one for all" method, it is not clear to the user, which member state provides which administrative service on his portal. Therefore, each administration portal provides a "Search and Find" functionality, which enables the user to find the correct administration portal and page, where the service is provided. In order for the administration portals to provide the "Search and Find" feature, an "Online Gateway" makes information about the location of administrative services accessible through a central data storage \cite{Capgemini:OnlineGateway}.
-    
-    \item \textbf{Selection of administrative service}
-    
-    In combination with the "Search and Find" feature, the user can select an entry of the search result and is forwarded to the corresponding web-page. Depending on the administrative service, the web-page can be hosted on the current or a different portal. It shows information about the selected service like a service description, requirements and possible outcomes and enables the user to open the corresponding form hosted by a form-server.
-    
-    \item \textbf{Opening a form through a form-server}
-    
-    The web-page of an administration portal describing the administrative service can integrate a form-server in multiple ways. The maybe easiest way is to add an URL which forwards the user to a web-page provided by the form-server. More advanced integration methods are possible where the form is rendered inside the web-page of the portal.
-    
-    \item \textbf{Request of personal information from user profile}
-    
-    Each member state and the federal republic provide interoperable user profiles. The administration portal is able to access the services of every user profile, which includes retrieval of personal information stored in the user profile. This requires a user to be logged into his user profile with a sufficiently high trust level.
-    
-    \item \textbf{Transfer of personal data to the form-server}
-    
-    If the administration portal was able to retrieve personal information from a currently active user profile, it can, with approval of the user, transmit it to the form-server which provides the form corresponding to the selected administrative service.
-    
-    \item \textbf{Reception of applications from form-server}
-    
-    The administration portal can request the application data from the form-server after it was notified of its "submission".
-    
-    \item \textbf{Feedback to form-server}
-    
-    The administration portal notifies the form-server, that it no longer has to store a certain application.
-
-    \item \textbf{Determination of receiving institution}
-    
-    Administrative services can be processed by a variety of administrative institutions, depending on the content of the application or the sender. It is the responsibility of the administration portal to determine which institution receives which application.
-    
-    \item \textbf{Transfer to data-exchange platform}
-    
-    The administration portal transfers the application to the data-exchange platform which is responsible for delivering it to the institution.
-\end{itemize}
-
 \paragraph{Form-Server}
 The from-server provides digital forms associated to administrative services. They can be accessed by a user profile through online self-service and submitted as applications to administrative institutions. The main services are \cite{dNRW:Standardisierungskonzeptzur}
 
@@ -432,7 +394,7 @@ Each member state provides its own user profile for identity management. The mai
     
     \item \textbf{Management Personal Information} \cite{dNRW:Anbindungsleitfaden} 
     
-    Personal information of the user profile can be managed through the administration portal after successful authentification.
+    Personal information of the user profile can be modified. This requires the user to authenticate. In case the user profile is connected with an online identity card, some attributes like name and age can not be changed.
     
     \item \textbf{Provisioning Personal Information} \cite{dNRW:Anbindungsleitfaden} \cite{dNRW:Schnittstellen}
 
@@ -441,7 +403,7 @@ Each member state provides its own user profile for identity management. The mai
 \end{itemize}
 
 \paragraph{Institution}
-Institutions are the entities which eventually process the incoming applications and provide the users with solutions. They receive a digital application through the data-exchange platform. Institution are provided a special website on the administration portal, where they can interact with the user of an application through for example messages, status updates or requests for additional documents. Those interactions are done manually by an employee through the user interface of the website but can, to some degree, be automated.
+Institutions are the entities which eventually process the incoming applications and provide the users with solutions. They receive a digital application through the data-exchange platform and send back the result as a message through the inbox.
 
 \paragraph{Data-Exchange Platform}
 The data-exchange platform delivers applications from the administration portal to the correct administrative institution.
@@ -469,7 +431,6 @@ The data wallet is a sub-component of the user profile and enables the user to m
 
 \end{itemize}
 
-
 \paragraph{Inbox}
 The inbox is a sub-component of the user profile and enables the user to send messages through his user profile. The main services are:
     
@@ -493,57 +454,231 @@ The inbox is a sub-component of the user profile and enables the user to send me
 
 \end{itemize}
 
+
+\paragraph{Administration Portal}
+The administration portal provides the user access to various OZG services of other system components:
+
+\begin{itemize}
+
+    \item \textbf{Application for administrative service}
+    The administration portal provides access to services for creation and submission of applications for administration services. The portal hosts a web page for each administration service which enables the user to get information about the service and start the application process. After starting the process, the portal interacts with multiple system components to guide the user through the application.
+    
+    \item \textbf{Management of user profile}
+    The administration portal provides access to the personal information stored in the user profile by interacting with the user profile system component. It enables the user to add, remove and update a set of attributes.
+    
+    \item \textbf{Management of inbox}
+    The administration portal provides access to the inbox of the user profile. It enables the user to send new messages and display received messages.
+    
+    \item \textbf{Management of data wallet}
+    The administration portal provides access to the data wallet of the user profile. It enables the user to upload and download documents and to attach copies of documents to applications.
+    
+\end{itemize}
+
+The administration portal provides additional services:
+
+\begin{itemize}
+    \item \textbf{Determination of responsible institution}
+    
+    Administrative services can be processed by a variety of administrative institutions, depending on the content of the application or the sender. It is the responsibility of the administration portal to determine which institution receives which application.
+    
+    \item \textbf{Search and find Administrative Service}
+    
+    The administration portal provides a search and find service which enables the user to find the web page of all administrative services which relate to the entered search term.
+
+\end{itemize}
+
 \subsubsection{Interfaces}
 In order to implement the basic use case, the components have to interact with each. The following diagram visualizes, which components interact. Each interaction is described afterwards. The arrows describe the main direction of information flow in an interaction.
 
 \begin{center}
-    \includegraphics[width=8cm]{Interaction Diagram.png}
+    \includegraphics[width=8cm]{Diagrams/Interaction Diagram.png}
 \end{center}
 
 \begin{enumerate}
 
-    \item The form-server provides the service "Initiation of application" which can be requested by the administration portal. The portal submits information for identification, authentication and authorisation of a user through an JSON Web Token and a user profile ID. In order for the form server to determine the correct form to display, the portal submits a FIM-ID which corresponds to a data field schemata. In case the user approved, the portal can also collect personal information from the user profile and submit it to the form server for automated filling in of the form.
-    
+    \item The web browser of the user displays the web pages hosted by the administration portal.
 
-    \item The user interacts with the system architecture relevant for OZG only through the administration portal. The user is provided with a website as an interface with multiple online self-service functionalities.
-    \item Administration portal and form-server interact through a REST API. The API provides the following interfaces:
-    \begin{itemize}
-        \item \textbf{Application initiation interface provided by form-server and used by administration portal}
-        
-        On the page of an administrative service on the administration portal, the user can press a button "to online application". Upon pressing the button, the portal interacts with the form server by transmitting data through an interface and receiving a response, see table \ref{table:interface_form_initialization}.
-        
-
-        \item \textbf{Status updates from from-server to administration portal}
-        
-        The form-server notifies the administration portal of changes in the status of the application through an interface, see table \ref{table:interface_status}.
-        
-
-        
-        \item \textbf{Submission of the application from the form-server to the administration portal}
-        
-        After the administration portal received the status update "submitted", it requests the form-server to transfer the application data through an interface, see table \ref{table:interface_application_data}.
-        
-
-    \end{itemize}
+    \item The form-server can initiate the application if requested by the administration portal. The portal submits information for identification, authentication and authorisation of a user through an JSON Web Token and a user profile ID. In order for the form server to determine the correct form to display, the portal submits a FIM-ID which corresponds to a data field schemata. In case the user approved, the portal can also collect personal information from the user profile and submit it to the form server for automated filling in of the form.
     
-    \item The administration portal interacts with the user profile to provide online self-service for profile management and to identify the user and to request authentication and authorisation.
+    \item The form server provides the user a web page which displays an interactive form.
     
-    \item The administration portal interacts with the data exchange platform to transfer an application which the data exchange platform submits to the correct institution.
+    \item The form server notifies the administration portal of changes in the status of applications. If the administration portal is notified of a submitted application, it requests the form server to transmit the application data.
     
-    \item 
+    \item The administration portal requests the user profile for identification and authentication to login a user on the web page of the portal. The portal also requests authorisation from the user profile to for example access certain personal information.
     
-    \item
+    \item The administration portal enables the user to manage services of the user profile. It provides OSS tools for managing attributes stored in the user profile, to send new messages and to manage documents in the data wallet.
     
-    \item
+    \item The administration platform submits application data to the data exchange platform for delivery to the responsible institution.
+    
+    \item The data exchange platform notifies the administration portal of the delivery status of the application data.
+    
+    \item The data exchange platform notifies the institution of a new application and enables it to download the corresponding data.
+    
+    \item The institution can send messages to the inbox of a user profile to for example request additional documents.
+    
+    \item The user can send messages to the institution which for example asked for additional documents.
     
 \end{enumerate}
     
 \subsubsection{Data Objects}
-The system architecture processes the following data objects which are associated to certain system components:
+This section describes what data each component processes. The property value describes a certain type of data. The source describes which component stores the value. This distinguishes the access of a property by reference and by copy. If the source of a property is another component, the property is accessed by reference. The description gives further detail on how the property is processed by the component.
 
-\subsection{Basic Use Case Sequence Diagram}
+\begin{table}[!h]
+    \begin{tabularx}{\textwidth}{|l|l|l|C|}
+    \rowcolor{LightCyan}
+    \hline
+    \multicolumn{4}{|l|}{Administration Portal: Service Web Page} \\
+    \hline
+    Property & Storage & Origin & Description  \\
+    \hline
+    \hline
+    Name & Web Page & FIM & Name of an administrative service \\
+    \hline
+    URL & Portal & Portal & The URL of the Web Page \\
+    \hline
+    Description & Web Page & FIM & Description of an administrative service \\
+    \hline
+    FIM-ID & Web Page & FIM & FIM-ID of a data field schemata which describes attributes required from the user when applying for the service \\
+    \hline
+    \end{tabularx}
+\end{table}
 
-\includegraphics[width=15cm]{Basic Use Case.png}
+\begin{table}[!h]
+    \begin{tabularx}{\textwidth}{|l|l|l|C|}
+    \rowcolor{LightCyan}
+    \hline
+    \multicolumn{4}{|l|}{Administration Portal: User} \\
+    \hline
+    Property & Storage & Origin & Description  \\
+    \hline
+    \hline
+    Attributes & User Profile & User Profile & The portal can manage attributes of user profiles \\
+    \hline
+    JWT & Portal & User Profile & The portal can retrieve a JSON Web Token from the profile after successful authentication by a user \\
+    \hline
+    URL Form & Portal & Form Server & The portal stores the URL where the form server hosts the interactive form \\
+    \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[!h]
+    \begin{tabularx}{\textwidth}{|l|l|l|C|}
+    \rowcolor{LightCyan}
+    \hline
+    \multicolumn{4}{|l|}{Administration Portal: Application} \\
+    \hline
+    Property & Storage & Origin & Description  \\
+    \hline
+    \hline
+    FMS-ID & Portal & Form Server & The portal receives the ID of applications from the form server \\
+    \hline
+    Status & Portal & Form Server & The portal receives status updates for each application \\
+    \hline
+    XML Form Data & Portal & Form Server & The portal can retrieve the data which was filled into a form \\
+    \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[!h]
+    \begin{tabularx}{\textwidth}{|l|l|l|C|}
+    \rowcolor{LightCyan}
+    \hline
+    \multicolumn{4}{|l|}{User Profile: Personal Information} \\
+    \hline
+    Property & Storage & Origin & Description  \\
+    \hline
+    \hline
+    Attributes & User Profile & FIM & The list of attributes the user can fill in at his profile are based on FIM data fields managed in the FIM repository. \\
+    \hline
+    Attribute Values & User Profile & User & The user can manually add values to a list of predetermined attributes in his profile \\
+    \hline
+    Credentials & User Profile & User & The User Profile stores encrypted credentials of the user to authenticate him \\
+    \hline
+    User Profile ID & User Profile & User Profile & The User Profile creates and stores a unique ID for the user \\
+    \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[!h]
+    \begin{tabularx}{\textwidth}{|l|l|l|C|}
+    \rowcolor{LightCyan}
+    \hline
+    \multicolumn{4}{|l|}{User Profile: Authorisatiozation} \\
+    \hline
+    Property & Storage & Origin & Description  \\
+    \hline
+    \hline
+    JWT & Other Component & User Profile & The user profile can create and transfer JSON Web Tokens which authorise other components to access resources of the user profile \\
+    \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[!h]
+    \begin{tabularx}{\textwidth}{|l|l|l|C|}
+    \rowcolor{LightCyan}
+    \hline
+    \multicolumn{4}{|l|}{User Profile: Inbox} \\
+    \hline
+    Property & Storage & Origin & Description  \\
+    \hline
+    \hline
+    Received Messages & User Profile & User & The user profile stores messages which were addressed to the user \\
+    \hline
+    Sent Messages & User Profile & User & The user profile stores messages which were sent by the user \\
+    \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[!h]
+    \begin{tabularx}{\textwidth}{|l|l|l|C|}
+    \rowcolor{LightCyan}
+    \hline
+    \multicolumn{4}{|l|}{User Profile: Data Wallet} \\
+    \hline
+    Property & Storage & Origin & Description  \\
+    \hline
+    \hline
+    Documents & User Profile & User & The user profile stores documents which were uploaded by the user \\
+    \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[!h]
+    \begin{tabularx}{\textwidth}{|l|l|l|C|}
+    \rowcolor{LightCyan}
+    \hline
+    \multicolumn{4}{|l|}{Form Server} \\
+    \hline
+    Property & Storage & Origin & Description  \\
+    \hline
+    \hline
+    FMS-ID & Form Server & Form Server & The form server creates a unique ID for each application \\
+    \hline
+    JWT & Form Server & User Profile & The form server uses a JSON Web Token to verify that the entity issuing the request is authorised \\
+    \hline
+    User Profile ID & Form Server & User Profile & The ID of the user who is associated to the application \\
+    \hline
+    FIM-ID & Form Server & FIM & The FIM ID of a data field schemata is used to determine how to construct the form \\
+    \hline
+    Form & Form Server & FIM & The list of attributes the user can fill in at the form are based on the FIM data field schemata. The form server maps the FIM data fields of the FIM data field schemata to attributes the form server understands \\
+    \hline
+    Status & Form Server & Form Server & The status describes which actions were performed on the application \\
+    \hline
+    Application Data & Form Server & User & The form server stores the data which the user filled in to the form as an XML file \\
+    \hline
+    Web Page & Form Server & Form Server & The form server hosts a web page with the interactive form  \\
+    \hline 
+    Web Page URL & Form Server & Form Server & The form server hosts the web page of the form at an individual URL \\
+    \hline 
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Sequence Diagram}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=17cm]{Diagrams/Basic Use Case Sequence Diagram.png}
+\end{figure}
 
 
 \chapter{Identity Management}
@@ -610,21 +745,52 @@ The system architecture processes the following data objects which are associate
 
 \section{IMP Solution Proposal}
 
-\subsection{IMP Functionalities}
+This section describes a solution for an IMP system considering the previously mentioned requirements.
 
-The IMP solution aims to replace existing user profiles by enabling users to manage their identity through IMP clients and by integration with service providers.
+\subsection{Components}
 
-\subsection{Basic Use Case}
+\subsubsection{IMP Client}
 
-The following diagram describes the concept of how IMP fits within the basic use case of the OZG. It contains some of the previously explained OZG components and an additional component: the IMP client. The IMP client is part of the system architecture and is responsible for identity management. Components related to integration and implementation of IMP are left out in this diagram and are focus of the Integration chapter. 
+The IMP client is a smartphone application which enables the user to manage his IMP identity. The client provides the following functionalities:
+\begin{itemize}
+    \item Create an identity
+    \item Manage attributes of the identity
+    \item Manage documents
+    \item Send and receive messages
+    \item Send and receive relationship requests
+    \item Send and receive requests
+\end{itemize}
 
-\includegraphics[width=15cm]{Basic Use Case IMP.png}
+\subsubsection{IMP Server}
+The IMP server interacts with the clients in order to deliver information from one client to the other. The server has the following functionalities:
+\begin{itemize}
+    \item Create and store relationship template
+    \item Create and store request template
+    \item Deliver relationship requests
+    \item Deliver requests
+    \item Deliver messages
+\end{itemize}
 
-The selection of an administrative service is online self-service which is not part of identity management an is therefore left to be done through the websites of the administration portal. 
+\subsection{Functionalities}
 
-One focus of IMP is to enable the user to be in full control of his identity. It therefore is the goal to execute the basic use case while sharing as little personal information as necessary and sharing personal information only with the components which require it. The main issue of the official execution of the basic use case in this regard is, that the administration portal collects personal information with the purpose of forwarding it to responsible institutions. It is not in the best interest of the user to share all information of an application with the administration portal of a member state when the application is eventually processed by an institution. It would be in the interest of the user to share personal information regarding the application with the institution directly. This way, the user has more differentiated control of which institutions access which personal information. The IMP client in the proposed solution therefore shares personal information directly with the institutions instead of the administration portal.
+\subsubsection{Relationships}
 
-The result of the application is sent to the IMP client as it contributes to personal information of his identity.
+\subsubsection{Requests}
+
+\subsection{Data Objects}
+
+\begin{table}[!h]
+    \begin{tabularx}{\textwidth}{|l|l|l|C|}
+    \rowcolor{LightCyan}
+    \hline
+    \multicolumn{4}{|l|}{Form Server} \\
+    \hline
+    Property & Storage & Origin & Description  \\
+    \hline
+    \hline
+    \hline
+    \end{tabularx}
+\end{table}
 
 \chapter{IMP Integration Architecture}
 
@@ -633,21 +799,6 @@ The result of the application is sent to the IMP client as it contributes to per
 \subsection{Integration Challenges}
 
 The following challenges are a result of the functionalities an IMP system provides in addition to conventional identity management systems. The origin of the challenges is the interoperability of the IMP identity with multiple SPs. It is the purpose of the integration architecture to solve as many of these challenges as possible.
-
-\paragraph{Data Mapping}
-If multiple SPs and the user are able to add new attributes, there is the possibility of duplicate attributes with the same meaning but different name. It is also possible for SPs to utilize the same attribute but interpreting its meaning differently.
-
-\paragraph{Identity Attributes}
-Service providers are able to add attributes to an identity. It, however, is not clear which information should be added to an IMP system as part of an identity and which information should be stored by the individual SPs. One reason is, that service providers exist for which creation and utilization of personal information is a business model. For those SPs, the secrecy of certain types of personal information is important. One example would be information about product preferences of customers acquired by online retailers for usage with recommender systems.
-A guideline could be, to only add attributes to the IMP system, which should be directly managed by users.
-
-\paragraph{Online Self-Service}
-SPs might add attributes to the identity of an IMP system which have very special meanings which are not self-explanatory. The attribute might also adhere to a special data format or be conditioned by other attributes of the identity. The modification of the attributes might also require interaction with the system architecture of an SP. In order for the attributes to stay valid, management through online self-service tools which are provided by the system architecture of an SP might be required.
-
-In this case, the self-service tools should be accessible through the IMP systems in a user friendly way.
-
-\paragraph{Attribute Access}
-Attributes which were added by a SP might require restrictions towards the user. If for example a subscription status is saved as an attribute, the user should not be able to modify it without permission of the SP.
 
 \subsection{Basic Use Case}
 
@@ -659,19 +810,85 @@ Attributes which were added by a SP might require restrictions towards the user.
 
 \subsection{Messaging}
 
-\section{Basic Use Case}
+\section{Integration}
 
-\subsection{Sequence Diagrams}
+Multiple integration scenarios are presented with increasing complexity and functionality.
 
-Hier der Anfang einer detaillierteren Beschreibung des Basis Anwendungsfalls basierend auf dem Klassen Diagramm weiter unten.
+\subsection{Scenario 1}
 
-\includegraphics[width=15cm]{Diagrams/out/Sequence Diagram/Sequence Diagram.png}
+In this scenario, the IMP system integrates only with the administration portal to enable the usage of its identity related functionalities through the IMP client. The integration architecture contains one connector which interacts with the administration portal. The integration should provide an additional optional way for users to manage their OZG identity.
 
-\subsection{Class Diagram}
+\subsubsection{Overview}
 
-\includegraphics[width=15cm]{Diagrams/out/Class Diagram/Class Diagram.png}
+\begin{center}
+    \includegraphics[width=8cm]{Diagrams/Integration 1 Overview.png}
+\end{center}
 
-\subsection{Messaging Diagram}
+\subsubsection{Functionalities}
+
+The IMP client should be able to:
+\begin{itemize}
+    \item manage personal information stored in the user profile
+    \item receive and send messages through the inbox of the user profile
+    \item upload and download documents through the data wallet of the user profile
+    \item manage active applications
+\end{itemize}
+
+The IMP client should however not be used to search for administrative services, as this is a service of the portal which is not related to the management of an identity.
+
+\subsubsection{Integration}
+
+\paragraph{Association IMP ID and OZG ID}
+
+Before the IMP client can access services of the administration portal, it has to be possible to connect the IMP identity with a user profile. The user should be able to connect and disconnect the identity with an existing user profile. As in this scenario the IMP systems only integrate with the administration portal, the user profile should not be modified to include information about an IMP identity.
+
+\begin{center}
+    \includegraphics[width=8cm]{Diagrams/Integration 1 Connection Overview.png}
+\end{center}
+
+The administration portal can provide an additional web page where a logged in user can connect an IMP identity with his user profile. In order for the web page to initiate a connection process, administration portal and IMP identity require some way to identify each other. Either the IMP identity identifies itself to the administration portal or the administration portal identifies itself to the IMP identity.
+
+The IMP identity could identify itself to the administration portal through manual entering of an IMP ID on the web page. This could enable the administration portal to interact with the identity through a connector. Another option is for the administration portal to identify itself to the IMP identity. As the IMP system provides a functionality for this, it is the better option. Through the connector, the administration portal can create a relationship template. The template is stored on the IMP server but can be accessed by any client which has the correlating template ID. The template contains information for identification of the connector, a encrypted session ID, a reason why the relationship is requested and a list of attributes the IMP client is required to share.
+
+Based on the resulting template ID, the connector creates a QR code which the administration portal includes in web page before sending it to the user. The user can now scan the QR code with the IMP client which retrieves the template corresponding to the template ID from the IMP server. The IMP client displays the request and if the user accepts, the connector is notified of an incoming relationship request. The request contains the template ID, information about the IMP identity of the user, the shared attributes and the encrypted session ID.
+
+The connector transfers the relationship request to the administration portal which based on the decrypted session ID sends a confirmation request to the web page. The confirmation request contains information about the IMP identity which requested to connect to the user profile. If the user accepts the confirmation, the association of the IMP relation and the user ID is stored in a database.
+
+The connection of the user profile and the IMP identity would therefore be an IMP relationship.
+
+\paragraph{Authorisation}
+
+If the user successfully authenticated for a user profile, the administration portal receives a JSON Web Token, which enables it to start actions in the name of the user. The user might want to manage which actions an IMP client is authorised for.
+
+On the web page where the user can connect user profile and IMP identity, authorisation of a connection can be managed too. After a success full connection, the web page presents a UI where the user can determine which actions the IMP client should be able to perform. If the user finishes, the administration portal can request the authorisation from the user profile which requests authentication from a user. The resulting JSON Web Token is then transmitted to the administration portal.
+
+The JSON Web Token contains information to identify the user profile and the authorisations for the entity which possesses this token. It also includes a signature with a private key of the user profile component. This allows the component to check if the token is valid.
+
+This token can be stored in the database where IMP relations are mapped to profile IDs.
+
+\paragraph{Improved Association of IMP ID and OZG ID}
+
+JSON Web Tokens can also function as a connection between user profile and IMP identity because they includes the ID of a user profile. If the IMP client is in possession of this token and requests the administration portal to perform an action, the administration portal can read the profile ID stored inside the token along with the authorisation information. The portal can then verify the validity of the token through the user profile component. If the validation was successful, the portal knows, that whoever sent the request has the authorisation stored in the token for the user profile ID stored in the token.
+
+The JSON Web Token can be saved as attribute of the IMP identity which the administration portal was granted access to. Whenever the portal receives a request from a relation to for example modify an attribute in the user profile, the portal can read the JSON Web Token of the corresponding IMP identity determine the connected user profile ID and verify the authorisation.
+
+\paragraph{Personal Information}
+
+One of the goals of an IMP system is to enable the user to only manage his identity in one place while all other service providers rely on the attributes of the identity. As in this scenario however, the OZG system does not rely on attributes of the IMP system but enables it to manage personal information stored in the user profile. Some synchronisation mechanism can therefore operate.
+
+When the user profile is connected with the IMP identity, an attribute request is issued at least for the JWT issued by the user profile component. In case the JWT authorizes the IMP client to manage personal information of user profile, the administration portal can request access to attributes of the IMP identity which are also stored in the user profile.
+
+As the attributes stored in the user profile might be named differently than the attributes stored in the user profile, some mapping has to take place.
+
+The access of the administration portal to attributes of the IMP identity is stored as part of the relationship.
+
+There are multiple ways to synchronize the attributes. One way would require the administration portal to compare the attributes of the IMP identity with those of the user profile. Another option would be for the IMP client to notify the administration portal of a change in the shared attributes. The second option would be beneficial, as iterative requests to the IMP Client and user profile are resource intensive, especially for a large number of users.
+
+\paragraph{Attribute Mapping}
+
+\paragraph{Inbox}
+
+Both IMP Client and the administration portal provide an inbox functionality. If an IMP identity is connected with a user profile, it can send and receive messages as part of the relation it has with the administration portal. As the administration portal does not store any information on which user profile is connected with which IMP identity, it cannot forward messages of the inbox to the IMP identity of a relation. The IMP client will have to request for new messages from time to time or the previously removed database which maps IMP relations to user profiles is added again.
 
 \section{Extension: Inbox}
 
