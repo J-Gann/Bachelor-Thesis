@@ -821,7 +821,7 @@ In this scenario, the IMP system integrates only with the administration portal 
 \subsubsection{Overview}
 
 \begin{center}
-    \includegraphics[width=8cm]{Diagrams/Integration 1 Overview.png}
+    \includegraphics[width=8cm]{Diagrams/Integration 1/Overview.png}
 \end{center}
 
 \subsubsection{Functionalities}
@@ -840,55 +840,113 @@ The IMP client should however not be used to search for administrative services,
 
 \paragraph{Association IMP ID and OZG ID}
 
-Before the IMP client can access services of the administration portal, it has to be possible to connect the IMP identity with a user profile. The user should be able to connect and disconnect the identity with an existing user profile. As in this scenario the IMP systems only integrate with the administration portal, the user profile should not be modified to include information about an IMP identity.
+Before the IMP client can access services of the administration portal, it has to be possible to connect the IMP identity with a user profile. The user should be able to connect and disconnect the identity with an existing user profile.
 
 \begin{center}
-    \includegraphics[width=8cm]{Diagrams/Integration 1 Connection Overview.png}
+    \includegraphics[width=10cm]{Diagrams/Integration 1/Connection/Overview.png}
 \end{center}
 
-The administration portal can provide an additional web page where a logged in user can connect an IMP identity with his user profile. In order for the web page to initiate a connection process, administration portal and IMP identity require some way to identify each other. Either the IMP identity identifies itself to the administration portal or the administration portal identifies itself to the IMP identity.
+The administration portal provides an additional web page where a logged in user can connect an IMP identity with his user profile. When the user requests the web page from the server, the portal requests the connector to create a relationship template. The template is stored on the IMP server but can be accessed by any client which has the correlating template ID. The administration portal fills the template with information for identification of the connector, the ID of the user, a reason why the relationship is requested and a list of attributes the IMP client is required to share. After creation of the template, the connector submits the template ID to the administration portal in form of a QR code.
 
-The IMP identity could identify itself to the administration portal through manual entering of an IMP ID on the web page. This could enable the administration portal to interact with the identity through a connector. Another option is for the administration portal to identify itself to the IMP identity. As the IMP system provides a functionality for this, it is the better option. Through the connector, the administration portal can create a relationship template. The template is stored on the IMP server but can be accessed by any client which has the correlating template ID. The template contains information for identification of the connector, a encrypted session ID, a reason why the relationship is requested and a list of attributes the IMP client is required to share.
+The portal now transmits the web page including the QR code to the web browser of the user. The user can now scan the QR code with the IMP client. The client retrieves the template corresponding to the template ID from the IMP server and displays the request.
 
-Based on the resulting template ID, the connector creates a QR code which the administration portal includes in web page before sending it to the user. The user can now scan the QR code with the IMP client which retrieves the template corresponding to the template ID from the IMP server. The IMP client displays the request and if the user accepts, the connector is notified of an incoming relationship request. The request contains the template ID, information about the IMP identity of the user, the shared attributes and the encrypted session ID.
+If the user accepts, the connector is notified of an incoming relationship request trough the IMP server. The request contains the template ID, information about the IMP identity of the user, the shared attributes and the user ID.
 
-The connector transfers the relationship request to the administration portal which based on the decrypted session ID sends a confirmation request to the web page. The confirmation request contains information about the IMP identity which requested to connect to the user profile. If the user accepts the confirmation, the association of the IMP relation and the user ID is stored in a database.
+The connector transfers the request to the administration portal which, based on the user ID, updates the web page to display a confirmation request. The confirmation request contains information about the IMP identity which requested to connect to the user profile. If the user accepts the confirmation, the administration portal requests the connector to accept the relationship which results in a relationship ID. The association of the relationship ID and the user ID is stored in a database.
 
-The connection of the user profile and the IMP identity would therefore be an IMP relationship.
+The connection of the user profile and the IMP identity is an IMP relationship.
+
+\begin{center}
+    \includegraphics[width=15cm]{Diagrams/Integration 1/Connection/Messaging Overview.png}
+\end{center}
+
+The newly created web page uses messages to communicate with the administration portal using a request-reply pattern. The request-reply pattern enables the requestor - the web page in this case - to send a message to the replier - the connector in this case - and receive an answer which correlates to the request. The purpose of the communication in this case is for the web page to receive the QR code containing the relationship template.
+
+\begin{center}
+    \includegraphics[width=15cm]{Diagrams/Integration 1/Connection/Messaging 1.png}
+\end{center}
+
+In order for the web page to send and receive messages, it includes a messaging gateway. As the web page is added as part of the integration architecture, the gateway can be included in the web page. It provides domain specific functions to the web page and hides much of the complexity of interacting with the messaging system. In combination with the request-reply pattern, the local functions provided by the gateway can be used synchronously and asynchronously.
+The web page requires the user to be logged in to his user profile and therefore expects the web browser to contain a JSON Web Token. The web page uses the messaging gateway to send a message, requesting a QR code for connecting an IMP identity. The message consists of a JSON Web Token and is placed in a datatype channel called "QR Request Channel". 
+
+\begin{center}
+    \includegraphics[width=15cm]{Diagrams/Integration 1/Connection/Messaging 2.png}
+\end{center}
+
+In order to implement a request-reply pattern, a stateful smart proxy is used. The web page sends a message which contains a JSON Web Token in the body to the "QR Request" channel. Besides the body, the message contains a message ID in the header which uniquely identifies it. The message also contains a return address which specifies a channel to which the reply should be sent. The messaging gateway specifies a reply channel unique to the web browser instance. The temporary channel is deleted eventually. The smart proxy stores message ID and reply channel in order to correlate replies in the "QR Reply Service" channel with the request and send it to the specified reply channel. If eventually, the integration architecture is ready to send a QR code as reply, the corresponding message can be put on the "QR Reply Service" channel, where, based on the message ID, the smart proxy can correlate it to the request message and send the reply to the corresponding reply channel. The messaging gateway included in the web browser can retrieve the reply from its reply channel in multiple ways. One example would be iterative polling.
+
+\begin{center}
+    \includegraphics[width=15cm]{Diagrams/Integration 1/Connection/Messaging 3.png}
+\end{center}
+
+The message from the "QR Request Channel" are processed by a filter. All messages which are invalid through for example an expired JSON Web Token are deleted. Valid messages are then routed by a stateful content-based router. The router keeps track from which users a message was received. In case a message was received previously, the current message is routed to the "Existing Request" channel. Otherwise the message is routed to the "New Request Template" channel.
+
+\begin{center}
+    \includegraphics[width=15cm]{Diagrams/Integration 1/Connection/Messaging 4.png}
+\end{center}
+
+The messages from the "Existing Request Template" channel are consumed by a QR code management system, which stores all valid QR codes in a database. The system adds the QR code corresponding to the user to the message and sends it to the "QR Reply Service" channel, where it is delivered to the web page by the smart proxy.
+
+\begin{center}
+    \includegraphics[width=15cm]{Diagrams/Integration 1/Connection/Messaging 5.png}
+\end{center}
+
+Messages on the "New Relationship Template" channel are modified by a content enricher to contain parameters which are required by the connector to create a relationship template. The message is then send to the connector using a request-reply pattern.
+
+\begin{center}
+    \includegraphics[width=15cm]{Diagrams/Integration 1/Connection/Messaging 6.png}
+\end{center}
+
+As there is only one possible channel to receive the reply from the connector, no smart proxy is required for this request-reply pattern. The message is send to the "Relationship Template Request" channel, trough which the portal connector receives it. As the connector is designed with integration in mind, he is capable of receiving and sending messages through an included messaging gateway. The connector also contains a sophisticated process manager for implementing the provided IMP functionalities through interaction with an IMP server. In this case, the process manager interacts with the IMP server to create a relationship template, store it on the IMP server, retrieve a template ID and export it as a QR code. Through a content enricher, the QR code is attached to the message and placed on the "Relationship Template Reply" channel.
+
+\begin{center}
+    \includegraphics[width=15cm]{Diagrams/Integration 1/Connection/Messaging 7.png}
+\end{center}
+
+The message from the "Relationship Template Reply" channel is consumed by the QR code management system. The system stores the new QR code for the user and sends the message unchanged to the "QR Reply Service" channel, where the smart proxy delivers it to the web page.
 
 \paragraph{Authorisation}
 
-If the user successfully authenticated for a user profile, the administration portal receives a JSON Web Token, which enables it to start actions in the name of the user. The user might want to manage which actions an IMP client is authorised for.
+If the user successfully authenticated for a user profile, the administration portal receives a JSON Web Token which enables it to perform actions for the user. The user might want to manage which actions an IMP client is authorised to perform without having to approve each of them trough the website of the portal.
 
-On the web page where the user can connect user profile and IMP identity, authorisation of a connection can be managed too. After a success full connection, the web page presents a UI where the user can determine which actions the IMP client should be able to perform. If the user finishes, the administration portal can request the authorisation from the user profile which requests authentication from a user. The resulting JSON Web Token is then transmitted to the administration portal.
+\begin{center}
+    \includegraphics[width=15cm]{Diagrams/Integration 1/Authorisation/Overview.png}
+\end{center}
 
-The JSON Web Token contains information to identify the user profile and the authorisations for the entity which possesses this token. It also includes a signature with a private key of the user profile component. This allows the component to check if the token is valid.
+After successful connection of an IMP identity with the user profile through the introduced web page, the website can display a user interface for specifying which actions the IMP identity is authorized for. After the user finishes, the web page submits the configuration to the administration portal. The portal then creates a suitable authorisation request to the user profile which requires the token to include the relationship ID associated to the user profile. After successful authentication by the user, the user profile transmits a JSON Web Token to the portal. 
 
-This token can be stored in the database where IMP relations are mapped to profile IDs.
+It contains the user profile ID, the relationship ID and information about the authorisations that are granted when attaching this tokens to a request. It also includes a signature with the private key of the user profile component. This enables components to verify if the token is valid by transmitting it to the user profile component.
 
-\paragraph{Improved Association of IMP ID and OZG ID}
+The JSON Web Token is stored as attribute of the IMP identity. Upon receiving the token form the user profile component, the administration portal initiates two requests through the connector to the IMP identity of the relation corresponding to the relation ID. The first requests to add the token as attribute. The second requests to share the attribute.
 
-JSON Web Tokens can also function as a connection between user profile and IMP identity because they includes the ID of a user profile. If the IMP client is in possession of this token and requests the administration portal to perform an action, the administration portal can read the profile ID stored inside the token along with the authorisation information. The portal can then verify the validity of the token through the user profile component. If the validation was successful, the portal knows, that whoever sent the request has the authorisation stored in the token for the user profile ID stored in the token.
-
-The JSON Web Token can be saved as attribute of the IMP identity which the administration portal was granted access to. Whenever the portal receives a request from a relation to for example modify an attribute in the user profile, the portal can read the JSON Web Token of the corresponding IMP identity determine the connected user profile ID and verify the authorisation.
+If the user approves both requests, every time the connector requests the portal to perform an action coming from a relationship, the portal can use the JSON Web Token shared through this relation.
 
 \paragraph{Personal Information}
 
 One of the goals of an IMP system is to enable the user to only manage his identity in one place while all other service providers rely on the attributes of the identity. As in this scenario however, the OZG system does not rely on attributes of the IMP system but enables it to manage personal information stored in the user profile. Some synchronisation mechanism can therefore operate.
 
-When the user profile is connected with the IMP identity, an attribute request is issued at least for the JWT issued by the user profile component. In case the JWT authorizes the IMP client to manage personal information of user profile, the administration portal can request access to attributes of the IMP identity which are also stored in the user profile.
+\begin{center}
+    \includegraphics[width=15cm]{Diagrams/Integration 1/Personal Information/Overview.png}
+\end{center}
 
-As the attributes stored in the user profile might be named differently than the attributes stored in the user profile, some mapping has to take place.
+While configuring the authorisation of the IMP identity on the previously described website, the user can determine if the IMP identity is allowed to manage personal information stored in the user profile. If the user approves, the JSON web Token stored as attribute of the identity is authorized to update, delete and read attributes of the user profile. As the user profile determines which attributes exist, no attributes can be added.
 
-The access of the administration portal to attributes of the IMP identity is stored as part of the relationship.
-
-There are multiple ways to synchronize the attributes. One way would require the administration portal to compare the attributes of the IMP identity with those of the user profile. Another option would be for the IMP client to notify the administration portal of a change in the shared attributes. The second option would be beneficial, as iterative requests to the IMP Client and user profile are resource intensive, especially for a large number of users.
-
-\paragraph{Attribute Mapping}
+If an attribute of an identity changes, the IMP client notifies all relationships. When the connector receives this notification, he reads all shared attributes and requests the administration portal to update the same attributes in the user profile. As the naming and meaning of attributes can differentiate between IMP systems and OZG systems, the attributes have to be mapped to each other. A simple solution would be a table, created by an administrator, which maps each attribute from the IMP system to an attribute of the OZG system.
 
 \paragraph{Inbox}
 
-Both IMP Client and the administration portal provide an inbox functionality. If an IMP identity is connected with a user profile, it can send and receive messages as part of the relation it has with the administration portal. As the administration portal does not store any information on which user profile is connected with which IMP identity, it cannot forward messages of the inbox to the IMP identity of a relation. The IMP client will have to request for new messages from time to time or the previously removed database which maps IMP relations to user profiles is added again.
+Both IMP Client and the administration portal provide an inbox functionality. If an IMP identity has established a relationship with the administration portal, they can exchange messages through the connector as part of this relationship.
+
+In order to notify the user of a new message to the user profile, the administration portal can send the same message through the relationship associated with this user.
+The user can, however, only send messages to the administration portal and not to for example institutions.
+
+\paragraph{Data Wallet}
+
+\subsubsection{Messaging Architecture}
+
+\subsection{Integration 2}
+
+Option for user to use IMP identity INSTEAD of user profile
 
 \section{Extension: Inbox}
 
