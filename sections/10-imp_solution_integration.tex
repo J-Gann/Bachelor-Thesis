@@ -1,0 +1,24 @@
+
+The first step of the basic OZG use case is the creation of a user profile through the web page of the administration portal. This is not necessary any more, as user profiles are replaced by IMP identities. The user will only have to create an IMP identity.
+
+The second step of the basic OZG use case is to login to a user profile on the web page of the administration portal. As user profiles get replaced by IMP identities, the IMP client can be used to access OZG services. The IMP client does not require authentication, as it is installed on the smart phone of the user. The user can secure his smartphone through for example biometric authentication.
+
+The third step of the basic OZG use case is to select an administrative service which is still done through the web page of the administration portal.
+
+The fourth step of the basic OZG use case is to fill in the application. The application is not started by the user filling in a form on the form server and submitting the result to the administration portal any more, but by requesting a relationship with the institution responsible for processing a selected application.
+
+The web page of the administration portal displaying a selected administrative service does not contain an integration with a form server any more. Instead it displays the QR code for a relationship template provided by the institution responsible for processing the application.
+
+For each administrative service, the institution is responsible for processing, it issues a HTTP POST request to the institution connector requesting the creation of a relationship template. The connector responds to the institution with the template IDs.
+
+In order for the administration portal to display the correct relationship template, he requests the user to manually enter his home address. After the administration portal determined the responsible institution, he retrieves the correct template ID and displays it to the user as QR code.
+
+If the user scans the QR code with his IMP client, the client retrieves the relationship template corresponding to the template ID of the QR code and display it. The relationship template contains a description of the selected administrative service as reason for the relationship. The template also requests the IMP identity to share several attributes, which the institution requires in order to process the application. This replaces the functionalities of the form server.
+
+The fifth step of the basic OZG use case is to submit the application. After the user accepts the relationship template, the client sends a relationship request to the institution which created the template along with the shared attributes. The institution can accept the request and start processing the application. The IMP identity in this case has to share personal information only with the specific institution responsible for processing the application.
+
+The sixth and seventh steps of the basic use case are no longer necessary as the application is properly delivered to the institution as result of the fifth step.
+
+The eighth step of the basic OZG use case is the management of active applications. As each application is represented by a relationship between an institution and an IMP identity, the application can be managed by requesting a termination of the relationship and sharing the status of the relationship as part of an attribute of the institution. Termination of the relationship after approval of both parties, also prohibits the institution from further usage of personal information of the IMP identity.
+
+The ninth step of the basic OZG use case is the communication between user profile and institutions responsible for active applications. As an active relationship is represented by a relationship, the two parties can directly communicate through the relationship.
