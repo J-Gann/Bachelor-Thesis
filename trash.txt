@@ -1,0 +1,191 @@
+
+In this scenario, the IMP system integrates only with the administration portal to extend the usage of identity related functionalities through the IMP client. The integration architecture contains one connector which integrates with the administration portal and communicates with IMP server and IMP client.
+
+Through the integration, the user will be able to connect his OZG user profile with an IMP identity. As a result of this connection, the personal information of the user profile will be synchronized with the attributes of the IMP identity. The user will only be able to change personal information of his user profile through the IMP client. If the user has connected an IMP identity, starting an application will require authorization through the IMP client. However, starting and filling in the application will still be done through the web page of the administration portal and form server. After the user submitted the application through the form server, the user will be able to manage active applications through the IMP client.
+The user will be able to send and receive messages of the user profile inbox through the inbox of the IMP client and combine the data wallet of the IMP client and user profile.
+
+The integration provides an improved experience of the basic OZG use case through the IMP systems by making existing functionalities of the administration portal available through the IMP client. Especially the fact that the user wont have to manage the OZG user profile separately is an advantage for the user. Communicating with governmental institutions through the smartphone instead of a web page is also more convenient.
+
+This integration scenario can be a first step by service providers to adopt an IMP system.
+
+\paragraph{Linking IMP ID and OZG ID}
+
+\begin{figure}[h]
+\caption{Overview Connection}
+    \centering
+    \includegraphics[scale=0.25]{Diagrams/Integration 1/Connection/Overview.png}
+\end{figure}
+
+
+Before the IMP client can access services of the administration portal, the user has to be able to connect his IMP identity with the user profile. This is necessary for the integration architecture to enable bidirectional communication between OZG systems and IMP client regarding a user.
+
+The administration portal hosts an additional web page where a logged in user can connect one IMP identity to his user profile. The IMP identity can be connected with the user profile through an IMP relationship between the administration portal and the IMP identity. The relationship includes the ID of the user profile in order for the relationship to be associated to a user profile. For a relationship to be established, a relationship template has to be created. This template is created by the IMP connector and stored on the IMP server. The template can be referenced through a template ID, created by the IMP server. The relationship template contains information about the administration portal, the reason for the relationship, attributes the IMP client is required to share as part of the relationship and additional metadata like the ID of the user profile or some legal information.
+The reason for the relationship could be described like: "This relationship enables your identity to be connected with the user profile of the administration portal". The list of attributes required to be shared is based on the list of attributes stored in the OZG user profile. This will later enable the synchronization of attributes. The IMP identity is also required to share a JSON Web Token attribute. If this is the first time, the identity connects to a user profile, this attribute will not yet exist. The integration architecture will add it for means of authorization.
+Based on the template ID, the connector creates a QR code which gets displayed on the web page for any IMP client to scan, retrieve the relationship template and issue a relationship request. The request contains information about the IMP identity and values for the requested attributes. The user gets notified of the connection request through an E-Mail which includes an URL. Visiting this URL will confirm the relationship request.
+
+After confirmation, the IMP identity is connected with the administration portal through an IMP relationship which contains the ID of a user profile. The administration portal stores the IMP identity ID, the relationship ID and the user profile ID as an entry in a database.
+
+The relationship can be cancelled through the IMP client or through the web page of the administration portal.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{Diagrams/Integration 1/Connection/Messaging 1.png}
+\end{figure}
+
+The web server of the administration portal hosts an additional web page where a user can connect an IMP identity with his user profile. When a user tries to visit the web page, the browser sends a GET request to the web server and attaches a session ID as cookie. Based on the session ID, the web server can determine the user ID and the authentication state of the session. If the user is not authenticated, the server responds with a redirection to the login page. If the user is authenticated, the web server requests a QR code from the messaging system for connecting an IMP identity to the user ID of the session.
+
+A messaging gateway is integrated into the run-time of the web server. It provides functions in an API for the server code to use for requesting services from the integration architecture or to notify it of events. If the server issues a function call from the API, the messaging gateway will send a corresponding message to the integration architecture. Depending on the API, the function will wait for a response before returning it or will accept a function as parameter and execute it upon receiving a response from the integration architecture. In order for the messaging gateway to match incoming replies to the issuing function calls, outgoing and incoming messages contain the same request ID.
+After the authentication of the session is validated, the web server calls the API of the gateway to request a QR code for connecting an IMP identity to the user ID corresponding to the session. The web server passes the user ID as a parameter to the function.
+The messaging gateway places a message which contains the user ID (UID) and the request ID (RID) on the "Connection QR Request" channel. Based on the request-reply pattern, the messaging gateway will expect a reply on the "Connection QR Reply" channel.
+
+\textbf{Performance and Stability Considerations}: 
+
+As the request for a QR code originates from the web browser of the user, a large amount of requests can be expected either due to a large amount of users or due to a few users issuing a large amount of requests. As the storage of channel adapters is limited, a large amount of requests could exhaust its capacity and lead to dropped messages. In order to handle request spikes, a message store could be attached before the "Connection QR Request" channel to act as a buffer. However, as the message requesting a QR code does not contain irreplaceable information and the user will probably not wait a long time until his web page loads, dropping messages is a reasonable solution.
+To prevent the integration architecture from overloading, a stateful content-based router can be attached. He can keep track of all user IDs which issued a request and route the request of users to a dead letter channel if they exceeded the maximum amount of requests per minute. The messaging gateway of the web server consumes messages in the dead letter channel and returns an error to the function call corresponding to the request ID. Upon receiving the error, the web server can sent the user a suitable response.
+
+\textbf{Failure Considerations}: 
+
+In case of a complete failure of the integration architecture, all messages would be dropped and wont be able to recovered. This part of the system manages three types of messages, the incoming requests for QR codes on the "Connection QR Request" channel, the denied requests on the dead letter channel and the replies with QR codes on the "Connection QR Reply" channel.
+If messages on the "Connection QR Request" channel get lost for example due to a system failure, no relationship template will be created and the web server will not receive a reply. It is not a problem, that no relationship template gets created as this will be done as soon as the next request message with the same user ID gets through. The problem of the web server not receiving a reply can be handled by the messaging gateway determining a timeout and returning an error to the function call. The web page could then sent a corresponding failure message to the user. The messages of the channel could be stored in a message store to be processed after the system failure, but the request is highly time dependent and to the user would not be waiting for the response.
+If messages on the dead letter channel get lost, the messaging gateway does not get notified of a denied request message. Similar to the previously described situation, a timeout could return an error message to the function call.
+If messages on the "Connection QR Reply" channel get lost, the web server will not receive a reply although a relationship template exists and the QR code was retrieved. As the created relationship template and the QR code are stored in a database, a following request will be able to retrieve the result quickly. Similar to the previously described situation, a the messaging gateway could return an error message to the function call due to a timeout.
+
+\textbf{Administration Considerations}: 
+
+In order for administrators to verify that all requests issued to the integration architecture succeed and to monitor the processing time of requests, a control bus can monitor the "Connection QR Request" channel and the "Connection QR Reply" channel. To be notified of malicious request activities, the control bus can also monitor the dead letter channel.
+
+\textbf{Future Proofing Considerations}
+
+In the future, the format in which the web server expects the data to be returned might change. It could for example request the template ID not to be delivered as QR code but as barcode or as an integer or a string. One possibility would be for the API of the messaging gateway to change and modify the returned results accordingly. In order to decouple the messaging gateway from the requested data format, a message translator can be included. If the web server requires a new data format, the message translator can change the content of the messages accordingly.
+It could also happen, that in the future, the web server passes the user ID in a different format. In order for the same user ID with different formats to not be treated as different users, a message translator can be included who maps the user ID to a canonical data format.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{Diagrams/Integration 1/Connection/Messaging 2.png}
+\end{figure}
+
+Until now, the integration architecture is able to receive requests for QR codes for connecting IMP identities to user profiles on the "Connection QR Request" channel. The requests originate from authenticated users and are filtered to prevent an overload.
+
+The integration architecture now has to return a relationship template in form of a QR code to the web server. As the name suggests, the relationship template is the basis for creating a relationship request. One template can therefore be used multiple times. Therefore, in order to save resources, QR codes for connecting IMP identities and user profiles should be reused. However, it still has to be possible to use new relationship templates, as the required content of future relationships might change. It could for example happen, that additional attributes are required to be shared by the IMP identity or that a user agreement attached to the relationship metadata changed.
+
+The messaging architecture contains a database which is responsible for storing all QR codes and the corresponding user IDs. Upon receiving a message on the "Connection Qr Reply" channel, the integration architecture therefore first checks if a QR code is stored in the database for the specified user ID. If this is the case, the corresponding QR code is sent back as reply to the web server. If no QR code can be found, the user corresponding to the UID did not yet connect to an IMP identity and a relationship template has to be created.
+In order to check if a QR code exists, the messages from the "Connection QR Request" channel are consumed by a content based router who is connected with the QR code database. Depending on the existence of a QR code, the router sends the message in different directions. In one direction the existing QR code will be delivered to the web server, in the other direction, a new relationship template will be created.
+
+\textbf{Performance and Stability Considerations}: 
+
+It has to be made sure, that for each user ID, only one message is sent down the path of creating a new relationship template at the same time to prevent multiple creations of the same relationship template. Therefore, besides the existing QR codes, a list of user IDs is maintained. Each time the content based router sends a message to create a new template, he stores the respective user ID in the database. A selective consumer is inserted before the content-based router to only forward messages which contain a user ID not stored in the database. Once the database storing the QR codes adds a new entry, it notifies the other database to remove the corresponding user ID. The messages which were hold back are now routed to the path of existing QR codes. 
+
+\textbf{Failure Considerations}: 
+
+One important requirement of this system is, that for each user ID a QR code will eventually be added to the database. If a message which was routed to the path of creating a new template gets lost or the creation of the QR code fails, no message with the same user ID will be let through by the selective consumer. Therefore, along with the user ID, a timestamp should be saved in the database to remove all user IDs older than a few minutes. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{Diagrams/Integration 1/Connection/Messaging 3.png}
+\end{figure}
+
+So far, the integration architecture is able to route a request for a QR code to either use an existing one or create a new template. To use an existing QR code, the message is routed to a content enricher which retrieves the QR code corresponding to the user ID from the database and attaches it to the message. A content filter removes the user ID afterwards and publishes the message to the "Connection QR Reply" channel.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{Diagrams/Integration 1/Connection/Messaging 4.png}
+\end{figure}
+
+So far, the integration architecture is able to send existing QR codes to the web server. In order to create new relationship templates, the content-based router sends the message to a content enricher. This content enricher accesses a database storing configuration parameters (Conf) for creation of relationship templates and attaches it to the message, then sends the message to the "Create Relationship Template" channel. In order for the administration to change the configuration, the content enricher also adds the version number of the configuration (VER) to the message.
+
+\textbf{Administration Considerations}: 
+
+To enable the administration to change the relationship template for new relationship requests, a control bus is attached to the content-based router, the content enricher, the user ID database and the QR code database. The control bus first momentarily halts the router, changes the configuration stored at the content enricher, increments its stored version number, removes all data from both databases then activates the router again. Deletion of the databases enables the population of the database with new QR codes. Request messages which were issued before halting the router but did not yet result in the storage of the corresponding QR code will be deleted upon being received by the QR code database. The database will refuse to store QR codes with a version number lower than the current increment.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{Diagrams/Integration 1/Connection/Messaging 5.png}
+\end{figure}
+
+The message including the configuration for creating a relationship template now has to be delivered to the connector. The connector contains a messaging gateway which can receive a message containing a configuration on the "Template Request Connector" channel and publish QR codes of all created relationship templates on the "Template Reply Connector" channel. The connector creates a relationship template based on the configuration attached to the message. The relationship template is stored on the IMP server but can be retrieved through a template ID. The connector exports the ID as a QR code and publishes it on the "Template Reply Connector" channel.
+
+\textbf{Future Proofing Considerations}:
+
+In order for the solution to be future proof, the service of the connector should be usable from any place in the integration architecture. A smart proxy is therefore introduced, which consumes messages that were published on the "Template Request" channel. The messages on this channel have to specify a channel where they expect the smart proxy to send the reply. The specified return address in this case is the "New Connection Template Reply" channel, as the template created in this case is for connecting an IMP identity to a user profile. The smart proxy requires request ID (RID) in order to correlate replies coming from the connector to the specified return address. As the messages in this case already contain a request ID no new one has to be added. It is expected, that all request IDs independent of where they were created are unique. As the messaging gateway expects a message to only contain a configuration and a correlation identifier, a content filter is attached before the "Template Request" channel to remove all attributes besides the request ID and the configuration and save the message in a message store. After receiving the reply from the smart proxy on the "New Connection Template Reply" channel, a content enricher adds the removed attributes to the message based on the request ID. The configuration and return address however are obsolete and therefore not added again. The message is then published to the "New Connection Template" channel.
+
+The IMP connector includes a messaging gateway which enables services of the connector to be used through messaging. The messaging gateway of the connector should be decoupled from the integration architecture as much as possible. It should only be able to receive a message trough a request channel, derive the requested service from the used channel and publish the result on a reply channel corresponding to the request channel. For each request reply channel,the connector is connected to, a smart proxy is attached, which 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{Diagrams/Integration 1/Connection/Messaging 6.png}
+\end{figure}
+
+So far, the integration architecture is able to create new relationship templates if necessary. The resulting QR code now has to be stored in the database and delivered to the web server. In order to deliver the message to the web server, a content filter removes the user ID from the message and publishes it to the "Connection QR Reply" channel, where the messaging gateway of the web server waits for replies.
+In order to store the QR code in the database, the message is sent to another content filter which removes the request ID from the message and sends it to the database for storage. A message filter is inserted before the database to remove all messages which contain a version number lower than the current increment.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{Diagrams/Integration 1/Connection/Messaging 7.png}
+\end{figure}
+
+
+Now that the web server retrieved the QR code, he sends the web page including the code to the user. The IMP client of the user scans the QR code on the web page and extracts the template ID. Based on this template ID, the client retrieves the relationship template from the IMP server and displays it on the screen. The user is asked if he wants to send a relationship request to the administration portal. The interface displays information about the administration portal, personal information which will be shared from the portal and from the user as part of the relationship and additional metadata information like user agreements. If the user accepts, the client creates a relationship request and sends it to the IMP server, which stores the request and forwards a request ID to the connector.
+Upon receiving the request ID, the connector retrieves the corresponding request from the IMP server, publishes a message containing the relationship request (REQ) and the request ID (RID) to the "Relationship Request" channel and based on the request-reply pattern expects a message containing a response (RESP) and the request ID (RID) on the "Relationship Response" channel.
+A message filter lets only messages through which contain a relationship request which contains a user ID as metadata. This makes sure, that in the following, only relationship requests are processed which result in the connection of a IMP identity with a user profile. The messages from the message filter are consumed by the connection process manager. The process manager will create a new process for each relationship request. He is able to keep track of the current progress of the request and he can initiate new processing steps.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{Diagrams/Integration 1/Connection/Messaging 8.png}
+\end{figure}
+
+Messages on the "Relationship Request" channel are consumed by a content-based message router. The router performs validation steps on the relationship requests. It can for example check, if the UID exists and if the corresponding user already has a IMP connected. It can also for example check if the name shared by the IMP identity is the same as in the user profile. If the validation fails, the message is sent to a content enricher who attaches the corresponding negative response to the message. If the validation succeeds, a later described user confirmation process either accepts or reclines the request. In both cases, a message containing the response is published on the "Relationship Response" channel. The connector reads the response from the channel and either confirms the relationship or cancels the request. A content enricher also subscribes to the "Relationship Response" channel and together with a content filter creates a message which contains a user ID and an email body, which depending on the response attribute either informs the user of a accepted or of a denied connection. The message is consumed by the messaging adapter of the web server which sends the mail to the address corresponding to the user ID.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{Diagrams/Integration 1/Connection/Messaging 9.png}
+\end{figure}
+
+If the content-based router validates the relationship request, the message is sent to a content enricher, who generates a token and attaches it to the message. The message including the generated token is stored in a database. The message is sent to another content enricher, who adds the body of an E-Mail. The mail informs the user about a requested connection of an IMP identity. The mail also contains an URL to an additional web page the server hosts. The URL contains the previously generated token. If the user tries to open the URL, the GET request to the web server therefore submits the token. If the web server receives the GET request, he sends a message to the "Relationship User Confirmation" channel, containing the received token. A content enricher consumes this message and searches for the token in the database. If he finds an entry, he retrieves the stored message, adds a positive response to the message and publishes it on the "Relationship Response" channel. The message stored in the database is deleted afterwards.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{Diagrams/Integration 1/Connection/Messaging 10.png}
+\end{figure}
+
+The connector sends a relationship request response to the IMP server. If the response was negative, the server notifies the IMP client. If the response was positive, the IMP server stores the established relationship and notifies IMP client and connector with a relationship ID. Upon receiving the relationship ID, the connector retrieves the relationship and sends a message to the "New Relationship" channel. Through a messaging gateway, a database consumes the message and adds an entry to the database containing the relationship ID, the user ID and the IMP identity ID. Afterwards, the database publishes a message to the "Connection Finished" channel containing the user ID.
+
+\paragraph{Authorisation}
+
+After the user connected an IMP identity to his user profile, the IMP identity has to be authorized to access resources of the OZG systems. The OZG system architecture uses JSON Web Tokens for authorization management. In order to minimize integration complexity, the IMP identity also uses JWT for authorization. To enable the IMP identity to us a JSON Web Token, the integration system will have to create the token, store it somewhere, enable the IMP client to make use of it and enable the OZG system architecture to associate the JSON Web Token with an IMP identity.
+The web server is able to request a JWT from the user profile component, which after a successful authentication of the user will transmit the requested token. The token can then be stored as attribute of the IMP identity.
+Every time, the integration architecture receives a request from the IMP client, it can retrieve the JWT corresponding to the IMP identity and attach it to a request to the web server. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\paragraph{Personal Information}
+
+One of the goals of an IMP system is to enable the user to only manage his identity in one place while all other service providers rely on the attributes of the identity. As in this scenario however, the OZG system does not rely on attributes of the IMP system but enables it to manage personal information stored in the user profile. Some synchronisation mechanism can therefore operate.
+
+\begin{center}
+    \includegraphics[scale=0.3]{Diagrams/Integration 1/Personal Information/Overview.png}
+\end{center}
+
+While configuring the authorisation of the IMP identity on the previously described website, the user can determine if the IMP identity is allowed to manage personal information stored in the user profile. If the user approves, the JSON web Token stored as attribute of the identity is authorized to update, delete and read attributes of the user profile. As the user profile determines which attributes exist, no attributes can be added.
+
+If an attribute of an identity changes, the IMP client notifies all relationships. When the connector receives this notification, he reads all shared attributes and requests the administration portal to update the same attributes in the user profile. As the naming and meaning of attributes can differentiate between IMP systems and OZG systems, the attributes have to be mapped to each other. A simple solution would be a table, created by an administrator, which maps each attribute from the IMP system to an attribute of the OZG system.
+
+\paragraph{Inbox}
+
+Both IMP Client and the administration portal provide an inbox functionality. If an IMP identity has established a relationship with the administration portal, they can exchange messages through the connector as part of this relationship.
+
+In order to notify the user of a new message to the user profile, the administration portal can send the same message through the relationship associated with this user.
+The user can, however, only send messages to the administration portal and not to for example institutions.
+
+\paragraph{Data Wallet}
