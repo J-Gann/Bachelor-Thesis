@@ -1,9 +1,21 @@
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.15]{Diagrams/Integration Architecture 1/Overview.png}
+\end{figure}
 
 \subsection{Messaging}
 
+This section describes the advantages of using a message based integration approach.
+
+...
 
 \subsection{Create User Profile}
 
+\begin{figure}[h]
+    \centering
+    \caption{Overview Connection}
+    \includegraphics[scale=0.2]{Diagrams/Integration Architecture 1/Messaging/Connection/Technological Integration Connection.png}
+\end{figure}
 
 In order for an IMP identity to request a relationship with the administration portal, the portal has to provide a relationship template to the IMP client of the user. The template can be made accessible to the IMP client trough a new web page which displays the template ID as QR code if the user is logged in. Each time a logged in user requests the web page, the web server requests the IMP connector to create a relationship template.
 
@@ -11,6 +23,7 @@ The IMP connector provides an API for creation of relationship templates as part
 
 \begin{figure}[h]
     \centering
+    \caption{Relationship Template}
     \includegraphics[scale=0.3]{Diagrams/Integration Architecture 1/Overview/Relationship Template REST.png}
 \end{figure}
 
@@ -18,6 +31,7 @@ This is one example, where the OZG system could use the REST interface for integ
 
 \begin{figure}[h]
     \centering
+    \caption{Relationship Template Messaging}
     \includegraphics[scale=0.3]{Diagrams/Integration Architecture 1/Overview/Relationship Template Messaging.png}
 \end{figure}
 
@@ -25,6 +39,7 @@ It could happen, that in future, the API of the connector changes. If the web se
 
 \begin{figure}[h]
     \centering
+    \caption{Relationship Template Improved Messaging}
     \includegraphics[scale=0.3]{Diagrams/Integration Architecture 1/Overview/Relationship Template Messaging Improved.png}
 \end{figure}
 
@@ -36,6 +51,7 @@ In order to map relationships to user profiles, the administration portal manage
 
 \begin{figure}[h]
     \centering
+    \caption{Relationship Request}
     \includegraphics[scale=0.3]{Diagrams/Integration Architecture 1/Overview/Relationship Request.png}
 \end{figure}
 
@@ -47,6 +63,7 @@ If the user requests the change of a shared attribute through the IMP client, it
 
 \begin{figure}[h]
     \centering
+    \caption{Attribute Change Inbound}
     \includegraphics[scale=0.3]{Diagrams/Integration Architecture 1/Overview/Attribute Change IMP Client.png}
 \end{figure}
 
@@ -54,13 +71,17 @@ If the user requests the change of a shared attribute through the web page of th
 
 \begin{figure}[h]
     \centering
+    \caption{Attribute Change Outbound}
     \includegraphics[scale=0.3]{Diagrams/Integration Architecture 1/Overview/Attribute Change Web Page.png}
 \end{figure}
 
 \subsection{Login to a User Profile}
 
+The administration portal receives a request from the IMP client through a "Request" channel. Through the connection database created in 4.2.2, the administration portal finds the corresponding user ID. Through a JWT database, where all JWT tokens are stored for the user profiles, the administration portal retrieves the JWT corresponding to the user ID. The administration portal can then route the request on the "Request" channel and attach the JWT.
+
 \begin{figure}[h]
     \centering
+    \caption{Authentication}
     \includegraphics[scale=0.3]{Diagrams/Integration Architecture 1/Overview/Login.png}
 \end{figure}
 

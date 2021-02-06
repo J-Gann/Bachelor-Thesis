@@ -10,7 +10,7 @@
 %     liststotoc,   % table listing in toc
 %     bibtotoc,     % bibliography in toc
 %     idxtotoc,     % index in toc
-%     parskip       % paragraph skip instad of paragraph indent
+%     parskip       % paragraph skip instead of paragraph indent
      ]{scrreprt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,7 +43,7 @@
 \usepackage{multirow}
 \usepackage{longtable}
 \usepackage{float}
-
+\usepackage{wrapfig}
 \usepackage{subfiles} % Best loaded last in the preamble
 
 % hyperrefs in the documents
@@ -161,39 +161,80 @@ Date of Submission: \today
 
 \subfile{sections/5-online_access_law}
 
+\section{Messaging}
+
+This section describes possibilities of constructing a message based integration architecture
+
+\subsection{Messaging Patterns}
+
 \chapter{Identity Management}
 
 \section{Functional Requirement Analysis}
 
+
 \subfile{sections/6-requirement_analysis}
 
-\section{IMP System Proposal}
+\section{IMP System Solution}
 
 \subfile{sections/7-imp_system_proposal}
 
-\chapter{Minimal Integration Architecture}
+\chapter{Integration Challenges}
 
-The goal of the integration architecture is to make as many functionalities required for the basic OZG use case available through the IMP client as possible. As described in chapter 2.3, the steps of the basic OZG use case are:
-\begin{enumerate}
-    \item{Create User Profile}
-    \item{Login to User Profile}
-    \item{Selection of Administrative Service}
-    \item{Filling in Application}
-    \item{Submission of Application}
-    \item{Reception of Application by Administration Portal}
-    \item{Submission of Application to Data-Exchange Platform}
-    \item{Management of Applications}
-    \item{Communication}
-\end{enumerate}
+This chapter describes challenges for integrating the IMP system described in chapter 3 into the OZG system architecture. The quality of the presented integration can be determined based on the number of the following challenges it solves.
 
-To enable service providers a quick introduction of IMP systems into their system architecture, this integration architecture describes a minimally invasive integration. After deployment of this integration architecture, all OZG services are still usable as before but can be enhanced by IMP solutions. For this integration to be minimally invasive, only one connector exists and integrates only with the administration portal. No other OZG system component is modified or directly accessed.
+\section{IMP Challenges}
+This section describes challenges which arise from the operation of the IMP system
 
-The goal of the integration is to enhance each step of the basic OZG use case through integration with IMP solutions. Therefore in the overview section, for each step, possible integration's of OZG systems are evaluated. The following sections contain more detailed descriptions of the selected integration strategies.
+\begin{itemize}
+    \item Connector has REST interface and cannot notify system architecture
+    \item Connector does not understand messages
+    \item Messages can have different versions
+    \item API of connector can change
+    \item New types of messages can be added by the client and the system provider might need to understand them
+\end{itemize}
+
+\section{SP Challenges}
+
+This section describes challenges which arise from service provider integration requirements.
+
+\begin{itemize}
+    \item Minimal modification of existing systems
+    \item Maintainability
+    \item Scalability
+    \item Failure Handling
+    \item Administration
+    \item Extendability
+    \item Modularity
+    
+\end{itemize}
+
+\subsection{OZG Challenges}
+
+This section describes challenges which arise from OZG integration requirements.
+
+\begin{itemize}
+    \item Administration portal has access to all personal information
+    \item Once an application is submitted, its attributes cannot be changed
+    \item Mapping of IMP attributes and FIM data blocks
+    \item Messages can have a correlation (request-reply) which the system architecture might want to keep track of
+\end{itemize}
+
+\chapter{Initial Solution Proposal}
+
+The goal of the initial integration solution is to introduce features of the IMP system into the OZG system architecture. All existing services should be accessible the same way as before but with additional options for using IMP. The focus of this initial integration is to avoid disruption of existing system operation through non-invasive integration, to enable a fast and simple entrance into the IMP system and to provide future upgrade capabilities. The integration takes place on three layers:
 
 \begin{figure}[h]
+\caption{IMP Layer Diagram}
     \centering
-    \includegraphics[scale=0.15]{Diagrams/Integration Architecture 1/Overview.png}
+    \includegraphics[scale=0.3]{Diagrams/Integration Architecture 1/IMP Layer Diagram Integration.png}
 \end{figure}
+
+\paragraph{IMP Solution Integration Layer} 
+The purpose of the integration on the IMP solution layer is to take advantage of new interaction capabilities with the user through the IMP system. Chapter 3 gives some examples on how the IMP client can enable the user to interact with the IMP system. The integration evaluates possibilities of using relationships and IMP messages to improve OZG services, defines what the purpose of each message and relationship type is and how they should be handled by client and service provider. For example relationship templates can be defined and new message types can be created with corresponding new user interfaces in the IMP client.
+
+\paragraph{Relationship Integration Layer} The purpose of the integration on the relationship layer is to enable the technological utilization of relationships as described by the integration on the solution integration layer. 
+
+\paragraph{Communication Integration Layer} The purpose of the integration on the communication layer is to enable the technological utilization of messages as described by the integration on the solution integration layer. 
 
 \section{IMP Solution Integration}
 
@@ -201,10 +242,12 @@ The goal of the integration is to enhance each step of the basic OZG use case th
 
 \section{Technological Integration}
 
+This section evaluates possibilities of a technological integration architecture for realizing the integration solution described in the previous section.
+
 \subfile{sections/9-technological_integration}
 
 
-\chapter{Advanced Integration Architecture}
+\chapter{Advanced Solution Proposal}
 
 The goal of this integration architecture is to make as much functionalities required for the basic OZG use case available through the IMP client. Now, the OZG user profiles are replaced with IMP identities and the integration architecture integrates with any system component necessary.
 
@@ -214,6 +257,8 @@ The goal of this integration architecture is to make as much functionalities req
 \end{figure}
 
 \section{IMP Solution Integration}
+
+\subfile{sections/10-imp_solution_integration}
 
 \chapter{Solution Evaluation}
 

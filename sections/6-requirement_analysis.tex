@@ -1,58 +1,49 @@
-
 \subsection{User Perspective}
 
 \begin{itemize}
-    \item The user wants to manage his personal information in one place
-    \begin{itemize}
-        \item The user wants to CRUD attributes
-        \item The user wants SPs to CRUD his attributes
-        \item The user wants a user friendly interface where he can CRUD his attributes
-        \item In case the user cannot understand an attribute or its possible values, he needs OSS tools which enables him to enter the correct value
-        \item The user wants to enter personal information only once (=> SPs should reuse existing attributes)
-        \item The user wants a new or modified attributes to be instantly used everywhere
-        \item The user wants a deleted attribute to be instantly deleted everywhere
-        \item The user wants to have a list of often used attributes, in order to prefill them
-    \end{itemize}
-    \item The user wants to manage authentication in one place
-    \begin{itemize}
-        \item The user does not want to authenticate
-        \item The user wants that only he has access to the identity
-    \end{itemize}
-    \item The user wants to manage authorisation in one place
-    \begin{itemize}
-        \item The user wants to manage who can perform which actions in his name (f.e CRUD attributes, place order, cancel subscription)
-        \item The user wants an authorisation to only be granted if he manually approves
-        \item The user wants an authorisation to be associated with a single entity, a reason, which actions can be performed and duration of the authorisation
-        \item The user wants to communicate with the authorised entity
-        \item The user wants to have much information about the authorised entity
-        \item The user wants to be able to revoke an authorisation
-        \item The user wants to save the history of authorisations
-    \end{itemize}
-    \item The user wants to use all OSS tools in one place
-    \begin{itemize}
-        \item Communication through inbox
-        \item Subscribe for a service of an SP
-        \item Place order in a shop of an SP
-        \item ...
-    \end{itemize}
-    \item The user wants
-
+    \item The user wants one service where he can manage all personal information 
+    
+    \item The user does not want to manage multiple user profiles
+    
+    \item The user wants all service providers to be able to use the personal information of the service
+    
+    \item The user wants service providers to always use the most recent state of his personal information
+    
+    \item The user wants to be able to share and retract personal information, service providers have access to
+    
+    \item The user wants to restrict access to personal information as much as possible
+    
+    \item The user wants information about the service provider he is about to share information with
+    
+    \item The user wants to know the reason each time a service provider wants to process his personal information
+    
 \end{itemize}
 
 \subsection{Service Provider Perspective}
 
-\begin{itemize}
-    \item SPs want to manage personal information of users
-    \begin{itemize}
-        \item SPs want to CRUD attributes of the user
-        \item In case modification of an attribute has strong implications on the operation of a system, the modification of an attribute needs to be limited
-        \item SPs want to access personal information already collected by other SPs
-        \item SPs want 
-    \end{itemize}
-    \item identification
-    \item authentication
-    \item authorisation
-    \item 
-\end{itemize}
+The service provider is assumed to have an existing system architecture containing systems for management of user profiles. This section describes requirements of a service provider regarding the service for managing user data.
 
-\subsection{OZG Perspective}
+
+\begin{itemize}
+    
+    \item The service provider wants a good user experience -> see all user requirements above
+    
+    \item The service provider wants to access personal information necessary for processing user requests
+    
+    \item The service provider wants to change, add or delete personal information
+    
+    \item The service provider wants to communicate with users
+    
+    \item The service provider wants to the service to guarantee secure interaction with users
+    
+    \item The service provider wants the system to keep a record of interactions with users and be able to verify the validity of the record
+    
+    \item The service provider wants to inform users about legal regulations like privacy protection measurements
+    
+    \item The service provider wants minimal integration effort and cost
+    
+    \item The service provider wants to be able to quickly integrate parts of the service with optional future upgrades
+    
+    \item The service provider wants the integrated solution to be scalable, maintainable and stable
+
+\end{itemize}
