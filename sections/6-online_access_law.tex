@@ -60,11 +60,9 @@ This subsection describes the system architecture of a member state relevant for
 \subsubsection{System Components}
 The system architecture consists of the following system components. Each component consists of a list of services it provides either to the user or to other components. Components are defined based on strongly connected categories of services \cite{NRW:Umsetzung}:
 
-\begin{figure}[h]
-\caption{Overview IMP System}
-    \centering
-    \includegraphics[scale=0.25]{Diagrams/OZG System Overview.png}
-\end{figure}
+\begin{center}
+    \includegraphics[scale=0.6]{Diagrams/OZG System Overview.pdf}
+\end{center}
 
 \paragraph{Administration Portal}
 The administration portal is the component which directly interacts with users through a web site an provides the basic OZG use case through interaction with other system components. Through the web page of the portal, the user can create and manage his user profile, receive and send messages, upload and download documents, find administrative services, select an application form for an administrative service and be forwarded to the respective form server. Without direct visibility for the user, the portal also transmits personal information from the user profile to the form server, receives finished applications from the form server, determines responsible institutions and submits applications to the data exchange platform.
@@ -250,7 +248,7 @@ The inbox is a sub-component of the user profile and enables the user to send me
 In order to implement the basic use case, the components have to interact with each. The following diagram visualizes, which components interact. Each interaction is described afterwards. The arrows describe the main direction of information flow in an interaction.
 
 \begin{center}
-    \includegraphics[width=8cm]{Diagrams/Interaction Diagram.png}
+    \includegraphics[scale=0.6]{Diagrams/Interaction Diagram.pdf}
 \end{center}
 
 \begin{enumerate}

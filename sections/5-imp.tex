@@ -1,10 +1,26 @@
-There exist many ways to realize an IMP system. Based on the previously analyzed requirements of users and service providers, a possible solution for an IMP system is presented. The purpose of this chapter is not to give a detailed explanation of the presented IMP system but to deliver a brought understanding of the concepts, features and components involved.
+\begin{itemize}
+    \item IMP hosts systems for identity management and provides access to users with an application and to service providers with integration tools
+    \item Users can create an identity and manage attributes (key-value pairs)
+    \item Users and service providers can establish relationships and use them to securely share personal information and exchange structured data
+\end{itemize}
+
+\begin{itemize}
+    \item Ease of Use: Users only need to manage one online identity which can be accessed by multiple service providers
+    \item Data protection: Users can control which service providers get access to which attributes
+    \item Bidirectional Communication: Service providers and users can directly communicate with each other by exchanging structured data their tools have a common understanding of.
+    \item User Interaction: The user application can display various user interfaces based on the content of exchanged structured data.
+    \item Data Abuse Protection: Service providers are only supplied with necessary personal information which minimizes the possibilities of abuse by the service provider or in case of a data breach.
+    \item Communication Security: Attributes communicated structured data are securely exchanged. User and service provider can therefore also directly exchange sensible information. This is not possible for example through e-mail
+\end{itemize}
+
+
+The purpose of the following sections is not to give a detailed explanation of the presented IMP system but to deliver a brought understanding of the concepts, features and components involved.
 
 \subsection{Features}
 
 \paragraph{Provisioning} The IMP system is hosted on the system architecture of the identity management provider and provides identity management as a service for users and SPs. Users and service providers can manage identities by accessing features of the IMP system. The IMP system stores all personal information and data necessary for the operation of identity management. The user only manages one identity which can be accessed by multiple service providers.
 
-\paragraph{Tooling} The IMP system provides users and service providers with software tools for accessing its features. The user is provided with a user friendly application while the enterprise is provided with tools for integration.
+\paragraph{Applications} The IMP system provides users and service providers with software tools for accessing its features. The user is provided with a user friendly application while the enterprise is provided with tools for integration.
 
 \paragraph{Personal Information Management} One feature of the IMP system is management of personal information. Through the application, the user can create an identity and add, remove and update any kind of key-value pairs. These are IMP identity attributes.
 
@@ -220,3 +236,5 @@ If a user has questions about the newsletter, he can send messages to the servic
     \caption{IMP Use Case Communication Sequence Diagram}
     \includegraphics[scale=0.3]{Diagrams/IMP Use Case Communication Sequence Diagram.png}
 \end{figure}
+
+\section{}

@@ -45,6 +45,7 @@
 \usepackage{float}
 \usepackage{wrapfig}
 \usepackage{subfiles} % Best loaded last in the preamble
+\usepackage{pdfpages}
 
 % hyperrefs in the documents
 \usepackage[bookmarks=true,colorlinks,pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,citecolor = black,urlcolor=black]{hyperref} 
@@ -74,7 +75,7 @@
           \vspace*{3cm}
           \textbf
           {
-               \Large University of Heidelberg\\
+               \Large Universität Heidelberg\\
                \smallskip
                \Large Institute for Computer Science\\
                \smallskip
@@ -157,108 +158,29 @@ Date of Submission: \today
 
 \subfile{sections/4-terminology}
 
+\section{Identity Management Provisioning (IMP)}
+
+\subfile{sections/5-imp}
+
 \section{Online Access Law (OZG)}
 
-\subfile{sections/5-online_access_law}
+\subfile{sections/6-online_access_law}
 
 \section{Messaging}
 
-This section describes possibilities of constructing a message based integration architecture
-
-\subsection{Messaging Patterns}
+\subfile{sections/7-messaging}
 
 \chapter{Identity Management}
 
-\section{Functional Requirement Analysis}
+\subfile{sections/8-identity_management}
 
+\chapter{IMP Utilization in OZG}
 
-\subfile{sections/6-requirement_analysis}
+\subfile{sections/9-imp_utilization_in_ozg}
 
-\section{IMP System Solution}
+\chapter{Advanced Utilization}
 
-\subfile{sections/7-imp_system_proposal}
-
-\chapter{Integration Challenges}
-
-This chapter describes challenges for integrating the IMP system described in chapter 3 into the OZG system architecture. The quality of the presented integration can be determined based on the number of the following challenges it solves.
-
-\section{IMP Challenges}
-This section describes challenges which arise from the operation of the IMP system
-
-\begin{itemize}
-    \item Connector has REST interface and cannot notify system architecture
-    \item Connector does not understand messages
-    \item Messages can have different versions
-    \item API of connector can change
-    \item New types of messages can be added by the client and the system provider might need to understand them
-\end{itemize}
-
-\section{SP Challenges}
-
-This section describes challenges which arise from service provider integration requirements.
-
-\begin{itemize}
-    \item Minimal modification of existing systems
-    \item Maintainability
-    \item Scalability
-    \item Failure Handling
-    \item Administration
-    \item Extendability
-    \item Modularity
-    
-\end{itemize}
-
-\subsection{OZG Challenges}
-
-This section describes challenges which arise from OZG integration requirements.
-
-\begin{itemize}
-    \item Administration portal has access to all personal information
-    \item Once an application is submitted, its attributes cannot be changed
-    \item Mapping of IMP attributes and FIM data blocks
-    \item Messages can have a correlation (request-reply) which the system architecture might want to keep track of
-\end{itemize}
-
-\chapter{Initial Solution Proposal}
-
-The goal of the initial integration solution is to introduce features of the IMP system into the OZG system architecture. All existing services should be accessible the same way as before but with additional options for using IMP. The focus of this initial integration is to avoid disruption of existing system operation through non-invasive integration, to enable a fast and simple entrance into the IMP system and to provide future upgrade capabilities. The integration takes place on three layers:
-
-\begin{figure}[h]
-\caption{IMP Layer Diagram}
-    \centering
-    \includegraphics[scale=0.3]{Diagrams/Integration Architecture 1/IMP Layer Diagram Integration.png}
-\end{figure}
-
-\paragraph{IMP Solution Integration Layer} 
-The purpose of the integration on the IMP solution layer is to take advantage of new interaction capabilities with the user through the IMP system. Chapter 3 gives some examples on how the IMP client can enable the user to interact with the IMP system. The integration evaluates possibilities of using relationships and IMP messages to improve OZG services, defines what the purpose of each message and relationship type is and how they should be handled by client and service provider. For example relationship templates can be defined and new message types can be created with corresponding new user interfaces in the IMP client.
-
-\paragraph{Relationship Integration Layer} The purpose of the integration on the relationship layer is to enable the technological utilization of relationships as described by the integration on the solution integration layer. 
-
-\paragraph{Communication Integration Layer} The purpose of the integration on the communication layer is to enable the technological utilization of messages as described by the integration on the solution integration layer. 
-
-\section{IMP Solution Integration}
-
-\subfile{sections/8-imp_solution_integration}
-
-\section{Technological Integration}
-
-This section evaluates possibilities of a technological integration architecture for realizing the integration solution described in the previous section.
-
-\subfile{sections/9-technological_integration}
-
-
-\chapter{Advanced Solution Proposal}
-
-The goal of this integration architecture is to make as much functionalities required for the basic OZG use case available through the IMP client. Now, the OZG user profiles are replaced with IMP identities and the integration architecture integrates with any system component necessary.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.15]{Diagrams/Integration Architecture 2/Overview.png}
-\end{figure}
-
-\section{IMP Solution Integration}
-
-\subfile{sections/10-imp_solution_integration}
+\subfile{sections/12-advanced_utilization}
 
 \chapter{Solution Evaluation}
 
@@ -266,8 +188,6 @@ The goal of this integration architecture is to make as much functionalities req
 
 \chapter{Outlook: Advanced IMP Integration}
 
-
 \printbibliography
-
 
 \end{document}

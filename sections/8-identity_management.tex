@@ -1,0 +1,58 @@
+\section{Identity Management in OZG}
+Like many online self-service platforms, the system architecture responsible for implementing the OZG relies on user profiles for managing identities. In case of the OZG, identity management is especially complicated due to the federated model of interoperable user profiles. Each member state has to provide its own user profile system which can be utilized through every administration portal. This solution is expensive to develop and maintain, as cooperation of multiple member states and institutions is required.
+
+If every member state integrated IMP, users could access all administrative services through on IMP identity. Member states would not need to coordinate the operation of their user profile systems but independently access personal information through the IMP system.
+
+
+Users are required to create and maintain multiple user profile, the user profile of the OZG being yet another one. Changing personal information is a time consuming task with with an increasing number of user profiles and login credentials.
+
+Multiple service providers accessing personal information through the IMP identity of a user would enable the management of personal information in one place.
+
+Possibilities of interaction with the user to for example notify him about the status of an application are limited as no information which requires a high authentication level can be transmitted via E-Mail.
+
+Through the IMP client, direct interaction with the user is possible. The user can not only receive notifications but directly respond without the need for visiting a website and logging in.
+
+
+With a large number of user profiles the risk of forgetting passwords and the possibility of users using the same password multiple times increases.
+Using the IMP client to access services, no authentication through a username and password combination is required as the application is installed on a secured smartphone.
+
+
+\section{Integration Challenges}
+
+This chapter describes challenges for integrating the IMP system described in chapter 3 into the OZG system architecture. The quality of the presented integration can be determined based on the number of the following challenges it solves.
+
+\subsection{IMP Challenges}
+This section describes challenges which arise from the operation of the IMP system
+
+\begin{itemize}
+    \item Connector has REST interface and cannot notify system architecture
+    \item Connector does not understand messages
+    \item Messages can have different versions
+    \item API of connector can change
+    \item New types of messages can be added by the client and the system provider might need to understand them
+\end{itemize}
+
+\subsection{SP Challenges}
+
+This section describes challenges which arise from service provider integration requirements.
+
+\begin{itemize}
+    \item Minimal modification of existing systems
+    \item Maintainability
+    \item Scalability
+    \item Failure Handling
+    \item Administration
+    \item Extendability
+    \item Modularity
+    
+\end{itemize}
+
+\subsection{OZG Challenges}
+
+This section describes challenges which arise from OZG integration requirements.
+
+\begin{itemize}
+    \item Administration portal has access to all personal information
+    \item Once an application is submitted, its attributes cannot be changed
+    \item Mapping of IMP attributes and FIM data blocks
+\end{itemize}

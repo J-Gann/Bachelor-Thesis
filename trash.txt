@@ -431,3 +431,184 @@ The administration portal receives a request from the IMP client through a "Requ
 \end{figure}
 
 \subsection{Communication}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The first step of onboarding a new user was to create and display the relationship template. A messaging adapter is attached to the web server of the administration portal. The adapter presents an API for retrieving relationship templates for onboarding towards the coding of the web server. The code of the web server is manually modified to use the API to retrieve the template before sending the profile creation web page to the user. The messaging adapter can publish requests on the "Onboarding Template Request" channel and receive responses on the "Onboarding Template Response" Channel. The adapter defines a format for the message containing the request and expects a certain format of the response message. The message the adapter publishes on the "Onboarding Template Request" channel contains a request ID and template metadata. The request ID is a unique number, which will be included in the response. Through this ID, the adapter can return the response to the issuer of the request message. The template metadata are dynamically created attributes of the web server which should be included in the relationship template. Based on this metadata, the web server can personalize the processing of the template and the eventually resulting relationship request. In this case, the web server includes the session ID of the user as metadata to associate template and relationship request with the session. This enables the web server to send status updates to the user through the web page.
+
+Requests on the "Onboarding Template Request" channel are processed by the "Onboarding Template" Module.
+
+The module stores the configuration of the onboarding template. The configuration defines the content of the template like title, requested attributes and more for the onboarding scenario.
+
+The request message is consumed by the "Config Enricher" who adds the stored configuration as a new entry to the message.
+The template configuration lists attributes which are required by the user in order to request the relationship. Because the relationship based on this template will eventually be used to create a user profile, all attributes required to create a user profile will have to be requested by the template. As the OZG user profile and the IMP identity might not share the same definitions for attributes, the attribute names used by OZG user profile component have to be manually mapped to those used by the IMP system. The attribute names the IMP system understands are included in the template.
+To create a suitable configuration object, the connector can understand, the message is consumed by the "Config Object Creator" component. This component incorporates the template metadata included in the original request message into the template configuration and structures the configuration for example as a JSON object. This is done to decouple the data representation of the messaging adapters. The adapter of the web server might use XML and the adapter of the connector might use JSON.
+
+A channel adapter is also attached to the connector. It is able to transform messages sent to a specific set of channels to a suitable REST request. Responses are then published to a specific set of response channels. For each possible REST request, one request and reply channel exists.
+
+In this case, the message containing the template configuration is published on the "Template Request" channel. The messaging adapter sends a REST request to the connector, requesting a new relationship template along with the configuration. The adapter then publishes the response along with the request ID on the "Template Response" channel.
+
+The "Template Request" and "Template Response" channel can be used by any number of messaging modules, therefore it is necessary for the "Onboarding Template" module to only process template responses it is responsible for. Therefore a "Onboarding Template Filter" component consumes all messages on the "Template Response" channel but only publishes templates of the onboarding type to the "Onboarding Template Response" channel. Before publishing, a "Response Formatting" Component maps the data format of the message so that the adapter of the web server understands it.
+
+The web server consumes the response and based on the session ID stored in the template knows which user to send it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The first step of the basic OZG use case is the creation of a user profile through the web page of the administration portal. This is not necessary any more, as user profiles are replaced by IMP identities. The user will only have to create an IMP identity.
+
+The second step of the basic OZG use case is to login to a user profile on the web page of the administration portal. As user profiles get replaced by IMP identities, the IMP client can be used to access OZG services. The IMP client does not require authentication, as it is installed on the smart phone of the user. The user can secure his smartphone through for example biometric authentication.
+
+The third step of the basic OZG use case is to select an administrative service which is still done through the web page of the administration portal.
+
+The fourth step of the basic OZG use case is to fill in the application. The application is not started by the user filling in a form on the form server and submitting the result to the administration portal any more, but by requesting a relationship with the institution responsible for processing a selected application.
+
+The web page of the administration portal displaying a selected administrative service does not contain an integration with a form server any more. Instead it displays the QR code for a relationship template provided by the institution responsible for processing the application.
+
+For each administrative service, the institution is responsible for processing, it issues a HTTP POST request to the institution connector requesting the creation of a relationship template. The connector responds to the institution with the template IDs.
+
+In order for the administration portal to display the correct relationship template, he requests the user to manually enter his home address. After the administration portal determined the responsible institution, he retrieves the correct template ID and displays it to the user as QR code.
+
+If the user scans the QR code with his IMP client, the client retrieves the relationship template corresponding to the template ID of the QR code and display it. The relationship template contains a description of the selected administrative service as reason for the relationship. The template also requests the IMP identity to share several attributes, which the institution requires in order to process the application. This replaces the functionalities of the form server.
+
+The fifth step of the basic OZG use case is to submit the application. After the user accepts the relationship template, the client sends a relationship request to the institution which created the template along with the shared attributes. The institution can accept the request and start processing the application. The IMP identity in this case has to share personal information only with the specific institution responsible for processing the application.
+
+The sixth and seventh steps of the basic use case are no longer necessary as the application is properly delivered to the institution as result of the fifth step.
+
+The eighth step of the basic OZG use case is the management of active applications. As each application is represented by a relationship between an institution and an IMP identity, the application can be managed by requesting a termination of the relationship and sharing the status of the relationship as part of an attribute of the institution. Termination of the relationship after approval of both parties, also prohibits the institution from further usage of personal information of the IMP identity.
+
+The ninth step of the basic OZG use case is the communication between user profile and institutions responsible for active applications. As an active relationship is represented by a relationship, the two parties can directly communicate through the relationship.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{User Perspective}
+
+\begin{itemize}
+    \item The user wants one service where he can manage all personal information 
+    
+    \item The user does not want to manage multiple user profiles
+    
+    \item The user wants all service providers to be able to use the personal information of the service
+    
+    \item The user wants service providers to always use the most recent state of his personal information
+    
+    \item The user wants to be able to share and retract personal information, service providers have access to
+    
+    \item The user wants to restrict access to personal information as much as possible
+    
+    \item The user wants information about the service provider he is about to share information with
+    
+    \item The user wants to know the reason each time a service provider wants to process his personal information
+    
+\end{itemize}
+
+\subsection{Service Provider Perspective}
+
+The service provider is assumed to have an existing system architecture containing systems for management of user profiles. This section describes requirements of a service provider regarding the service for managing user data.
+
+
+\begin{itemize}
+    
+    \item The service provider wants a good user experience -> see all user requirements above
+    
+    \item The service provider wants to access personal information necessary for processing user requests
+    
+    \item The service provider wants to change, add or delete personal information
+    
+    \item The service provider wants to communicate with users
+    
+    \item The service provider wants to the service to guarantee secure interaction with users
+    
+    \item The service provider wants the system to keep a record of interactions with users and be able to verify the validity of the record
+    
+    \item The service provider wants to inform users about legal regulations like privacy protection measurements
+    
+    \item The service provider wants minimal integration effort and cost
+    
+    \item The service provider wants to be able to quickly integrate parts of the service with optional future upgrades
+    
+    \item The service provider wants the integrated solution to be scalable, maintainable and stable
+
+\end{itemize}
