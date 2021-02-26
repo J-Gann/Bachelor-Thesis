@@ -1,47 +1,20 @@
+The main issue of the IMP solution presented in chapter 4 is the utilization of user profiles and the resulting lack of data protection. The IMP solution described in this chapter puts the individual institutions in the center of the integration in order to eliminate the need for user profiles and the need for administration portals to process personal information.
+
+Applications submitted to administration portals will eventually be submitted to responsible governmental institutions. Using IMP, relationships can be used to send applications directly to institutions without the need for an administration portal, form server or data exchange platform. Each institution has a predetermined set of administrative services it can process. For each administrative service, the institution can create relationship templates, containing a description of the service along with attributes required by the user:
 
 \begin{itemize}
-    \item The goal of this advanced integration is to take full advantage of IMP features
-    
-    \item The integration now focuses not only in the system architecture of the administration portal but also of the institutions
-    
-    \item A disadvantage of the previous integration solution is, that the administration portal maintains user profiles. This results in a duplication of user data management systems (IMP system and user profile system). In addition, trough the user profiles, the administration portal has access to personal information without the need for processing but routing it. This is a data protection issue.
-    
-    \item As institutions are the entities which eventually need to process personal information, personal information should only be shared with them.
-    
-    \item Using a IMP connector, institutions can establish relationships with users while the relationship represents the application for an administrative service.
-    
-    \item The institution does not maintain a identity management system in addition to the IMP system: An application is started being processed after the relationship is established and further communication regarding the application is done through the relationship. If the application is finished, the relationship is terminated, removing access to personal information for the institution.
-    
-    \item Institutions are capable of processing multiple administrative services. Each service has its own purpose, description and personal information required by the user. For each service, the institution processes, individual relationship templates can be created.
-    
-    \item In order for users to determine which institution is responsible for processing their request and for accessing the correct relationship template, the administration portal can be used as a "search-engine"
-    
-    \item The user searches for a administration service on the website of the administration portal and specifies the location he lives in. The administration portal determines the responsible institution and retrieves the correct relationship template from it.
-    
-    \item Based on the template, the user now interact only with the institution to apply for a service. The administration portal does not receive any further personal information.
-    
-    \item By requesting to change attributes of established relationships the institutions can process modifications of the request and decide if they accept or deny the request.
-    
-    \item As there is no standard for how the system of an institution operates, the integration can follow the integration of the administration portal by constructing a "form" from the shared personal information and enabling to deliver it in all kinds of formats through an adapter
-    
-    \item However, to further demonstrate the integration capabilities, the integration presents a possible integration for enabling application management through an E-Mail server on the institution side.
-    
-    \item Incoming applications can be sent as an E-Mail to employees assigned to a certain type of request. The relationship ID can be used as a reference ID in the title of the relationship or as a "spoofed" email sender. Further communication like attribute change requests can follow the same style and be aggregates by any email client to display all messages with the same reference ID.
-    
-    \item This method of applying for administrative services completely removes the need for administration portal and institution to maintain user profiles. It also enables users to share personal information only with entities which really need to process it. By enabling institution and user to directly interact, changes of the request content, status updates and exchange of mails can be done easily.
-    
-    \item Integration aufbauend auf erster oder ersetzend??
-    
-    \item Messaging architektur aus 1 genau so applizierbar in advanced integration
-    
-    \item im stil der overview der integrationen auch das connection diagram des OZG systems beschreiben. User Domain, Portal Domain, FIM Domain, Institution Domain, Data Exchange Domain
-    
-    \item basic use case umsetzen durch IMP trotz ablösen von 3 vorher existierenden domänen
-    
-    \item in diagrammen aufzeigen wo persönliche daten verarbeitet werden
-    
-    \item datenverabeitung vergleich zwischen diagrammen
-    
-    \item offen ob man andere domänen abschaltet (übergangszeit anlassen)
-    
+    \item Title: Apply for administrative service XYZ
+    \item Attributes: Name, Surname, ... 
+    \item Shared Attributes: Institution Name ...
+    \item Reason: Apply for the administrative service XYZ ...
 \end{itemize}
+
+Based on these relationship templates, users and institutions can establish relationships. In contrast to the IMP solution of chapter 4, an established relationship does not result in the creation of a user profile. Instead, relationships represent a single application process and the attributes shared as part of the relationship are used by the institution to process the corresponding administrative service. After finishing the service, the relationship can be terminated, removing access to the shared attributes from the institution. 
+
+While processing the administrative service, institution and user can securely and directly exchange data such as mails trough the IMP system without the need of an administration portal or user profile being involved.
+
+Providing an attribute change feature as described in chapter 4, can enable users to request modification of attributes of an active application. The institution can then decide whether to accept or reject the request.
+
+For users to access the relationship templates, each institution can host its own web page which lists all administration services along with the corresponding QR code containing the template.
+
+However, depending on for example the home address of the user, the institution responsible for processing an administrative service can change. Therefore the administration portals connected trough the online gateway can be used as a "search-engine" for institutions. On any administration portal a user can select an administrative service and specify his home address. Based on this information, the portal is able to determine the institution responsible for processing the request. However, instead of requiring the user to login to a profile, the portal can redirect him to the web page of the institution where the relationship templates are being displayed.

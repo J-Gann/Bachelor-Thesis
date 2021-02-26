@@ -1,58 +1,80 @@
-\section{Identity Management in OZG}
-Like many online self-service platforms, the system architecture responsible for implementing the OZG relies on user profiles for managing identities. In case of the OZG, identity management is especially complicated due to the federated model of interoperable user profiles. Each member state has to provide its own user profile system which can be utilized through every administration portal. This solution is expensive to develop and maintain, as cooperation of multiple member states and institutions is required.
+\section{OZG Identity Management Issues}
 
-If every member state integrated IMP, users could access all administrative services through on IMP identity. Member states would not need to coordinate the operation of their user profile systems but independently access personal information through the IMP system.
+The OZG system architecture utilizes user profiles for identity management. This leads to several issues regarding usability, data protection, security and maintenance costs. The following sections describe problems of user profiles in general as well as problems arising specifically in context of the OZG system architecture.
 
-
-Users are required to create and maintain multiple user profile, the user profile of the OZG being yet another one. Changing personal information is a time consuming task with with an increasing number of user profiles and login credentials.
-
-Multiple service providers accessing personal information through the IMP identity of a user would enable the management of personal information in one place.
-
-Possibilities of interaction with the user to for example notify him about the status of an application are limited as no information which requires a high authentication level can be transmitted via E-Mail.
-
-Through the IMP client, direct interaction with the user is possible. The user can not only receive notifications but directly respond without the need for visiting a website and logging in.
+\paragraph{Usability}
+Each service provider has different platform for management of personal information and identity related interactions. This can for example be web pages or applications for desktop and smartphone. Keeping track of all created user profiles is difficult. In case of web pages, users will also have to remember various URLs, usernames and passwords. The risk of forgetting login credentials is high. To manage personal information stored in each user profile and for example change an E-Mail address, users have to access the individual platforms of each service provider. Depending on the amount of created profiles, this can be a time consuming task. Especially if the user has to login to web pages using various authentication methods like passwords, single-sign-on, 2FA or Magic-Link. Users receiving notifications, messages and mails on multiple platforms can quickly loose the overview and oversee important notifications. Each platform is often presented with a different design although the purpose remains similar. This makes it difficult for users to orientate themselves. Bidirectional identity related interactions like subscribing for a service, canceling a subscription, sending or receiving a security relevant mail often only takes place trough a web page while E-Mails are only used to notify the user to check his user profile ("You have unread messages!"). One reason is, that E-Mails do not provide a secure way of exchanging information and don't enable advanced interaction capabilities or exchange of structured content. Although service providers could develop mobile applications as an alternative for the web pages and benefit from secure communication and advanced interaction capabilities, due to the required investments many smaller SPs decide not to. Service providers rely on the validity of information stored in the user profile. To guarantee that the information is correct, some SPs require users to take extra identification steps by for example performing a video call or requesting the user to show his ID at a local shop. As each service provider manages separate user profiles, the user might have to go trough this time consuming process repeatedly. Users are not able to automatically share personal information from one user profile with another (except for some Single-Sign-On cases). As a result of that, creating new user profiles each time involves entering personal information all over again. 
 
 
-With a large number of user profiles the risk of forgetting passwords and the possibility of users using the same password multiple times increases.
-Using the IMP client to access services, no authentication through a username and password combination is required as the application is installed on a secured smartphone.
+In case of the OZG, usability of user profiles across multiple administration portals is limited: Although user profiles are interoperable, administration portals are individually responsible for the application process. Applying for different administration services, users might have to visit different administration portals. Each of the portals managing the application process separately. Active applications are not stored as part of the user profile but remain accessible only trough the respective portals they were created through. There does not exist an overview of all active applications amongst all administration portals. The user has to go trough each portal to find the application he for example wants to cancel. Especially due to the „one for all“ approach, users will have to access dedicated administration portals for certain types of administrative services. To mitigate this issue, the inbox of user profiles is used to notify the user of the status of all applications.
+
+\paragraph{Data Protection}
+In the past, service providers established a habit of collecting more personal information than necessary for providing their services. As a response, the "Datenschutz Grundverordnung" - DSGVO (General Data Protection Regulation) was passed. Amongst other things, it requires service providers to inform the user about which personal information is processed, what the reason for processing the information is and how it is being processed. Conventional user profile systems which store all personal information but do not differentiate between possibly different processing legitimisation of attributes increase the risk of illegitimate data usage. As a result of the multitude of user profiles and the variety of platforms to manage them, users can quickly loose track of which service provider processes which personal information. Multiple service providers storing sensible information increases the risk of data being stolen due to a data breach.
 
 
-\section{Integration Challenges}
+In case of the OZG, the user shares personal information not only with institutions responsible for processing an application but also multiple systems operated by the member state. Especially the administration portal used to initiate the application is problematic as it receives personal information from the interoperable user profile, sends it to a form server, eventually receives the filled in form and stores it. As a result of that, the administration portal has access to all personal information only the institution will eventually need to process. In addition, institutions actually do not require user profiles for processing applications. After an application is finished, the institution can delete all data stored as part of this process. The only reason user profiles are required is to verify the validity and authorization of incoming applications and to enable the user to comfortably fill in application forms and communicate trough an inbox. 
 
-This chapter describes challenges for integrating the IMP system described in chapter 3 into the OZG system architecture. The quality of the presented integration can be determined based on the number of the following challenges it solves.
+\paragraph{Security}
 
-\subsection{IMP Challenges}
-This section describes challenges which arise from the operation of the IMP system
+User profiles are often secured trough passwords. Especially in case of a large amount of profiles, users are tempted to use identical passwords, increasing the risk of it being stolen and all user profiles being accessible. With the amount of different service providers storing personal information and passwords, the risk of it being stolen increases as security of system architectures differs between service providers. Users also have to rely on the correct operation of the system architecture of the service provider and might not be able to proof failures in the operation of the system. If for example the user cancels a subscription but the system architecture quietly fails to process it, the user might have issues proofing to the service provider, that he did cancel the subscription.
+
+
+\section{IMP Solution Opportunities}
+
+Identity management provisioning is capable of solving many of the issues described in the previous section.
+
+\paragraph{Usability}
+
+The goal of IMP solutions is to replace user profiles with a single IMP identity. Trough the IMP client a user can manage his IMP identity and all integrated service providers. Instead of creating user profiles, the user can establish a relationship between his IMP identity and the service provider. Depending on the use case, the relationship can be utilized differently. Using the IMP client, the user can keep track of all relationships without the need of remembering URLs, usernames or passwords. It also enables the user to update personal information shared with service providers trough one application. As the IMP client also contains an inbox, all notifications sent by each service provider can be viewed in the same place. As part of established relationships, IMP client and service provider can securely exchange bidirectional structured data which along with advanced interaction capabilities of the IMP client can be used to create custom interaction scenarios: Service providers can sent structured data to the IMP client along with the information that it should be displayed as a form. Depending on the content of the form and the use case of the service provider, the form can either be a purchase agreement or a survey. Assumed, trough a secure identification and validation process, the identity management provider makes sure, attributes users stores as part of their IMP identity are correct, service providers wont require any additional identification steps trough for example video calls. Due to the IMP client being able to automatically fill in attributes requested as part of a relationship, the user usually wont need to repeatedly manually enter personal information.
+
+In case of the OZG system architecture, IMP can be used by each member state to individually establish relationships with IMP identities of users to access personal information. This could replace the requirement for user profiles to be interoperable. For the most part, member states would then be able to operate independently from each other. This solution is described in detail in chapter 4.
+
+\paragraph{Data Protection}
+
+IMP puts the user back in control of his personal information. As part of the process of establishing a relationship, the service provider has to specify exactly which attributes have to be shared, give a detailed explanation of why the attributes are required to be shared, what the purpose of the relationship is and how the attributes are processed. With this information, the user can make an informed decision whether to establish the relationship and the service provider performed his duty to inform the user as required by the DSGVO. As personal information is only shared as part of a relationship and with a specified purpose, the service provider has an effective tool to differentiate processing legitimisation of attributes based on the type of relationship they are accessible trough. This helps the service provider in processing personal information according to the DSGVO. As every relationship along with shared attributes is manageable trough the IMP client, the user wont loose track of which service provider has access to which personal information. The risk of data being stolen decreases as most of the identity management and data storage is performed by the IMP system and the service provider processes only a small portion of attributes of IMP identities.
+
+In case of the OZG system architecture, IMP can be used by the individual institutions to establish relationships with IMP identities of users to retrieve applications for administrative services. This could eventually eliminate the need of user profiles. Personal information could be shared with only the responsible institution. This solution is described in detail in chapter 5.
+
+\paragraph{Security}
+
+The IMP client enables users to access their IMP identity and all relationships without the need of remembering a variety of credentials. This removes the risk of passwords being stolen. The IMP client itself can be secured without the need for a password. As the IMP system is capable of signing relationships and exchanged data, interactions between IMP identity and service provider can be validate at any time. This enables both user and service provider to provide proof for interactions.
+
+\section{IMP Integration Challenges}
+
+In order for the system architecture of the OZG and service providers in general to utilize IMP services, the IMP connector has to be integrated. Multiple integration challenges are described in the following sections and will be focus of the integration architectures of chapter 4 and 5.
+
+
+\paragraph{SP Challenges}
+
+\begin{itemize}
+    \item Sp does not understand concepts of the IMP like relationships, the integration has to bridge this gap
+    \item The SP wants the integration to 
+    \item Minimal modification of existing systems
+    \item Maintainability
+    \item Scalability
+    \item Extendability
+    \item Modularity
+    \item 
+    
+\end{itemize}
+
+\paragraph{OZG Challenges}
+
+\begin{itemize}
+    \item Once an application is submitted, its attributes cannot be changed
+    \item Mapping of IMP attributes and FIM data blocks
+    \item 
+\end{itemize}
+
+\paragraph{IMP Challenges}
 
 \begin{itemize}
     \item Connector has REST interface and cannot notify system architecture
     \item Connector does not understand messages
-    \item Messages can have different versions
     \item API of connector can change
     \item New types of messages can be added by the client and the system provider might need to understand them
 \end{itemize}
 
-\subsection{SP Challenges}
 
-This section describes challenges which arise from service provider integration requirements.
 
-\begin{itemize}
-    \item Minimal modification of existing systems
-    \item Maintainability
-    \item Scalability
-    \item Failure Handling
-    \item Administration
-    \item Extendability
-    \item Modularity
-    
-\end{itemize}
 
-\subsection{OZG Challenges}
-
-This section describes challenges which arise from OZG integration requirements.
-
-\begin{itemize}
-    \item Administration portal has access to all personal information
-    \item Once an application is submitted, its attributes cannot be changed
-    \item Mapping of IMP attributes and FIM data blocks
-\end{itemize}

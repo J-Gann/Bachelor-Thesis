@@ -612,3 +612,62 @@ The service provider is assumed to have an existing system architecture containi
     \item The service provider wants the integrated solution to be scalable, maintainable and stable
 
 \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The system architecture for implementing the OZG as described in section 2.4 has flaws which can be addressed by utilizing an IMP solution. This chapter will elaborate on issues of the OZG system architecture regarding identity management, data protection and usability.
+
+Like many service providers, OZG systems manage identities trough user profiles. The widespread usage of user profiles comes with disadvantages regarding usability, data protection and security. Issues in usability often have its origin in that each service provider enables management of user profiles and the corresponding interaction only trough its own clients.
+
+As today, more and more services are provided trough the internet, the amount of user profiles the average person has to manage increases. Each user profile being managed on a different website with a different design and possibly different authentication method. Changing personal information such as an E-Mail address is very time consuming.
+
+Security relevant interactions with users also happens only through specialized websites or applications. For each service provider the user has to bookmark a certain web page or install a specialized app on his smartphone. Due to security problems, communication through E-Mail can only be used for general notifications and information.
+
+When a user interacts with a service provider through its web page or application, the user has to rely on the correct operation of the system of the service provider. If the user for example cancels a subscription but the system of the service provider quietly fails to successfully process it, the user has limited options of proofing that interaction.
+
+In addition to that, often used methods for authentication like username and password combinations can become insecure: Due to the amount of different user profiles and passwords, users are tempted to use identical passwords. This increases the risk of malicious access if the password gets stolen.
+
+The risk of passwords and personal information being stolen or misused also increases as many service providers with possibly insufficiently secured systems perform identity management.
+
+Service providers often require users to share more information than necessary and don't specify the reason why certain information has to be shared. Once shared, personal information might not be deleted even if it is not required any more. This kind of data collection is prohibited by current European data protection laws. Users maintaining multiple user profiles can quickly loose track of which service provider processes which personal information and for what reason.
+
+\subsection{Interoperability}
+
+Identity management through user profiles in case of the OZG is especially complicated.
+
+User profiles are provided by every member state and federal republic and need to be usable through every administration portal of the portal group. The benefit of distributing responsibility for operation of administration portals an user profiles in each member state is, that each member state can to a large extend operate independently. However, this advantage is reduced through the requirement of interoperable user profiles. Developing this system is complex as multiple different legacy systems have to interact in a standardized way. Each user profile system and each administration portal have to be made compatible. Besides the technological challenge of developing this system, project planning is difficult as decisions regarding the operation of the systems have to be made in cooperation of multiple entities distributed across multiple member states. This issue continues to be relevant even after finishing the development of the system, as future feature updates, security updates and error fixes might also require cooperation. This slows down the development process and makes member states dependant on each other in the operation of their systems. Users benefit from this as they can access all administrative services trough any user profile. However, keeping track of active applications is difficult, as the administration portal through which they can be managed can be different. Especially as a result of the "one for all" method, administrative services are distributed on different portals.
+
+\subsection{Data protection}
+
+Besides the complexity of the operation of the user profile system, issues regarding data protection of personal information exist. Although only the Institution domain actually requires the personal information for processing an application, every domain of the system architecture of the OZG processes it. Especially, as users might be required to use multiple administration portals operated by different member states to access administrative services, sharing personal information and application forms with their systems is a data protection issue.
+
+\begin{center}
+    \includegraphics[scale=0.6]{Diagrams/OZG Personal Information.pdf}
+\end{center}
+
+As long as the information transmitted to the institution is guaranteed to be correct and authorized, the institution does not even require user profiles as its sole purpose is performing an administrative service based on an application form. After finishing the service, the institution may delete all information stored a part of the application. While processing the application, a temporary "user profile" can be used to interact with the user.
