@@ -1,50 +1,31 @@
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Overview.pdf}
-\end{center}
+This section describes the integration of the IMP solution presented in section 5.1 using the same messaging system as described in section 4.2.
 
-To implement the solution described in the previous section, a connector is included in the existing system architecture of every institution. The same messaging system described in chapter 4 can be used to integrate the IMP solution described in the previous section. Many of the messaging modules can be reused with minor modifications. Similar to the messaging system in chapter 4, two system components are connected: A web server and a institution system.
-
-As described in the previous section, for each administrative service, the institution is able to process, a relationship template is created and stored on a web page displayed by the web server. This can be done, as no personalized relationship templates will have to be created. 
-
-Therefore, the messaging system wont need modules for creating templates. However, modules for processing incoming relationship requests are required.
+\subsection{Integration Overview}
 
 \begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Application Request Module.pdf}
+    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Technological Integration/1. Integration Overview.pdf}
 \end{center}
 
-For each administrative service, separate types of relationship templates and therefore relationship requests exist. Each relationship request type is processed by its custom "Application Request" module and "Application Request Processing" module. 
+To implement the IMP solution, a connector is included in the existing system architecture of each institution as well as the messaging system described in section 4.2. Instead of the web server and service facade in the portal domain, the messaging system is connected to the web server and institution system of the institution domain.
 
 \begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Application Relationship Module.pdf}
+    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Technological Integration/3. Application Overview.pdf}
 \end{center}
 
-Application Relationship Modules consume messages from the "Relationship Established" and filter all requests not concerning the application type of the module. After that, attributes shared as part of the relationship are mapped from the IMP data model to the OZG data model. As the existing institution system expects applications to be delivered as a form created by the form server of the administration portal, a message translator is added which translates the shared attributes to a suitable format so that the institution system understands it. The message is then published on the "Process Application" channel where a messaging adapter connected to the institution system consumes the message and submits the included form to the institution system the same way as the data exchange platform would.
+Institutions are able to process a predetermined set of administrative services. For each service, the institution can once create a relationship template and store them as QR code on their web page. 
 
-The institution system can use the unique relationship ID as reference ID for the application process and all further user interactions.
-
-Similar to the "Profile Attribute Change Message" module a "Application Attribute Change Message" module can be included witch performs the same operations.
+Users visiting an administration portal can select an administrative service, specify their home address and be forwarded to the web page of the respective institution. After scanning the appropriate QR code with the IMP client, the user can fill in the requested attributes and send the relationship request. After the relationship is established, the institution is notified and starts processing the application utilizing the shared attributes.
 
 \begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Application Attribute Change Request Module.pdf}
+    \includegraphics[scale=0.5]{Diagrams/Integration Architecture 2/Technological Integration/2. Messaging Overview.pdf}
 \end{center}
 
-For processing attribute change requests, application attribute change request modules are included for each relationship type. They consume messages from the !Attribute Change Request" channel and filter messages which do not concern the application type of the module. After mapping the attributes from IMP data model to OZG data model, messages are published on the "Application Attribute Change Request" channel. A module of the service provider can, based on the provided relationship ID and shared attributes decide if the attributes of the active application can still be changed. 
+The layout of the messaging system is identical to the one presented in section 4.2. Exactly the same type of messages are exchanged with however, a slightly different purpose and content. 
 
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Application Attribute Sync Module.pdf}
-\end{center}
+On the "Relationship to Identity Integration Layer", modules exist for establishing the different types of application relationships. For simplification, modules only for an "Application A" are shown. Besides the content and purpose of relationships in this case are different to the relationships of chapter 4, they are processed exactly the same: Each type of relationship request is processed by an individual application request module and each type of established relationship is processed by an individual application relationship module. As the purpose of relationships in this case are applications for administrative services, each module has to be configured appropriately. For an established relationship, instead of issuing the existing system architecture to create a user profile, the application relationship module issues the existing system architecture to process an application based on the attributes shared as part of the relationship. And instead of a user profile ID, the existing system architecture responds with an application process reference ID. This application process reference ID is used in the same way as the user profile ID in section 4.2. Trough the "New Relationship Mapping" channel, it is sent to the relationship mapping module, which maps each relationship to an application process and vice versa.
 
-In order to process the change of an attribute for an active application, application attribute sync modules are included for each relationship type. They first filter all messages not concerning the relationship type of the module, then translate all attributes from the IMP data model to the OZG data model and publish them on the "Application Attribute Change" channel.
-A messaging adapter connected to the service facade consumes the messages and submits it to the institution system. In case the institution system has no way of processing an attribute change, a message translator can be included which constructs a form the messaging adapter submits as a new application with the same relationship ID.
+On the "Communication Integration Layer", the same types of messages are exchanged. However instead of user profile IDs, relationship IDs are mapped to application process reference IDs. In chapter 4, each module connected to the messaging adapter of the institution system was designed to be able to distinguish between different types of user profile IDs in order to for example distinguish a enterprise profile from the profile of a private person. In this case, modules can distinguish between different application types based on the application process reference ID. 
 
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Mail Message Module.pdf}
-\end{center}
 
-Using a bidirectional version of the "Mail Message" module, the messaging system can exchange mails from institution to IMP client and vice versa relating to a relationship ID.
 
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Application Mail Module.pdf}
-\end{center}
-
-For exchanging mails, application mail modules are included for each type of application.
+...... Hier muss noch mehr kommen (ausführlicher) .......

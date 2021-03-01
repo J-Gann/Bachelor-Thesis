@@ -11,30 +11,26 @@ The goal of the advanced IMP utilization for OZG is to improve upon the solution
 
 \subsection{Solution Evaluation}
 
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Personal Information Existing Architecture.pdf}
-\end{center}
-
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Overview.pdf}
-\end{center}
-
-
 \begin{itemize}
+
+    \item The IMP solution present in this chapter reduces the amount of systems processing personal information to the absolute minimum: only the responsible institution and the user.
     
-    \item Integration aufbauend auf erster oder ersetzend??
+    \item The integration architecture described in section 4.2 was able to integrate into two different system architectures. This demonstrates, that the presented integration architecture is applicable to a variety of system architectures.
     
-    \item Messaging architektur aus 1 genau so applizierbar in advanced integration
+    \item The integration architecture described in section 4.2 was able to integrate a user oriented (persistent) relationship scenario as well as a process oriented (temporary) relationship scenario. This demonstrates, that the presented integration architecture can be used for integrating a variety of IMP solutions.
     
-    \item im stil der overview der integrationen auch das connection diagram des OZG systems beschreiben. User Domain, Portal Domain, FIM Domain, Institution Domain, Data Exchange Domain
+    \item The modular message based approach made it possible to use the integration architecture in a different scenario, by enabling easy configuration of modules for new requirements.
     
-    \item basic use case umsetzen durch IMP trotz ablösen von 3 vorher existierenden domänen
+    \item IMP utilization of chapter 5 can be used simultaneously to IMP utilization of chapter 4 or as an incremental step.
     
-    \item in diagrammen aufzeigen wo persönliche daten verarbeitet werden
+    \item Eventually, profile based operation of OZG can be replaced by process based IMP solution.
     
-    \item datenverabeitung vergleich zwischen diagrammen
-    
-    \item offen ob man andere domänen abschaltet (übergangszeit anlassen)
-    
-    \item benefit of module for each application type is, that the processing of applications with different legitimations is fully seperated and in the future new apllication types can be added without touching exisitng modules
 \end{itemize}
+
+\begin{center}
+    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/OZG Personal Information.pdf}
+\end{center}
+
+\begin{center}
+    \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/IMP Personal Information.pdf}
+\end{center}
