@@ -1,4 +1,26 @@
-This section describes a messaging architecture enabling the integration of the IMP solution described in the previous section into the existing OZG system architecture.
+In this section an integration architecture is presented for integration of the IMP system presented in section 2.2 into the existing OZG system architecture presented in section 3.3. 
+
+\subsection{Integration Requirements}
+Purpose of the integration architecture is to enable the existing OZG system to access IMP services according to the previously described IMP solution. It therefore has to enable the creation of onboarding relationship template, the processing of onboarding relationship requests and the processing of established relationships through creation of user profiles.
+
+In addition to that, it has to enable the definition and utilization of message types listed in the IMP solution. This are messages for attribute changes, communication and authentication.
+
+As the approach of the IMP solution is the mapping between user profiles and IMP relationships, the integration architecture has to enable an effortless translation between the two entities.
+
+OZG system architecture and IMP systems use different data models, especially in regard to personal information. The integration architecture therefore has to translate between them.
+
+As the IMP connector is not capable of sending asynchronous notifications, the integration architecture has to add this functionality.
+
+Depending on the use case of service providers, multiple types of relationships or in this case multiple types of user profiles might be necessary.
+
+The integration architecture has to enable each type of relationship and user profile to be processed separately, as they might have different processing legitimization.
+
+OZG and the presented IMP solution are only one example of a system architecture and IMP use case. The integration architecture should be able to be used in various different scenarios. It therefore has to be configurable and expandable in order to meet new requirements.
+
+\subsection{Messaging}
+For the technological integration, a messaging approach is used. 
+
+The reasons are ...
 
 \subsection{Integration Overview}
 
@@ -6,7 +28,7 @@ This section describes a messaging architecture enabling the integration of the 
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/1. Integration Overview.pdf}
 \end{center}
 
-The IMP solution described in the previous section requires the administration portal to access IMP services. For integration, an IMP connector and a messaging system are added to the portal domain. Using the messaging system, existing systems of the administration portal can access IMP services trough the IMP connector.
+The IMP solution described in the previous section requires the administration portal to access IMP services. For integration, an IMP connector and a messaging system are added to the portal domain. Using the messaging system, existing systems of the administration portal can access IMP services through the IMP connector.
 
 \begin{center}
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/2. System Integration Overview.pdf}
@@ -32,11 +54,11 @@ On the existing website of the administration portal, where users can create a u
 
 The main task of the integration system is to translate between the domain of the existing system architecture and the domain of the IMP system. None of the existing systems can process IMP relationships but they can process user profiles and vice versa. 
 
-On the side of the administration portal, messaging adapters provide an API to the existing systems providing access to IMP services while hiding the technological details of the operation of the IMP system and the underlying messaging system. The adapters communicate with the messaging system trough publish-subscribe datatype channels. Each datatype channel contains messages with the same datatype and has a defined purpose. All systems, consuming messages from the channel are aware of this purpose and process consumed messages accordingly. Messages placed on a publish-subscribe channel can be simultaneously accessed by multiple systems which subscribed to the channel. Using these channels, message adapters can send requests, receive replies, receive notifications, receive requests and send replies. 
+On the side of the administration portal, messaging adapters provide an API to the existing systems providing access to IMP services while hiding the technological details of the operation of the IMP system and the underlying messaging system. The adapters communicate with the messaging system through channels. Messages placed on each channel can be simultaneously accessed by multiple systems. Using these channels, message adapters can send requests, receive replies, receive notifications, receive requests and send replies. 
 
 On the side of the connector, messaging adapters translate the REST API of the connector to a set of publish-subscribe datatype channels. Using these channels, the messaging system can send REST requests by placing messages on channels corresponding to a certain interface. This also enables the messaging system to receive events from by the connector by the messaging adapter placing messages on a notification channels.
 
-Messaging adapters do not communicate directly trough channels, but with messaging modules. Messaging modules consist of messaging patterns which are able to modify, delete and route messages. Purpose of the modules is to translate messages sent by messaging adapters of either service provider or connector to be understood by the respective recipient. Each module is assigned to an individual integration task. By adding or removing modules, integration capabilities of the messaging system can be suited to the system architecture of the service provider. Modules can be designed to provide services to messaging adapters or other modules. Designing modules specifically for the usage by other modules helps in distributing integration responsibilities and avoiding a single monolithic integration component.
+Messaging adapters do not communicate directly through channels, but with messaging modules. Messaging modules consist of messaging patterns which are able to modify, delete and route messages. Purpose of the modules is to translate messages sent by messaging adapters of either service provider or connector to be understood by the respective recipient. Each module is assigned to an individual integration task. By adding or removing modules, integration capabilities of the messaging system can be suited to the system architecture of the service provider. Modules can be designed to provide services to messaging adapters or other modules. Designing modules specifically for the usage by other modules helps in distributing integration responsibilities and avoiding a single monolithic integration component.
 
 \begin{center}
     \includegraphics[scale=0.5]{Diagrams/Integration Architecture 1/Technological Integration/4. Messaging Overview.pdf}
@@ -44,11 +66,11 @@ Messaging adapters do not communicate directly trough channels, but with messagi
 
 The figure gives an overview of the messaging system which will be discussed in detail in the following sections. The figure contains all channels and messaging modules along with their connectivity.
 
-As introduced in the beginning of this chapter, the technological integration can be separated into two layers: The "Relationship to Identity Integration Layer" and the "Communication Integration Layer" which is built upon it. As described in section 2.2, communication between IMP identity and service provider is only possible trough an established relationship.
+As introduced in the beginning of this chapter, the technological integration can be separated into two layers: The "Relationship to Identity Integration Layer" and the "Communication Integration Layer" which is built upon it. As described in section 2.2, communication between IMP identity and service provider is only possible through an established relationship.
 
 Three messaging modules on the "Relationship to Identity Integration Layer" exist, which directly access services of the connector. The onboarding template module provides the feature of creating relationship templates for onboarding. The Onboarding request module, provides the feature of processing and responding to relationship requests. And the Onboarding relationship module provides the feature of processing established relationships by creating a new user profile. The relationship mapping module has the purpose of combining "Relationship to Identity Integration Layer" and "Communication Integration Layer" by enabling the messaging system to map relationships to the corresponding entity of the service provider. In this case, the module maps IDs of relationships to IDs of user profiles. Each relationship has a one-to-one relationship to a user profile.
 
-The "Communication Integration Layer" consists of modules, which enable the existing systems to exchange structured data with the IMP client. Purpose of the modules is to translate between the data models of the service provider and the IMP system. Most importantly in this case, none of the existing systems is able to understand relationships or relationship IDs. Therefore, the message mapping module has the purpose of translating all incoming relationship IDs to user profile IDs with the help of the previously mentioned relationship mapping module on the underlying layer. Three message modules are included. Each of them has the purpose of identifying messages of a certain type and separate them on individual channels. This enables the construction of various modules processing the same message types in different ways. However, in this case, each message type has only a single module processing it. Modules which eventually process the messages, have the purpose of translating the message content between the data models of service provider and IMP system. For example the mail module consumes messages which contain a mail received by a user profile. It is very likely, that the inbox of the user profile and the inbox of the IMP system process mails with different data representation and data types. The mail module therefore has to convert the format of the mail content.
+The "Communication Integration Layer" consists of modules, which enable the existing systems to exchange structured data with the IMP client. Purpose of the modules is to translate between the data models of the service provider and the IMP system. Most importantly in this case, none of the existing systems is able to understand relationships or relationship IDs. Therefore, the message mapping module has the purpose of translating all incoming relationship IDs to user profile IDs with the help of the previously mentioned relationship mapping module on the underlying layer. Three message modules are included. Each of them has the purpose of identifying messages of a certain type and separate them on individual channels. This enables the construction of various modules processing the same message types in different ways. However, in this case, each message type has only a single module processing it. Modules which eventually process the messages, have the purpose of translating the message content between the data models of service provider and IMP system. For example the mail module consumes messages which contain a mail received by a user profile. It is very likely that the inbox of the user profile and the inbox of the IMP system process mails with different data representation and data types. The mail module therefore has to convert the format of the mail content.
 
 \subsection{Onboarding Template Module}
 
@@ -190,3 +212,19 @@ In order to send and receive messages related to authentication, similar to prev
 When the user visits the web page of the administration portal to apply for an administrative service, he will have to login. To utilize the IMP client for authentication, the web server can use a channel adapter to publish a authentication request concerning a user profile ID and a certain session ID. The adapter publishes a message on the "Authenticate" channel which contains the profile ID and a request content. Next to the session ID, the request content may also include information for presentation to the user like the current time or the IP address of the browser. Similar to previous modules, a message translator is inserted to translate the message to a canonical data model and publish it on the "Authentication Request Message".
 
 Eventually, the IMP client sends a response as message, which the "Authentication Message" module publishes on the "Authentication Response" channel. Similar to previous modules, the service provider can use a message filter to process user profile types differently. After translating the message to the OZG data model, it is published on the "Authenticate Profile Response" channel. The channel adapter of the web server receives the message and based on the session ID contained in the response content can authenticate the browser session.
+
+\subsection{Evaluation}
+
+The messaging system and the modular approach make integration architecture expandable and configurable for new integration scenarios.
+
+Message mapping module and relationship mapping module enable the translation between user profile and relationship.
+
+Onboarding template, onboarding request and onboarding relationship module enable the definition and utilization of one or more relationship types.
+
+Message modules enable the definition of message types.
+
+Message processing modules enable the translation between data models.
+
+Messaging system enables asynchronous, event based and direct communication between user and service provider.
+
+Assigning special modules to each type of relationship and message type enables the separation of processing depending on differences in processing legitimization.

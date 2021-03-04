@@ -20,10 +20,10 @@ Digitalization of an administrative service is the modification of the underlyin
 \paragraph{Networking}
 The networking focuses on connecting governmental systems to make all digitized administrative services available for every user. This includes most importantly the connection of administration portals to a portal network through an online gateway and the interoperability of user profiles.
 
-In order to save investments a method called "one for all" is used when hosting administrative services. One member state or the federal republic provide access to a service on their administration portal and distribute the requests to the responsible institutions "under the hood". As administration portals are connected through an "online gateway", each portal contains a search feature, which enables users to find all administrative services through any portal. Interoperable user profiles enable usage of each profile for management of administrative services on all portals.
+In order to save investments a method called "one for all" is used when hosting administrative services. One member state or the federal republic provides access to a service on their administration portal and distributes the requests to the responsible institutions "under the hood". As administration portals are connected through an "online gateway", each portal contains a search feature, which enables users to find all administrative services through any portal. Interoperable user profiles enable usage of each profile for management of administrative services on all portals.
 
 \subsection{Basic Use Case}
-The BMI lists a total of almost 600 administrative services, each being described by a different process \cite{BMI:Informatiosplattform}. Each process consists of multiple sub-processes. When comparing the processes, one can see, that some sub-processes occur very often and in similar arrangements. Those arrangements can be called the basic use case of OZG services.
+The BMI lists a total of almost 600 administrative services, each being described by a different process \cite{BMI:Informatiosplattform}. Each process consists of multiple sub-processes. When comparing the processes, one can see that some sub-processes occur very often and in similar arrangements. Those arrangements can be called the basic use case of OZG services.
 
 The basic use case describes the submission of an application for an administrative service and consists of the following arrangement of sub-processes \cite{NRW:Umsetzung}:
 
@@ -55,7 +55,7 @@ The administration portal stores active applications and enables the user to man
 As part of an active application, the responsible institution can respond to the inbox of the user with status updates, requests or results.  Through the active application, he user can send messages to the responsible institution to request a status update or send additional information and documents.
 
 \subsection{System Architecture}
-This subsection describes the system architecture of a member state relevant for the execution the basic use case of the OZG based on the system architecture of Nordrhein-Westfalen. Systems, which are responsible for coordination of OZG execution between member states and the federal republic are not the focus.
+This subsection describes the system architecture of a member state relevant for the execution of the basic use case of the OZG based on the system architecture of Nordrhein-Westfalen. Systems responsible for coordination of OZG execution between member states and the federal republic are not the focus.
 
 \subsubsection{System Components}
 The system architecture consists of the following system components. Each component consists of a list of services it provides either to the user or to other components. Components are defined based on strongly connected categories of services \cite{NRW:Umsetzung}:
@@ -66,7 +66,7 @@ The system architecture consists of the following system components. Each compon
 
 \paragraph{Administration Portal}
 The administration portal is the component which directly interacts with users through a web site an provides the basic OZG use case through interaction with other system components. Through the web page of the portal, the user can create and manage his user profile, receive and send messages, upload and download documents, find administrative services, select an application form for an administrative service and be forwarded to the respective form server. Without direct visibility for the user, the portal also transmits personal information from the user profile to the form server, receives finished applications from the form server, determines responsible institutions and submits applications to the data exchange platform.
-The administration portal consists of a web server, responsible for hosting web pages, and a facade for service components. The most important components, the service facade provides an interface for are:
+The administration portal consists of a web server, responsible for hosting web pages, and a facade for service components. The most important components the service facade provides an interface for are:
 
 \begin{itemize}
     \item \textbf{Responsibility Finder}
@@ -83,11 +83,11 @@ The administration portal consists of a web server, responsible for hosting web 
     
     \item \textbf{User Profile Management}
     
-    This service component enables the administration portal to interact with the user profile component to retrieve JSON Web Tokens, update and read personal information and document wallet, to read messages of the inbox and sent messages to an institution.
+    This service component enables the administration portal to interact with the user profile component to retrieve JSON Web Tokens, update and read personal information and document wallet, to read messages of the inbox and send messages to an institution.
     
     \item \textbf{Application Management}
     
-    This service component manages applications issued through the administration portal through communication with the form server. The component enables the user to start an application by forwarding him to the correct form on the form server and optionally providing personal information to the form server. Form server and portal communicate about the status and content of the application. The user is able to keep track about the status of active applications through the profile, view their content, send messages to responsible institutions and cancel them.
+    This service component manages applications issued through the administration portal through communication with the form server. The component enables the user to start an application by forwarding him to the correct form on the form server and optionally providing personal information to the form server. Form server and portal communicate about the status and content of the application. The user is able to keep track of the status of active applications through the profile, view their content, send messages to responsible institutions and cancel them.
     
 \end{itemize}
 
@@ -99,7 +99,7 @@ The from-server provides digital forms associated to administrative services. Th
     
     There exist many administrative services and depending on the member state or commune, the required layout of the application can be different. Therefore, a system called federal information management (Föderales Informationsmanagement: FIM) is used to standardize administrative services. FIM consists of three categories of building blocks.
     
-    \textit{Service blocks} contain human readable descriptions about a administrative service.
+    \textit{Service blocks} contain human readable descriptions about an administrative service.
     
     \textit{Data field blocks} contain the standardized description of data fields required for the application of administrative services.
     
@@ -107,7 +107,7 @@ The from-server provides digital forms associated to administrative services. Th
 
     Relevant for the form-server are data field blocks. A data field block can contain one element of five categories.
     
-    \textit{Data fields} are the "smallest entity" of a data field block and describes one standardized piece of information. Depending on the type of information - if it is for example a checkbox or input field - additional metadata is included.
+    \textit{Data fields} are the "smallest entity" of a data field block and describe one standardized piece of information. Depending on the type of information - if it is for example a checkbox or input field - additional metadata is included.
     
     \textit{Data field groups} consist of multiple data fields and other data field groups, relating to a category of information. A data field group can for example be "person" or "company".
     
@@ -119,7 +119,7 @@ The from-server provides digital forms associated to administrative services. Th
     
     The building blocks are centrally managed by federal republic, member states and communes. This simplifies the creation of for example a new form by reusing existing data schema blocks and adding additional required data fields to a new data field schema.
     
-    Each data field block can be uniquely identified through an ID. Therefore, if the form-server is provided with a FIM-ID, he can retrieve the corresponding data filed block from the central storage.
+    Each data field block can be uniquely identified through an ID. Therefore, if the form-server is provided with a FIM-ID, he can retrieve the corresponding data field block from the central storage.
     
     \item \textbf{Initiation of application}
     
@@ -143,7 +143,7 @@ The from-server provides digital forms associated to administrative services. Th
     
     If the user decides to cancel editing the form, the application is deleted from the from-server.
     
-    Depending on the actions of the user, the status of the application changes accordingly and the form server sends an status update.
+    Depending on the actions of the user, the status of the application changes accordingly and the form server sends a status update.
     
     \item \textbf{Storage of application}
     The form-server stores applications for a specified period of time if they were interrupted or submitted.
@@ -180,7 +180,7 @@ Each member state provides its own user profile for identity management. The mai
     
     \item \textbf{Determination Trust Level} \cite{dNRW:Anbindungsleitfaden}
     
-    The trust level of a logged in user profile is determined while registration and usage. The user can register and login to the user profile using a username / password combination or the German ID card. The trust level "High" is only granted, if the user registered using the German ID card \textbf{AND} logs in using the German ID card. All other combinations of registration and login result in a "normal" trust level.
+    The trust level of a logged in user profile is determined while registration and usage. The user can register and login to the user profile using a username / password combination or the German ID card. The trust level "High" is only granted if the user registered using the German ID card \textbf{AND} logs in using the German ID card. All other combinations of registration and login result in a "normal" trust level.
     
     \item \textbf{Management Personal Information} \cite{dNRW:Anbindungsleitfaden} 
     
@@ -217,7 +217,7 @@ The data wallet is a sub-component of the user profile and enables the user to m
     
     \item \textbf{Attach documents to application}
     
-    The user can attach a copy of a document stored in his data wallet to an application on a from server.
+    The user can attach a copy of a document stored in his data wallet to an application on a form server.
 
 \end{itemize}
 
@@ -240,12 +240,12 @@ The inbox is a sub-component of the user profile and enables the user to send me
     
     \item \textbf{Notification through E-Mail}
     
-    The user can be notified of a new message through E-Mail.
+    The user can be notified of a new message through e-mail.
 
 \end{itemize}
 
 \subsubsection{Interfaces}
-In order to implement the basic use case, the components have to interact with each. The following diagram visualizes, which components interact. Each interaction is described afterwards. The arrows describe the main direction of information flow in an interaction.
+In order to implement the basic use case, the components have to interact with each other. The following diagram visualizes, which components interact. Each interaction is described afterwards. The arrows describe the main direction of information flow in an interaction.
 
 \begin{center}
     \includegraphics[scale=0.6]{Diagrams/Interaction Diagram.pdf}
@@ -255,7 +255,7 @@ In order to implement the basic use case, the components have to interact with e
 
     \item The web browser of the user displays the web pages hosted by the administration portal.
 
-    \item The form-server can initiate the application if requested by the administration portal. The portal submits information for identification, authentication and authorisation of a user through an JSON Web Token and a user profile ID. In order for the form server to determine the correct form to display, the portal submits a FIM-ID which corresponds to a data field schemata. In case the user approved, the portal can also collect personal information from the user profile and submit it to the form server for automated filling in of the form.
+    \item The form-server can initiate the application if requested by the administration portal. The portal submits information for identification, authentication and authorisation of a user through a JSON Web Token and a user profile ID. In order for the form server to determine the correct form to display, the portal submits a FIM-ID which corresponds to a data field schemata. In case the user approved, the portal can also collect personal information from the user profile and submit it to the form server for automated filling in of the form.
     
     \item The form server provides the user a web page which displays an interactive form.
     

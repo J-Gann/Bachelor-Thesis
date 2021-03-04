@@ -1,33 +1,72 @@
-This section describes integration possibilities on the solution layer.
-Although the eventual goal of an IMP integration is to replace user profiles, in this case, IMP identity and user profiles will be used together to solve issues described in chapter 3 without disrupting the operation of the existing system architecture. The advanced integration in chapter 5 will present a more invasive solution.
+The IMP solution presented in this section describes the utilization of IMP relationships with the purpose of creating and maintaining user profiles through the IMP client. Message types for attribute synchronization, authentication and communication are defined. To not disrupt the operation of the existing system architecture, the IMP solution is designed to not replace user profiles but provide an additional way of accessing them trough IMP. To later reduce technological integration efforts, the IMP solution is designed to only require interaction with systems of the portal domain.
 
-The presented solution enables users to access OZG services by connecting user profiles to existing IMP identities. Operations performed on the IMP identity will then be synchronized with the connected user profile.
-
-\subsection{Create User Profile}
-One way to connect user profile and IMP identity is by creating a new user profile based on an existing IMP identity. The web page of the administration portal responsible for guiding the user through the user profile creation steps can present an additional option of creating a user profile called "Login using IMP Identity". A relationship template can be displayed in form of a QR code with the following content:
+\subsection{Relationship Utilization}
+The option of using an existing IMP identity for creation of an OZG user profile is added to the account creation web page of the administration portal. An IMP relationship is used for the account creation process. The web page renders the ID of the following relationship template as a QR-code: 
 
 \begin{itemize}
     \item Title: Create OZG User Profile
     \item Attributes: Name, Surname, ... 
+    \begin{itemize}
+        \item Name: Max
+        \item Surname: Mustermann
+    \end{itemize}
     \item Shared Attributes: Administration Portal of the member state ...
     \item Reason: Create an OZG user profile and connect your IMP identity.
+    \item Metadata: <<data for technological integration>>
 \end{itemize}
 
-The user can scan the QR code using his IMP client and is presented with the relationship template. As part of the template, the user is requested to share attributes which thee IMP client can automatically fill in if they already exist. The attributes requested as part of the template have to be sufficient for creating an OZG user profile.
-The user is also presented with an explanation for what the purpose of the relationship is and why the specified attributes are required. If the user accepts, a relationship request can be sent to the administration portal, where the attributes can be analyzed. Depending on the result of the analysis, the relationship can be accepted and therefore established or rejected.
-Once the relationship is established, the OZG system architecture can create a new user profile based on the shared attributes and store the connection of user profile and IMP identity.
+Users visiting the account creation web page of the administration portal can use the IMP client to scan the QR code. The IMP client presents the corresponding relationship template to the user and automatically fills in attributes which the administration portal requests from the user as part of the relationship. It is assumed that the IMP system has systems in place for identifying users and validating personal information of corresponding IMP identities. As a result of that, service providers could rely on the validity of shared attributes.
 
-\subsection{Authentication}
-Communication between IMP system and administration portal can assumed to be secure: Messages originating from an IMP identity for an IMP relationship can not be accessed or modified by a third party and are authorized by the corresponding user. Therefore messages exchanged as part of the established relationship can be used to provide the IMP identity access to OZG services. Some examples for this are shown in the following sections.
+Based on the presented content of the template, the user can make an informed decision on whether to submit a relationship request. If the user submits the request, the administration portal receives it and, based on the attributes shared by the user, decides whether to accept or reject it. If it accepts the relationship request and the user did not retract the request in the meantime, the relationship is established.
 
-\subsection{Login to User Profile}
-Messages trough the established IMP relationship can be used to enable the user to access OZG services through the existing web page, by using the IMP client for authentication. After receiving a login request for a user profile on the web page of the administration portal, an authentication request containing the session ID can be sent to the IMP relationship corresponding to the user profile. The IMP client can display an appropriate notification with options for the user to accept or reject the request. The IMP client sends the result back to the administration portal which according to the response authenticates the browser session or not.
+Using the personal information shared as part of the established relationship, the portal creates a new user profile and connects it to the IMP identity.
 
-\subsection{Attribute Synchronization}
-Modifications of the personal information stored in the user profile can be done by exchanging messages trough the established IMP relationship. Through the IMP client, the user can send an attribute change request regarding the relationship. The system architecture can map the relationship to the connected user profile, evaluate the request and if accepted, perform the modification of personal information. It is possible to enable the user to update attributes of his user profile trough the web page which would require the OZG system to send attribute change requests to the IMP client. For simplicity, this option is left out and the profile management web page is expected to be inaccessible for user profiles connected to IMP.
+\subsection{Message Utilization}
+As part of an established relationship, service provider and user can securely exchange structured data in form of asynchronous messages. Security in this case means that messages can not be accessed or modified by a third party and are authorized by the corresponding user. Based on this secure data exchange capabilities, service providers can define various types of messages, each with different purposes and effects on the IMP client. This section contains various message types useful for managing the user profile created as a result of an established relationship.
 
-\subsection{Communication}
-Messages sent to the inbox of the user profile can be forwarded to the inbox of the IMP identity. As the exchange of messages through the IMP system is secure, also security relevant information can be shared.
+\paragraph{Login to User Profile}
+During the user profile creation process using IMP, the user specified a username but not a password. The IMP client is used for authentication of login requests to the administration portal.
 
-\subsection{Application}
-To minimize the invasiveness of the integration, applications for administrative services remain to be done on the administration portal trough user profiles.
+On the login web page of the administration portal, an option is added to login to a user profile using IMP. After entering and submitting the username specified during the profile creation process, administration portal and IMP client exchange authentication messages. Through the IMP client, the user will be requested to approve a login attempt along with information about the corresponding relationship, IP address, URL and more.
+
+If the user accepts the request, the administration portal authenticates the browser session.
+
+\paragraph{Attribute Synchronization}
+
+The IMP client is used for management of personal information of the user profile. Through the IMP client, the user can send requests for adding, updating or deleting shared attributes. Administration portal and IMP client exchange attribute change request and reply messages. The requests can either be accepted or rejected by the service provider. Accepting the request will result in according modification of the user profile connected to the relationship.
+
+For simplification purposes, the web page for management of personal information on the administration portal is expected to be locked. However, it would also be possible for the portal to send attribute change requests to the IMP client based on the modifications the user performed on the web page.
+
+\paragraph{Communication}
+
+The IMP client is used for receiving and displaying mails sent to the user profile. The administration portal forwards mails sent to a user profile to the inbox of the IMP identity corresponding to the connected relationship.
+
+For simplification purposes, the option of the user to send mails to the administration portal is left out.
+
+\subsection{Evaluation}
+
+The approach of this IMP solution is to map partial identities to IMP relationships. This section evaluates the advantages and disadvantages of this approach as well as its application in the OZG context.
+
+\paragraph{Advantages}
+
+User profiles are known to the existing system architecture and are an often used identity management solution. Many service providers, especially in the private sector will want to keep using a profile based identity management approach. The IMP solution presents an opportunity of leveraging existing user profile systems while simplifying identity management through IMP. In addition to that, the IMP solution is designed, so that it can almost effortlessly be turned on and off, giving service providers the freedom of testing the solution. Service providers can initially add the IMP solution as an alternative to the conventional user profile identity management solution and after some period of time switch to only using the IMP solution.
+
+Mapping user profiles to IMP relationships has many of the usability advantages described in section 3.2. The onboarding process is simplified. Users don't have to manually fill in a form for the creation of a user profile but are supported by the IMP client. As part of established relationships, service provider and users are able to directly exchange messages with structured content. In addition to interaction capabilities of the IMP client, this enables a variety of interaction scenarios not possible through for example common e-mail clients. In this case, scenarios for attribute changes, user profile authentication and communication are made possible.
+
+This approach also increases data protection by providing the user with information on exactly which personal information is shared and how it is being processed as part of the profile creation process. This helps users in making an informed decision on whether to create the user profile. At any time after the onboarding process, users can view the relationship in the IMP client and check which service providers process which personal information and how. This enables users to keep an overview of the distribution of personal information.
+
+Security is also increased as a result of this approach. Through established relationships, service provider and users have the ability to not only directly exchange messages but also securely. As a result of that, authentication through the IMP client can replace password based authentication methods. This eliminates the risk of weak or stolen passwords.
+
+In case of the OZG, this IMP solution can eventually replace the need for interoperable user profiles. In case each administration portal enables onboarding as described by the IMP solution, regarding usability, the existence of a separation of user profiles can be transparent to the user but regarding data protection, the user profiles are strongly separated:
+
+After an effortless onboarding process on multiple administration portals, users are able to manage each profile through the IMP client. This enables users break free access to all user profiles giving the illusion of an interoperable user profile. Logging in to a user profile using the IMP client eliminates the need of remembering passwords, furthering the illusion of interoperable user profiles. Finally, if for each user profile, the same profile name is selected, the user wont be able to distinguish user profiles most of the time.
+
+However in cases where the user requires distinction between user profiles in regard to data protection, the IMP client enables the user to separately view personal information shared with each portal and information about how each portal processes it.
+
+\paragraph{Disadvantages}
+
+The IMP solution has also several problems regarding usability and data protection.
+
+Most importantly, as a result of integrating the IMP system through user profiles, each administration portal is still required to access personal information.
+
+In addition to that, application and management of administrative services remains accessible only through administration portal and form server which presents a discontinuity in accessing OZG services.
