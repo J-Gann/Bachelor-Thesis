@@ -29,67 +29,149 @@ As channels are able to function as a message buffer, sender and receiver of mes
 
 \section{Messaging Patterns}
 
-In the book "\textit{Enterprise Integration Patterns}" by \cite{EIP} multiple patterns for designing messaging systems are presented. This section gives a brief overview of patterns relevant for the thesis.
+In the book "\textit{Enterprise Integration Patterns}" by \cite{EIP} multiple patterns for designing messaging systems are presented. This section gives a brief overview of patterns relevant for the thesis and their visual notation.
 
 \paragraph{Message}
 
-\begin{center}
+Figure \ref{messaging:message} shows the visual notation of a message with two attributes. 
+
+\begin{figure}[H]
+    \centering
     \includegraphics[scale=0.6]{Diagrams/Messaging/1. Message.pdf}
-\end{center}
+    \caption{Message}
+    \label{messaging:message}
+\end{figure}
 
 \paragraph{Channel}
 
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Messaging/2. Channel.pdf}
-\end{center}
+Figure \ref{messaging:channel1} shows the visual notation of an unnamed channel. Arrows to a message symbol are not a notation for channels but for message flow.
 
-\begin{center}
+\begin{figure}[H]
+    \centering
     \includegraphics[scale=0.6]{Diagrams/Messaging/3. Channel.pdf}
-\end{center}
+    \caption{Unnamed Channel}
+    \label{messaging:channel1}
+\end{figure}
+
+Figure \ref{messaging:channel2} shows the visual notation of a named channel. Arrows to and from named channels are no notation for channels but for message flow. Channels are named if they have a special importance.
+
+There exist different types of channels. In the thesis, named channels are publish-subscribe datatype channels. Unnamed channels are point-to-point channels. Publish-subscribe channels can be accessed by every system. In contrast to that, point-to-point channels can only be accessed by two systems - one writing and one reading system.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{Diagrams/Messaging/2. Channel.pdf}
+    \caption{Named Channel}
+    \label{messaging:channel2}
+\end{figure}
 
 \paragraph{Messaging Adapter}
 
-\begin{center}
+Systems which do not natively support message based communication require a messaging adapter which enables the programs of the system to access the messaging system trough an API. The messaging adapter usually has to be developed for each system individually, and manually integrated into the code of the system trough asynchronous function calls of the adapter API.
+
+Figure \ref{messaging:adapter} shows the visual notation of a messaging adapter connected to a system.
+
+\begin{figure}[H]
+    \centering
     \includegraphics[scale=0.6]{Diagrams/Messaging/4. Messaging Adapter.pdf}
-\end{center}
+    \caption{Messaging Adapter}
+    \label{messaging:adapter}
+\end{figure}
 
-\paragraph{Message Router}
+\paragraph{Content-Based Router}
 
-\begin{center}
+Content based routers contain a preconfigured set of routing rules, which instruct the router to place inbound messages on different outbound channels, depending on their content. The definition of the rules does not change during operation of the system.
+
+Figure \ref{messaging:router} shows the visual notation of a message router.
+
+\begin{figure}[H]
+    \centering
     \includegraphics[scale=0.6]{Diagrams/Messaging/5. Message Router.pdf}
-\end{center}
+    \caption{Message Router}
+    \label{messaging:router}
+\end{figure}
 
 \paragraph{Message Translator}
 
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Messaging/6. Message Translator.pdf}
-\end{center}
+Message translators have the purpose of translating message content on data representation and data type layer.
+On the data representation layer, message translators for example translate message content from an XML format to a JSON format. On the data type layer, message translators can for example concatenate first name and last name fields to a single name field.
 
-\begin{center}
+Figure \ref{messaging:translator1} shows the visual notation of a message translator.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{Diagrams/Messaging/6. Message Translator.pdf}
+    \caption{Message Translator}
+    \label{messaging:translator1}
+\end{figure}
+
+As shown in figure \ref{messaging:translator2}, if using two message translators on both sides of a channel, a canonical data model can be created in between. For more information, read \textcite[p. 355]{EIP}
+
+\begin{figure}[H]
+    \centering
     \includegraphics[scale=0.6]{Diagrams/Messaging/7. Message Translator.pdf}
-\end{center}
+    \caption{Message Translator creating Canonical Data Model}
+    \label{messaging:translator2}
+\end{figure}
 
 \paragraph{Message Filter}
 
-\begin{center}
+Message filters contain a preconfigured set of filtering rules, which instruct the filter to delete messages, based on their content. The definition of the rules does not change during operation of the system.
+
+Figure \ref{messaging:filter} shows the visual notation of a message filter.
+
+\begin{figure}[H]
+    \centering
     \includegraphics[scale=0.6]{Diagrams/Messaging/8. Message Filter.pdf}
-\end{center}
+    \caption{Message Filter}
+    \label{messaging:filter1}
+\end{figure}
+
+As shown in figure \ref{messaging:filter2}, message filters can, in combination with publish-subscribe channels, be used to separate messages onto individual datatype channels.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{Diagrams/Messaging/9. Message Filter.pdf}
+    \caption{Message Filter Separating Message Types}
+    \label{messaging:filter2}
+\end{figure}
 
 \paragraph{Content Enricher}
 
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Messaging/9. Content Enricher.pdf}
-\end{center}
+Content enricher have the purpose of adding new attributes to messages. The content which is added usually is a predetermined set of attributes but with dynamically created values.
+
+Figure \ref{messaging:enricher} shows the visual notation of a content enricher.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{Diagrams/Messaging/10. Content Enricher.pdf}
+    \caption{Content Enricher}
+    \label{messaging:enricher}
+\end{figure}
 
 \paragraph{Content Filter}
 
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Messaging/10. Content Filter.pdf}
-\end{center}
+Content filters have the purpose of removing a predetermined set of attributes from messages.
+
+Figure \ref{messaging:filter3} shows the visual notation of a content filter.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{Diagrams/Messaging/11. Content Filter.pdf}
+    \caption{Content Filter}
+    \label{messaging:filter3}
+\end{figure}
 
 \paragraph{Message Store}
 
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Messaging/11. Message Store.pdf}
-\end{center}
+Message stores have the purpose of storing consumed messages in a database. They are also capable of communicating with other messaging patterns for providing access to stored messages. Communication between message patterns and message stores is indicated by a dotted arrows.
+
+Figure \ref{messaging:store} shows the visual notation of a message store. It also shows the example of a content enricher accessing the message store.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{Diagrams/Messaging/12. Message Store.pdf}
+    \caption{Message Store}
+    \label{messaging:store}
+\end{figure}
 
