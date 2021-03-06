@@ -1,12 +1,16 @@
+This chapter gives an overview of regulations, execution and system architecture regarding the online access law. 
+
+\subsection{Regulations}
+
 In 2017 the German government passed the law for improvement of online access to administrative services (Online Zugangs Gesetz: OZG) which requires federal republic and member states to execute the following regulations until 2022 \cite{BMI:OZG_Wortlaut}:
-\begin{enumerate}
-    \item \textbf{Digital availability of administrative services} \\
-    An administrative service is the electronic processing of administrative procedures which are available from outside the governmental institution.  As it is not clear which administrative services exactly are meant by the definition of the OZG, the BMI created a catalogue \cite{BMI:Verwaltungsleistungen}. The OZG requires these services to be digitally available. As a guideline to what is considered sufficient availability, the BMI defined a maturity model \cite{BMI:Digitale_Services}.
-    \item \textbf{Digital access to administrative services through administration portals of a portal network} \\
-    Federal republic, each member state and each commune must provide an administration portal. Portals of communes must be linked to the portal of the corresponding member state. Portals of federal republic and member states must be connected through a portal network. \cite{BMI:Portalverbund} Each portal must provide a "seek and find" feature, which enables users to find all administrative services provided by any administration portal \cite{Cotar:Drucksache_19/19089}. 
-    \item \textbf{Interoperable user profiles for accessing administrative services} \\
-    Federal republic and member states must provide user profiles which can be used to identify the corresponding person while requesting access to administrative services, to save personal information according to the once-only principle, to receive and send messages via a digital mailbox and to pay for services \cite{Cotar:Drucksache_19/19089}. The user profiles must be interoperable for every administration portal of the portal network.
-\end{enumerate}
+
+\paragraph{Digital availability of administrative services} An administrative service is the electronic processing of administrative procedures which are available from outside the governmental institution.  As it is not clear which administrative services exactly are meant by the definition of the OZG, the BMI created a catalogue \cite{BMI:Verwaltungsleistungen}. The OZG requires these services to be digitally available. As a guideline to what is considered sufficient availability, the BMI defined a maturity model \cite{BMI:Digitale_Services}.
+
+\paragraph{Digital access to administrative services through administration portals of a portal network} Federal republic, each member state and each commune must provide an administration portal. Portals of communes must be linked to the portal of the corresponding member state. Portals of federal republic and member states must be connected through a portal network. \cite{BMI:Portalverbund} Each portal must provide a "seek and find" feature, which enables users to find all administrative services provided by any administration portal \cite{Cotar:Drucksache_19/19089}. 
+
+\paragraph{Interoperable user profiles for accessing administrative services} Federal republic and member states must provide user profiles which can be used to identify the corresponding person while requesting access to administrative services, to save personal information according to the once-only principle, to receive and send messages via a digital mailbox and to pay for services \cite{Cotar:Drucksache_19/19089}. The user profiles must be interoperable for every administration portal of the portal network.
+
+\subsection{Execution}
 
 Execution of the OZG can be separated into two projects:
 
@@ -22,40 +26,53 @@ The networking focuses on connecting governmental systems to make all digitized 
 
 In order to save investments a method called "one for all" is used when hosting administrative services. One member state or the federal republic provides access to a service on their administration portal and distributes the requests to the responsible institutions "under the hood". As administration portals are connected through an "online gateway", each portal contains a search feature, which enables users to find all administrative services through any portal. Interoperable user profiles enable usage of each profile for management of administrative services on all portals.
 
-\subsection{Basic Use Case}
-The BMI lists a total of almost 600 administrative services, each being described by a different process \cite{BMI:Informatiosplattform}. Each process consists of multiple sub-processes. When comparing the processes, one can see that some sub-processes occur very often and in similar arrangements. Those arrangements can be called the basic use case of OZG services.
-
-The basic use case describes the submission of an application for an administrative service and consists of the following arrangement of sub-processes \cite{NRW:Umsetzung}:
-
-\paragraph{1. Create User Profile}
-The user creates a user profile on the administration portal of a member state by entering personal information and a authentication method like username and password or the German digital identity card.
-
-\paragraph{2. Login to User Profile}
-Independent of the member state the user created the interoperable user profile for, he can use it in the current administration portal. The user has to finish authentication steps, which can consist for example of a username and password. Depending on the authentication method, a trust level of the current session is determined. With approval from the user, personal information from his profile is provided towards the form-server.
-
-\paragraph{3. Selection of Administrative Service}
-The user visits any administration portal of the portal network and types a search term in the corresponding search field. The user is then presented with a list of search results consisting of administrative services. If the user selects a search result, he is forwarded to the correct page inside the domain of the administration portal which hosts the selected service. This page provides information about the administration service along with instructions on how to access the form for application. The interactive form, usually provided by a form-server, can be for example included in the page through a web-component.
-
-\paragraph{4. Filling in Application}
-Personal information from the user profile is used by the form-server to fill as many fields of the form as possible. The form with prefilled information is then presented to the user. The interactive form can then be modified by the user. Depending on the form-server, additional functionalities like conditions between fields or sanity checking can be provided.
-
-\paragraph{5. Submission of Application}
-The user again authenticates for his user profile and authorises the form-server to submit the application. The form-server saves the application until he is notified to delete it. The form-server submits the application to the administration portal which hosts the administrative service.
-
-\paragraph{6. Reception of Application by Administration Portal}
-The administration portal receives the application from a form-server and usually just forwards it to the data-exchange platform and notifies the form-server that the he can delete the application.
-
-\paragraph{7. Submission of Application to Data-Exchange Platform}
-The data-exchange platform distributes the application to the correct administrative institution responsible for processing it.
-
-\paragraph{8. Management of Applications}
-The administration portal stores active applications and enables the user to manage them.
-
-\paragraph{9. Communication}
-As part of an active application, the responsible institution can respond to the inbox of the user with status updates, requests or results.  Through the active application, he user can send messages to the responsible institution to request a status update or send additional information and documents.
-
 \subsection{System Architecture}
-This subsection describes the system architecture of a member state relevant for the execution of the basic use case of the OZG based on the system architecture of Nordrhein-Westfalen. Systems responsible for coordination of OZG execution between member states and the federal republic are not the focus.
+This subsection first describes the basic use case of the OZG. It then presents the OZG system architecture of a member state capable of executing the basic OZG use case.
+Systems responsible for coordination of OZG execution between member states and the federal republic such as the online gateway are not included.
+
+This section combines references from OZG system architectures from Baden-Würrtemberg \cite{ozg:bw} and Nordrhein-Westfalen \cite{ozg:nrw}.
+
+\paragraph{Basic Use Case}
+The BMI lists a total of almost 600 administrative services, each being described by a different process \cite{BMI:Informatiosplattform}. Each process consists of multiple sub-processes. When comparing the processes, one can see that some sub-processes occur very often and in similar arrangements. Those arrangements can be called the basic use case of OZG services. The basic use case describes the submission of an application for an administrative service and consists of the following arrangement of sub-processes \cite{NRW:Umsetzung}:
+
+\begin{enumerate}
+    \item \textbf{Create User Profile}
+    
+    The user creates a user profile on the administration portal of a member state by entering personal information and a authentication method like username and password or the German digital identity card.
+    
+    \item \textbf{Login to User Profile}
+    
+    Independent of the member state the user created the interoperable user profile for, he can use it in the current administration portal. The user has to finish authentication steps, which can consist for example of a username and password. Depending on the authentication method, a trust level of the current session is determined. With approval from the user, personal information from his profile is provided towards the form-server.
+    
+    \item \textbf{Selection of Administrative Service}
+    
+    The user visits any administration portal of the portal network and types a search term in the corresponding search field. The user is then presented with a list of search results consisting of administrative services. If the user selects a search result, he is forwarded to the correct page inside the domain of the administration portal which hosts the selected service. This page provides information about the administration service along with instructions on how to access the form for application. The interactive form, usually provided by a form-server, can be for example included in the page through a web-component.
+    
+    \item \textbf{Filling in Application}
+    
+    Personal information from the user profile is used by the form-server to fill as many fields of the form as possible. The form with prefilled information is then presented to the user. The interactive form can then be modified by the user. Depending on the form-server, additional functionalities like conditions between fields or sanity checking can be provided.
+    
+    \item \textbf{Submission of Application}
+    
+    The user again authenticates for his user profile and authorises the form-server to submit the application. The form-server saves the application until he is notified to delete it. The form-server submits the application to the administration portal which hosts the administrative service.
+    
+    \item \textbf{Reception of Application by Administration Portal}
+    
+    The administration portal receives the application from a form-server and usually just forwards it to the data-exchange platform and notifies the form-server that the he can delete the application.
+    
+    \item \textbf{Submission of Application to Data-Exchange Platform}
+    
+    The data-exchange platform distributes the application to the correct administrative institution responsible for processing it.
+    
+    \item \textbf{Management of Applications}
+    
+    The administration portal stores active applications and enables the user to manage them.
+    
+    \item \textbf{Communication}
+    
+    As part of an active application, the responsible institution can respond to the inbox of the user with status updates, requests or results.  Through the active application, he user can send messages to the responsible institution to request a status update or send additional information and documents.
+    
+\end{enumerate}
 
 \subsubsection{System Components}
 The system architecture consists of the following system components. Each component consists of a list of services it provides either to the user or to other components. Components are defined based on strongly connected categories of services \cite{NRW:Umsetzung}:
@@ -66,30 +83,17 @@ The system architecture consists of the following system components. Each compon
 
 \paragraph{Administration Portal}
 The administration portal is the component which directly interacts with users through a web site an provides the basic OZG use case through interaction with other system components. Through the web page of the portal, the user can create and manage his user profile, receive and send messages, upload and download documents, find administrative services, select an application form for an administrative service and be forwarded to the respective form server. Without direct visibility for the user, the portal also transmits personal information from the user profile to the form server, receives finished applications from the form server, determines responsible institutions and submits applications to the data exchange platform.
-The administration portal consists of a web server, responsible for hosting web pages, and a facade for service components. The most important components the service facade provides an interface for are:
+The administration portal consists of a web server, responsible for hosting web pages, and a facade for service components.
 
-\begin{itemize}
-    \item \textbf{Responsibility Finder}
-    
-    This service component is used to find administrative institutions which are responsible for an application. Depending on the type of application and on the home address of the user, different institutions might be responsible.
-    
-    \item \textbf{Process Management}
-    
-    This service component manages when the administration portal has to start which process in order to provide the basic OZG use case described earlier.
-    
-    \item \textbf{Search}
-    
-    This service component creates a list of URLs of administrative services relevant for a specified search term. This enables the portal to provide a search functionality of administrative services for the user.
-    
-    \item \textbf{User Profile Management}
-    
-    This service component enables the administration portal to interact with the user profile component to retrieve JSON Web Tokens, update and read personal information and document wallet, to read messages of the inbox and send messages to an institution.
-    
-    \item \textbf{Application Management}
-    
-    This service component manages applications issued through the administration portal through communication with the form server. The component enables the user to start an application by forwarding him to the correct form on the form server and optionally providing personal information to the form server. Form server and portal communicate about the status and content of the application. The user is able to keep track of the status of active applications through the profile, view their content, send messages to responsible institutions and cancel them.
-    
-\end{itemize}
+The service facade provides an interface to the \textbf{responsibility finder}. This service component is used to find administrative institutions which are responsible for an application. Depending on the type of application and on the home address of the user, different institutions might be responsible.
+
+The service facade provides an interface to the \textbf{process manager}. This service component manages when the administration portal has to start which process in order to provide the basic OZG use case described earlier.
+
+The service facade provides an interface to the \textbf{search service}. This service component creates a list of URLs of administrative services relevant for a specified search term. It enables the portal to provide a search functionality of administrative services for the user.
+
+The service facade provides an interface to \textbf{user profile management}. This service component enables the administration portal to interact with the user profile component to retrieve JSON Web Tokens, update and read personal information and document wallet, to read messages of the inbox and send messages to an institution.
+
+The service facade provides an interface to \textbf{application management}. This service component manages applications issued through the administration portal by communicating with the form server. The component enables the user to start an application by forwarding him to the correct form on the form server and optionally providing personal information to the form server. Form server and portal communicate about the status and content of the application. The user is able to keep track of the status of active applications through the profile, view their content, send messages to responsible institutions and cancel them.
 
 \paragraph{Form-Server}
 The from-server provides digital forms associated to administrative services. They can be accessed by a user profile through online self-service and submitted as applications to administrative institutions. The main services are \cite{dNRW:Standardisierungskonzeptzur}

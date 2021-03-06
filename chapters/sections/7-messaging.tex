@@ -1,25 +1,25 @@
 This chapter gives a brief overview of what messaging is and how it can be used for system integration purposes. It introduces various messaging patterns which will be used by the technological integration of chapter 4 and 5.
 The content of this chapter is based on the book \textit{Enterprise Integration Patterns} by \textcite{EIP}.
 
-\section{Messaging}
+\subsection{Messaging}
 
-Messaging is an asynchronous system-to-system communication, delivering packages of data called messages trough channels. Messages can contain any structured data like strings, arrays or objects. It is up to the sender and receiver to determine and understand its content.
+Messaging is an asynchronous system-to-system communication, delivering packages of data called messages through channels. Messages can contain any structured data like strings, arrays or objects. It is up to the sender and receiver to determine and understand its content.
 
 Channels can be seen as a collection or array of messages, accessible to interested systems. Channels have a direction in a sense, that no system simultaneously writes to and reads from a channel. Therefore, by one system writing messages to a channel and another system reading them, a message and data flow can be established.
 
 Depending on the use case, the flow and destination of messages might have to be determined during operation. Therefore, various message routing components exist. Their purpose is to transfer messages from an inbound channel to one or more outbound channels, depending on predefined or dynamic rules.
 
-During the routing of messages between systems, the content of messages might have to be modified. Therefore various message transformation components exist. Their purpose is to consume messages from an inbound channel, modify their content based on predefined or dynamic rules and publish the modified message on a outbound channel.
+During the routing of messages between systems, the content of messages might have to be modified. Therefore various message transformation components exist. Their purpose is to consume messages from an inbound channel, modify their content based on predefined or dynamic rules and publish the modified message to an outbound channel.
 
 "\textit{A messaging system manages messaging the way a database system manages data persistence}" \cite[p. 31]{EIP}. Configuring a messaging system involves definition of available channels, the type of messages they exchange, their connection between systems, the message flow and where necessary the insertion of routing and transformation components.
 
-Depending on the messaging system solution, additional features can be configured to increase performance, stability, failure safety and more. If properly configured, the messaging system operates reliably, handles unreliable network connections and persistently store messages in case of a system crash.
+Depending on the messaging system solution, additional features can be configured to increase performance, stability, failure safety and more. If properly configured, the messaging system operates reliably, handles unreliable network connections and persistently stores messages in case of a system crash.
 
-\section{Messaging Integration}
+\subsection{Messaging Integration}
 
 One use case for a messaging system is integration.
 
-The main benefit of messaging for integration is, that it enables systems to share services and data in a decoupled way. Neither system, whether sending or receiving messages, needs to be aware of each other. 
+The main benefit of messaging for integration is that it enables systems to share services and data in a decoupled way. Neither system, whether sending or receiving messages, needs to be aware of each other. 
 
 During configuration of the messaging system, datatype channels can be defined. On these channels, only messages with the same content are exchanged. Using message transformation components, messages placed on a datatype channel can be translated to follow a canonical data model.
 
@@ -27,7 +27,7 @@ Systems consuming messages from datatype channels can individually assign a purp
 
 As channels are able to function as a message buffer, sender and receiver of messages do not even have to be running at the same time.
 
-\section{Messaging Patterns}
+\subsection{Messaging Patterns}
 
 In the book "\textit{Enterprise Integration Patterns}" by \cite{EIP} multiple patterns for designing messaging systems are presented. This section gives a brief overview of patterns relevant for the thesis and their visual notation.
 
@@ -55,7 +55,7 @@ Figure \ref{messaging:channel1} shows the visual notation of an unnamed channel.
 
 Figure \ref{messaging:channel2} shows the visual notation of a named channel. Arrows to and from named channels are no notation for channels but for message flow. Channels are named if they have a special importance.
 
-There exist different types of channels. In the thesis, named channels are publish-subscribe datatype channels. Unnamed channels are point-to-point channels. Publish-subscribe channels can be accessed by every system. In contrast to that, point-to-point channels can only be accessed by two systems - one writing and one reading system.
+There are different types of channels. In this thesis, named channels are publish-subscribe datatype channels. Unnamed channels are point-to-point channels. Publish-subscribe channels can be accessed by every system. In contrast to that, point-to-point channels can only be accessed by two systems - one writing and one reading system.
 
 \begin{figure}[H]
     \centering
@@ -66,7 +66,7 @@ There exist different types of channels. In the thesis, named channels are publi
 
 \paragraph{Messaging Adapter}
 
-Systems which do not natively support message based communication require a messaging adapter which enables the programs of the system to access the messaging system trough an API. The messaging adapter usually has to be developed for each system individually, and manually integrated into the code of the system trough asynchronous function calls of the adapter API.
+Systems which do not natively support message based communication require a messaging adapter which enables the programs of the system to access the messaging system through an API. The messaging adapter usually has to be developed for each system individually, and manually integrated into the code of the system trough asynchronous function calls of the adapter API.
 
 Figure \ref{messaging:adapter} shows the visual notation of a messaging adapter connected to a system.
 
@@ -93,7 +93,7 @@ Figure \ref{messaging:router} shows the visual notation of a message router.
 \paragraph{Message Translator}
 
 Message translators have the purpose of translating message content on data representation and data type layer.
-On the data representation layer, message translators for example translate message content from an XML format to a JSON format. On the data type layer, message translators can for example concatenate first name and last name fields to a single name field.
+On the data representation layer, message translators translate message content for example from an XML format to a JSON format. On the data type layer, message translators can for example concatenate first name and last name fields to a single name field.
 
 Figure \ref{messaging:translator1} shows the visual notation of a message translator.
 
@@ -115,9 +115,9 @@ As shown in figure \ref{messaging:translator2}, if using two message translators
 
 \paragraph{Message Filter}
 
-Message filters contain a preconfigured set of filtering rules, which instruct the filter to delete messages, based on their content. The definition of the rules does not change during operation of the system.
+Message filters contain a preconfigured set of filtering rules, which instruct the filter to delete messages based on their content. The definition of the rules does not change during operation of the system.
 
-Figure \ref{messaging:filter} shows the visual notation of a message filter.
+Figure \ref{messaging:filter1} shows the visual notation of a message filter.
 
 \begin{figure}[H]
     \centering
@@ -137,7 +137,7 @@ As shown in figure \ref{messaging:filter2}, message filters can, in combination 
 
 \paragraph{Content Enricher}
 
-Content enricher have the purpose of adding new attributes to messages. The content which is added usually is a predetermined set of attributes but with dynamically created values.
+Content enricher have the purpose of adding new attributes to messages. The content which is usually added is a predetermined set of attributes but with dynamically created values.
 
 Figure \ref{messaging:enricher} shows the visual notation of a content enricher.
 
@@ -164,7 +164,7 @@ Figure \ref{messaging:filter3} shows the visual notation of a content filter.
 
 \paragraph{Message Store}
 
-Message stores have the purpose of storing consumed messages in a database. They are also capable of communicating with other messaging patterns for providing access to stored messages. Communication between message patterns and message stores is indicated by a dotted arrows.
+Message stores have the purpose of storing consumed messages in a database. They are also capable of communicating with other messaging patterns for providing access to stored messages. Communication between message patterns and message stores is indicated by a dotted arrow.
 
 Figure \ref{messaging:store} shows the visual notation of a message store. It also shows the example of a content enricher accessing the message store.
 

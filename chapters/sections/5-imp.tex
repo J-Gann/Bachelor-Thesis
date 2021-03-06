@@ -1,26 +1,16 @@
-\begin{itemize}
-    \item IMP hosts systems for identity management and provides access to users with an application and to service providers with integration tools
-    \item Users can create an identity and manage attributes (key-value pairs)
-    \item Users and service providers can establish relationships and use them to securely share personal information and exchange structured data
-\end{itemize}
+The purpose of the following sections is not to give a detailed explanation but to deliver a brought understanding of what identity management provisioning is and how identity management provisioning systems operate.
 
-\begin{itemize}
-    \item Ease of Use: Users only need to manage one online identity which can be accessed by multiple service providers
-    \item Data protection: Users can control which service providers get access to which attributes
-    \item Bidirectional Communication: Service providers and users can directly communicate with each other by exchanging structured data their tools have a common understanding of.
-    \item User Interaction: The user application can display various user interfaces based on the content of exchanged structured data.
-    \item Data Abuse Protection: Service providers are only supplied with necessary personal information which minimizes the possibilities of abuse by the service provider or in case of a data breach.
-    \item Communication Security: Attributes communicated structured data are securely exchanged. User and service provider can therefore also directly exchange sensible information. This is not possible for example through e-mail
-\end{itemize}
+Identity management provisioning (IMP) is a service which enables users to manage a digital identity and use it to share personal information and interact with service providers.
 
+Any user can create an IMP identity and similar to user profiles, add any personal information as attributes. In contrast to existing user profile based identity management systems, however, only one IMP identity and only one identity management provisioning system (IMPS) are necessary. The IMPS is hosted by an identity management provisioning host (IMPH) to enable every service provider to access its service.
 
-The purpose of the following sections is not to give a detailed explanation of the presented IMP system but to deliver a brought understanding of the concepts, features and components involved.
+Service providers can use the service for identity management by requesting access to personal information of IMP identities. The user has the option of accepting or rejecting to share personal information. As part of the service, users and service provider are also enabled to exchange messages to interact with each other.
 
-\subsection{Features}
+\subsection{IMP Example}
 
-\paragraph{Provisioning} The IMP system is hosted on the system architecture of the identity management provider and provides identity management as a service for users and SPs. Users and service providers can manage identities by accessing features of the IMP system. The IMP system stores all personal information and data necessary for the operation of identity management. The user only manages one identity which can be accessed by multiple service providers.
+This section describes what an identity management provisioning service can look like and is based on the identity management provisioning system called IDAS.
 
-\paragraph{Applications} The IMP system provides users and service providers with software tools for accessing its features. The user is provided with a user friendly application while the enterprise is provided with tools for integration.
+\paragraph{Applications} Users and service providers can access  software tools for accessing its features. The user is provided with a user friendly application while the enterprise is provided with tools for integration.
 
 \paragraph{Personal Information Management} One feature of the IMP system is management of personal information. Through the application, the user can create an identity and add, remove and update any kind of key-value pairs. These are IMP identity attributes.
 
@@ -80,21 +70,7 @@ Some important messages the user application understands and the service provide
 \paragraph{Security}
 The IMP system guarantees that all information is encrypted and can only be decrypted by identities which are allowed to read it. Only the owner of an identity can manage attributes of his identity. A relationship is established only with the identity presented as part of the relationship request and only the specified attributes are shared. Interactions as part of a relationship are only possible between the identities of the relationship. 
 
-\subsection{Evaluation of Features}
-
-This section evaluates the advantages and disadvantages of the described features of the IMP system based on the requirements of users and service providers.
-
-\subsubsection{User}
-The IMP system enables users to manage one identity and share attributes with multiple service providers. This replaces the need of a user profile for all service providers which take advantage of the IMP service. The user wont have to access multiple websites for managing user profiles but update his identity only through the IMP service.
-As attributes can only be shared with service providers as part of a relationship, the user has control of his personal information. Before accepting the relationship, he can see information about the identity of the service provider, like his name, address, phone number and more. The user is also provided with information on why the relationship and request attributes are necessary which helps the user in deciding if he agrees with the necessity of sharing the information. As it is possible to establish multiple relationships with a service provider, each with a different specified reason and list of shared attributes, it is possible for user and service provider to establish a relationship for each business process which requires access to personal information. The information therefore can not only be shared with a single service provider but also for an individual process. User and service provider can interact through relationships. Therefore messages can be exchanged and associated to a certain business process.
-
-\subsubsection{Service Provider}
-
-The IMP system enables the service provider to access personal information of users without the need of hosting a system for identity management. Depending on the price of the IMP solution, this can reduce the cost for operating and maintaining the system architecture. The service provider has to hire less staff, does not have to buy expensive hardware and can more easily scale the performance of his system. As previously described, the user experience can also increase and lead to more customers. Relationships enable service providers to request users to share attributes while specifying the legal reasons for processing the information and to directly interact with them. The IMP system takes over the responsibility for securing personal information of users and interactions with the service provider. As the relationship cannot be deleted without approval of both identities, it can be used as proof of for example contracts or order placements. The IMP system provides tools for integration which minimizes the effort for system providers to start using the IMP system.
-
-As the IMP system focuses on improved data protection for users, the service provider might lose access to valuable but not necessary personal information. The determination of a reason for processing personal information also requires increased system complexity for making sure, that personal information is only used for the specified reason. The integration of a new solution for identity management is an expensive and time consuming task and might in short term increase instead of reduce cost. Using an external service for identity management makes the service provider dependent on the identity management provider. This can be a problem, if in the future, the service costs increase or the IMP solution stops being supported.
-
-\subsection{Components}
+\subsection{IMPS Example}
 
 \begin{figure}[h]
 \caption{IMP System Overview}
@@ -111,7 +87,7 @@ The service provider domain contains the system architecture of the service prov
 \begin{figure}[h]
 \caption{IMP System Operation Layers}
     \centering
-    \includegraphics[scale=0.3]{Diagrams/IMP Layer Diagram.png}
+    \includegraphics[scale=0.6]{Diagrams/IMP Layer Diagram.pdf}
 \end{figure}
 
 The operation of IMP systems can be separated into multiple layers. The layers build upon each other (from bottom to top) and provide an increasingly abstract perspective on the functionalities of each component.

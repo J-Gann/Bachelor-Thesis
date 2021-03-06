@@ -1,0 +1,22 @@
+Since invention of the World Wide Web, the number of its users increased rapidly. Today, more than 90 percent of the German population uses the internet \cite{Onlinestudie}. Enterprises and organizations recognised this potential to provide their services to a large number of people as Service Providers (SP). A frequently used method of SPs is "online self-service" (OSS). Specialized software tools enable customers to use services through the internet without direct human interaction.
+
+Many tools require identification of users in case interactions or initiated business processes have to be associated with them. A system for management of identities of users therefore is part of numerous system architectures. Service Providers often enable users to manage their partial identities using online self-service through user profiles. Today, customers of SPs are associated with multiple partial identities and user profiles - one for each SP.
+
+The result is a variety of problems in management of digital identities \cite{IdentityCrisis}. Here are some examples:
+\begin{itemize}
+    \item Multiple SPs collect, use and share parts of identities which leads to distributed and fragmented identities.
+    \item As a result of the distributed identities, risk of data breaches increases.
+    \item Managing multiple user profiles is very inconvenient. Users have to login to various websites to change attributes of each user profile.
+    \item It is often unclear which SP stores which data and for what purpose.
+    \item SPs have an incentive to collect and share more user data than they need.
+\end{itemize}
+
+An improved identity management is necessary. In recent years, multiple new models have been invented. One model called Social Login became popular. It enables customers to create user profiles for SPs through existing user profiles of Social Networks like Facebook. This improves identity management by enabling SPs to rely on the external profile for unique identification, authorisation and personal attributes. Users can therefore manage identity related information through their Social Profile which is accessed by the SP.
+
+This approach, however, still leaves the requirement of user profiles for each SP because, depending on the provided service, additional attributes which are not part of the Social Profile, have to be manageable by the user.
+
+A possible solution to this problem is Identity Management Provisioning (IMP) which enables users to manage their whole online identity instead of partial identities and user profiles. Trough IMP relationships, users can share personal information of their IMP identity with service providers and exchange data in form of messages. Users remain in control of their identity. They share personal information when needed, retract access for service providers when no longer necessary, securely exchange messages, all trough the same service.
+
+An Identity Management Host (IMH) hosts an Identity Management Provisioning System (IMPS) to make IMP accessible to service providers. In order for a SP to use IMP for identity management, an integration of IMPS into its existing system architecture is necessary. Due to the complex nature of system architectures and identity management, this is a difficult task.
+
+A currently relevant example for usage of online self-service with particular interesting requirements for identity management is the German Online Access Law (Online Zugangs Gesetz - OZG). It requires all administrative services of the German federal republic, each member state and commune to be digitally available through interoperable user profiles. The current plan is to make user profiles only available for usage in context of the OZG. From a user perspective, this would be yet another partial identity and user profile to manage.

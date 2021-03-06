@@ -13,31 +13,31 @@ Each institution has a predetermined set of administrative services it can proce
     \item Reason: Apply for the administrative service XYZ ...
 \end{itemize}
 
-In contrast to relationship templates in the previous IMP solution, these wont have to be dynamically created but only once. The reason is, that in the previous IMP solution templates had to contain personalized information like the session ID. This is not necessary in this case.
+In contrast to relationship templates in the previous IMP solution, these wont have to be dynamically created but only once. The reason is that in the previous IMP solution templates had to contain personalized information like the session ID. This is not necessary in this case.
 
-Once the templates are created, the corresponding template IDs can be rendered as QR code on the web page of the institution. If the content of a template has to be changed, an employee can be manually create a new template and switch the template IDs on the web page.
+Once the templates are created, the corresponding template IDs can be rendered as QR code on the web page of the institution. If the content of a template has to be changed, an employee can manually create a new template and switch the template IDs on the web page.
 
-Visiting the web page of the institution, the user can scan the QR code and is presented with the relationship template. The user can read trough the included description of the corresponding administrative service to determine if it is the correct one. Based on the requested attributes and the information of how they are processed, the user can make an informed decision whether to apply for the administrative service.
+Visiting the web page of the institution, the user can scan the QR code and is presented with the relationship template. The user can read through the included description of the corresponding administrative service to determine if it is the correct one. Based on the requested attributes and the information on how they are processed, the user can make an informed decision whether to apply for the administrative service.
 
 When sending the relationship request, the institution directly receives it without an administration portal being involved. Based on the shared attributes, the institution can decide to either accept or reject the application request. It might for example verify if the home address of the user lies in the area of its responsibility.
 
-When accepting the relationship and therefore the application request, and the user did not retract his request in the meantime, the relationship is established and the institution gets notified of a new application.
+When accepting the relationship and therefore the application request, and the user did not retract his request in the meantime, the relationship is established and the institution gets notified about a new application.
 
-After the administrative service is finished, the relationship can be terminated and the institution loose access to all shared personal information.
+After the administrative service is finished, the relationship can be terminated and the institution looses access to all shared personal information.
 
 However, the administration portal cannot be completely replaced. It is still required by users for directing them to the correct institution based on the selected administrative service and for example their home address. Therefore, users visit any administration portal, search for an administrative service and specify their home address. The administration portal is able to determine the responsible institution and forward the user to an URL provided by the institution. 
 
 \subsection{Message Utilization}
 
-This IMP solution utilizes the same message types as the previous IMP solution however with a different purpose.
+This IMP solution utilizes the same message types as the previous IMP solution, however with a different purpose.
 
 \paragraph{Attribute Synchronization}
 
-Trough the IMP client users can request attribute changes for established relationships. The purpose of these messages is to enable uses to change the content of an application even after it was submitted.
+Through the IMP, client users can request attribute changes for established relationships. The purpose of these messages is to enable users to change the content of an application even after it was submitted.
 
 \paragraph{Communication}
 
-As in the previous IMP solution, users should be able to receive mails from every institution trough the IMP client. Each mail is associated to a relationship, enabling the user to easily correlate mails to active applications.
+As in the previous IMP solution, users should be able to receive mails from every institution through the IMP client. Each mail is associated with a relationship, enabling the user to easily correlate mails to active applications.
 
 \paragraph{Authentication}
 
@@ -52,7 +52,7 @@ As a result of mapping IMP relationships to individual business processes, the u
 
 Using relationships for execution of business processes eliminates the need for service providers to operate identity management systems. It is sufficient to integrate the identity management capabilities of the IMP system according to the IMP solution. This leaves the service provider with the main task of executing the business processes. 
 
-The IMP solution enables users to share personal information directly with responsible institution, restricting access to for example administration portals. It also enables direct and secure exchange of messages.
+The IMP solution enables users to share personal information directly with responsible institutions, restricting access to for example administration portals. It also enables direct and secure exchange of messages.
 As a result of the direct mapping of relationships to applications, users can request the modification of application content even after submission.
 
 The IMP solution can also operate alongside the previous IMP solution and eventually replace it.
