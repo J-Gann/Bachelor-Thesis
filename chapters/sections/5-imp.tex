@@ -1,148 +1,109 @@
-The purpose of the following sections is not to give a detailed explanation but to deliver a brought understanding of what identity management provisioning is and how identity management provisioning systems operate.
+The purpose of this section is not to give a detailed explanation but to deliver a broad understanding of what identity management provisioning is, what an IMP service can look like and how identity management provisioning systems can operate.
 
-Identity management provisioning (IMP) is a service which enables users to manage a digital identity and use it to share personal information and interact with service providers.
+\subsection{IMP}
+Identity management provisioning (IMP) is a method of identity management where identity management is provided as a service to users and service providers. The service enables users to manage a digital identity and use it to share personal information and interact with service providers.
 
-Any user can create an IMP identity and similar to user profiles, add any personal information as attributes. In contrast to existing user profile based identity management systems, however, only one IMP identity and only one identity management provisioning system (IMPS) are necessary. The IMPS is hosted by an identity management provisioning host (IMPH) to enable every service provider to access its service.
+Many identity management systems currently in use by service providers each require the user to create a user profile, specify login credentials and maintain personal information. Each service provider operates his own identity management system and users have to access each system individually trough multiple websites to access their user profiles. This approach to identity management leads to several problems which are discussed in section \ref{section:identity_management_issues}.
 
-Service providers can use the service for identity management by requesting access to personal information of IMP identities. The user has the option of accepting or rejecting to share personal information. As part of the service, users and service provider are also enabled to exchange messages to interact with each other.
+In contrast to a user profile based identity management approach, IMP provides identity management as a service. Only one identity management provisioning system is hosted and accessed by user and service providers. Users therefore only need one IMP identity, which is accessed by multiple service providers. This approach to identity management is capable of solving various issues of user profile based identity management which is discussed in section \ref{section:imp_solution_opportunities}
 
-\subsection{IMP Example}
+To access the IMP service, users can use applications or websites. Service providers however often require integration into their existing system architecture to enable existing system components to use the new identity management method.
 
-This section describes what an identity management provisioning service can look like and is based on the identity management provisioning system called IDAS.
+\subsection{IMP Service}
 
-\paragraph{Applications} Users and service providers can access  software tools for accessing its features. The user is provided with a user friendly application while the enterprise is provided with tools for integration.
+There are many ways to design a service for identity management provisioning. This section describes what an identity management provisioning service can look like. It is based on the IMP service called IDAS.
 
-\paragraph{Personal Information Management} One feature of the IMP system is management of personal information. Through the application, the user can create an identity and add, remove and update any kind of key-value pairs. These are IMP identity attributes.
+For users and service provider to access the IMP service, software tools exist. For the user, this is a smartphone application. For the service provider this is an integration component. The smartphone application provides a user friendly graphical interface which enables the user to receive notifications, maintain personal information, share personal information, and more. The integration component for the service provider is a software solution with similar capabilities as the smartphone app but designed towards enterprise use. It therefore has no graphical user interface but additional business relevant features and integration capabilities. IMP application and integration component are described in section \ref{section:imp_system} in more detail.
 
-\paragraph{Relationship} 
+One important part of the IMP service is management of personal information by users. After installation of the smartphone application, a new identity (IMP identity) can be created. As part of this identity, the user can add any amount of key-value pairs as attributes. The list of all attributes makes up the personal information of the IMP identity. Despite being able to add any key-value pair, there exist some commonly used keys like name, age, home address and so on. Depending on the use case of service providers, multiple more keys and their meaning have to be agreed upon. This means, the IMP service has to define a canonical data model. Each service provider then translates it to their individual data models.
 
-Users and service providers can establish relationships which enables them to share information and interact. The initial form of a relationship is a relationship template. The template is created by the service provider and describes which relationships he is willing to establish. Relationship templates are distributed to interested users which can use it to request relationships. A service provider has to fill a relationship template with some minimal required and some optional information:
+Many service providers require users to manually verify their identity and personal information by for example visiting a store and showing their ID card. Similar verification processes are expected to be used by the IMP service to verify IMP identities and their personal information. However, for simplification reasons, the details of this verification process are left out.
 
-\begin{itemize}
-    \item \textbf{Title}
+Users and service providers can establish relationships and use them to share personal information and interact. The initial form of a relationship is a relationship template. The template is created by the service provider and describes which types relationships he is willing to establish. The templates are made available to interested users, which can use them to request relationships.
+
+A service provider fill a relationship template with optional and mandatory information:
+
+\paragraph{Title} The title describes the purpose of the relationship in a short way. 
     
-    The title describes the purpose of the relationship in a short way.
+\paragraph{Requested Attributes} The service provider can list keys of attributes he requires the user to share in order to send a relationship request. When the user submits a relationship request based on this relationship template, the values filled in for the requested attributes are copied and sent as part of the request. The recipient of the request can use the personal information to decide whether to accept or reject the relationship.
     
-    \item \textbf{Requested Attributes} (optional)
+\paragraph{Shared Attributes} Shared Attributes is a list of key-values pairs, the service provider makes available to any user interested in requesting a relationship. The service provider has to share a minimal amount of attributes which enable the user to identify it. 
     
-    Requested Attributes is a list of attribute keys the user will have to submit as part of the relationship request.
+\paragraph{Purpose} This is a text field where the service provider can give a detailed explanation of what the purpose of the relationship is, e.g what effects a relationship request and an established relationship will have. Here, the reason for why the requested attributes are necessary for the relationship has to be explained as well as how each shared attribute is going to be processed. This helps the user in making an informed decision on whether to submit the relationship request or not.
     
-    \item \textbf{Shared Attributes}
+\paragraph{Attachments} Attachments can be all kinds of documents and files. Here, for example legal information can be included but also for example product flyers corresponding to the relationship template.
     
-    Shared Attributes is a list of attribute keys and values the service provider makes available to any user interested in requesting a relationship. The service provider has to share a minimal amount of attributes which enable the user to identify it. 
-    
-    \item \textbf{Purpose}
-    
-    The purpose describes why the user and the service provider want to establish the relationship and why the attributes requested from the user are necessary for it.
-    
-    \item \textbf{Attachments}
-    
-    Attachments are documents attached to the relationship template by the service provider. The documents can for example contain legal information.
-    
-    \item \textbf{Metadata}
-    
-    Metadata can be any type of information which should not be displayed to the user but is necessary for the user application or the service provider to process the resulting relationship request.
-    
-\end{itemize}
+\paragraph{Metadata} Metadata can be any type of information which should not be displayed to the user but is necessary for the user application or the service provider to process the relationship process.
 
-When the user receives the template through his IMP tooling, the requested attributes are automatically filled in if he previously added them to his IMP identity. Otherwise he can fill in the correct values now and automatically add them as attributes of his identity.
+When the user receives the template through his IMP application, the requested attributes are automatically filled in if they exist for his IMP identity. Otherwise they can be filled in manually and added as new attributes of the IMP identity.
 
-It is important to differentiate identity attributes from the attributes shared as part of the relationship. Identity attributes are managed by the user to reflect the most up to date information. Attributes shared as part of a relationship can be automatically filled with values from the same attributes of the IMP identity but can also be manually entered. This means, shared attributes and IMP identity attributes are not necessarily the same.
+At this point it is important to take a look at how IMP identity attributes and shared attributes are separated. IMP identity attributes are managed by the user to reflect the most up to date information. Attributes shared as part of a relationship can be automatically filled with values from the IMP identity but can also be manually entered. This means, shared attributes and IMP identity attributes are not necessarily the same. 
 
-Based on the information about the service provider and the purpose of the relationship, the user can decide to send a relationship request or not. If the user decides to request the relationship, the request is sent to the service provider along with a copy of the requested attributes. If the service provider approves the request, the relationship is established and both parties get notified.
+Based on the information about the service provider and the purpose of the relationship, the user can decide to send a relationship request or not. If the user decides to request the relationship, the request is sent to the service provider. If the service provider approves the request, the relationship is established and both parties get notified. Trough the IMP application, the user can see all relationships as well as their status, the content of the underlying relationship template and a list of shared attributes and their values.
 
-\paragraph{Messages} As part of a relationship, user and service provider can interact with each other by asynchronously exchanging structured data (IMP messages). Messages with any content can be exchanged, however, the tools used by the user and the service provider should be able to understand the messages.
+As part of an established relationship, user and service provider can interact with each other by asynchronously exchanging structured data packages as IMP messages. IMP messages can contain any content, however, both IMP application and service provider systems should be able to understand the messages. For this purpose, besides content, messages are expected to contain some identification value like a message type. The integration component provided to the SP does not process the content of messages but simply makes the messages accessible to the system architecture of the service provider. Without additional integration systems, the service provider has to implement his own solutions for understanding and processing messages. The IMP application however, has a set of messages it understands. The list of messages the application is able to process can be expanded by the identity management provider who develops it.
 
-The integration tool for the service provider does not understand the content of messages but simply makes them accessible by the system architecture of the service provider. Without additional integration solutions, the service provider has to implement his own solutions for processing the different types of messages. The application provided to the user has a set of messages it understands. The list of messages the application is able to process can be expanded by the identity management provider who develops it.
+Some important messages the IMP application understands and the service provider should be able to process too are:
 
-Some important messages the user application understands and the service provider should be able to process too are:
-
-\begin{itemize}
-    \item \textbf{Mails}
+\paragraph{Mail} Messages of the mail type can be used by service provider and user to exchange human readable text. Mails sent to an IMP identity are displayed by the IMP application trough for example a notification. The IMP application defines a format, for the content of the mail.
     
-    Mails are messages which contain a human readable title, and body.
-    
-    \item \textbf{Attribute Change}
-    
-    After a relationship is established, service provider or user might want to change attributes they shared. This can be done by exchanging request-reply messages.
-\end{itemize}
+\paragraph{Attribute Change} Messages of the attribute change type can be used by the user to request the modification of shared attributes. The user can modify, add or delete attributes shared as part of a relationship and submit a attribute change request to the service provider which contains the changes. The service provider can decide to either accept or reject the request and respond with a corresponding attribute change response message. The IMP application defines a format, for the content of the attribute change request and response messages.
 
-\paragraph{Security}
-The IMP system guarantees that all information is encrypted and can only be decrypted by identities which are allowed to read it. Only the owner of an identity can manage attributes of his identity. A relationship is established only with the identity presented as part of the relationship request and only the specified attributes are shared. Interactions as part of a relationship are only possible between the identities of the relationship. 
+\paragraph{Authentication} Messages of the authentication type can be used by the service provider to request confirmation from the IMP identity for some business process. The service provider sends a initial request message to the IMP identity which contains a description of what confirmation is requested by the user. Through the IMP application the user is notified and can accept or reject. Depending on the interaction by the user, the IMP application sends a response message to the service provider. The IMP application defines a format, for the content of the authentication request and response messages.
 
-\subsection{IMPS Example}
+The IMP system guarantees that all information is encrypted and can only be decrypted by identities which are allowed to read it. This usually does not include the systems hosting the IMP service. Only the owner of an identity can manage attributes of his identity. A relationship is established only with the identity presented as part of the relationship request and only the specified attributes are shared. Interactions as part of a relationship are only possible between the two parties of the relationship and cannot be intercepted or modified others.
 
-\begin{figure}[h]
-\caption{IMP System Overview}
+\subsection{IMP System} \label{section:imp_system}
+
+There are many ways to design a system for identity management provisioning. This section describes what an identity management provisioning systems can look like. It is based on the IMP system for IDAS. An IMP system is the combination of all system components required for providing IMP services. 
+
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=0.25]{Diagrams/IMP System Overview.png}
+    \includegraphics[scale=0.6]{Diagrams/IMP System Overview.pdf}
+    \caption{IMP System Overview}
+    \label{imp:imp_system_overview}
 \end{figure}
 
-The IMP system operates on three domains. The user domain contains systems the user directly interacts with. These typically are applications on PC or smartphone and websites. The IMP system provides an application for PC and smartphone to the user for accessing IMP services. For simplification, the user is assumed to use only one device which eliminates the need for synchronization of devices. The client enables the user to manage attributes of his identity, to establish relationships, to manage relationships and to interact through relationships. 
-
-The IMP domain contains all systems hosted by the identity management provider. In this case, the domain contains only the IMP server. The IMP server is able to communicate with IMP client and IMP connector.
+As shown in figure \ref{imp:imp_system_overview}, the IMP system can be separated into three domains. The user domain contains systems the user directly interacts with. These typically are applications on PC or smartphone and websites. IMP application on smartphones are provided to users for accessing IMP services. For simplification, each user is assumed to use access the IMP service trough one device which eliminates the need for device synchronization. As previously described, the IMP application enables the user to manage attributes of his identity, to establish relationships, to manage relationships and interact with messages through relationships. 
 
 The service provider domain contains the system architecture of the service provider and the IMP connector. The IMP connector contains a REST API which enables the system architecture to access IMP services.
 
+The IMP domain contains all identity management provisioning systems required to be hosted by the identity management provider. In this case, the domain contains only the IMP server. The IMP server is able to communicate with each IMP application and IMP connector. It has the purpose of maintaining a - where necessary encrypted - list of all identities, relationships, relationship templates and IMP messages. As the IMP server does not know the private key corresponding to the IMP identity, it is unable to decrypt the data. The IMP server is also capable of creating relationship templates, processing and routing relationship requests and responses and IMP messages. The exact details of how the IMP server operates is out of the scope of this thesis.
+
 \begin{figure}[h]
-\caption{IMP System Operation Layers}
     \centering
     \includegraphics[scale=0.6]{Diagrams/IMP Layer Diagram.pdf}
+    \caption{IMP System Operation Layers}
+    \label{imp:layer_diagram}
 \end{figure}
 
-The operation of IMP systems can be separated into multiple layers. The layers build upon each other (from bottom to top) and provide an increasingly abstract perspective on the functionalities of each component.
+As shown in figure \ref{imp:layer_diagram}, the operation of IMP systems can be separated into multiple layers. The layers build upon each other (from bottom to top) and provide an increasingly abstract perspective on the functionalities of each component. 
 
-\paragraph{Transport Layer}
+The vertical bars in the figure represent all previously described components of the IMP system and one additional component called "Integration Module". The "Integration Module" is not important for the moment and fill be the focus of following chapters. The horizontal bars in the figure represent layers of IMP system operation. From bottom to top, the layers describe the operation of the IMP system in a way increasingly abstracted from the underlying technology. In addition to that, each bar is split up into two sides, however, in this section only the left side is relevant.
 
-The "transport layer" is responsible for securely routing data between IMP client, IMP server and IMP connector. Depending on the use case, the transport layer encrypts data so that it is only visible for client and connector. In this layer, IMP client and IMP connector are endpoints where data can be encrypted, decrypted, sent and received. In this layer, the IMP server is the routing component which forwards sent data to its correct destination while checking validity of messages.
+The lowest layer is called "Relationship Layer". On this layer, the IMP system operates by establishing relationships. IMP application and IMP connector exchange relationship requests and responses trough the IMP server in order to establish new relationships. The IMP server maintains a list of all relationships and their status.
 
-\paragraph{Relationship Layer}
+Once a relationship is established, the IMP system operates on the "Communication Layer". On this layer, IMP messages are exchanged as part of an active IMP relationship between IMP application and IMP connector. The application can create, send, receive, process and display a list of IMP messages he is able to understand. The IMP connector is able to send and receive IMP messages through a relationship without being aware of its content. The IMP server stores an encrypted backup of all messages.
 
-The "relationship layer" is responsible for establishing a relationship between IMP client and IMP connector. IMP client and IMP connector send relationship requests and responses and store relationships. The IMP server creates, stores and updates relationships and synchronizes their status with client and connector.
-
-\paragraph{Communication Layer}
-
-The "communication layer" is responsible for exchanging IMP messages as part of an active relationship between IMP client and IMP connector. The client can create, send, receive, process and display a list of IMP messages he is able to understand. The IMP connector is able to send and receive IMP messages through a relationship without being aware of its content. The IMP server stores an encrypted backup of all messages.
-
-\paragraph{IMP Solution Layer}
-
-The "IMP solution layer" is responsible for providing user interaction capabilities for construction of IMP solutions. A service provider can interact with the user in multiple ways through user interfaces of the IMP client. Depending on the use case of the service provider, interactions through the UIs can have different purposes.
-
-For example, a service provider can decide to use relationships as a way to receive product or subscription orders. Another possibility would be to use relationships for filling in a form as part of a survey.
-
-The user interface described in the following are a minimal example which fulfill basic requirements for establishing relationships and displaying IMP messages. An identity management provider can add multiple more specialized UIs to the application.
-
-\begin{figure}[h]
-\caption{User Application Interfaces}
-    \centering
-    \includegraphics[scale=0.2]{Diagrams/UI.png}
-\end{figure}
-
-\paragraph{Personal Information} The attributes interface enables the user to manage attributes for his identity by adding, updating or removing values for common keys like name, surname, birth date and more. Here, the user can also create, update or delete new key-value pairs.
-
-\paragraph{Relationship Request} On the relationship request interface, the user can scan a QR code containing a relationship template and request a corresponding relationship. The attributes required for the relationship are automatically filled in if they exist for the identity. Otherwise the user can manually enter the correct values. If all requested attributes are filled in, the user can request the relationship
-
-\paragraph{Relationship Overview} On the relationship overview interface, the user can see all active relationships
-
-\paragraph{Relationship Details} On the relationship details interface, the user can view the content of a relationship and change shared attributes. However, an attribute will only be changed after the service provider accepted. The user can also send a mail to the other party of the relationship.
-
-\paragraph{Notifications} On the notifications interface, the user sees all received mails and the corresponding relationship. The user is able to reply to the mails.
+Using IMP relationships and IMP messages, the service provider can interact with the user on the "IMP Interaction Layer". On this layer, depending on the use case, different purposes can be assigned to interaction possibilities. For example, a service provider can decide to use relationships as a way to receive product or subscription orders. Another possibility would be to use relationships for filling in a form as part of a survey.
 
 \subsection{IMP Use Cases}
 
-In this section the most important use cases of the IMP system are described in more detail.
+In this section the IMP system operation for most important use cases of the IMP service are described in more detail.
 
 \subsubsection{Establish Relationship}
 
-The first step towards a relationship usually is the interest of a user. A user for example wants to subscribe to the newsletter of a service provider. The service provider needs personal information of the user to be able to send him personalized mails. To obtain the necessary attributes and receive the approval of the user, the service provider requires an established relationship.
+This section elaborates the sequence of establishing an IMP relationship as shown in figure \ref{imp:establish_relationship}.
+The first step towards a relationship is the interest of a user. A user for example wants to subscribe to the newsletter of a service provider. The service provider needs personal information of the user to be able to send him personalized mails. To obtain the necessary attributes and receive the approval of the user, the service provider requires an established relationship.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \caption{IMP Use Case Establish Relationship Sequence Diagram}
-    \includegraphics[scale=0.3]{Diagrams/IMP Use Case Establish Relationship Sequence Diagram 1.png}
+    \includegraphics[scale=0.6]{Diagrams/IMP Use Case Establish Relationship Sequence Diagram.pdf}
+    \caption{Establish Relationship Sequence Diagram}
+    \label{imp:establish_relationship}
 \end{figure}
 
-To enable users to request a relationship with the purpose of subscribing for a newsletter, the service provider has to create a relationship template. Through the REST interface of the connector, he sends a request for a new relationship template. The request contains parameters specifying the content of the relationship template. In this case, the relationship template could be configured as follows:
+To enable users to request a relationship with the purpose of subscribing for a newsletter, the service provider has to create a relationship template. Through the REST interface of the connector, the SP sends a request for a new relationship template. The request contains parameters specifying the content of the relationship template. In this case, the relationship template could be configured as follows:
 
 \begin{itemize}
     \item Title: Subscribe to the newsletter
@@ -152,25 +113,13 @@ To enable users to request a relationship with the purpose of subscribing for a 
     \item Attachments: Some legal document
 \end{itemize}
 
-\begin{wrapfigure}{r}{0.5\textwidth}
-    \centering
-    \caption{Relationship Request Example}
-    \includegraphics[scale=0.25]{Diagrams/Relationship Request Example.png}
-\end{wrapfigure}
-
 Based on the parameters of the request, the connector creates a relationship template and sends it to the IMP server. The server stores the template and returns a relationship template ID. Through this ID, the corresponding template can be retrieved from the IMP server.
 The service provider can transmit the template ID to any user who wishes to subscribe for a newsletter. This can be done by for example rendering the template ID as a QR code on a website.
-If the QR code is displayed to the user, he can scan it using the IMP client. The client understands that the content of the QR code contains a relationship template ID and retrieves the corresponding template from the IMP server.
+If the QR code is displayed to the user, he can scan it using the IMP application. The application understands that the content of the QR code contains a relationship template ID and retrieves the corresponding template from the IMP server.
 
-The IMP client displays the relationship template to the user and automatically fills in as many requested attributes as possible.
+The IMP application displays the relationship template to the user and automatically fills in as many requested attributes as possible.
 
-The user can now decide if he wants to accept the relationship and share the requested attributes. If he accepts, IMP client sends a relationship request to the IMP server. The request contains all information of the relationship template in addition to the shared attributes of the user.
-
-\begin{figure}[h]
-    \centering
-    \caption{IMP Use Case Establish Relationship Sequence Diagram}
-    \includegraphics[scale=0.3]{Diagrams/IMP Use Case Establish Relationship Sequence Diagram 2.png}
-\end{figure}
+The user can now decide if he wants to accept the relationship and share the requested attributes. If he accepts, IMP application sends a relationship request to the IMP server. The request contains all information of the relationship template in addition to the shared attributes of the user.
 
 Based on the relationship request, the IMP server creates a relationship with the status "pending". A unique relationship ID is attached. The server then forwards the relationship request to the connector of the service provider.
 
@@ -179,36 +128,44 @@ As the system architecture of the service provider has no way of knowing when th
 The system architecture sends a relationship response to the REST interface of the connector. The response contains all information of the received relationship request with optional additional information the service provider might want to share now. This could for example be the name of the newsletter the service provider decided to select for the user based on his specified interests.
 
 The connector sends the relationship response to the IMP server which updates the content and status of the corresponding relationship. It might be possible that the user retracted the relationship request in the meantime. In this case, the relationship response would be dropped by the IMP server and the connector would be notified.
-If however, the IMP server updates the status of the relationship to "established", both IMP client and connector are notified with the final content of the relationship.
+If however, the IMP server updates the status of the relationship to "established", both IMP application and connector are notified with the final content of the relationship.
 
-After receiving the final "relationship established" notification, the system architecture of the service provider can store the shared attributes in a database along with the corresponding relationship ID for the newsletter system to access.
+After receiving the final "relationship established" notification, the system architecture of the service provider can store the shared attributes in a database along with the corresponding relationship ID.
 
-\subsubsection{Send Message}
+\subsubsection{Attribute Change}
+This section elaborates the sequence of changing an attribute shared as part of an IMP relationship as shown in figure \ref{imp:attribute_change}. If the user switches to a new e-mail provider, he will need to change the corresponding e-mail attribute shared as part of the relationship to receive the newsletter on his new e-mail address.
 
-Through an established message, user and service provider can exchange messages with any structure and content. However, this only makes sense if both IMP client and system architecture of the service provider can understand the messages. IMP server and IMP connector only take care of the correct routing. The list of messages an IMP client understands can be expanded by the identity management provider. It can therefore be assumed that the IMP client understands any message service providers often want to exchange. For simplicity, in the following sections, behaviour of the IMP client for newly defined message can be defined at will. Two important types of messages were already defined: Mail Messages and Attribute Change Request-Reply Messages.
-
-\subsubsection{Request Attribute Change}
-
-It is possible that in the future, the user wants to change the mail address where he receives the newsletter. As the established relationship remains to be valid, it should not be terminated, but shared attributes should be changed instead.
-
-Through the IMP client, the user can view the corresponding relationship and edit the attributes. After he changed the mail attribute he shares, through routing by the IMP server, the IMP client sends an attribute change request message to the connector. The connector does not understand the content of the message but from which relationship it originated from. As the connector cannot notify the system architecture of the service provider, polling for new messages is required. After the system architecture receives the message, it understands the structure of the message and that the purpose of the message is an attribute change request.
-
-The system architecture evaluates if it accepts the changes and sends a response through the REST interface of the connector. The system architecture might execute additional processes. In this case, the mail address stored in the database would be updated.
-
-The IMP server receives the response message through the connector and routes it to the IMP client. The IMP client understands the message, updates the value stored as part of the relationship and displays a notification to the user.
-
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \caption{IMP Use Case Change Relationship Attribute Sequence Diagram}
-    \includegraphics[scale=0.3]{Diagrams/IMP Use Case Change Realtionship Attribute Sequence Diagram.png}
+    \includegraphics[scale=0.6]{Diagrams/IMP Use Case Change Realtionship Attribute Sequence Diagram.pdf}
+    \caption{Change Relationship Attributes Sequence Diagram}
+    \label{imp:attribute_change}
 \end{figure}
 
-\subsubsection{Send Mail}
+Through the IMP application, the user can view relationships and edit shared attributes. After changing an attribute, like for example the e-mail address, the IMP application sends an attribute change request to the IMP server, which forwards it to the IMP connector corresponding to the IMP relationship. Trough the REST interface of the IMP connector, the service provider iteratively polls for new messages and eventually receives the attribute change request as response. The service provider evaluates whether to accept or reject the request and uses the REST interface of the IMP connector to submit the response. The IMP connector sends the response to the IMP server which - if the service provider accepted the request - notifies IMP connector and IMP application of the successful change of attributes. The service provider again polls for new messages and eventually receives the attribute change established notification based on which it now updates the stored attributes associated to the relationship. When the IMP application receives the attribute change established message, it displays a notification to the user.
 
-If a user has questions about the newsletter, he can send messages to the service provider as part of the relationship. The client sends the mail message to the IMP server which routes it to the connector. The system architecture polls for incoming messages. When the system architecture receives the message, it understands the content and purpose and for example notifies an employee. An employee could be notified via e-mail and a response from the employee to the mail could automatically be sent to the relationship through the REST API of the connector. Connector and IMP server route the message to the IMP client, who understands the message and displays it to the user.
+\subsubsection{Mail}
+This section elaborates the sequence of sending a mail as part of an IMP relationship as shown in figure \ref{imp:mail}.
+If a user for example has questions about the newsletter, he can send a mail to the service provider as part of the established relationship.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \caption{IMP Use Case Communication Sequence Diagram}
-    \includegraphics[scale=0.3]{Diagrams/IMP Use Case Communication Sequence Diagram.png}
+    \includegraphics[scale=0.6]{Diagrams/IMP Use Case Mail Sequence Diagram.pdf}
+    \caption{Mail Sequence Diagram}
+    \label{imp:mail}
 \end{figure}
+
+Trough the IMP application the user can view relationships and submit mails. Once submitted, the IMP application sends the mail to the IMP server which forwards it to the IMP connector corresponding to the relationship. The service provider polls for new messages and eventually receives the mail as response. An employee of the service provider can process the email and use the REST interface of the IMP connector to send a response mail to the same relationship. The IMP connector sends the mail to the IMP server which forwards it to the IMP application of the IMP identity corresponding to the IMP relationship. The application then notifies the user of the received mail.
+
+\subsubsection{Authenticate}
+This section elaborates the sequence of authenticating as part of an IMP relationship as shown in figure \ref{imp:authenticate}.
+If the service provider wants to request confirmation from the user, it can send an authentication request to the corresponding relationship.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{Diagrams/IMP Use Case Authenticate Sequence Diagram.pdf}
+    \caption{Authenticate Sequence Diagram}
+    \label{imp:authenticate}
+\end{figure}
+
+The SP uses the REST interface of the IMP connector to send an authentication request as part of an IMP relationship. The IMP connector sends the request to the IMP server which forwards it to the IMP application of the IMP identity corresponding to the IMP relationship. The application displays the authentication request to the user. The user can accept or reject the request which will result in the corresponding authentication response by the IMP application. The response is send to the IMP server which forwards it to the IMP connector corresponding to the IMP relationship. The service provider polls for new messages and eventually receives the authentication response.

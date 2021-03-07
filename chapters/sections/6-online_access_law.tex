@@ -2,7 +2,7 @@ This chapter gives an overview of regulations, execution and system architecture
 
 \subsection{Regulations}
 
-In 2017 the German government passed the law for improvement of online access to administrative services (Online Zugangs Gesetz: OZG) which requires federal republic and member states to execute the following regulations until 2022 \cite{BMI:OZG_Wortlaut}:
+In 2017, the German government passed the law for improvement of online access to administrative services (Online Zugangs Gesetz: OZG) which requires federal republic and member states to execute the following regulations until 2022 \cite{BMI:OZG_Wortlaut}:
 
 \paragraph{Digital availability of administrative services} An administrative service is the electronic processing of administrative procedures which are available from outside the governmental institution.  As it is not clear which administrative services exactly are meant by the definition of the OZG, the BMI created a catalogue \cite{BMI:Verwaltungsleistungen}. The OZG requires these services to be digitally available. As a guideline to what is considered sufficient availability, the BMI defined a maturity model \cite{BMI:Digitale_Services}.
 
@@ -77,9 +77,12 @@ The BMI lists a total of almost 600 administrative services, each being describe
 \subsubsection{System Components}
 The system architecture consists of the following system components. Each component consists of a list of services it provides either to the user or to other components. Components are defined based on strongly connected categories of services \cite{NRW:Umsetzung}:
 
-\begin{center}
+\begin{figure}[h]
+    \centering
     \includegraphics[scale=0.6]{Diagrams/OZG System Overview.pdf}
-\end{center}
+    \caption{OZG System Overview}
+    \label{ozg:system_overview}
+\end{figure}
 
 \paragraph{Administration Portal}
 The administration portal is the component which directly interacts with users through a web site an provides the basic OZG use case through interaction with other system components. Through the web page of the portal, the user can create and manage his user profile, receive and send messages, upload and download documents, find administrative services, select an application form for an administrative service and be forwarded to the respective form server. Without direct visibility for the user, the portal also transmits personal information from the user profile to the form server, receives finished applications from the form server, determines responsible institutions and submits applications to the data exchange platform.
@@ -280,160 +283,7 @@ In order to implement the basic use case, the components have to interact with e
     \item The user can send messages to the institution which for example asked for additional documents.
     
 \end{enumerate}
-    
-\subsubsection{Data Objects}
-This section describes what data each component processes. The property value describes a certain type of data. The source describes which component stores the value. This distinguishes the access of a property by reference and by copy. If the source of a property is another component, the property is accessed by reference. The description gives further detail on how the property is processed by the component.
-
-\begin{table}[!h]
-    \begin{tabularx}{\textwidth}{|l|l|l|C|}
-    \rowcolor{LightCyan}
-    \hline
-    \multicolumn{4}{|l|}{Administration Portal: Service Web Page} \\
-    \hline
-    Property & Storage & Origin & Description  \\
-    \hline
-    \hline
-    Name & Web Page & FIM & Name of an administrative service \\
-    \hline
-    URL & Portal & Portal & The URL of the Web Page \\
-    \hline
-    Description & Web Page & FIM & Description of an administrative service \\
-    \hline
-    FIM-ID & Web Page & FIM & FIM-ID of a data field schemata which describes attributes required from the user when applying for the service \\
-    \hline
-    \end{tabularx}
-\end{table}
-
-\begin{table}[!h]
-    \begin{tabularx}{\textwidth}{|l|l|l|C|}
-    \rowcolor{LightCyan}
-    \hline
-    \multicolumn{4}{|l|}{Administration Portal: User} \\
-    \hline
-    Property & Storage & Origin & Description  \\
-    \hline
-    \hline
-    Attributes & User Profile & User Profile & The portal can manage attributes of user profiles \\
-    \hline
-    JWT & Portal & User Profile & The portal can retrieve a JSON Web Token from the profile after successful authentication by a user \\
-    \hline
-    URL Form & Portal & Form Server & The portal stores the URL where the form server hosts the interactive form \\
-    \hline
-    \end{tabularx}
-\end{table}
-
-\begin{table}[!h]
-    \begin{tabularx}{\textwidth}{|l|l|l|C|}
-    \rowcolor{LightCyan}
-    \hline
-    \multicolumn{4}{|l|}{Administration Portal: Application} \\
-    \hline
-    Property & Storage & Origin & Description  \\
-    \hline
-    \hline
-    FMS-ID & Portal & Form Server & The portal receives the ID of applications from the form server \\
-    \hline
-    Status & Portal & Form Server & The portal receives status updates for each application \\
-    \hline
-    XML Form Data & Portal & Form Server & The portal can retrieve the data which was filled into a form \\
-    \hline
-    \end{tabularx}
-\end{table}
-
-\begin{table}[!h]
-    \begin{tabularx}{\textwidth}{|l|l|l|C|}
-    \rowcolor{LightCyan}
-    \hline
-    \multicolumn{4}{|l|}{User Profile: Personal Information} \\
-    \hline
-    Property & Storage & Origin & Description  \\
-    \hline
-    \hline
-    Attributes & User Profile & FIM & The list of attributes the user can fill in at his profile are based on FIM data fields managed in the FIM repository. \\
-    \hline
-    Attribute Values & User Profile & User & The user can manually add values to a list of predetermined attributes in his profile \\
-    \hline
-    Credentials & User Profile & User & The User Profile stores encrypted credentials of the user to authenticate him \\
-    \hline
-    User Profile ID & User Profile & User Profile & The User Profile creates and stores a unique ID for the user \\
-    \hline
-    \end{tabularx}
-\end{table}
-
-\begin{table}[!h]
-    \begin{tabularx}{\textwidth}{|l|l|l|C|}
-    \rowcolor{LightCyan}
-    \hline
-    \multicolumn{4}{|l|}{User Profile: Authorisatiozation} \\
-    \hline
-    Property & Storage & Origin & Description  \\
-    \hline
-    \hline
-    JWT & Other Component & User Profile & The user profile can create and transfer JSON Web Tokens which authorise other components to access resources of the user profile \\
-    \hline
-    \end{tabularx}
-\end{table}
-
-\begin{table}[!h]
-    \begin{tabularx}{\textwidth}{|l|l|l|C|}
-    \rowcolor{LightCyan}
-    \hline
-    \multicolumn{4}{|l|}{User Profile: Inbox} \\
-    \hline
-    Property & Storage & Origin & Description  \\
-    \hline
-    \hline
-    Received Messages & User Profile & User & The user profile stores messages which were addressed to the user \\
-    \hline
-    Sent Messages & User Profile & User & The user profile stores messages which were sent by the user \\
-    \hline
-    \end{tabularx}
-\end{table}
-
-\begin{table}[!h]
-    \begin{tabularx}{\textwidth}{|l|l|l|C|}
-    \rowcolor{LightCyan}
-    \hline
-    \multicolumn{4}{|l|}{User Profile: Data Wallet} \\
-    \hline
-    Property & Storage & Origin & Description  \\
-    \hline
-    \hline
-    Documents & User Profile & User & The user profile stores documents which were uploaded by the user \\
-    \hline
-    \end{tabularx}
-\end{table}
-
-\begin{table}[!h]
-    \begin{tabularx}{\textwidth}{|l|l|l|C|}
-    \rowcolor{LightCyan}
-    \hline
-    \multicolumn{4}{|l|}{Form Server} \\
-    \hline
-    Property & Storage & Origin & Description  \\
-    \hline
-    \hline
-    FMS-ID & Form Server & Form Server & The form server creates a unique ID for each application \\
-    \hline
-    JWT & Form Server & User Profile & The form server uses a JSON Web Token to verify that the entity issuing the request is authorised \\
-    \hline
-    User Profile ID & Form Server & User Profile & The ID of the user who is associated to the application \\
-    \hline
-    FIM-ID & Form Server & FIM & The FIM ID of a data field schemata is used to determine how to construct the form \\
-    \hline
-    Form & Form Server & FIM & The list of attributes the user can fill in at the form are based on the FIM data field schemata. The form server maps the FIM data fields of the FIM data field schemata to attributes the form server understands \\
-    \hline
-    Status & Form Server & Form Server & The status describes which actions were performed on the application \\
-    \hline
-    Application Data & Form Server & User & The form server stores the data which the user filled in to the form as an XML file \\
-    \hline
-    Web Page & Form Server & Form Server & The form server hosts a web page with the interactive form  \\
-    \hline 
-    Web Page URL & Form Server & Form Server & The form server hosts the web page of the form at an individual URL \\
-    \hline 
-    \end{tabularx}
-\end{table}
-
+  
 \subsubsection{Sequence Diagram}
 
 \begin{figure}[!h]
