@@ -1,39 +1,41 @@
-The main issue of the IMP solution presented in chapter 4 is the utilization of user profiles and the resulting lack of data protection. The IMP solution described in this chapter puts the institutions in the center of the integration in order to eliminate the need for user profiles and the need for administration portals to process personal information.
+The main issue of the IMP solution presented in chapter 4 is the utilization of user profiles and the resulting lack of data protection. The IMP solution described in this chapter puts the institutions in the center of the integration in order to eliminate the need for user profiles and administration portals to process personal information.
 
 \subsection{Relationship Utilization}
 
-As part of the existing operation of the OZG system architecture, applications submitted to administration portals will eventually be transferred to responsible governmental institutions. Using IMP, relationships can be used to send applications directly to institutions without the need for an administration portal, form server or data exchange platform.
+As part of the existing operation of the OZG system architecture, applications submitted to administration portals will eventually be transferred to responsible governmental institutions. Using IMP relationships can be used to send applications directly to institutions without the need for an administration portal, form server or data exchange platform.
 
 Each institution has a predetermined set of administrative services it can process. For each administrative service, the institution can create a relationship template, containing the description of the service, the list of attributes required from the user necessary for processing the application and information on how the personal information will be processed:
 
+\begin{figure}[H]
 \begin{itemize}
     \item Title: Apply for administrative service XYZ
     \item Attributes: Name, Surname, ... 
     \item Shared Attributes: Institution Name ...
     \item Reason: Apply for the administrative service XYZ ...
 \end{itemize}
+\end{figure}
 
-In contrast to relationship templates in the previous IMP solution, these wont have to be dynamically created but only once. The reason is that in the previous IMP solution templates had to contain personalized information like the session ID. This is not necessary in this case.
+In contrast to relationship templates in the previous IMP solution, these will not have to be dynamically created but only once. The reason is that in the previous IMP solution templates had to contain personalized information like the session ID. This is not necessary in this case.
 
 Once the templates are created, the corresponding template IDs can be rendered as QR code on the web page of the institution. If the content of a template has to be changed, an employee can manually create a new template and switch the template IDs on the web page.
 
-Visiting the web page of the institution, the user can scan the QR code and is presented with the relationship template. The user can read through the included description of the corresponding administrative service to determine if it is the correct one. Based on the requested attributes and the information on how they are processed, the user can make an informed decision whether to apply for the administrative service.
+Visiting the web page of the institution, the user can scan the QR code and the corresponding relationship template for an application is shown. The user can read through the included description of the corresponding administrative service to determine if it is the correct one. Based on the requested attributes and the information on how they are processed, the user can make an informed decision whether to apply for the administrative service.
 
-When sending the relationship request, the institution directly receives it without an administration portal being involved. Based on the shared attributes, the institution can decide to either accept or reject the application request. It might for example verify if the home address of the user lies in the area of its responsibility.
+When sending the relationship request, the institution directly receives it without an administration portal being involved. Based on the shared attributes, the institution can decide to either accept or reject the application request. It might for example verify whether the home address of the user is within the area that it is responsible for.
 
-When accepting the relationship and therefore the application request, and the user did not retract his request in the meantime, the relationship is established and the institution gets notified about a new application.
+When accepting the application request and therefore the whole relationship, and if the user did not retract his request in the meantime, the relationship is established and the institution gets notified about a new application.
 
 After the administrative service is finished, the relationship can be terminated and the institution looses access to all shared personal information.
 
-However, the administration portal cannot be completely replaced. It is still required by users for directing them to the correct institution based on the selected administrative service and for example their home address. Therefore, users visit any administration portal, search for an administrative service and specify their home address. The administration portal is able to determine the responsible institution and forward the user to an URL provided by the institution. 
+However, the administration portal cannot be completely replaced. It is still required by users for directing them to the correct institution based on the selected administrative service and for example their home address. Therefore users visiting any administration portal search for an administrative service and specify their home address. The administration portal is able to determine the responsible institution and forward the user to an URL provided by the institution. 
 
 \subsection{Message Utilization}
 
-This IMP solution utilizes the same message types as the previous IMP solution, however with a different purpose.
+This IMP solution utilizes the same message types as the previous IMP solution, however for a different purpose.
 
 \paragraph{Attribute Synchronization}
 
-Through the IMP, client users can request attribute changes for established relationships. The purpose of these messages is to enable users to change the content of an application even after it was submitted.
+Through the IMP client, users can request attribute changes for established relationships. The purpose of these messages is to enable users to change the content of an application even after it was submitted.
 
 \paragraph{Communication}
 
@@ -41,16 +43,16 @@ As in the previous IMP solution, users should be able to receive mails from ever
 
 \paragraph{Authentication}
 
-As no user profiles are necessary in this IMP solution, users wont have to use the IMP client for logging into a user profile. However, authentication messages can still be used as an accept / reject based communication method.
+As no user profiles are necessary in this IMP solution, users will not have to use the IMP client for logging into a user profile. However, authentication messages can still be used as an accept / reject based communication method.
 
 \subsection{Evaluation}
 The approach of this IMP solution is to map temporary business processes to IMP relationships. This section evaluates the advantages and disadvantages of this approach as well as its application in the OZG context in comparison to the previous IMP solution.
 
 \paragraph{Advantages}
 
-As a result of mapping IMP relationships to individual business processes, the user has more granular control of sharing personal information. Compared to the previous IMP solution, the user does not give general access to personal information for the purpose of creating a user profile but for individual processes. The user can better control whether he agrees to share personal information for processing an administrative service, while in the previous IMP solution the IMP client was not involved. In case of the OZG, the user profile component did require authentication prior to sharing attributes with institutions, but this might not be the case for all service providers.
+As a result of mapping IMP relationships to individual business processes, the user has more granular control of sharing personal information. Compared to the previous IMP solution, the user does not give general access to personal information for the purpose of creating a user profile but for individual processes. The users can better control whether they agree to share personal information for processing an administrative service, while in the previous IMP solution the IMP client was not involved. In case of the OZG, the user profile component did require authentication prior to sharing attributes with administration portals, but this might not be the case for all Service Providers.
 
-Using relationships for execution of business processes eliminates the need for service providers to operate identity management systems. It is sufficient to integrate the identity management capabilities of the IMP system according to the IMP solution. This leaves the service provider with the main task of executing the business processes. 
+Using relationships for execution of business processes eliminates the need for Service Providers to operate identity management systems. It is sufficient to integrate the identity management capabilities of the IMP system according to the IMP solution. This leaves the Service Provider with the main task of executing the business processes. 
 
 The IMP solution enables users to share personal information directly with responsible institutions, restricting access to for example administration portals. It also enables direct and secure exchange of messages.
 As a result of the direct mapping of relationships to applications, users can request the modification of application content even after submission.
@@ -59,4 +61,4 @@ The IMP solution can also operate alongside the previous IMP solution and eventu
 
 \paragraph{Disadvantages}
 
-The disadvantage of this IMP solution is, the invasive integration, which does not only provide an alternative way of accessing existing systems but for the most part replaces them.
+The disadvantage of this IMP solution is the invasive integration which does not only provide an alternative way of accessing existing systems but for the most part completely replaces them.

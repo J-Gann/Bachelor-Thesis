@@ -1,81 +1,64 @@
-This chapter gives an overview of regulations, execution and system architecture regarding the online access law. 
+This chapter gives an overview about the Online Access Law regarding its regulations, their implementation and the underlying system architecture.
 
 \subsection{Regulations}
 
-In 2017, the German government passed the law for improvement of online access to administrative services (Online Zugangs Gesetz: OZG) which requires federal republic and member states to execute the following regulations until 2022 \cite{BMI:OZG_Wortlaut}:
+In 2017, the German government passed the Online Access Law (OZG) which requires federal republic and member states to execute the following regulations until 2022 \cite{BMI:OZG_Wortlaut}:
 
-\paragraph{Digital availability of administrative services} An administrative service is the electronic processing of administrative procedures which are available from outside the governmental institution.  As it is not clear which administrative services exactly are meant by the definition of the OZG, the BMI created a catalogue \cite{BMI:Verwaltungsleistungen}. The OZG requires these services to be digitally available. As a guideline to what is considered sufficient availability, the BMI defined a maturity model \cite{BMI:Digitale_Services}.
+\paragraph{Digital availability of administrative services} An administrative service is the electronic processing of administrative procedures that are available from outside the governmental institution.  As it is not clear which administrative services exactly are included by the definition of the OZG, the BMI created a catalogue \cite{BMI:Verwaltungsleistungen}. The OZG requires these services to be digitally available. As a guideline to what is considered sufficient availability, the BMI defined a maturity model \cite{BMI:Digitale_Services}.
 
-\paragraph{Digital access to administrative services through administration portals of a portal network} Federal republic, each member state and each commune must provide an administration portal. Portals of communes must be linked to the portal of the corresponding member state. Portals of federal republic and member states must be connected through a portal network. \cite{BMI:Portalverbund} Each portal must provide a "seek and find" feature, which enables users to find all administrative services provided by any administration portal \cite{Cotar:Drucksache_19/19089}. 
+\paragraph{Digital access to administrative services through administration portals of a portal network} Federal republic, each federal state and each commune must provide an administration portal. Portals of communes must be linked to the portal of the corresponding member state. Portals of federal republic and member states must be connected through a portal network. \cite{BMI:Portalverbund} Each portal must provide a "seek and find" feature, which enables users to find all administrative services provided by any administration portal \cite{Cotar:Drucksache_19/19089}. 
 
-\paragraph{Interoperable user profiles for accessing administrative services} Federal republic and member states must provide user profiles which can be used to identify the corresponding person while requesting access to administrative services, to save personal information according to the once-only principle, to receive and send messages via a digital mailbox and to pay for services \cite{Cotar:Drucksache_19/19089}. The user profiles must be interoperable for every administration portal of the portal network.
+\paragraph{Interoperable user profiles for accessing administrative services} Federal republic and member states must provide user profiles that can be used to identify the corresponding person while requesting access to administrative services, to save personal information according to the once-only principle, to receive and send messages via a digital mailbox and to pay for services \cite{Cotar:Drucksache_19/19089}. The user profiles must be interoperable for every administration portal of the portal network.
 
-\subsection{Execution}
+\subsection{Implementation of Regulations}
 
-Execution of the OZG can be separated into two projects:
+The implementation of OZG regulations can be separated into two projects: The digitalization and the networking project.
 
-\paragraph{Digitalization}
 Digitalization of administrative services focuses on accessibility towards users but not modernization of its internal execution by administrative institutions. The goal of digitalization in this case is, to make administrative services available towards a user in a digitized way:
 
-A digitized administrative service can be accessed by a user through a website. The website is hosted either by the federal republic or a member state and is called "Administration Portal". Access is usually provided through an application form. The administrative service can be managed through a user profile which is provided by the federal republic or the member state. Management of an administrative service usually includes starting the service by sending in a form, communicating with responsible institutions through the inbox of the profile and receiving a result. The user profile can also enable users to upload documents to a data wallet and to save personal information for automatically filling in forms.
+A digitized administrative service can be accessed by a user through a website. The website is hosted either by the federal republic or a federal state and is called "Administration Portal". Access is usually provided through an application form. The administrative service can be managed through a user profile which is provided by the federal republic or the member state. Management of an administrative service usually includes starting the service by sending in a form, communicating with the responsible institutions through the inbox of the profile and receiving a result. The user profile can also enable users to upload documents to a datawallet and to save personal information for automatically filling in forms.
 
-Digitalization of an administrative service is the modification of the underlying processes to incorporate the usage of the described features of the user profile and administration portal. In total, the BMI lists 575 relevant services, some of them provided by the federal republic, some by the member states and yet other by the communes \cite{BMI:Onlinezugangsgesetz}.
+Digitalization of an administrative service is the modification of the underlying processes to incorporate the usage of the described features of the user profile and administration portal. In total, the BMI lists 575 relevant services, some of them provided by the federal republic, some by the member states and some by the communes \cite{BMI:Onlinezugangsgesetz}.
 
-\paragraph{Networking}
 The networking focuses on connecting governmental systems to make all digitized administrative services available for every user. This includes most importantly the connection of administration portals to a portal network through an online gateway and the interoperability of user profiles.
 
-In order to save investments a method called "one for all" is used when hosting administrative services. One member state or the federal republic provides access to a service on their administration portal and distributes the requests to the responsible institutions "under the hood". As administration portals are connected through an "online gateway", each portal contains a search feature, which enables users to find all administrative services through any portal. Interoperable user profiles enable usage of each profile for management of administrative services on all portals.
+In order to save investments a method called "one for all" is used when hosting administrative services. One federal state or the federal republic provides access to a service on their administration portal and distributes the requests to the responsible institutions "under the hood". As administration portals are connected through an "online gateway", each portal contains a search feature, which enables users to find all administrative services through any portal. Interoperable user profiles enable usage of each profile for management of administrative services on all portals.
+
+\subsection{Basic Use Case}
+Each time users apply for administrative services, they have to go through an application process, in the following section summarized as the basic OZG use case.
+
+A user wants to apply for two administrative services: funding under the Federal Training Assistance Act (BAföG) and a drivers license. Both administrative services are provided through the "one-for-all" method. The federal state Sachsen-Anhalt is responsible for processing BAföG applications on its administration portal and the federal state Hessen is responsible for processing drivers license applications on its administration portal. The user has never access OZG services before.
+
+\paragraph{Create User Profile} The user wants to apply for BAföG first and therefore visits an administration portal which informs them, that in order to apply for administrative services, a user profile is required. As user profiles are designed to be interoperable, it does not matter through which administration portal the user profile is created.
+
+The user is requested to enter personal information and to specify an authentication method. For authentication for example a username and password combination can be used.
+
+\paragraph{Selection of Administrative Service} Using the search feature of the administration portal, the user enters the search term "bafög" and is presented with a list of administrative services as result. The user selects the correct administrative service from the search result and is forwarded to the web page of the service on the administration portal of Sachsen-Anhalt . It contains information about the administrative service along with instructions on how to access an interactive application form which is can be hosted on a separate web page.
+
+\paragraph{Login to User Profile} Before being able to apply for administrative services, the user has to login into the user profile on the administration portal. Depending on the authentication method used for logging in, a trust level of the current session is determined. Only with a high trust level users can apply for a broad selection of administrative services. The user has selected an authentication method which results in a high trust level.
+    
+\paragraph{Application} On the web page of the administrative portal the user clicks on a "bring me to the application" button and is forwarded to a web page with an interactive form. Before the user is forwarded, he has the option to transfer personal information for automatic filling of the form. The user decides to accept and is presented with a filled in form. After pressing the "submit" button the application is transferred to the responsible institution.
+    
+\paragraph{Management of Applications} The user is forwarded back to the administration portal and selects to view all active applications created through the portal. Here the user can see the application they just submitted and is able manage it by for example requesting cancellation.
+    
+\paragraph{Communication} Through the inbox of the user profile the user is notified about a message regarding the application. The institution responsible for processing the application informs the user about receiving the application. Eventually the institution finishes processing the application and sends a message to the inbox of the user to inform them about the result. This marks the end of the basic OZG use case, however, the user wants to apply for a second administrative service.
+
+\paragraph{Selection of Administrative Service} Using the search feature of the administration portal, the user now enters the search term "drivers license", selects the correct search result and is forwarded to the corresponding web page on the administration portal of Hessen. 
+
+\paragraph{Login to User Profile} The same interoperable user profile can be used as on the administration portal of Sachsen-Anhalt, but the user is required to login again.
+
+\paragraph{Application} The application process is designed to be similar for each administration portal, however, as Sachsen-Anhalt and Hessen operate their application processes independently, minor differences exist in for example the design and text of the web pages.
+
+\paragraph{Management of Applications} The user is, again, forwarded back to the administration portal and selects to view all active applications created through the portal. The user is only able to see and manage the application for a drivers license. As the application for BAföG was created through a the administration portal of Sachsen-Anhalt, it is not accessible through the administration portal of Hessen.
+
+\paragraph{Communication} Through the inbox of the user profile, the responsible institution again sends notifications about the current status and results of the application.
 
 \subsection{System Architecture}
-This subsection first describes the basic use case of the OZG. It then presents the OZG system architecture of a member state capable of executing the basic OZG use case.
-Systems responsible for coordination of OZG execution between member states and the federal republic such as the online gateway are not included.
+This section describes the OZG system architecture of a federal state capable of executing the basic OZG use case. References about OZG system architectures of Baden-Württemberg \cite{ozg:bw} and Nordrhein-Westfalen \cite{ozg:nrw} are used. The presentation document regarding the administration portal of Baden-Württemberg \cite{ozg:bw_administration_portal} is used as basis for describing the administration portal.
 
-This section combines references from OZG system architectures from Baden-Würrtemberg \cite{ozg:bw} and Nordrhein-Westfalen \cite{ozg:nrw}.
+As shown in figure \ref{ozg:system_overview}, the OZG system architecture is separated into three components and two domains. Domains in this context describe the operation of systems they contain in separate physical locations. Components in this context describe functionally correlated systems of a system architecture.
 
-\paragraph{Basic Use Case}
-The BMI lists a total of almost 600 administrative services, each being described by a different process \cite{BMI:Informatiosplattform}. Each process consists of multiple sub-processes. When comparing the processes, one can see that some sub-processes occur very often and in similar arrangements. Those arrangements can be called the basic use case of OZG services. The basic use case describes the submission of an application for an administrative service and consists of the following arrangement of sub-processes \cite{NRW:Umsetzung}:
-
-\begin{enumerate}
-    \item \textbf{Create User Profile}
-    
-    The user creates a user profile on the administration portal of a member state by entering personal information and a authentication method like username and password or the German digital identity card.
-    
-    \item \textbf{Login to User Profile}
-    
-    Independent of the member state the user created the interoperable user profile for, he can use it in the current administration portal. The user has to finish authentication steps, which can consist for example of a username and password. Depending on the authentication method, a trust level of the current session is determined. With approval from the user, personal information from his profile is provided towards the form-server.
-    
-    \item \textbf{Selection of Administrative Service}
-    
-    The user visits any administration portal of the portal network and types a search term in the corresponding search field. The user is then presented with a list of search results consisting of administrative services. If the user selects a search result, he is forwarded to the correct page inside the domain of the administration portal which hosts the selected service. This page provides information about the administration service along with instructions on how to access the form for application. The interactive form, usually provided by a form-server, can be for example included in the page through a web-component.
-    
-    \item \textbf{Filling in Application}
-    
-    Personal information from the user profile is used by the form-server to fill as many fields of the form as possible. The form with prefilled information is then presented to the user. The interactive form can then be modified by the user. Depending on the form-server, additional functionalities like conditions between fields or sanity checking can be provided.
-    
-    \item \textbf{Submission of Application}
-    
-    The user again authenticates for his user profile and authorises the form-server to submit the application. The form-server saves the application until he is notified to delete it. The form-server submits the application to the administration portal which hosts the administrative service.
-    
-    \item \textbf{Reception of Application by Administration Portal}
-    
-    The administration portal receives the application from a form-server and usually just forwards it to the data-exchange platform and notifies the form-server that the he can delete the application.
-    
-    \item \textbf{Submission of Application to Data-Exchange Platform}
-    
-    The data-exchange platform distributes the application to the correct administrative institution responsible for processing it.
-    
-    \item \textbf{Management of Applications}
-    
-    The administration portal stores active applications and enables the user to manage them.
-    
-    \item \textbf{Communication}
-    
-    As part of an active application, the responsible institution can respond to the inbox of the user with status updates, requests or results.  Through the active application, he user can send messages to the responsible institution to request a status update or send additional information and documents.
-    
-\end{enumerate}
-
-\subsubsection{System Components}
-The system architecture consists of the following system components. Each component consists of a list of services it provides either to the user or to other components. Components are defined based on strongly connected categories of services \cite{NRW:Umsetzung}:
+The "User Component" directly interacts with users to enable access to administration portals. This can be desktop or mobile applications or as in this specific case a web browser. The "Administration Portal Component" hosts the administration portal. The "User Profile Component" provides interoperable user profiles. The "Integration Component" transfers filled in applications to responsible institutions. And finally, the "Institution Component" receives and processes applications.
 
 \begin{figure}[h]
     \centering
@@ -84,209 +67,13 @@ The system architecture consists of the following system components. Each compon
     \label{ozg:system_overview}
 \end{figure}
 
-\paragraph{Administration Portal}
-The administration portal is the component which directly interacts with users through a web site an provides the basic OZG use case through interaction with other system components. Through the web page of the portal, the user can create and manage his user profile, receive and send messages, upload and download documents, find administrative services, select an application form for an administrative service and be forwarded to the respective form server. Without direct visibility for the user, the portal also transmits personal information from the user profile to the form server, receives finished applications from the form server, determines responsible institutions and submits applications to the data exchange platform.
-The administration portal consists of a web server, responsible for hosting web pages, and a facade for service components.
+The administration portal directly interacts with the "User Component" through a web page and provides access to the basic OZG use case by interacting with other components. It consists of a web server that is responsible for hosting web pages and a service facade connected to multiple service components. Through the service facade, the web server accesses each service component and makes its service available to the "User Component". 
+The "User Profile Management" component is capable of interacting with the "User Profile Component" to create new user profiles, retrieve personal information from existing user profiles and process login requests. 
+The "User Profile Component" provides conventional user profile based identity management. 
+Through the Federated Identity Management of Interoperable User Accounts in Germany (Föderiertes Identitätsmanagement interoperabler Nutzerkonten in Deutschland - FINK) the "User Profile" component of each federal state is made interoperable. The "Search" component can be used to retrieve a list of URLs of administrative services corresponding to a search term. It can retrieve URLs of administrative services from all administration portals through the "Online-Gateway".
 
-The service facade provides an interface to the \textbf{responsibility finder}. This service component is used to find administrative institutions which are responsible for an application. Depending on the type of application and on the home address of the user, different institutions might be responsible.
+The "Online-Gateway" is a system connecting all administration portals and enabling them to exchange information. The "Formula Engine" component is accessed by the web server to display interactive forms to the user when applying for selected administrative services. The interactive form can be either integrated into the web page of the administrative service or hosted on a separate web page. The user can opt in to automatically fill in forms with personal information. In that case, after authentication of the user, the "Administration Portal" component retrieves personal information from the "User Profile" component and sends it to the "Formula Engine" before displaying a filled in form to the user. 
 
-The service facade provides an interface to the \textbf{process manager}. This service component manages when the administration portal has to start which process in order to provide the basic OZG use case described earlier.
+The "Application Management" component receives submitted applications by the "Formula Engine" component for further processing. Depending on the administration portal and type of application, additional processing steps, that are not part of the use case can take place. This includes for example payment processes. The component tracks the current status of the application which the user can view through the web page of the administration portal. It is also capable of terminating the application process if the user requests it. 
 
-The service facade provides an interface to the \textbf{search service}. This service component creates a list of URLs of administrative services relevant for a specified search term. It enables the portal to provide a search functionality of administrative services for the user.
-
-The service facade provides an interface to \textbf{user profile management}. This service component enables the administration portal to interact with the user profile component to retrieve JSON Web Tokens, update and read personal information and document wallet, to read messages of the inbox and send messages to an institution.
-
-The service facade provides an interface to \textbf{application management}. This service component manages applications issued through the administration portal by communicating with the form server. The component enables the user to start an application by forwarding him to the correct form on the form server and optionally providing personal information to the form server. Form server and portal communicate about the status and content of the application. The user is able to keep track of the status of active applications through the profile, view their content, send messages to responsible institutions and cancel them.
-
-\paragraph{Form-Server}
-The from-server provides digital forms associated to administrative services. They can be accessed by a user profile through online self-service and submitted as applications to administrative institutions. The main services are \cite{dNRW:Standardisierungskonzeptzur}
-
-\begin{itemize}
-    \item \textbf{Retrieval of a digital form}
-    
-    There exist many administrative services and depending on the member state or commune, the required layout of the application can be different. Therefore, a system called federal information management (Föderales Informationsmanagement: FIM) is used to standardize administrative services. FIM consists of three categories of building blocks.
-    
-    \textit{Service blocks} contain human readable descriptions about an administrative service.
-    
-    \textit{Data field blocks} contain the standardized description of data fields required for the application of administrative services.
-    
-    \textit{Process blocks} contain standardized descriptions about the process of an administrative service.
-
-    Relevant for the form-server are data field blocks. A data field block can contain one element of five categories.
-    
-    \textit{Data fields} are the "smallest entity" of a data field block and describe one standardized piece of information. Depending on the type of information - if it is for example a checkbox or input field - additional metadata is included.
-    
-    \textit{Data field groups} consist of multiple data fields and other data field groups, relating to a category of information. A data field group can for example be "person" or "company".
-    
-    \textit{Rules} describe all kinds of logical conditions of and between data fields. This includes for example the automatic validation of the correctness of an entered value or the activation and deactivation of data fields depending on an entered value.
-    
-    \textit{Code lists} are lists of predefined values the user can select. This can for example be a list of all countries.
-    
-    \textit{Data field schemata} is the combination of entities from all previously described categories and describes the structure of a form.
-    
-    The building blocks are centrally managed by federal republic, member states and communes. This simplifies the creation of for example a new form by reusing existing data schema blocks and adding additional required data fields to a new data field schema.
-    
-    Each data field block can be uniquely identified through an ID. Therefore, if the form-server is provided with a FIM-ID, he can retrieve the corresponding data field block from the central storage.
-    
-    \item \textbf{Initiation of application}
-    
-    The from-server can be requested to initiate an application using a certain form based on a FIM ID of a data field schemata. Along with the request, an identification and authorisation of a user profile has to be passed. Additional personal information of the user profile can be passed for automated filling in of the form.
-    
-    \item \textbf{Status update}
-    
-    The form-server sends updates regarding the current status of the application.
-
-    \item \textbf{Automatic filling in of form}
-    
-    If the form server was provided with personal information during the initiation request for an application, it can automatically fill in the form.
-    
-    \item \textbf{Presentation of form}
-    
-    The form server can host a website where it displays an interactive form. The user can access this website either through an URL or through a web component.
-    
-    \item \textbf{Application interruption}
-    
-    The application can be interrupted or aborted. Interruption may occur if the user stays inactive for a certain period of time while filling in the form. The user can also manually interrupt the editing process. If the application is interrupted, the form-server stores the unfinished application for a certain amount of time. The user can then access the application at a later time.
-    
-    If the user decides to cancel editing the form, the application is deleted from the from-server.
-    
-    Depending on the actions of the user, the status of the application changes accordingly and the form server sends a status update.
-    
-    \item \textbf{Storage of application}
-    The form-server stores applications for a specified period of time if they were interrupted or submitted.
-    
-    \item \textbf{Provisioning stored applications}
-    
-    If the form server is provided an identification and authorisation of a user, it searches all stored applications which belong to the user and sends back a list of URLs, through which the user can access them.
-    
-    \item \textbf{Deletion of stored application}
-
-    If the form server is provided an identification and authorisation of a user and an identification of an application, it can delete the stored application.
-
-    \item \textbf{Manually filling in data fields}
-    
-    When the form is presented to the user, it can happen, that not all information could be automatically filled in. In this case, the form can be interactively filled in by the user.
-    
-    \item \textbf{Uploading documents}
-    
-    The user can add documents as attachments to an application. The documents can either be uploaded from the local machine or the data wallet of the user profile.
-
-    \item \textbf{Submission of application}
-    
-    When the user submits the application by for example pressing a "submit" button, the form-server sends a status update. The finished application can now be transmitted to a requesting system.
-
-\end{itemize}
-
-\paragraph{User Profile}
-Each member state provides its own user profile for identity management. The main services are \cite{NRW:Umsetzung}:
-
-\begin{itemize}
-    \item \textbf{Identification and Authentification} \cite{dNRW:Anbindungsleitfaden}
-    
-    The user profile can be used for identification by transmitting personal information like name and address after successfully authentification. Authentification is the verification of an authentication. Users can authenticate for the user profile for example through a username / password combination.
-    
-    \item \textbf{Determination Trust Level} \cite{dNRW:Anbindungsleitfaden}
-    
-    The trust level of a logged in user profile is determined while registration and usage. The user can register and login to the user profile using a username / password combination or the German ID card. The trust level "High" is only granted if the user registered using the German ID card \textbf{AND} logs in using the German ID card. All other combinations of registration and login result in a "normal" trust level.
-    
-    \item \textbf{Management Personal Information} \cite{dNRW:Anbindungsleitfaden} 
-    
-    Personal information of the user profile can be modified. This requires the user to authenticate. In case the user profile is connected with an online identity card, some attributes like name and age can not be changed.
-    
-    \item \textbf{Provisioning Personal Information} \cite{dNRW:Anbindungsleitfaden} \cite{dNRW:Schnittstellen}
-
-    The user profile can be requested to send personal information to a specified URL. This requires the user to authenticate.
-    
-\end{itemize}
-
-\paragraph{Institution}
-Institutions are the entities which eventually process the incoming applications and provide the users with solutions. They receive a digital application through the data-exchange platform and send back the result as a message through the inbox.
-
-\paragraph{Data-Exchange Platform}
-The data-exchange platform delivers applications from the administration portal to the correct administrative institution.
-
-\paragraph{Data Wallet}
-The data wallet is a sub-component of the user profile and enables the user to manage documents for his user profile. The main services are:
-
-\begin{itemize}
-
-    \item \textbf{Upload of document}
-    
-    The user can upload a document from his local machine to the data wallet.
-    
-    \item \textbf{Show documents}
-    
-    The user can list all documents which are stored in the data wallet.
-    
-    \item \textbf{Delete documents}
-    
-    The user can delete documents from the data wallet.
-    
-    \item \textbf{Attach documents to application}
-    
-    The user can attach a copy of a document stored in his data wallet to an application on a form server.
-
-\end{itemize}
-
-\paragraph{Inbox}
-The inbox is a sub-component of the user profile and enables the user to send messages through his user profile. The main services are:
-    
-\begin{itemize}
-    
-    \item \textbf{Send a message}
-    
-    The user can send a message to authorities. This can be for example an institution which processes an application.
-    
-    \item \textbf{Receive a message}
-    
-    The user can receive messages from authorities for example to update the status of an application.
-    
-    \item \textbf{List messages}
-    
-    The user can see the messages he received by logging in to his user profile on the administration portal.
-    
-    \item \textbf{Notification through E-Mail}
-    
-    The user can be notified of a new message through e-mail.
-
-\end{itemize}
-
-\subsubsection{Interfaces}
-In order to implement the basic use case, the components have to interact with each other. The following diagram visualizes, which components interact. Each interaction is described afterwards. The arrows describe the main direction of information flow in an interaction.
-
-\begin{center}
-    \includegraphics[scale=0.6]{Diagrams/Interaction Diagram.pdf}
-\end{center}
-
-\begin{enumerate}
-
-    \item The web browser of the user displays the web pages hosted by the administration portal.
-
-    \item The form-server can initiate the application if requested by the administration portal. The portal submits information for identification, authentication and authorisation of a user through a JSON Web Token and a user profile ID. In order for the form server to determine the correct form to display, the portal submits a FIM-ID which corresponds to a data field schemata. In case the user approved, the portal can also collect personal information from the user profile and submit it to the form server for automated filling in of the form.
-    
-    \item The form server provides the user a web page which displays an interactive form.
-    
-    \item The form server notifies the administration portal of changes in the status of applications. If the administration portal is notified of a submitted application, it requests the form server to transmit the application data.
-    
-    \item The administration portal requests the user profile for identification and authentication to login a user on the web page of the portal. The portal also requests authorisation from the user profile to for example access certain personal information.
-    
-    \item The administration portal enables the user to manage services of the user profile. It provides OSS tools for managing attributes stored in the user profile, to send new messages and to manage documents in the data wallet.
-    
-    \item The administration platform submits application data to the data exchange platform for delivery to the responsible institution.
-    
-    \item The data exchange platform notifies the administration portal of the delivery status of the application data.
-    
-    \item The data exchange platform notifies the institution of a new application and enables it to download the corresponding data.
-    
-    \item The institution can send messages to the inbox of a user profile to for example request additional documents.
-    
-    \item The user can send messages to the institution which for example asked for additional documents.
-    
-\end{enumerate}
-  
-\subsubsection{Sequence Diagram}
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=17cm]{Diagrams/Basic Use Case Sequence Diagram.png}
-\end{figure}
+The "Application Management" component sends information about the application to the "Responsibility Finder" component which returns an identification of the institution responsible for processing the application. Along with the institution ID, the "Application Management" component submits the application to the "Data Exchange Platform". This component transfers the application data to the institution corresponding to the specified institution ID. The institution can register their "Institution System" to automatically receive the application from the "Data Exchange Platform" where it will be processed. In addition to that, the "Institution Component" hosts a web page with information about the institution.

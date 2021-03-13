@@ -2,18 +2,30 @@ Finally, this chapter aims to summarize the most important results of the thesis
 
 \section{Summary}
 
-\begin{itemize}
-    \item Purpose of the thesis is to design integration solutions for identity management provisioning systems on the example of OZG.
-    \item The integration is separated into a business scenario integration trough an IMP solution and a system integration trough a messaging system.
-    \item Trough two IMP solutions, it was shown, how IMP can be utilized in different identity management scenarios
-    \item In the first scenario, an IMP solution was presented which focused on enhancing usability of 
-    \item The thesis introduced identity management provisioning as an identity management service capable of replacing conventional user profiles
-    \item On the example of the OZG, the thesis showed 
-\end{itemize}
+The thesis describes an identity management method called IMP, which provides identity management to Service Providers and users as a service. To share personal information, users and Service Providers can establish IMP relationships and exchange IMP messages to interact with each other. On the example of the system architecture for the Online Access Law, problems of user profile based identity management are described as well as possibilities of how IMP could be used to solve them.
+
+User profile based identity management systems lack usability as they lead to a fragmentation of partial identities, accessible only through separate applications and web pages. Data protection is reduced due to the lack of oversight for the user about existing user profiles and shared personal information. Due to the distribution of personal information to various Service Providers, the risk of data being stolen increases.
+
+Especially in case of the OZG, issues regarding data protection exist: As a result of the "one-for-all" method, access to administrative services is distributed across multiple administration portals. Users applying for services therefore have to share large quantities of personal information with administration portals of multiple federal states. As institutions and not administration portals eventually process the personal information, sharing personal information directly with institutions would be favourable in regard to data minimisation.
+
+Using the OZG as an example, the thesis presents two solutions for IMP utilization for Service Providers with existing user profile based identity management.
+The first solution utilizes IMP in addition to existing user profiles. It provides an optional way for users to create and manage OZG user profiles through an IMP client. This is done by enabling users to create new user profiles through existing IMP identities by establishing an IMP relationship. By exchanging IMP messages users are able to access and manage their user profile. The IMP solution especially improves usability as OZG user profiles can be managed along with many other user profiles of other Service Providers through the same IMP client. The solution requires integration only with the administration portal component and can operate without disrupting the existing operation of the system architecture. However, this IMP solution does not solve many of the data protection issues, as the user profile based identity management system remains in operation.
+
+The second solution utilizes IMP to replace user profiles. Instead of persistently sharing personal information with administration portals in form of user profiles, IMP is used to temporarily share personal information with institutions, for the period of time where an application is being processed. This is done by enabling users to establish different types of IMP relationships, each corresponding to a different application type.
+This IMP solution especially improves data protection, as only the institution responsible for processing the application receives personal information. In addition to that, sharing personal information only for a short period of time decreases the risk of personal information being misused or stolen.
+
+Service Providers which want to use IMP solutions have to integrate the IMP system into their existing system architecture.
+The IMP system provides an IMP connector with a REST interface for integration purposes. However, as the functionality of the connector is limited to establishing communication between user and Service Provider and exchanging messages, additional integration systems are necessary.
+
+The thesis presents a modular messaging system, which enables the integration of IMP solutions into existing system architectures of Service Providers. Through the messaging system, the system architecture of the Service Provider can 
+establish multiple types of IMP relationships and define, exchange and process different message types. The messaging system maps relationships to entities the SP systems understand. This can be for example the mapping of an IMP relationship to a user profile or to an application process. It also translates between data models of IMP and Service Provider. As a result of using messaging and messaging modules, the integration system can be configured and extended to fit requirements of different system architectures of Service Providers.
+
+The messaging system is shown, integrating both previously descried IMP solutions into different system architectures. The first IMP solution was integrated into the administration portal component, the second IMP solution was integrated into the institution domain. This demonstrates, that the messaging system is capable of integrating different IMP solutions into different system architectures.
+
+\section{Solution to Objectives}
 
 \section{Outlook}
 
-\begin{itemize}
-    \item experimental evaluation
-    \item 
-\end{itemize}
+The bachelor thesis describes integration of IMP on a theoretical level. Developing a prototype of the messaging system as part of an experimental evaluations can give further information about its feasibility, performance and stability. The prototype can furthermore be used to test integration of the first IMP solution into the OZG system architecture of a federal state to validate the functionality of IMP solution and messaging system and find out about possible missing features. Due to the modular design of the messaging system, new messaging modules implementing missing features can be added.
+
+The thesis presents OZG as a Service Provider relevant for integration of IMP. IMP, however, is relevant for many other Service Providers. For example, in the scope of the National Education Platform, "a digital portal is being created that in the future will support universities as well as national and international students who are seeking a stay abroad, a course of study, or a change of study location in Germany along their educational career through a digital offering that is interoperable across institutions" \cite{digitale_bildung}. In accordance to IMP solutions in the thesis, an IMP solution for this new use case can be designed and the presented messaging system can be configured and expanded to suit new requirements and be used for system integration. 

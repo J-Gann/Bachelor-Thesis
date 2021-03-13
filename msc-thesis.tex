@@ -128,9 +128,30 @@ Date of Submission: \today
 
 \chapter*{Zusammenfassung}
 
-\newpage
+Diese Bachelorarbeit stellt Identity Management Provisioning (IMP) als mögliche Lösung von Problemen Benutzerprofil basierter Identitätsmanagementsysteme vor. IMP bietet Identitätsmanagement als Service für Benutzer und Dienstanbieter. Es ermöglicht Benutzern eine IMP-Identität zu erstellen und diese zu nutzen, um persönliche Informationen und Nachrichten mit mehreren Dienstanbietern auszutauschen.
+
+Damit Dienstanbieter mit bestehenden, auf Benutzerprofilen basierenden, Identitätsmanagementsystemen, IMP nutzen können, ist eine Integration in bestehende Geschäftsprozesse und bestehende Systemarchitekturen erforderlich. Es werden zwei IMP-Lösungen vorgestellt, die beschreiben, wie Service-Provider IMP verwenden können. Außerdem wird ein Messaging-System für die technologische Integration präsentiert.
+
+Ziel der IMP-Lösungen ist es, Möglichkeiten zu beschreiben, die Benutzerfreundlichkeit, Datenschutz und Sicherheit des Identitätsmanagements durch die Nutzung des IMP-Dienstes erhöhen. Basierend auf dem aktuell relevanten Anwendungsfall des Online-Zugangs-Gesetzes (OZG) werden zwei IMP-Lösungen vorgestellt. Die erste IMP-Lösung beschreibt eine Möglichkeit, welche Benutzern die Erstellung von Benutzerprofilen, Pflege persönlicher Informationen und Interaktion über eine IMP-Anwendung ermöglicht. Dieser Integrationsansatz soll die Benutzerfreundlichkeit erhöhen und gleichzeitig das Risiko, die Komplexität und die Kosten der Integration minimieren. Dadurch, dass das auf Benutzerprofilen basierende Identitätsmanagement in Betrieb gelassen wird, bleiben Probleme hinsichtlich des Datenschutzes bestehen. Eine zweite IMP-Lösung wird vorgestellt, die den Datenschutz erhöht, indem Benutzerprofile ersetzt werden. Stattdessen geben Benutzer persönliche Informationen für einzelne Geschäftsprozesse temporär frei.   
+
+Zur Integration von IMP-Lösungen wird ein Messaging-System vorgestellt, das in der Lage ist, IMP in bestehende Systemarchitekturen von Dienstanbietern zu integrieren. Neben messaging ermöglicht ein modularer Ansatz, dass die Integrationsarchitektur konfigurierbar und erweiterbar ist, um verschiedene IMP-Lösungen in unterschiedliche Systemarchitekturen zu integrieren. Die Fähigkeiten des Messaging-Systems werden durch die Integration der zuvor beschriebenen, grundsätzlich unterschiedlichen, IMP-Lösungen in verschiedene Systemarchitekturen im Kontext des OZG demonstriert.
+
 
 \chapter*{Abstract}
+
+This bachelor thesis presents Identity Management Provisioning (IMP) as possibility for solving problems of user profile based identity management systems. IMP provides identity management as a service to users and Service Providers. It enables users to create an IMP identity and use it to share personal information and exchange messages with multiple Service Providers.
+
+In order for Service Providers with existing user profile based identity management systems to utilize IMP, integration into their existing business processes and existing system architectures is necessary. Two IMP solutions which describe how Service Providers can utilize IMP and one messaging system for technological integration are presented.
+
+Purpose of IMP solutions is to describe possibilities to increase usability, data protection and security of identity management trough utilization of the IMP service. Based on the currently relevant use case of the Online Access Law (Online Zugangs Gesetz - OZG), two IMP solutions are presented.
+
+The first IMP solution describes the possibility of enabling users to create user profiles, maintain personal information and interact trough an IMP application. This integration approach is designed to increase usability while minimizing risk, complexity and cost of integration.
+
+As a result of leaving user profile based identity management in operation, problems regarding data protection remain. A second IMP solution is presented to increase data protection by replacing user profiles. Instead users temporarily share personal information for individual business processes.   
+
+For integration of IMP solutions, a messaging system is presented which is capable of integrating IMP into existing system architectures of Service Providers. In addition to messaging, a modular approach enables the integration architecture to be configurable and expandable to integrate various IMP solutions into different system architectures.
+
+The capabilities of the messaging system are demonstrated by integrating the previously described, fundamentally different, IMP solutions into different system architectures in the context of the OZG.
 
 \newpage
 
@@ -147,10 +168,10 @@ Date of Submission: \today
 \chapter{User Profile Identity Management} \label{chapter:user_profile_identity_management}
 \subfile{chapters/3-ozg_identity_management}
 
-\chapter{Enhancing IMP Utilization}
+\chapter{IMP Utilization as Extension}
 \subfile{chapters/4-imp_utilization_in_ozg}
 
-\chapter{Replacing IMP Utilization}
+\chapter{IMP Utilization as Replacement}
 \subfile{chapters/5-advanced_utilization}
 
 \chapter{Conclusion}
