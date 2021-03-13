@@ -2,20 +2,20 @@ This section describes how the messaging system described as part of the previou
 
 \subsection{Integration Requirements}
 
-Focus of the technological integration is to use the same messaging system as described in section 4.2 to integrate the new IMP solution into the different system architecture of institutions. The layout of the messaging system should not change and the purpose of each module should stay the same. In order to adapt the architecture to the new system architecture and IMP solution, the modules can be configured and named differently.
+Focus of the technological integration is to use the messaging system as described in section 4.2 to integrate the new IMP solution into the different system architecture of institutions. The layout of the messaging system should not change and the purpose of each module should stay the same. In order to adapt the architecture to the new system architecture and IMP solution, the modules can be configured and named differently.
 
 \subsection{Integration Overview}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Technological Integration/1. Integration Overview.pdf}
     \caption{Integration Overview}
     \label{integration2:integration_overview}
 \end{figure}
 
-To implement the IMP solution, a connector is included in the existing system architecture of each institution as well as the messaging system described in section 4.2. Instead of the web server and service facade in the portal domain, the messaging system is connected to the web server and institution system of the institution domain.
+As shown in figure \ref{integration2:integration_overview}, to implement the IMP solution, a connector as well as the messaging system described in section 4.2 is included in the existing system architecture of each institution. Instead of the web server and service facade in the portal domain, the messaging system is connected to the web server and institution system of the institution domain.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 2/Technological Integration/3. Application Overview.pdf}
     \caption{Service Application Overview}
@@ -26,7 +26,7 @@ Institutions are able to process a predetermined set of administrative services.
 
 Users visiting an administration portal can select an administrative service, specify their home address and be forwarded to the web page of the respective institution. After scanning the appropriate QR code with the IMP client, the user can fill in the requested attributes and send the relationship request. After the relationship is established, the institution is notified and starts processing the application utilizing the shared attributes.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.45]{Diagrams/Integration Architecture 2/Technological Integration/2. Messaging Overview.pdf}
     \caption{Messaging Overview}
@@ -35,7 +35,7 @@ Users visiting an administration portal can select an administrative service, sp
 
 The layout of the messaging system is identical to the one presented in section 4.2. Exactly the same type of messages are exchanged with however a slightly different purpose and content. Therefore, in this and the following sections, only important differences between the operation of the messaging system will be described.
 
-On the "Relationship to Identity Integration Layer", modules exist for establishing the different types of application relationships. For simplification, modules only for an "Application A" are shown. Besides the content and purpose of relationships in this case are different to the relationships of chapter 4, they are processed exactly the same: each type of relationship request is processed by an individual application request module and each type of established relationship is processed by an individual application relationship module. As the purpose of relationships in this case are applications for administrative services, each module has to be configured appropriately. For an established relationship, instead of issuing the existing system architecture to create a user profile, the application relationship module issues the existing system architecture to process an application based on the attributes shared as part of the relationship. And instead of a user profile ID, the existing system architecture responds with an application process ID. This application process ID is used in the same way as the user profile ID in section 4.2. Through the "New Relationship Mapping" channel, it is sent to the relationship mapping module, which maps each relationship to an application process and vice versa.
+On the "Relationship to Identity Integration Layer", modules exist for establishing the different types of application relationships. For simplification, modules only for an exemplary application process "Application A" are shown. Although the content and purpose of relationships in this case are different to the relationships of chapter 4, they are processed exactly the same: each type of relationship request is processed by an individual application request module and each type of established relationship is processed by an individual application relationship module. As the purpose of relationships in this case are applications for administrative services, each module has to be configured appropriately. For an established relationship, instead of issuing the existing system architecture to create a user profile, the application relationship module issues the existing system architecture to process an application based on the attributes shared as part of the relationship. And instead of a user profile ID, the existing system architecture responds with an application process ID. This application process ID is used in the same way as the user profile ID in section 4.2. Through the "New Relationship Mapping" channel, it is sent to the relationship mapping module, which maps each relationship to an application process and vice versa.
 
 On the "Communication Integration Layer", the same types of messages are exchanged. However instead of user profile IDs, relationship IDs are mapped to application process IDs. In chapter 4, each module connected to the messaging adapter of the institution system was designed to be able to distinguish between different types of user profile IDs in order to for example distinguish an enterprise profile from the profile of a private person. In this case, modules can distinguish between different application types based on the application process ID.
 

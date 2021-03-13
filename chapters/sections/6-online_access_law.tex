@@ -1,10 +1,10 @@
-This chapter gives an overview about the Online Access Law regarding its regulations, their implementation and the underlying system architecture.
+This chapter gives an overview about the Online Access Law regarding its regulations, their implementation, the basic OZG use case and the underlying system architecture.
 
 \subsection{Regulations}
 
 In 2017, the German government passed the Online Access Law (OZG) which requires federal republic and member states to execute the following regulations until 2022 \cite{BMI:OZG_Wortlaut}:
 
-\paragraph{Digital availability of administrative services} An administrative service is the electronic processing of administrative procedures that are available from outside the governmental institution.  As it is not clear which administrative services exactly are included by the definition of the OZG, the BMI created a catalogue \cite{BMI:Verwaltungsleistungen}. The OZG requires these services to be digitally available. As a guideline to what is considered sufficient availability, the BMI defined a maturity model \cite{BMI:Digitale_Services}.
+\paragraph{Digital availability of administrative services} An administrative service is the electronic processing of administrative procedures that are available from outside the governmental institution.  As it is not clear which administrative services exactly are included by the definition of the OZG, the Federal Ministry of the Interior Building and Community (Bundesministerium des Innern, für Bau und Heimat - BMI) created a catalogue \cite{BMI:Verwaltungsleistungen}. The OZG requires these services to be digitally available. As a guideline to what is considered sufficient availability, the BMI defined a maturity model \cite{BMI:Digitale_Services}.
 
 \paragraph{Digital access to administrative services through administration portals of a portal network} Federal republic, each federal state and each commune must provide an administration portal. Portals of communes must be linked to the portal of the corresponding member state. Portals of federal republic and member states must be connected through a portal network. \cite{BMI:Portalverbund} Each portal must provide a "seek and find" feature, which enables users to find all administrative services provided by any administration portal \cite{Cotar:Drucksache_19/19089}. 
 
@@ -14,9 +14,7 @@ In 2017, the German government passed the Online Access Law (OZG) which requires
 
 The implementation of OZG regulations can be separated into two projects: The digitalization and the networking project.
 
-Digitalization of administrative services focuses on accessibility towards users but not modernization of its internal execution by administrative institutions. The goal of digitalization in this case is, to make administrative services available towards a user in a digitized way:
-
-A digitized administrative service can be accessed by a user through a website. The website is hosted either by the federal republic or a federal state and is called "Administration Portal". Access is usually provided through an application form. The administrative service can be managed through a user profile which is provided by the federal republic or the member state. Management of an administrative service usually includes starting the service by sending in a form, communicating with the responsible institutions through the inbox of the profile and receiving a result. The user profile can also enable users to upload documents to a datawallet and to save personal information for automatically filling in forms.
+The goal of digitalization in this case is, to make administrative services available towards a user in a digitized way: A digitized administrative service can be accessed by a user through a website. The website is hosted either by the federal republic or a federal state and is called "Administration Portal". Access is usually provided through an application form. The administrative service can be managed through a user profile which is provided by the federal republic or the member state. Management of an administrative service usually includes starting the service by sending in a form, communicating with the responsible institutions through the inbox of the profile and receiving a result. The user profile can also enable users to upload documents to a datawallet and to save personal information for automatically filling in forms.
 
 Digitalization of an administrative service is the modification of the underlying processes to incorporate the usage of the described features of the user profile and administration portal. In total, the BMI lists 575 relevant services, some of them provided by the federal republic, some by the member states and some by the communes \cite{BMI:Onlinezugangsgesetz}.
 
@@ -56,7 +54,7 @@ The user is requested to enter personal information and to specify an authentica
 \subsection{System Architecture}
 This section describes the OZG system architecture of a federal state capable of executing the basic OZG use case. References about OZG system architectures of Baden-Württemberg \cite{ozg:bw} and Nordrhein-Westfalen \cite{ozg:nrw} are used. The presentation document regarding the administration portal of Baden-Württemberg \cite{ozg:bw_administration_portal} is used as basis for describing the administration portal.
 
-As shown in figure \ref{ozg:system_overview}, the OZG system architecture is separated into three components and two domains. Domains in this context describe the operation of systems they contain in separate physical locations. Components in this context describe functionally correlated systems of a system architecture.
+As shown in figure \ref{ozg:system_overview}, the OZG system architecture is separated into three components and two domains. Domains in this case separate systems in regard to the physical location where they operate. Components in this case describe functionally correlated systems of a system architecture.
 
 The "User Component" directly interacts with users to enable access to administration portals. This can be desktop or mobile applications or as in this specific case a web browser. The "Administration Portal Component" hosts the administration portal. The "User Profile Component" provides interoperable user profiles. The "Integration Component" transfers filled in applications to responsible institutions. And finally, the "Institution Component" receives and processes applications.
 

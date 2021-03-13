@@ -60,7 +60,7 @@ The IMP system guarantees that all information is encrypted and can only be deci
 \subsection{IMP System} \label{section:imp_system}
 This section describes the IMP system which is the system architecture required for providing the IMP service described in the previous section. The content of this section is based on the IMP system used by IDAS \cite{idas}.
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/IMP System Overview.pdf}
     \caption{IMP System Overview}
@@ -74,7 +74,7 @@ The Service Provider domain contains the system architecture of the Service Prov
 
 The IMP domain contains all identity management provisioning systems required to be hosted by the identity management provider. In this case, the domain contains only the IMP server. The IMP server is able to communicate with each IMP application and IMP connector. It has the purpose of maintaining a - when necessary encrypted - list of all identities, relationships, relationship templates and IMP messages. As the IMP server does not know the private key corresponding to the IMP identity, it is unable to decipher the data. The IMP server is also capable of creating relationship templates, processing and routing relationship requests and responses and IMP messages. The exact details of how the IMP server operates is too broad to be covered in this thesis.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/IMP Layer Diagram.pdf}
     \caption{IMP System Operation Layers}
@@ -100,7 +100,7 @@ In this section the IMP system operation for the most important use cases of the
 This section elaborates the sequence of establishing an IMP relationship as shown in figure \ref{imp:establish_relationship}.
 The first step towards a relationship is the interest of a user. A user for example wants to subscribe to the newsletter of a Service Provider. The Service Provider needs personal information of the users to be able to send them personalized mails. To obtain the necessary attributes and receive the approval of the users, the Service Provider requires  established relationships.
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/IMP Use Case Establish Relationship Sequence Diagram.pdf}
     \caption{Establish Relationship Sequence Diagram}
@@ -108,7 +108,7 @@ The first step towards a relationship is the interest of a user. A user for exam
 \end{figure}
 
 To enable users to request a relationship with the purpose of subscribing to a newsletter, the Service Provider has to create a relationship template. Through the REST interface of the connector, the SP sends a request for a new relationship template. The request contains parameters specifying the content of the relationship template. In this case, the relationship template could be configured as follows:
-\begin{figure}[H]
+\begin{figure}[h!]
     \begin{itemize}
     \item Title: Subscribe to the newsletter
     \item Requested Attributes: Name, Surname, E-Mail address, Interests
@@ -141,7 +141,7 @@ After receiving the final "relationship established" notification, the system ar
 \subsubsection{Attribute Change}
 This section describes the sequence of changing an attribute shared as part of an IMP relationship as shown in figure \ref{imp:attribute_change}. If the user switches to a new e-mail provider, he will need to change the corresponding e-mail attribute shared as part of the relationship to receive the newsletter on his new e-mail address.
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/IMP Use Case Change Realtionship Attribute Sequence Diagram.pdf}
     \caption{Change Relationship Attributes Sequence Diagram}
@@ -154,7 +154,7 @@ Through the IMP application, the user can view relationships and edit shared att
 This section elaborates the sequence of sending a mail as part of an IMP relationship as shown in figure \ref{imp:mail}.
 If a user for example has questions about the newsletter, he can send a mail to the Service Provider as part of the established relationship.
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/IMP Use Case Mail Sequence Diagram.pdf}
     \caption{Mail Sequence Diagram}
@@ -167,7 +167,7 @@ Through the IMP application the user can view relationships and submit mails. On
 This section elaborates the sequence of authenticating as part of an IMP relationship as shown in figure \ref{imp:authenticate}.
 If the Service Provider wants to request confirmation from the user, they can send an authentication request to the corresponding relationship.
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/IMP Use Case Authenticate Sequence Diagram.pdf}
     \caption{Authenticate Sequence Diagram}

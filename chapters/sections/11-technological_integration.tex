@@ -1,15 +1,13 @@
-In this section an integration architecture is presented for integration of the IMP system presented in section 2.2 into the existing OZG system architecture presented in section 3.3. 
+In this section an integration architecture is presented for integration of the IMP system presented in section \ref{imp} into the existing OZG system architecture presented in section \ref{ozg}. 
 
 \subsection{Integration Requirements}
 Purpose of the integration architecture is to enable the existing OZG system to access IMP services according to the previously described IMP solution. It therefore has to enable the creation of an onboarding relationship template, the processing of onboarding relationship requests and the processing of established relationships through creation of user profiles. \\ 
 In addition to that, it has to enable the definition and utilization of message types listed in the IMP solution. This are messages for attribute changes, communication and authentication. As the approach of the IMP solution is the mapping between user profiles and IMP relationships, the integration architecture has to enable an effortless translation between the two entities. OZG system architecture and IMP systems use different data models, especially in regard to personal information. The integration architecture therefore has to translate between them. As the IMP connector is not capable of sending asynchronous notifications, the integration architecture has to add this functionality. Depending on the use case of Service Providers, multiple types of relationships or in this case multiple types of user profiles might be necessary. The integration architecture has to enable each type of relationship and user profile to be processed separately, as they might have different processing legitimization. OZG and the presented IMP solution are only one example of a system architecture and IMP use case. The integration architecture should be able to be used in various different scenarios. It therefore has to be configurable and expandable in order to meet new requirements.
 
-\subsection{Messaging}
-A messaging approach is used for the technological integration. As described in section 2.4, messaging enables the systems to access each others services in a decoupled way. This is a useful feature as the integration architecture should be reusable for different system architectures. The messaging patterns described in 2.4 also enable the integration architecture to be configured according to changes in the operation of the existing systems. The asynchronous nature of messaging systems translates well to the asynchronous and message based operation of the IMP system and IMP solution.
 
 \subsection{Integration Overview}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/1. Integration Overview.pdf}
     \caption{Insertion of Integration Systems into OZG System Architecture}
@@ -23,7 +21,7 @@ In order for the integration not to be invasive, only the web server and the ser
 \subsection{Onboarding Sequence}
 This section describes the sequence of an application process as visualized in figure \ref{integration1:onboarding_overview}.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/5. Onboarding Overview.pdf}
     \caption{Onboarding Overview}
@@ -37,7 +35,9 @@ After successful creation of the user profile, the messaging system stores the r
 
 \subsection{Messaging Overview}
 
-\begin{figure}[h]
+A messaging approach is used for the technological integration. As described in section \ref{messaging}, messaging enables the systems to access each others services in a decoupled way. This is a useful feature as the integration architecture should be reusable for different system architectures. The messaging patterns described in section \ref{messaging} also enable the integration architecture to be configured according to changes in the operation of the existing systems. The asynchronous nature of messaging systems translates well to the asynchronous and message based operation of the IMP system and IMP solution.
+
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/3. Messaging Integration.pdf}
     \caption{Messaging Integration}
@@ -46,22 +46,22 @@ After successful creation of the user profile, the messaging system stores the r
 
 The main task of the integration system is to translate between the domain of the existing system architecture and the domain of the IMP system. None of the existing systems can process IMP relationships but they can process user profiles and vice versa. 
 
-On the side of the administration portal, messaging adapters provide an API to the existing systems that is providing access to IMP services while hiding the technological details of the operation of the IMP system and the underlying messaging system. The adapters communicate with the messaging system through channels. Messages placed on each channel can be simultaneously accessed by multiple systems. Using these channels, message adapters can send requests and replies, and receive replies, notifications and requests
+As shown in figure \ref{integration1:messaging_integration}, on the side of the administration portal, messaging adapters provide an API to the existing systems that is providing access to IMP services while hiding the technological details of the operation of the IMP system and the underlying messaging system. The adapters communicate with the messaging system through channels. Messages placed on each channel can be simultaneously accessed by multiple systems. Using these channels, message adapters can send requests and replies, and receive replies, notifications and requests
 
 On the side of the connector, messaging adapters translate the REST API of the connector to a set of publish-subscribe datatype channels. Using these channels, the messaging system can send REST requests by placing messages on channels corresponding to a certain interface. This also enables the messaging system to receive events from the connector.
 
 Messaging adapters do not communicate directly through channels, but with messaging modules. Messaging modules consist of messaging patterns which are able to modify, delete and route messages. Purpose of the modules is to translate messages sent by messaging adapters of either Service Provider or connector to be understood by the respective recipient. Each module is assigned to an individual integration task. By adding or removing modules, integration capabilities of the messaging system can be suited to the system architecture of the Service Provider. Modules can be designed to provide services to messaging adapters or other modules. Designing modules specifically for the usage by other modules helps in distributing integration responsibilities and avoiding a single monolithic integration component.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.45]{Diagrams/Integration Architecture 1/Technological Integration/4. Messaging Overview.pdf}
     \caption{Messaging System Overview}
     \label{integration1:messaging_system_overview}
 \end{figure}
 
-The figure gives an overview of the messaging system which will be discussed in detail in the following sections. The figure contains all channels and messaging modules along with their connectivity.
+Figure \ref{integration1:messaging_system_overview} gives an overview of the messaging system which will be discussed in detail in the following sections. The figure contains all channels and messaging modules along with their connectivity.
 
-As introduced in the beginning of this chapter, the technological integration can be separated into two layers: The "Relationship to Identity Integration Layer" and the "Communication Integration Layer" which it is built upon. As described in section 2.2, communication between IMP identity and Service Provider is only possible through an established relationship.
+As introduced in the beginning of this chapter, the technological integration can be separated into two layers: The "Relationship to Identity Integration Layer" and the "Communication Integration Layer" which it is built upon. As described in section \ref{imp}, communication between IMP identity and Service Provider is only possible through an established relationship.
 
 Three messaging modules exist on the "Relationship to Identity Integration Layer", which directly access services of the connector. The onboarding template module provides the feature of creating relationship templates for onboarding. The onboarding request module, provides the feature of processing and responding to relationship requests. And the onboarding relationship module provides the feature of processing established relationships by creating a new user profile. The relationship mapping module has the purpose of combining "Relationship to Identity Integration Layer" and "Communication Integration Layer" by enabling the messaging system to map relationships to the corresponding entity of the Service Provider. In this case, the module maps IDs of relationships to IDs of user profiles. Each relationship has a one-to-one relationship to a user profile.
 
@@ -74,7 +74,7 @@ In this section each messaging module mentioned in the overview of the message a
 
 \paragraph{Onboarding Template Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/6. Onboarding Template Module.pdf}
     \caption{Onboarding Template Module}
@@ -94,7 +94,7 @@ The messaging adapter consumes the message on the response channel and returns t
 
 \paragraph{Onboarding Request Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/7. Onboarding Request Module.pdf}
     \caption{Onboarding Request Module}
@@ -107,7 +107,7 @@ Based on the attributes the user shares, the OZG system has to decide if the rel
 
 \paragraph{Onboarding Relationship Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/8. Onboarding Relationship Module.pdf}
     \caption{Onboarding Relationship Module}
@@ -126,7 +126,7 @@ As responses to requests from other modules might be published on this channel, 
 
 \paragraph{Relationship Mapping Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/9. Relationship Mapping.pdf}
     \caption{Relationship Mapping Module}
@@ -139,7 +139,7 @@ Using messaging for this form of database access enables modules to stay unaware
 
 \paragraph{Message Mapping Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/10. Message Mapping Module.pdf}
     \caption{Message Mapping Module}
@@ -154,22 +154,22 @@ Outbound messages on the "Message Outbound Mapping" channel are processed simila
 
 \paragraph{Attribute Change Message Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/11. Attribute Change Message Module.pdf}
     \caption{Attribute Change Message Module}
     \label{integration1:attribute_change_message_module}
 \end{figure}
 
-For the messaging system to process messages being exchanged as part of relationships, message modules can be added. Their purpose is to map messages of certain types onto the "Message Inbound Mapping" channel to individual message type channels so that the modules can process them. They also map messages of the individual message type channels to the "Message Outbound Mapping" channel to so that the connector can submit them.
+For the messaging system to process messages being exchanged as part of relationships, message modules can be added. Their purpose is to map messages of certain types from the "Message Inbound Mapping" channel to individual message type channels so that the modules can process them. They also map messages of the individual message type channels to the "Message Outbound Mapping" channel to so that the connector can submit them.
 
-In this case an "Attribute Change Message Module" is included, which processes messages related to the attribute change process. Messages exchanged through IMP relationships can have arbitrary content. However, the messages are assumed to contain a message type attribute and a message content attribute. Based on the message type attribute a message filter can let messages through that contain a message type attribute correlating to an attribute change process. Based on the type of a message, a content based message router then copies each message to a datatype channel. In this example, messages of type attribute change request and attribute change established are distinguished. Corresponding to that, two data type channels exist. As based on the channel, a message is placed, its message type can be inferred, content filters remove the message type attributes.
+In this case an "Attribute Change Message Module" is included, which processes messages related to the attribute change process. Messages exchanged through IMP relationships can have arbitrary content. However, the messages are assumed to contain a message type attribute and a message content attribute. Based on the message type attribute a message filter can let messages through that contain a message type attribute correlating to an attribute change process. Based on the type of a message, a content based message router then copies each message to a datatype channel. In this example, messages of type attribute change request and attribute change established are distinguished. Corresponding to that, two data type channels exist. As the type of a message can be inferred from the channel it is placed on, content filters can remove the message type attributes.
 
 Outbound messages related to the attribute change process are consumed in data type channels. In this case it is only one "Attribute Change Response" channel. A Content Enricher adds a message type attribute correlating to the channel the message was placed on. This is required in order for the IMP client to properly interpret the message. After that the message is published on the "Message Outbound Mapping" channel.
 
 \paragraph{User Profile Attribute Change Request Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/12. Attribute Change Request Module.pdf}
     \caption{Attribute Change Request Module}
@@ -184,7 +184,7 @@ Similar to the "Onboarding Request Module", the decision whether to approve or r
 
 \paragraph{User Profile Attribute Sync Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/13. User Profile Attribute Sync Module.pdf}
     \caption{User Profile Attribute Sync Module}
@@ -197,7 +197,7 @@ The "User Profile Attribute Sync" module consumes messages from the "Attribute C
 
 \paragraph{Mail Message module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/14. Mail Message Module.pdf}
     \caption{Mail Message Module}
@@ -212,7 +212,7 @@ Before publishing messages on the "Message Outbound Mapping" channel, a Content 
 
 \paragraph{Mail Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/15. Mail Module.pdf}
     \caption{Mail Module}
@@ -226,7 +226,7 @@ A "Mail" module is included which consumes the messages from the "Profile Mail O
 
 \paragraph{Authentication Message Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/16. Authenticatin Message Module.pdf}
     \caption{Authentication Message Module}
@@ -239,7 +239,7 @@ In order to send and receive messages related to authentication, similar to prev
 
 \paragraph{Authentication Module}
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=0.6]{Diagrams/Integration Architecture 1/Technological Integration/17. Authentication.pdf}
     \caption{Authentication Module}
